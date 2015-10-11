@@ -120,9 +120,8 @@ public class ShowComments {
 				public void onScroll(AbsListView view, int firstVisibleItem,
 						int visibleItemCount, int totalItemCount) {
 					View fstView=PKUHoleActivity.pkuHoleActivity.commentListView.getChildAt(0);
-					int fstId=firstVisibleItem;
-					if (drawableMap.containsKey(fstId)) {
-						ViewSetting.setImageDrawable(fstView, R.id.pkuhole_comment_image, drawableMap.get(fstId));
+					if (drawableMap.containsKey(firstVisibleItem)) {
+						ViewSetting.setImageDrawable(fstView, R.id.pkuhole_comment_image, drawableMap.get(firstVisibleItem));
 					}
 					View lstView=PKUHoleActivity.pkuHoleActivity.commentListView.getChildAt(visibleItemCount-1);
 					int lstId=firstVisibleItem+visibleItemCount-1;
@@ -142,25 +141,24 @@ public class ShowComments {
 				}
 			});
 			for (int i=0;i<len;i++) {
-				final int j=Integer.valueOf(i);
+				final int j=i;
 				
 				new Thread(new Runnable() {
 					
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
-						int w=j;
 						PKUHoleActivity pku=PKUHoleActivity.pkuHoleActivity;
 						Drawable drawable=pku.getResources().getDrawable(R.drawable.failure);
 						try {
-							InputStream inputStream=WebConnection.connect(imageUrls.get(w));
-							drawable=Drawable.createFromStream(inputStream, w+".png");
+							InputStream inputStream=WebConnection.connect(imageUrls.get(j));
+							drawable=Drawable.createFromStream(inputStream, j +".png");
 						}
 						catch (Exception e) {
 						}
 						pku.eventHandler.sendMessage(Message.obtain(
 								pku.eventHandler, Constants.MESSAGE_PKUHOLE_IMAGE_REQUEST,
-								w+1, 0, drawable));
+								j +1, 0, drawable));
 					}
 				}).start();
 			}

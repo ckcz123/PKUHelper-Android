@@ -14,15 +14,6 @@ public class CourseInfo {
 		when=new ArrayList<TimeInfo>();
 	}
 
-	public CourseInfo(CourseInfo course) {
-		name=new String(course.name);
-		where=new String(course.where);
-		when=new ArrayList<TimeInfo>();
-		ArrayList<TimeInfo> _w=course.when;
-		for (int i=0;i<_w.size();i++)
-			when.add(new TimeInfo(_w.get(i)));
-		
-	}
 	public CourseInfo() {
 		name="";
 		where="";
@@ -32,23 +23,7 @@ public class CourseInfo {
 	public void addTime(int _week, int _starttime, int _endtime, int _type) {
 		when.add(new TimeInfo(_week, _starttime, _endtime, _type));
 	}
-	
-	public void addTime(String _week, String _times) throws Exception {
-		_week=_week.trim();
-		int week=Integer.parseInt(_week);
-		_times=_times.trim();
-		String[] strings=_times.split("-");
-		if (strings.length==1) {
-			when.add(new TimeInfo(week, Integer.parseInt(strings[0]), Integer.parseInt(strings[0]), 0));
-			return;
-		}
-		else if (strings.length!=2) throw new Exception("解析出错");
-		int begin=Integer.parseInt(strings[0]),end=Integer.parseInt(strings[1]);
-		if (begin>end) {
-			int tmp=begin;begin=end;end=tmp;
-		}
-		when.add(new TimeInfo(week, begin, end, 0));
-	}
+
 	public void addTime(String _week, String _times, int type) throws Exception {
 		_week=_week.trim();
 		int week=Integer.parseInt(_week);
@@ -67,17 +42,6 @@ public class CourseInfo {
 	}
 	public int size() {
 		return when.size();
-	}
-	
-	public int getWeek(int index) {
-		return when.get(index).week;
-	}
-	
-	public int getStarttime(int index) {
-		return when.get(index).starttime;
-	}
-	public int getEndtime(int index) {
-		return when.get(index).endtime;
 	}
 	
 	public void sortAndMerge() {

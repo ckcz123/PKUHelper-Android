@@ -587,8 +587,8 @@ public class LostFoundActivity extends Activity {
 			}
 		}
 		else if (type==Constants.REQUEST_LOSTFOUND_DELETE) {
-			if (deletingType=="lost") lostArray=null;
-			else if (deletingType=="found") foundArray=null;
+			if (deletingType.equals("lost")) lostArray=null;
+			else if (deletingType.equals("found")) foundArray=null;
 			myArray=null;
 			show(PAGE_MINE);
 		}

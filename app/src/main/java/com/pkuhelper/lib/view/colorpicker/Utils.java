@@ -2,9 +2,6 @@ package com.pkuhelper.lib.view.colorpicker;
 
 import android.graphics.Color;
 
-/**
- * Created by Charles Andersons on 4/17/15.
- */
 public class Utils {
 	public static float getAlphaPercent(int argb) {
 		return Color.alpha(argb) / 255f;

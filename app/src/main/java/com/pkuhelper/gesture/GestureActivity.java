@@ -26,7 +26,6 @@ public class GestureActivity extends Activity {
 	CustomViewPager mViewPager;
 	public static GestureActivity gestureActivity;
 	GestureLibrary gestureLibrary;
-	boolean isDrawing;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -107,10 +106,6 @@ public class GestureActivity extends Activity {
 		mViewPager.setCurrentItem(3);
 		resetAllTab();
 		ViewSetting.setTextViewColor(this, R.id.gesture_disconnectall, Color.parseColor("#2d90dc"));
-	}
-	
-	public void setIsDrawing(boolean isDrawing) {
-		this.isDrawing=isDrawing;
 	}
 	
 	@Override

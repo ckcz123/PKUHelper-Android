@@ -134,13 +134,13 @@ public class Add {
 		String name=ViewSetting.getEditTextValue(lostFoundActivity, R.id.lostfound_add_name);
 		if ("".equals(name)) {
 			CustomToast.showInfoToast(lostFoundActivity, "物品名称必须填写");
-			((EditText)lostFoundActivity.findViewById(R.id.lostfound_add_name)).requestFocus();
+			(lostFoundActivity.findViewById(R.id.lostfound_add_name)).requestFocus();
 			return;
 		}
 		String phone=ViewSetting.getEditTextValue(lostFoundActivity, R.id.lostfound_add_phone);
 		if ("".equals(phone)) {
 			CustomToast.showInfoToast(lostFoundActivity, "电话号码必须填写");
-			((EditText)lostFoundActivity.findViewById(R.id.lostfound_add_phone)).requestFocus();
+			(lostFoundActivity.findViewById(R.id.lostfound_add_phone)).requestFocus();
 			return;
 		}
 		String detail=ViewSetting.getEditTextValue(lostFoundActivity, R.id.lostfound_add_detail);

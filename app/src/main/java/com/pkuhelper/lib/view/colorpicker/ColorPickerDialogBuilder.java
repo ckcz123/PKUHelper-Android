@@ -22,10 +22,6 @@ public class ColorPickerDialogBuilder {
 	private AlertDialog.Builder builder;
 	private LinearLayout pickerContainer;
 	private ColorPickerView colorPickerView;
-	private LightnessSlider lightnessSlider;
-	private AlphaSlider alphaSlider;
-	private EditText colorEdit;
-	private LinearLayout colorPreview;
 
 	private boolean isLightnessSliderEnabled = true;
 	private boolean isAlphaSliderEnabled = true;
@@ -166,7 +162,7 @@ public class ColorPickerDialogBuilder {
 		if (isLightnessSliderEnabled) {
 			LinearLayout.LayoutParams layoutParamsForLightnessBar = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getDimensionAsPx(context, R.dimen.default_slider_height));
 			layoutParamsForLightnessBar.setMargins(defaultMargin, 0, defaultMargin, 0);
-			lightnessSlider = new LightnessSlider(context);
+			LightnessSlider lightnessSlider = new LightnessSlider(context);
 			lightnessSlider.setLayoutParams(layoutParamsForLightnessBar);
 			pickerContainer.addView(lightnessSlider);
 			colorPickerView.setLightnessSlider(lightnessSlider);
@@ -175,7 +171,7 @@ public class ColorPickerDialogBuilder {
 		if (isAlphaSliderEnabled) {
 			LinearLayout.LayoutParams layoutParamsForAlphaBar = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getDimensionAsPx(context, R.dimen.default_slider_height));
 			layoutParamsForAlphaBar.setMargins(defaultMargin, 0, defaultMargin, 0);
-			alphaSlider = new AlphaSlider(context);
+			AlphaSlider alphaSlider = new AlphaSlider(context);
 			alphaSlider.setLayoutParams(layoutParamsForAlphaBar);
 			pickerContainer.addView(alphaSlider);
 			colorPickerView.setAlphaSlider(alphaSlider);
@@ -186,7 +182,7 @@ public class ColorPickerDialogBuilder {
 			int padSide = getDimensionAsPx(context, R.dimen.default_padding_side);
 			layoutParamsForColorEdit.leftMargin = padSide;
 			layoutParamsForColorEdit.rightMargin = padSide;
-			colorEdit = (EditText) View.inflate(context, R.layout.picker_edit, null);
+			EditText colorEdit = (EditText) View.inflate(context, R.layout.picker_edit, null);
 			colorEdit.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
 			colorEdit.setSingleLine();
 			colorEdit.setVisibility(View.GONE);
@@ -196,7 +192,7 @@ public class ColorPickerDialogBuilder {
 			colorPickerView.setColorEdit(colorEdit);
 		}
 		if (isPreviewEnabled) {
-			colorPreview = (LinearLayout) View.inflate(context, R.layout.color_preview, null);
+			LinearLayout colorPreview = (LinearLayout) View.inflate(context, R.layout.color_preview, null);
 			colorPreview.setVisibility(View.GONE);
 			pickerContainer.addView(colorPreview);
 

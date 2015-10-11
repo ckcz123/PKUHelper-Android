@@ -54,7 +54,7 @@ public class Certification {
 				String _location, String _price, String _seat, int _newPass, String _serial,
 				String _description) {
 			id=_id;event=_event;time=_time;location=_location;
-			price=_price;seat=_seat;newPass=Integer.valueOf(_newPass);serial=_serial;
+			price=_price;seat=_seat;newPass=_newPass;serial=_serial;
 			description=_description;
 		}
 	}
@@ -117,7 +117,7 @@ public class Certification {
 			public void run() {
 				Parameters parameters=WebConnection.connect(Constants.domain+"/services/pass.php?token="+Constants.token,
 						null);
-				if ("200".equals(parameters))
+				if ("200".equals(parameters.name))
 					subActivity.handler.sendMessage(Message.obtain(
 							subActivity.handler, Constants.MESSAGE_SUBACTIVITY_CERTIFICATION, parameters.value));
 				else

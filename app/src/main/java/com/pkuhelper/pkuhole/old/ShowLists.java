@@ -47,7 +47,7 @@ public class ShowLists {
 				int itemLeft=3;
 				if (lastItem>=totalItemCount-itemLeft)
 					requestMore();
-			};
+			}
 		});
 		PKUHoleActivity.pkuHoleActivity.getActionBar().setTitle("P大树洞");
 		pkuHoleActivity.isShowing=PKUHoleActivity.PAGE_LIST;

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import org.json.JSONObject;
 
-import com.pkuhelper.R;
 import com.pkuhelper.chat.ChatActivity;
 import com.pkuhelper.gesture.GestureActivity;
 import com.pkuhelper.lib.*;

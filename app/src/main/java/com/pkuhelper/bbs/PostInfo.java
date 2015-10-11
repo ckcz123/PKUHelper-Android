@@ -20,17 +20,17 @@ public class PostInfo {
 	public PostInfo(String _author, int _postid, int _number,
 			long _timestamp, String _content, String _attaches) {
 		author=new String(_author);
-		postid=Integer.valueOf(_postid);
-		number=Integer.valueOf(_number);
-		timestamp=Long.valueOf(_timestamp);
+		postid=_postid;
+		number=_number;
+		timestamp=_timestamp;
 		content=translate(_content);
 		attaches=getAttaches(_attaches);
 	}
 	public PostInfo(PostInfo another) {
 		author=new String(another.author);
-		postid=Integer.valueOf(another.postid);
-		number=Integer.valueOf(another.number);
-		timestamp=Long.valueOf(another.timestamp);
+		postid=another.postid;
+		number=another.number;
+		timestamp=another.timestamp;
 		content=new String(another.content);
 		attaches=new ArrayList<Parameters>(another.attaches);
 	}

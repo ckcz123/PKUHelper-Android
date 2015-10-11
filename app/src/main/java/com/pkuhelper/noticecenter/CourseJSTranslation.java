@@ -35,7 +35,7 @@ public class CourseJSTranslation {
 				     int remainder = leng%4;
 				     int i=0;      
 				     for(i = 0;i < iterator;i++){
-				       String tempData = data.substring(i*4+0,i*4+4);
+				       String tempData = data.substring(i*4,i*4+4);
 				       int[] tempByte = strToBt(tempData);
 				       int[] encByte ;
 				         int[] tempBt;
@@ -54,7 +54,7 @@ public class CourseJSTranslation {
 				       encData += bt64ToHex(encByte);
 				     }      
 				     if(remainder > 0){
-				       String remainderData = data.substring(iterator*4+0,leng);
+				       String remainderData = data.substring(iterator*4,leng);
 				       int[] tempByte = strToBt(remainderData);
 				       int[] encByte ;
 				         int[] tempBt;
@@ -127,10 +127,10 @@ public class CourseJSTranslation {
 		int[][] keyBytes=new int[kbl][];
 		int i=0;
 		for(i = 0;i < iterator; i ++){
-			   keyBytes[i] = strToBt(key.substring(i*4+0,i*4+4));
+			   keyBytes[i] = strToBt(key.substring(i*4,i*4+4));
 			 }
 			 if(remainder > 0){
-			   keyBytes[i] = strToBt(key.substring(i*4+0,leng));
+			   keyBytes[i] = strToBt(key.substring(i*4,leng));
 			 }    
 			 return keyBytes;
 
@@ -259,11 +259,11 @@ public class CourseJSTranslation {
 		int i;
 		for (i = 0; i < 8; i++) {
 			   if (i == 0) {
-			     epByte[i * 6 + 0] = rightData[31];
+			     epByte[i * 6] = rightData[31];
 			   } else {
-			     epByte[i * 6 + 0] = rightData[i * 4 - 1];
+			     epByte[i * 6] = rightData[i * 4 - 1];
 			   }
-			   epByte[i * 6 + 1] = rightData[i * 4 + 0];
+			   epByte[i * 6 + 1] = rightData[i * 4];
 			   epByte[i * 6 + 2] = rightData[i * 4 + 1];
 			   epByte[i * 6 + 3] = rightData[i * 4 + 2];
 			   epByte[i * 6 + 4] = rightData[i * 4 + 3];
@@ -322,7 +322,7 @@ public class CourseJSTranslation {
 		int m;
 		for(m=0;m<8;m++){
 			   int i=0,j=0;
-			   i = expandByte[m*6+0]*2+expandByte[m*6+5];
+			   i = expandByte[m*6]*2+expandByte[m*6+5];
 			   j = expandByte[m * 6 + 1] * 2 * 2 * 2 
 			     + expandByte[m * 6 + 2] * 2* 2 
 			     + expandByte[m * 6 + 3] * 2 
@@ -353,7 +353,7 @@ public class CourseJSTranslation {
 			       binary = getBoxBinary(s8[i][j]);
 			       break;
 			   }
-			   sBoxByte[m*4+0] = Integer.parseInt(binary.substring(0,1));
+			   sBoxByte[m*4] = Integer.parseInt(binary.substring(0,1));
 			   sBoxByte[m*4+1] = Integer.parseInt(binary.substring(1,2));
 			   sBoxByte[m*4+2] = Integer.parseInt(binary.substring(2,3));
 			   sBoxByte[m*4+3] = Integer.parseInt(binary.substring(3,4));

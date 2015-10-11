@@ -35,7 +35,7 @@ public class GradeActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		gradeActivity=this;
-		setContentView(R.layout.grade_listview_layout);;
+		setContentView(R.layout.grade_listview_layout);
 		getActionBar().setTitle("成绩查询");
 		Intent intent=getIntent();
 		String string=intent.getExtras().getString("phpsessid");
@@ -313,7 +313,7 @@ public class GradeActivity extends Activity {
 		mp.put("name", "课程名称");
 		String name=hashMap.get("name");
 		if (name.length()>=15) name=name.substring(0, 13)+"...";
-		mp.put("value", hashMap.get("name"));
+		mp.put("value", name);
 		maps.add(mp);
 		mp=new HashMap<String, String>();
 		mp.put("name", "课程类别");

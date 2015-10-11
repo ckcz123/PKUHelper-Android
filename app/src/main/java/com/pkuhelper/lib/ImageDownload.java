@@ -48,21 +48,20 @@ public class ImageDownload {
 		if (activity==null || imageViews==null) return;
 		int len=imageViews.size();
 		for (int i=0;i<len;i++) {
-			final int j=Integer.valueOf(i);
+			final int j=i;
 			new Thread(new Runnable() {
 				
 				@Override
 				public void run() {
-					int w=j;
 					try {
-						InputStream inputStream=WebConnection.connect(urls.get(w));
-						Drawable drawable=Drawable.createFromStream(inputStream, w+".png");
+						InputStream inputStream=WebConnection.connect(urls.get(j));
+						Drawable drawable=Drawable.createFromStream(inputStream, j+".png");
 						eventHandler.sendMessage(Message.obtain(
-								eventHandler, IMAGE_REQUEST_FINISHED, w, 0, drawable));
+								eventHandler, IMAGE_REQUEST_FINISHED, j, 0, drawable));
 					}
 					catch (Exception e) {
 						eventHandler.sendMessage(Message.obtain(
-								eventHandler, IMAGE_REQUEST_FAILED, w, 0));
+								eventHandler, IMAGE_REQUEST_FAILED, j, 0));
 					}
 				}
 			}).start();

@@ -203,7 +203,7 @@ public class WebConnection {
 	
 	public static int checkIfInSchool() {
 		try {
-			HttpParams httpParams=new BasicHttpParams();;
+			HttpParams httpParams=new BasicHttpParams();
 			HttpConnectionParams.setConnectionTimeout(httpParams, 1000);
 			HttpConnectionParams.setSoTimeout(httpParams, 2000);
 			HttpClient httpClient=new DefaultHttpClient(httpParams);

@@ -41,7 +41,6 @@ public class ChatActivity extends Activity {
 	ArrayList<String> blackList=new ArrayList<String>();
 	static final int PAGE_LIST = 0;
 	static final int PAGE_CHAT = 1;
-	static final String TYPE_TO = "to";
 	static final String TYPE_FROM = "from";
 	static final String MIME_PLAIN = "text/plain";
 	static final String MIME_HTML = "text/html";
@@ -273,7 +272,7 @@ public class ChatActivity extends Activity {
 					names.add(name);
 				}
 			}
-			new AlertDialog.Builder(this).setItems(names.toArray(new String[]{}), 
+			new AlertDialog.Builder(this).setItems(names.toArray(new String[names.size()]),
 					new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int which) {
 					int sid=sids.get(which);
@@ -526,7 +525,7 @@ public class ChatActivity extends Activity {
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode==KeyEvent.KEYCODE_BACK && event.getAction()==KeyEvent.ACTION_DOWN) {
 			if (pageShowing==PAGE_CHAT) {
-				ChatList.realShowList();;
+				ChatList.realShowList();
 				return true;
 			}
 			if (pageShowing==PAGE_LIST) {

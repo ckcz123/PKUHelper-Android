@@ -11,10 +11,10 @@ public class SearchInfo {
 	public SearchInfo(String _board, int _threadid, 
 			String _title, String _author, int _number, long _timestamp) {
 		board=new String(_board);
-		threadid=Integer.valueOf(_threadid);
+		threadid=_threadid;
 		title=new String(_title);
 		author=new String(_author);
-		number=Integer.valueOf(_number);
-		timestamp=Long.valueOf(_timestamp);
+		number=_number;
+		timestamp=_timestamp;
 	}
 }

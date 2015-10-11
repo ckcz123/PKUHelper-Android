@@ -26,12 +26,12 @@ public class ThreadInfo {
 	 */
 	public ThreadInfo(int _rank, String _board, String _boardName,
 			String _author, String _time, String _title, int _threadid) throws Exception {
-		rank=Integer.valueOf(_rank);
+		rank=_rank;
 		board=new String(_board);
 		boardName=new String(_boardName);
 		author=new String(_author);
 		title=new String(_title);
-		threadid=Integer.valueOf(_threadid);
+		threadid=_threadid;
 
 		SimpleDateFormat simpleDateFormat=new SimpleDateFormat("M-d HH:mm:ss", Locale.getDefault());
 		Date date=simpleDateFormat.parse(_time);
@@ -64,8 +64,8 @@ public class ThreadInfo {
 		boardName=new String(_boardName);
 		author=new String(_author);
 		title=new String(_title);
-		threadid=Integer.valueOf(_threadid);
-		time=Long.valueOf(_time)*1000;
+		threadid=_threadid;
+		time=_time*1000;
 		isTop=top==1;
 	}
 	

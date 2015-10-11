@@ -231,7 +231,7 @@ public class ViewSetting {
 			double scaled=(width+0.0)/(height+0.0);
 			width=bitmap.getWidth();
 			height=bitmap.getHeight();
-			int x=0, y=0, dstwidth, dstheight;
+			int x, y, dstwidth, dstheight;
 			double s=(width+0.0)/(height+0.0);
 			if (s>scaled) {
 				dstheight=height;

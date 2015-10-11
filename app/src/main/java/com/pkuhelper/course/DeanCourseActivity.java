@@ -40,7 +40,6 @@ import android.widget.ListView;
 public class DeanCourseActivity extends Activity {
 	ArrayList<String> courseInfos=new ArrayList<String>();
 	HashMap<String, CourseInfo> courseMap=new HashMap<String, CourseInfo>();
-	int currCourseIndex=0;
 	boolean hasModified;
 	
 	@Override
@@ -54,7 +53,7 @@ public class DeanCourseActivity extends Activity {
 	
 	private void getList() {
 		//String html=Editor.getString(this, Constants.username+"_course");
-		String html="";
+		String html;
 		try {
 			html=MyFile.getString(this, Constants.username, "course", "");
 		}
@@ -77,8 +76,7 @@ public class DeanCourseActivity extends Activity {
 						Element span=td.child(0);
 						String[] strings=span.html().split("<br>");
 						String name=strings[0].trim();
-						String secondLine="";
-						secondLine=strings[1].trim();
+						String secondLine=strings[1].trim();
 						
 						String location="？";
 						int pos=secondLine.indexOf(")");
@@ -102,7 +100,6 @@ public class DeanCourseActivity extends Activity {
 					}
 				}
 			}
-			html=document.toString();
 			for (Map.Entry<String, CourseInfo> entry: courseMap.entrySet()) {
 				entry.getValue().sortAndMerge();
 			}
@@ -210,8 +207,7 @@ public class DeanCourseActivity extends Activity {
 					
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						String string=editText.getEditableText().toString();
-						courseInfo.where=string;
+						courseInfo.where=editText.getEditableText().toString();
 						hasModified=true;
 						showList();
 					}

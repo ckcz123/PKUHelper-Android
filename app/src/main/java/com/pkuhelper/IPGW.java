@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.*;
-import com.pkuhelper.R;
 import com.pkuhelper.gesture.GestureActivity;
 import com.pkuhelper.lib.*;
 import com.pkuhelper.lib.view.CustomToast;
@@ -224,6 +223,7 @@ public class IPGW extends Fragment{
 		String type="connect";
 		String free="2";
 		if (constantType==Constants.REQUEST_ITS_CONNECT) {
+			free="2";
 		}
 		else if (constantType==Constants.REQUEST_ITS_CONNECT_NO_FREE) {
 			free="1";
@@ -403,10 +403,9 @@ public class IPGW extends Fragment{
 		.setPositiveButton("确定", new ColorPickerClickListener() {
 			public void onClick(DialogInterface d, int lastSelectedColor,
 					Integer[] allColors) {
-				int color=lastSelectedColor;
-				ViewSetting.setTextViewColor(ipgwView, R.id.ipgw_hint, color);
-				ViewSetting.setTextViewColor(ipgwView, R.id.ipgw_state, color);
-				Editor.putInt(PKUHelper.pkuhelper, "ipgw_text_color", color);
+				ViewSetting.setTextViewColor(ipgwView, R.id.ipgw_hint, lastSelectedColor);
+				ViewSetting.setTextViewColor(ipgwView, R.id.ipgw_state, lastSelectedColor);
+				Editor.putInt(PKUHelper.pkuhelper, "ipgw_text_color", lastSelectedColor);
 			}
 		}).setNegativeButton("取消", null)
 		.build().show();

@@ -293,8 +293,6 @@ public class Lib {
 			case Constants.MESSAGE_IMAGE_REQUEST_FINISHED:
 				if (message.arg1==Constants.REQUEST_FEATURES_IMAGE)
 					Constants.setDrawable(message.arg2, (Drawable)message.obj);
-				else if (message.arg1==Constants.REQUEST_BACKGROUND_IMAGE)
-					;//Information.setBgImage((Drawable)message.obj);
 				break;
 			case Constants.MESSAGE_IMAGE_REQUEST_FAILED:
 				if (message.arg1==Constants.REQUEST_FEATURES_IMAGE) {

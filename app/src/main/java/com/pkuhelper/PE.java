@@ -11,7 +11,6 @@ import android.util.Base64;
 import android.view.View;
 import android.widget.*;
 
-import com.pkuhelper.R;
 import com.pkuhelper.lib.Constants;
 import com.pkuhelper.lib.Editor;
 import com.pkuhelper.lib.ViewSetting;

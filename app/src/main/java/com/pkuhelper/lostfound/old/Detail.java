@@ -145,7 +145,7 @@ public class Detail {
 	
 	private static ArrayList<HashMap<String, String>> getList(LostFoundInfo lostFoundInfo) {
 		ArrayList<HashMap<String, String>> arrayList=new ArrayList<HashMap<String,String>>();
-		HashMap<String, String> map=new HashMap<String, String>();
+		HashMap<String, String> map;
 		SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
 		
 		map=new HashMap<String, String>();
@@ -159,7 +159,7 @@ public class Detail {
 		arrayList.add(map);
 		
 		map=new HashMap<String, String>();
-		String type="";
+		String type;
 		switch (lostFoundInfo.type) {
 		case LostFoundInfo.TYPE_CARD:
 			type="卡片或钱包";

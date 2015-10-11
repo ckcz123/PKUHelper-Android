@@ -88,8 +88,7 @@ public class MyCalendar {
 			Date date2=dateFormat.parse(date);
 			long deltatime=date2.getTime()-date1.getTime();
 			if (deltatime<0) return -1;
-			int val=(int)(deltatime/(1000*86400));
-			return val;
+			return (int)(deltatime/(1000*86400));
 		} catch (Exception e) {return -1;}
 	}
 	/**

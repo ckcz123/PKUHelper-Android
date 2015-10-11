@@ -39,25 +39,25 @@ public class Editor {
 		SharedPreferences.Editor editor=
 				context.getSharedPreferences(TAG, 0).edit();
 		editor.putString(name, val);
-		editor.commit();
+		editor.apply();
 	}
 	public static void putInt(Context context, String name,int val) {
 		SharedPreferences.Editor editor=
 				context.getSharedPreferences(TAG, 0).edit();
 		editor.putInt(name, val);
-		editor.commit();
+		editor.apply();
 	}
 	public static void putLong(Context context, String name,long val) {
 		SharedPreferences.Editor editor=
 				context.getSharedPreferences(TAG, 0).edit();
 		editor.putLong(name, val);
-		editor.commit();
+		editor.apply();
 	}
 	public static void putBoolean(Context context, String name,Boolean val) {
 		SharedPreferences.Editor editor=
 				context.getSharedPreferences(TAG, 0).edit();
 		editor.putBoolean(name, val);
-		editor.commit();
+		editor.apply();
 	}
 	
 }

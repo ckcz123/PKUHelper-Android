@@ -47,7 +47,7 @@ public class SubActivity extends Activity {
 	String decodeString="";
 	
 	Handler handler=new Handler(new Handler.Callback() {
-		
+
 		@Override
 		public boolean handleMessage(Message msg) {
 			if (msg.what==Constants.MESSAGE_SUBACTIVITY_DECODE_PICTURE) {

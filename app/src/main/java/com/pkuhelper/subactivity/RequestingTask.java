@@ -15,7 +15,6 @@ public class RequestingTask extends AsyncTask<ArrayList<Parameters>, String, Par
 	SubActivity subActivity;
 	/**
 	 * 发起一个http调用；如果访问失败那么直接Toast提醒，无返回
-	 * @param pkuhelper 调用时需要传this
 	 * @param msg 提示消息
 	 * @param url 请求地址
 	 * @param type 访问类型

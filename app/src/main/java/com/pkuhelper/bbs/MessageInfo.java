@@ -8,10 +8,10 @@ public class MessageInfo {
 	boolean isnew;
 	public MessageInfo(int _number, String _title, String _author,
 			long _timestamp, int _isnew) {
-		number=Integer.valueOf(_number);
+		number=_number;
 		title=new String(_title);
 		author=new String(_author);
-		timestamp=Long.valueOf(_timestamp);
+		timestamp=_timestamp;
 		isnew=_isnew==1;
 	}	
 }

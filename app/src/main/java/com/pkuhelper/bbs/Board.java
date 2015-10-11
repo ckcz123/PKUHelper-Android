@@ -41,9 +41,9 @@ public class Board {
 		try {
 			String string=Editor.getString(BBSActivity.bbsActivity, "bbs_favorite");
 			String[] strings=string.split(",");
-			for (int i=0;i<strings.length;i++) {
-				if (!"".equals(strings[i]))
-					favorite.add(strings[i]);
+			for (String str: strings) {
+				if (!"".equals(str))
+					favorite.add(str);
 			}
 		}
 		catch (Exception e) {}
@@ -96,7 +96,7 @@ public class Board {
 		board=new String(_board);
 		name=new String(_name);
 		category=new String(_category);
-		anonymous=_anonymous==1?true:false;
+		anonymous=_anonymous==1;
 		this.total=total;
 	}
 }

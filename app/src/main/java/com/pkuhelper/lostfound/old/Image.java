@@ -28,7 +28,7 @@ public class Image {
 	public static void requestImage(int id, String url) {
 		if (imageMap.containsKey(url)) return;
 		final String _url=new String(url);
-		final int _id=Integer.valueOf(id);
+		final int _id=id;
 		new Thread(new Runnable() {
 			@Override
 			public void run() {

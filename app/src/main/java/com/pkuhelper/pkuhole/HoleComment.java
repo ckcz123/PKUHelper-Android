@@ -248,7 +248,7 @@ public class HoleComment extends Activity {
 			int code=jsonObject.getInt("code");
 			if (code!=0)
 				CustomToast.showErrorToast(this, jsonObject.optString("msg", "评论获取失败"));
-			attention=jsonObject.optInt("attention")!=0?true:false;
+			attention=jsonObject.optInt("attention")!=0;
 			JSONArray data=jsonObject.getJSONArray("data");
 			int len=data.length();
 			
@@ -257,7 +257,7 @@ public class HoleComment extends Activity {
 				JSONObject comment=data.getJSONObject(i);
 				commentInfos.add(new CommentInfo(comment.getInt("cid"), 
 						comment.optString("text"),
-						comment.optInt("islz")!=0?true:false,
+						comment.optInt("islz")!=0,
 								comment.optLong("timestamp")));
 			}
 			arrayList.clear();

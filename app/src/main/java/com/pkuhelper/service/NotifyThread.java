@@ -141,7 +141,7 @@ public class NotifyThread extends Thread implements Runnable {
 					break;
 				}
 			}
-			catch (Exception e) {continue;}	
+			catch (Exception e) {}
 		}
 		if (!"".equals(name)) {
 			String title="您明天有考试哦！";

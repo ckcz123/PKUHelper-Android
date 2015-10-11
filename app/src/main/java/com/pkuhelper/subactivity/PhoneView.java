@@ -90,7 +90,7 @@ public class PhoneView {
 	}
 	
 	private void getQuery(String text) {
-		lists.clear();;
+		lists.clear();
 		Iterator<HashMap<String, String>> iterator=phones.iterator();
 		while (iterator.hasNext()) {
 			HashMap<String, String> hashMap=iterator.next();

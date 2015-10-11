@@ -10,10 +10,6 @@ public class CircleColorDrawable extends ColorDrawable {
 	private Paint fillPaint = PaintBuilder.newPaint().style(Paint.Style.FILL).color(0).build();
 	private Paint fillBackPaint = PaintBuilder.newPaint().shader(PaintBuilder.createAlphaPatternShader(16)).build();
 
-	public CircleColorDrawable() {
-		super();
-	}
-
 	public CircleColorDrawable(int color) {
 		super(color);
 	}

@@ -6,7 +6,6 @@ public class ChatDetailInfo {
 	String mime;
 	long timestamp;
 	String type;
-	String name;
 	
 	public ChatDetailInfo(int _id,String _content, String _mime, long _timestamp,
 			String _type) {

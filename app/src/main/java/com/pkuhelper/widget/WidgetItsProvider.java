@@ -161,6 +161,7 @@ public class WidgetItsProvider extends AppWidgetProvider{
 		String type="connect";
 		String free="2";
 		if (constantType==Constants.REQUEST_ITS_CONNECT) {
+			free="2";
 		}
 		else if (constantType==Constants.REQUEST_ITS_CONNECT_NO_FREE) {
 			free="1";

@@ -39,7 +39,7 @@ public class MessagePostActivity extends Activity {
 			
 			BufferedReader bufferedReader=new BufferedReader(new StringReader(string));
 			text="\n\n【在 "+author+" 的来信中提到: 】\n";
-			String line="";
+			String line;
 			int cnt=0;
 			try {
 				boolean lastBlankline=false;
@@ -52,8 +52,7 @@ public class MessagePostActivity extends Activity {
 					if (str.startsWith("发信站:")) continue;
 					if (str.startsWith("来  源:")) continue;
 					text+=": "+line+"\n";
-					if ("".equals(str)) lastBlankline=true;
-					else lastBlankline=false;
+					lastBlankline="".equals(str);
 					cnt++;
 					if (cnt>=6) 
 						break;

@@ -49,7 +49,7 @@ public class ChatThread extends Thread implements Runnable{
 					Log.w("chat-return",string);
 					
 					listnew=string.charAt(0)=='1';
-					detailnew=string.length()==1?false:string.charAt(1)=='1';
+					detailnew=string.length()!=1&&string.charAt(1)=='1';
 				}
 				if (listnew) {
 					ArrayList<Parameters> arrayList=new ArrayList<Parameters>();

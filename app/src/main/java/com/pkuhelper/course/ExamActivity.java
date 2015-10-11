@@ -251,7 +251,6 @@ public class ExamActivity extends Activity {
 	
 	void save(boolean needToFinish) {
 		try {
-			String string="";
 			JSONArray jsonArray=new JSONArray();
 			int size=examInfos.size();
 			for (int i=0;i<size;i++) {
@@ -263,7 +262,7 @@ public class ExamActivity extends Activity {
 				jsonObject.put("time", examInfo.time);
 				jsonArray.put(jsonObject);
 			}
-			string=jsonArray.toString();
+			String string=jsonArray.toString();
 			MyFile.putString(this, Constants.username, "exam", string);
 			hasModified=false;
 			CustomToast.showSuccessToast(this, "保存成功");
@@ -411,18 +410,16 @@ public class ExamActivity extends Activity {
 			daysLeft=getDeltaDays();
 		}
 		private boolean checkfinished() {
-			Calendar calendar=Calendar.getInstance();
-			SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-			SimpleDateFormat timeFormat=new SimpleDateFormat("HH:mm", Locale.getDefault());
-			String nowDate=dateFormat.format(calendar.getTime());
-			String nowTime=timeFormat.format(calendar.getTime());
-			
-			int dateCompare=date.compareTo(nowDate);
-			int timeCompare=time.compareTo(nowTime);
-			
-			if (dateCompare>0) return false;
-			if (dateCompare==0 && timeCompare>0) return false;
-			return true;
+			Calendar calendar = Calendar.getInstance();
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+			SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
+			String nowDate = dateFormat.format(calendar.getTime());
+			String nowTime = timeFormat.format(calendar.getTime());
+
+			int dateCompare = date.compareTo(nowDate);
+			int timeCompare = time.compareTo(nowTime);
+
+			return dateCompare <= 0 && !(dateCompare == 0 && timeCompare > 0);
 		}
 		private String getDeltaDays() {
 			if (finished) return "已结束";

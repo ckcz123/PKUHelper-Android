@@ -39,7 +39,7 @@ public class MyWebView {
 	public MyWebView(SubActivity _sub) {subActivity=_sub;}
 	public MyWebView(SubActivity _sub, int _sid) {subActivity=_sub;sid=_sid;}
 	
-	@SuppressLint("SetJavaScriptEnabled")
+	@SuppressLint({"SetJavaScriptEnabled", "AddJavascriptInterface"})
 	public MyWebView showWebView(String title, String url) {
         subActivity.getActionBar().setTitle("loading...");
         if (title==null) title="";
@@ -209,7 +209,7 @@ public class MyWebView {
 				html, "text/html", "utf-8", null);
 		return this;
 	}
-	@SuppressLint("SetJavaScriptEnabled")
+	@SuppressLint({"SetJavaScriptEnabled", "AddJavascriptInterface"})
 	public MyWebView showPKUMail() {
 		subActivity.setContentView(R.layout.subactivity_webview);
 		swipeRefreshLayout=(SwipeRefreshLayout)subActivity.findViewById(R.id.subactivity_swipeRefreshLayout);
@@ -232,7 +232,7 @@ public class MyWebView {
 		WebView webView=subActivity.webView;
 		webView.getSettings().setJavaScriptEnabled(true);
 		webView.addJavascriptInterface(new JSInterface(subActivity), "imageclick");
-		webView.getSettings().setUseWideViewPort(false);;
+		webView.getSettings().setUseWideViewPort(false);
 		webView.setVerticalScrollBarEnabled(false);
 		webView.setHorizontalScrollBarEnabled(false);
 		webView.setDownloadListener(new DownloadListener() {

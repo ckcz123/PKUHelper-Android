@@ -6,7 +6,6 @@ import android.graphics.Paint;
 public class FlowerColorWheelRenderer extends AbsColorWheelRenderer {
 	private Paint selectorFill = PaintBuilder.newPaint().build();
 	private float[] hsv = new float[3];
-	private float sizeJitter = 1.2f;
 
 	@Override
 	public void draw() {
@@ -22,6 +21,7 @@ public class FlowerColorWheelRenderer extends AbsColorWheelRenderer {
 			float p = (float) i / (density - 1); // 0~1
 			float jitter = (i - density / 2f) / density; // -0.5 ~ 0.5
 			float radius = maxRadius * p;
+			float sizeJitter = 1.2f;
 			float size = Math.max(1.5f + strokeWidth, cSize + (i == 0 ? 0 : cSize * sizeJitter * jitter));
 			int total = Math.min(calcTotalCount(radius, size), density * 2);
 

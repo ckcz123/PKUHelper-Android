@@ -2,7 +2,6 @@ package com.pkuhelper;
 
 import java.util.*;
 
-import com.pkuhelper.R;
 import com.pkuhelper.lib.Constants;
 import com.pkuhelper.lib.Lib;
 import com.pkuhelper.lib.ViewSetting;

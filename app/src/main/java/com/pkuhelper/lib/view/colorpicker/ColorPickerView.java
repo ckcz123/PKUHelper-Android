@@ -30,7 +30,6 @@ public class ColorPickerView extends View {
 
 	private float lightness = 1;
 	private float alpha = 1;
-	private int backgroundColor = 0x00000000;
 
 	private Integer initialColors[] = new Integer[]{null, null, null, null, null};
 	private int colorSelection = 0;
@@ -229,6 +228,7 @@ public class ColorPickerView extends View {
 	@Override
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
+		int backgroundColor = 0x00000000;
 		canvas.drawColor(backgroundColor);
 		if (colorWheel != null)
 			canvas.drawBitmap(colorWheel, 0, 0, null);
