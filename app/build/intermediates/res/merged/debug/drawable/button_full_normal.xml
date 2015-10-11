@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?> 
-<shape 
-    xmlns:android="http://schemas.android.com/apk/res/android" 
-    android:shape="rectangle"> 
-    <!-- 填充的颜色 --> 
-    <solid android:color="#FFFFFF" />   
-<!-- padding：Button里面的文字与Button边界的间隔 -->  
-</shape> 
-<!-- From: file:/E:/android/PKUHelper/app/src/main/res/drawable/button_full_normal.xml -->
