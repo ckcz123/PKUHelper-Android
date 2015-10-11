@@ -1,8 +1,0 @@
-<ListView android:layout_width="fill_parent" 
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_height="fill_parent"
-         android:divider="#222222"
-         android:id="@+id/lostfound_listview">
-
-</ListView>
-<!-- From: file:/E:/android/PKUHelper/app/src/main/res/layout/lostfound_listview.xml -->
