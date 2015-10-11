@@ -1,0 +1,16 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:background="#f3f3f3"
+    android:padding="6dp"
+    android:layout_height="fill_parent" >
+
+    <TextView 
+        android:id="@+id/grade_text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
+        android:textColor="#aaaaaa"
+        />
+</LinearLayout>

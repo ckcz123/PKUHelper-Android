@@ -1,0 +1,34 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:gravity="center"
+        style="?android:attr/buttonBarStyle"
+        android:layout_width="fill_parent" android:layout_height="fill_parent"
+        >
+        <Button 
+            android:id="@+id/lostfound_detail_button_detail" 
+            android:text="@string/lostfound_detail"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:textSize="12sp"
+        />
+        <Button 
+            android:id="@+id/lostfound_detail_button_image" 
+            android:text="@string/lostfound_image"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:textSize="12sp"
+        />
+        <Button 
+            android:id="@+id/lostfound_detail_button_chat" 
+            android:text="@string/lostfound_chat"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:textSize="12sp"
+        />
+        <Button 
+            android:id="@+id/lostfound_detail_button_phone" 
+            android:text="@string/lostfound_phone"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:textSize="12sp"
+        />
+    </LinearLayout><!-- From: file:/E:/android/PKUHelper/app/src/main/res/layout/lostfound_detail_buttonview.xml -->

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="7dp"
+    android:paddingRight="7dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    >
+
+<LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentEnd="true"
+    android:background="@drawable/chatto_bg"
+    android:layout_marginLeft="70sp"
+    android:layout_marginStart="70sp"
+    android:paddingTop="13dp"
+    android:id="@+id/chatto_linearlayout"
+    android:orientation="vertical" >
+
+    <TextView 
+        android:id="@+id/chatto_text"
+        android:textSize="14sp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="3sp"
+        android:layout_marginRight="3sp"
+        android:layout_marginBottom="3sp"
+        />
+    
+    <TextView
+        android:id="@+id/chatto_time"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="7dp"
+        android:textColor="#999999"
+        android:gravity="end"
+        android:textSize="12sp" />
+
+</LinearLayout>
+<LinearLayout
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="vertical" 
+	        android:layout_marginTop="15dp"
+	        android:layout_below="@+id/chatto_linearlayout"
+	        android:id="@+id/chatto_hint"
+	        android:visibility="gone"
+	        android:gravity="center_horizontal">
+	
+	        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#f3f3f3"
+            android:textSize="12sp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+           android:paddingTop="5dp"
+           android:paddingBottom="5dp"
+           android:id="@+id/chatto_hint_text"
+            android:background="@drawable/chat_hint_bg"/>
+	        
+	    </LinearLayout>
+</RelativeLayout>

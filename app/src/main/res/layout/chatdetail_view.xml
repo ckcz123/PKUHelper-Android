@@ -1,0 +1,71 @@
+<RelativeLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+     android:background="#e8e8e7"
+    android:id="@+id/chat_bg"
+    android:layout_height="fill_parent" >
+
+    
+    <RelativeLayout
+            android:id="@+id/chatdetail_send_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            >
+
+            <Button
+                android:id="@+id/chatdetail_send_button"
+                android:layout_width="60sp"
+                android:layout_height="40sp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="18dp"
+                android:layout_marginRight="18dp"
+                android:background="@drawable/button"
+                android:text="@string/send"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/chatdetail_send_text"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginStart="10dp"
+                android:layout_toLeftOf="@id/chatdetail_send_button"
+                android:layout_toStartOf="@id/chatdetail_send_button"
+                android:background="@drawable/chat_send_text_bg"
+                android:minHeight="40sp"
+                android:maxHeight="80sp"
+                android:inputType="textMultiLine"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:textSize="15sp" />
+
+        </RelativeLayout>
+    
+    <View 
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:background="#aaaaaa"
+        android:layout_above="@+id/chatdetail_send_layout"
+        android:id="@+id/chatdetail_devider"
+        />
+    
+    <ListView 
+        android:id="@+id/chatdetail_list"
+        android:layout_above="@+id/chatdetail_devider"
+        android:layout_alignParentTop="true"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        />
+    
+    
+</RelativeLayout>

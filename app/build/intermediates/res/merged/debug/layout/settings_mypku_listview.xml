@@ -1,0 +1,8 @@
+<ListView android:layout_width="fill_parent" 
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_height="fill_parent"
+         android:background="#E8E8E7"
+         android:id="@+id/settings_mypku_listview">
+
+</ListView>
+<!-- From: file:/E:/android/PKUHelper/app/src/main/res/layout/settings_mypku_listview.xml -->

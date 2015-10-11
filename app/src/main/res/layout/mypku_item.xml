@@ -1,0 +1,27 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+     >
+
+    <com.pkuhelper.lib.view.AspectRatioImageView
+        android:id="@+id/mypku_image"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:contentDescription="@string/app_name"
+        android:layout_marginTop="15dp"
+        android:scaleType="fitCenter" />
+    
+    <TextView 
+        android:layout_width="fill_parent"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:id="@+id/mypku_text"
+        android:layout_below="@+id/mypku_image"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        />
+</RelativeLayout>

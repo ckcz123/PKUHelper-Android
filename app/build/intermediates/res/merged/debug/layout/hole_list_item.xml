@@ -1,0 +1,226 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+    <View android:layout_width="0dp" android:layout_height="0dp"/>
+
+<LinearLayout 
+    android:layout_marginTop="15dp"
+    android:layout_marginBottom="15dp"
+    android:layout_marginLeft="40dp"
+    android:layout_marginRight="40dp"
+    android:layout_marginStart="40dp"
+    android:layout_marginEnd="40dp"
+    android:background="@drawable/corners_bg"
+    android:layout_centerInParent="true"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <TextView 
+        android:id="@+id/hole_listitem_pid"
+        android:textSize="12sp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="5dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#636363"
+        />
+    
+    
+    <TextView 
+        android:id="@+id/hole_listitem_text"
+        android:textSize="14sp"
+        android:lineSpacingExtra="5sp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="7dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:singleLine="false"
+        />
+    
+    <RelativeLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:orientation="vertical"
+        android:id="@+id/hole_listitem_image_layout"
+        android:visibility="gone"
+        >
+
+    <com.pkuhelper.lib.view.AspectRatioImageView
+        android:id="@+id/hole_listitem_image"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/app_name"
+        android:scaleType="centerCrop"
+        android:visibility="gone" />
+    
+    <TextView 
+        android:id="@+id/hole_listitem_image_too_long"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:text="@string/hole_listitem_image_too_long"
+        android:textColor="#f3f3f3"
+        android:background="#dd444444"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
+        android:paddingLeft="6dp"
+        android:paddingRight="6dp"
+        android:paddingStart="6dp"
+        android:paddingEnd="6dp"
+        android:layout_marginTop="15dp"
+        android:visibility="gone"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
+        />
+    
+    <TextView 
+        android:id="@+id/hole_listitem_image_hint"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:text="@string/hole_image_hint"
+        android:visibility="gone"
+        />
+
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:id="@+id/hole_listitem_audio_layout"
+        android:visibility="gone"
+        >
+
+    <ImageView
+        android:id="@+id/hole_listitem_audio"
+        android:layout_width="144sp"
+        android:layout_height="30sp"
+        android:contentDescription="@string/app_name"
+        android:visibility="gone"
+        />
+    
+    <TextView 
+        android:id="@+id/hole_listitem_audio_length"
+        android:textSize="16sp"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginLeft="7dp"
+        android:layout_marginStart="7dp"
+        android:layout_toRightOf="@+id/hole_listitem_audio"
+        android:layout_toEndOf="@+id/hole_listitem_audio"
+        />
+    
+    <TextView 
+        android:id="@+id/hole_listitem_audio_hint"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:text="@string/hole_audio_hint"
+        android:visibility="gone"
+        android:layout_centerHorizontal="true"
+        />
+
+    </RelativeLayout>
+    
+    <RelativeLayout 
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        >
+        
+        <TextView 
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:textSize="12sp"
+            android:id="@+id/hole_listitem_time"
+            android:textColor="#555555"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+            />
+        
+        <TextView 
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:textSize="12sp"
+            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
+            android:id="@+id/hole_listitem_reply"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+            />
+        
+        <ImageView 
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/hole_listitem_reply"
+            android:layout_toStartOf="@+id/hole_listitem_reply"
+            android:layout_marginRight="5dp"
+            android:layout_marginEnd="5dp"
+            android:src="@drawable/pkuhole_comment"
+            android:layout_width="13sp"
+            android:layout_height="13sp"
+            android:scaleType="fitXY"
+            android:id="@+id/hole_listitem_reply_icon"
+            android:contentDescription="@string/app_name"
+            />
+        
+        <TextView 
+            android:layout_centerVertical="true"
+            android:textSize="12sp"
+            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
+            android:id="@+id/hole_listitem_like"
+            android:layout_toLeftOf="@+id/hole_listitem_reply_icon"
+            android:layout_toStartOf="@+id/hole_listitem_reply_icon"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+            />
+        
+        <ImageView 
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/hole_listitem_like"
+            android:layout_toStartOf="@+id/hole_listitem_like"
+            android:layout_marginRight="5dp"
+            android:layout_marginEnd="5dp"
+            android:src="@drawable/pkuhole_eye"
+            android:layout_width="13sp"
+            android:layout_height="13sp"
+            android:scaleType="fitXY"
+            android:id="@+id/hole_listitem_like_icon"
+            android:contentDescription="@string/app_name"
+            />
+        
+        
+    </RelativeLayout>
+    
+</LinearLayout>
+    
+</RelativeLayout><!-- From: file:/E:/android/PKUHelper/app/src/main/res/layout/hole_list_item.xml -->

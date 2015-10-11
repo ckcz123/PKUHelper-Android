@@ -1,0 +1,148 @@
+<ScrollView 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+
+<LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <EditText
+        android:id="@+id/hole_post_text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:padding="6dp"
+        android:textSize="14sp"
+        android:lineSpacingExtra="5sp"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        android:lines="10"
+        android:singleLine="false" />
+    
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginStart="15dp" >
+        
+        <LinearLayout
+            android:id="@+id/hole_post_extra_layout"
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true" >
+
+            <Button 
+            	android:id="@+id/hole_post_image_button" android:text="@string/hole_add_image"
+           	 	style="?android:attr/buttonBarButtonStyle"
+          	  	android:layout_width="wrap_content" android:layout_height="wrap_content"
+            	android:textSize="13sp"
+        	/>
+        	<Button 
+            	android:id="@+id/hole_post_audio_button" android:text="@string/hole_add_audio"
+            	android:textSize="13sp"
+            	style="?android:attr/buttonBarButtonStyle"
+            	android:layout_width="wrap_content" android:layout_height="wrap_content"
+        	/>
+            
+        </LinearLayout>
+        
+        <LinearLayout
+            android:id="@+id/hole_post_extra_hasitem_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:visibility="gone" >
+
+            <TextView 
+                android:id="@+id/hole_post_extra_hasitem_name"
+                android:textSize="15sp"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                />
+        	<TextView 
+                android:id="@+id/hole_post_extra_hasitem_delete"
+                android:textSize="15sp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:text="@string/hole_extra_clear"
+                android:textColor="#3d6ab7"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                />
+            
+        </LinearLayout>
+        
+        <Button 
+            android:id="@+id/hole_post_commit"
+            android:textSize="13sp"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:text="@string/hole_post_commmit"
+            />
+        
+    </RelativeLayout>
+    
+    <LinearLayout 
+        android:id="@+id/hole_post_extra_item"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginBottom="20dp"
+        android:visibility="gone"
+        android:orientation="vertical"
+        >
+        
+        <com.pkuhelper.lib.view.AspectRatioImageView
+        	android:id="@+id/hole_post_image"
+        	android:layout_width="fill_parent"
+        	android:layout_height="wrap_content"
+        	android:contentDescription="@string/app_name"
+        	android:scaleType="centerCrop"
+        	android:visibility="gone" />
+        
+        <RelativeLayout
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:id="@+id/hole_post_audio_layout"
+	        android:visibility="gone"
+        	>
+
+    	<ImageView
+       		android:id="@+id/hole_post_audio"
+        	android:layout_width="144sp"
+        	android:layout_height="30sp"
+        	android:contentDescription="@string/app_name"
+        />
+    
+    	<TextView 
+        	android:id="@+id/hole_post_audio_length"
+        	android:textSize="16sp"
+        	android:layout_centerVertical="true"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_marginLeft="7dp"
+        	android:layout_marginStart="7dp"
+        	android:layout_toRightOf="@+id/hole_post_audio"
+        	android:layout_toEndOf="@+id/hole_post_audio"
+        />
+    </RelativeLayout>
+        
+        
+    </LinearLayout>
+    
+</LinearLayout>
+
+</ScrollView><!-- From: file:/E:/android/PKUHelper/app/src/main/res/layout/hole_post_view.xml -->

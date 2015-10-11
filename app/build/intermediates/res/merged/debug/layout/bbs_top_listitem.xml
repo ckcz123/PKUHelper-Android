@@ -1,0 +1,58 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout android:orientation="horizontal" android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+        android:layout_width="fill_parent">
+       <TextView android:id="@+id/bbs_top_item_rank" android:textColor="#111111"
+            android:textSize="13sp" android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp" 
+            android:paddingRight="15dp"
+            />   
+		<TextView android:layout_width="0dp"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="1"/>
+       <TextView android:id="@+id/bbs_top_item_from" android:textColor="#909090"
+            android:textSize="13sp" android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp" 
+            android:paddingRight="15dp"
+            />       
+   </LinearLayout>
+    
+    <TextView
+        android:id="@+id/bbs_top_item_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="8dp"
+        android:textColor="#006060"
+        android:textSize="16sp"
+        />
+    
+    <LinearLayout android:orientation="horizontal" android:layout_height="wrap_content"
+         android:layout_marginBottom="6dp" 
+        android:layout_width="fill_parent">
+       <TextView android:id="@+id/bbs_top_item_author" android:textColor="#a9a9a9"
+            android:textSize="13sp" android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp" 
+            android:paddingRight="15dp"
+            /> 
+		<TextView android:layout_width="0dp"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="1"/>
+       <TextView android:id="@+id/bbs_top_item_time" android:textColor="#a9a9a9"
+            android:textSize="13sp" android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
+             android:paddingRight="15dp"
+            />       
+   </LinearLayout>
+   
+</LinearLayout><!-- From: file:/E:/android/PKUHelper/app/src/main/res/layout/bbs_top_listitem.xml -->

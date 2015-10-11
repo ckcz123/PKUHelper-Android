@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>  
+<shape xmlns:android="http://schemas.android.com/apk/res/android">   
+    <gradient 
+        android:startColor="#ff47e6b0"
+        android:endColor="#4458f6c1"
+        android:angle="45"
+        />
+    
+    
+</shape><!-- From: file:/E:/android/PKUHelper/app/src/main/res/drawable/hole_bg.xml -->
