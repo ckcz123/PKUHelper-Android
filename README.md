@@ -9,7 +9,8 @@ PKU Helper-Android
 
 ### 参与项目
   1. 推荐代码阅读顺序请看这里 https://github.com/ckcz123/PKUHelper-Android/issues/1
-  2. 对现有的版本改进建议(To-Do List)请看这里 https://github.com/ckcz123/PKUHelper-Android/issues/2
-  3. 欢迎读懂现有代码并提出自己的改进建议，为PKU Helper for Android做出自己的贡献！
-  4. 如果有任何问题，请直接提出，我们很欢迎并乐于进行解答
+  2. 接口说明请看这里 http://www.xiongdianpku.com/helper.html
+  3. 对现有的版本改进建议(To-Do List)请看这里 https://github.com/ckcz123/PKUHelper-Android/issues/2
+  4. 欢迎读懂现有代码并提出自己的改进建议，为PKU Helper for Android做出自己的贡献！
+  5. 如果有任何问题，请直接提出，我们很欢迎并乐于进行解答
   

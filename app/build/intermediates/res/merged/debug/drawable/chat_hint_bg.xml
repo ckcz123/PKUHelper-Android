@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>  
-<shape xmlns:android="http://schemas.android.com/apk/res/android">    
-    <solid android:color="#50aaaaaa" />    
-    <corners android:topLeftRadius="5dp"   
-             android:topRightRadius="5dp"    
-             android:bottomRightRadius="5dp"   
-             android:bottomLeftRadius="5dp"/>    
-</shape> <!-- From: file:/E:/android/PKUHelper/app/src/main/res/drawable/chat_hint_bg.xml -->
