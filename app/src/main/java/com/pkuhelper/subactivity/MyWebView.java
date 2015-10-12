@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.view.View;
 import android.webkit.CookieManager;
 import android.webkit.DownloadListener;
 import android.webkit.JavascriptInterface;
@@ -47,10 +48,10 @@ public class MyWebView {
         this.title=title;
 		subActivity.setContentView(R.layout.subactivity_webview);
 		swipeRefreshLayout=(SwipeRefreshLayout)subActivity.findViewById(R.id.subactivity_swipeRefreshLayout);
-		swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_purple, 
-	            android.R.color.holo_green_light, 
-	            android.R.color.holo_blue_bright, 
-	            android.R.color.holo_orange_light);
+		swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_purple,
+				android.R.color.holo_green_light,
+				android.R.color.holo_blue_bright,
+				android.R.color.holo_orange_light);
 		swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
 			public void onRefresh() {
 				subActivity.setRefresh();
@@ -67,7 +68,8 @@ public class MyWebView {
 		webView.getSettings().setJavaScriptEnabled(true);
 		webView.addJavascriptInterface(new JSInterface(subActivity), "imageclick");
 		webView.getSettings().setUseWideViewPort(false);
-		webView.setVerticalScrollBarEnabled(false);
+		//webView.setVerticalScrollBarEnabled(false);
+		webView.setScrollBarStyle(View.SCROLLBARS_OUTSIDE_INSET);
 		webView.setHorizontalScrollBarEnabled(false);
 		webView.getSettings().setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);
 		webView.setDownloadListener(new DownloadListener() {
@@ -213,10 +215,10 @@ public class MyWebView {
 	public MyWebView showPKUMail() {
 		subActivity.setContentView(R.layout.subactivity_webview);
 		swipeRefreshLayout=(SwipeRefreshLayout)subActivity.findViewById(R.id.subactivity_swipeRefreshLayout);
-		swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_purple, 
-	            android.R.color.holo_green_light, 
-	            android.R.color.holo_blue_bright, 
-	            android.R.color.holo_orange_light);
+		swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_purple,
+				android.R.color.holo_green_light,
+				android.R.color.holo_blue_bright,
+				android.R.color.holo_orange_light);
 		swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
 			public void onRefresh() {
 				subActivity.setRefresh();
@@ -233,7 +235,8 @@ public class MyWebView {
 		webView.getSettings().setJavaScriptEnabled(true);
 		webView.addJavascriptInterface(new JSInterface(subActivity), "imageclick");
 		webView.getSettings().setUseWideViewPort(false);
-		webView.setVerticalScrollBarEnabled(false);
+		//webView.setVerticalScrollBarEnabled(false);
+		webView.setScrollBarStyle(View.SCROLLBARS_OUTSIDE_INSET);
 		webView.setHorizontalScrollBarEnabled(false);
 		webView.setDownloadListener(new DownloadListener() {
 			

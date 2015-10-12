@@ -340,7 +340,7 @@ public class HolePost extends BaseActivity{
 		
 		ViewSetting.setOnClickListener(this, R.id.hole_post_image, new View.OnClickListener() {
 			public void onClick(View v) {
-				Intent intent=new Intent(HolePost.this, SubActivity.class);
+				Intent intent = new Intent(HolePost.this, SubActivity.class);
 				intent.putExtra("type", Constants.SUBACTIVITY_TYPE_PICTURE_FILE);
 				intent.putExtra("file", filepath);
 				startActivity(intent);
@@ -360,6 +360,7 @@ public class HolePost extends BaseActivity{
 				}
 				CustomToast.showSuccessToast(this, "发布成功！");
 				setResult(RESULT_OK);
+				setPlayerStatus(AUDIO_TYPE_STOP);
 				finish();
 			}
 			catch (Exception e) {
@@ -504,22 +505,15 @@ public class HolePost extends BaseActivity{
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int id = item.getItemId();
 		if (id == Constants.MENU_PKUHOLE_CLOSE) {
-			setPlayerStatus(AUDIO_TYPE_STOP);
-			setResult(RESULT_CANCELED);
-			finish();
+			wantToExit();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode==KeyEvent.KEYCODE_BACK && event.getAction()==KeyEvent.ACTION_DOWN) {
-			setPlayerStatus(AUDIO_TYPE_STOP);
-			setResult(RESULT_CANCELED);
-			finish();
-			return true;
-		}
-		return super.onKeyDown(keyCode, event);
+
+	protected void wantToExit() {
+		setPlayerStatus(AUDIO_TYPE_STOP);
+		super.wantToExit();
 	}
 	
 	@Override

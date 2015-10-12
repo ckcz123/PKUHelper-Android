@@ -73,7 +73,7 @@ public class ViewActivity extends BaseActivity {
 			String threadid=getIntent().getStringExtra("threadid");
 			if (threadid==null) {
 				CustomToast.showErrorToast(this, "没有threadid！");
-				finish();
+				super.wantToExit();
 				return;
 			}
 			ViewPost.selectNum=getIntent().getIntExtra("number", 0);
@@ -85,7 +85,7 @@ public class ViewActivity extends BaseActivity {
 		board=getIntent().getStringExtra("board");
 		if (board==null || "".equals(board)) {
 			CustomToast.showErrorToast(this, "没有这个版面！");
-			finish();
+			super.wantToExit();
 			return;
 		}
 		if ("AcademicInfo".equals(board)) {
@@ -96,7 +96,7 @@ public class ViewActivity extends BaseActivity {
 		Board bd=Board.boards.get(board);
 		if (bd==null) {
 			CustomToast.showErrorToast(this, "没有这个版面！");
-			finish();
+			super.wantToExit();
 			return;
 		}
 		boardName=bd.name;
@@ -239,7 +239,8 @@ public class ViewActivity extends BaseActivity {
 			return true;
 		}
 		if (id==Constants.MENU_BBS_VIEW_EXIT) {
-			finish();return true;
+			super.wantToExit();
+			return true;
 		}
 		
 		return super.onOptionsItemSelected(item);
@@ -345,21 +346,13 @@ public class ViewActivity extends BaseActivity {
 		}
 		return super.onContextItemSelected(item);
 	}
-	
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode==KeyEvent.KEYCODE_BACK && event.getAction()==KeyEvent.ACTION_DOWN) {
-			if (showingPage==PAGE_NONE) finish();
-			else if (showingPage==PAGE_THREAD) finish();
-			else  {
-				if (startFromParent) finish();
-				else {
-					ViewThread.viewThreads();
-				}
-			}
-			return true;
+
+	protected void wantToExit() {
+		if (showingPage==PAGE_POST && !startFromParent) {
+			ViewThread.viewThreads();
+			return;
 		}
-		return super.onKeyDown(keyCode, event);
+		super.wantToExit();
 	}
 	
 	@Override

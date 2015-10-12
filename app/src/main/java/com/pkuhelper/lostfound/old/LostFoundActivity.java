@@ -119,19 +119,14 @@ public class LostFoundActivity extends BaseActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
-	
+
 	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode==KeyEvent.KEYCODE_BACK && event.getAction()==KeyEvent.ACTION_DOWN) {
-			if (nowShowing==PAGE_ADD) {
-				MyLostFound.getMyInfo();
-				return true;
-			}
-			finish();
-			return true;
+	protected void wantToExit() {
+		if (nowShowing==PAGE_ADD) {
+			MyLostFound.getMyInfo();
+			return;
 		}
-		return super.onKeyDown(keyCode, event);
+		super.wantToExit();
 	}
 	
 	@Override
