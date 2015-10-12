@@ -22,11 +22,7 @@ import android.view.View;
 import android.widget.*;
 
 import com.pkuhelper.R;
-import com.pkuhelper.lib.Constants;
-import com.pkuhelper.lib.MyBitmapFactory;
-import com.pkuhelper.lib.MyFile;
-import com.pkuhelper.lib.Util;
-import com.pkuhelper.lib.ViewSetting;
+import com.pkuhelper.lib.*;
 import com.pkuhelper.lib.view.CustomToast;
 import com.pkuhelper.lib.view.MyDatePickerDialog;
 import com.pkuhelper.lib.view.MyTimePickerDialog;
@@ -172,7 +168,7 @@ public class Add {
 		if (imageString!=null)
 			arrayList.add(new Parameters("imageData", imageString));
 		
-		new RequestingTask("正在发布...", Constants.domain+"/services/LFpost.php",
+		new RequestingTask(lostFoundActivity, "正在发布...", Constants.domain+"/services/LFpost.php",
 				Constants.REQUEST_LOSTFOUND_ADD).execute(arrayList);
 	}
 	

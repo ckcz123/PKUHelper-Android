@@ -7,9 +7,11 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.pkuhelper.R;
+import com.pkuhelper.lib.BaseActivity;
 import com.pkuhelper.lib.Constants;
 import com.pkuhelper.lib.MyCalendar;
 import com.pkuhelper.lib.MyFile;
+import com.pkuhelper.lib.RequestingTask;
 import com.pkuhelper.lib.Util;
 import com.pkuhelper.lib.ViewSetting;
 import com.pkuhelper.lib.view.CustomToast;
@@ -17,7 +19,6 @@ import com.pkuhelper.lib.webconnection.Parameters;
 import com.pkuhelper.subactivity.SubActivity;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.AudioManager;
@@ -42,7 +43,7 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Spinner;
 
-public class HoleSearch extends Activity {
+public class HoleSearch extends BaseActivity {
 	
 	ArrayList<HoleInfo> infos=new ArrayList<HoleInfo>();
 	private static final int AUDIO_TYPE_START=0;
@@ -64,10 +65,7 @@ public class HoleSearch extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.hole_search);
-		getActionBar().setTitle("搜索树洞");		
-		
-		Util.getOverflowMenu(this);
-		
+		getActionBar().setTitle("搜索树洞");
 		
 		
 		searchView=(SearchView)findViewById(R.id.hole_search);
@@ -183,7 +181,7 @@ public class HoleSearch extends Activity {
 		
 	}
 	
-	void finishRequest(int type, String string) {
+	protected void finishRequest(int type, String string) {
 		if (type==Constants.REQUEST_HOLE_SEARCH) {
 			try {
 				JSONObject jsonObject=new JSONObject(string);
@@ -494,12 +492,6 @@ public class HoleSearch extends Activity {
 			playingpid=-1;
 		}
 		
-	}
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		Util.setIconEnable(menu, true);
-		return super.onCreateOptionsMenu(menu);
 	}
 	
 	@Override

@@ -14,6 +14,7 @@ import android.widget.*;
 import com.pkuhelper.lib.Constants;
 import com.pkuhelper.lib.Editor;
 import com.pkuhelper.lib.ViewSetting;
+import com.pkuhelper.lib.RequestingTask;
 import com.pkuhelper.lib.view.CustomToast;
 import com.pkuhelper.lib.webconnection.Parameters;
 import com.pkuhelper.subactivity.SubActivity;
@@ -31,7 +32,7 @@ public class PE {
 		arrayList.add(new Parameters("uid", Constants.username));
 		arrayList.add(new Parameters("proxypsd", proxypsd));
 		arrayList.add(new Parameters("password", password));		
-		new RequestingTask("正在获取打卡信息...", 
+		new RequestingTask(PKUHelper.pkuhelper, "正在获取打卡信息...",
 				Constants.domain+"/services/pkuhelper/pecard.php",
 				Constants.REQUEST_PE_CARD).execute(arrayList);
 	}
@@ -132,7 +133,7 @@ public class PE {
 		arrayList.add(new Parameters("proxypsd", proxypsd));
 		arrayList.add(new Parameters("password", password));
 		
-		new RequestingTask("正在获取体测成绩...", 
+		new RequestingTask(PKUHelper.pkuhelper, "正在获取体测成绩...",
 				Constants.domain+"/services/pkuhelper/petest.php", Constants.REQUEST_PE_TEST)
 		.execute(arrayList);
 	}

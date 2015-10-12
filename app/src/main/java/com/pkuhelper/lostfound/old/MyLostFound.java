@@ -20,6 +20,7 @@ import android.widget.ListView;
 
 import com.pkuhelper.R;
 import com.pkuhelper.lib.Constants;
+import com.pkuhelper.lib.RequestingTask;
 import com.pkuhelper.lib.ViewSetting;
 import com.pkuhelper.lib.view.CustomToast;
 import com.pkuhelper.lib.webconnection.Parameters;
@@ -33,7 +34,7 @@ public class MyLostFound {
 			return;
 		}
 		
-		new RequestingTask("正在获取我发布的失物招领信息...", 
+		new RequestingTask(LostFoundActivity.lostFoundActivity, "正在获取我发布的失物招领信息...",
 				Constants.domain+"/services/LFList.php?token="+Constants.token,
 				Constants.REQUEST_LOSTFOUND_GETMINE).execute(new ArrayList<Parameters>());
 	}

@@ -4,11 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.pkuhelper.R;
+import com.pkuhelper.lib.BaseActivity;
 import com.pkuhelper.lib.Constants;
-import com.pkuhelper.lib.Util;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -19,7 +18,7 @@ import android.view.MenuItem;
 import android.widget.ListView;
 
 @SuppressLint("UseSparseArrays")
-public class LostFoundActivity extends Activity {
+public class LostFoundActivity extends BaseActivity {
 	public HashMap<Integer, LostFoundInfo> lostMap=new HashMap<Integer, LostFoundInfo>();
 	public HashMap<Integer, LostFoundInfo> foundMap=new HashMap<Integer, LostFoundInfo>();
 	public HashMap<Integer, LostFoundInfo> myMap=new HashMap<Integer, LostFoundInfo>();
@@ -41,7 +40,6 @@ public class LostFoundActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Util.getOverflowMenu(this);
 		lostFoundActivity=this;
 		eventHandler=new EventHandler(getMainLooper());
 		setContentView(R.layout.lostfound_listview);
@@ -60,12 +58,6 @@ public class LostFoundActivity extends Activity {
 			Add.finishRequest(string);
 		else if (type==Constants.REQUEST_LOSTFOUND_DELETE)
 			Detail.finishDelete(string);
-	}
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		Util.setIconEnable(menu, true);
-		return super.onCreateOptionsMenu(menu);
 	}
 	
 

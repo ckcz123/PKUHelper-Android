@@ -29,8 +29,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.pkuhelper.R;
-import com.pkuhelper.lib.Constants;
-import com.pkuhelper.lib.ViewSetting;
+import com.pkuhelper.lib.*;
 import com.pkuhelper.lib.view.CustomToast;
 import com.pkuhelper.lib.webconnection.Parameters;
 import com.pkuhelper.lib.webconnection.WebConnection;
@@ -59,7 +58,8 @@ public class ChatDetail {
 		arrayList.add(new Parameters("type", "getdetail"));
 		arrayList.add(new Parameters("page", requestingPage+""));
 		arrayList.add(new Parameters("token", Constants.token));
-		new RequestingTask("正在获取聊天记录", Constants.domain+"/services/msg.php", Constants.REQUEST_CHAT_GET_CONTENT)
+		new RequestingTask(ChatActivity.chatActivity, "正在获取聊天记录",
+				Constants.domain+"/services/msg.php", Constants.REQUEST_CHAT_GET_CONTENT)
 			.execute(arrayList);
 		
 	}
@@ -306,8 +306,7 @@ public class ChatDetail {
 	static void requestMore() {
 		if (requesting) return;
 		requesting=true;
-		int page=ChatActivity.chatActivity.currPage+1;
-		requestingPage=page;
+		requestingPage=ChatActivity.chatActivity.currPage+1;
 		new Thread(new Runnable() {
 			@Override
 			public void run() {

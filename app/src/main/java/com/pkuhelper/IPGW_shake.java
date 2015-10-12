@@ -4,6 +4,7 @@ import java.util.*;
 
 import com.pkuhelper.lib.Constants;
 import com.pkuhelper.lib.Lib;
+import com.pkuhelper.lib.RequestingTask;
 import com.pkuhelper.lib.ViewSetting;
 import com.pkuhelper.lib.view.CustomToast;
 import com.pkuhelper.lib.webconnection.*;
@@ -71,7 +72,7 @@ public class IPGW_shake extends Fragment{
 		arrayList.add(new Parameters("range", free+""));
 		arrayList.add(new Parameters("timeout", "-1"));
 		
-		new RequestingTask(hintString, 
+		new RequestingTask(PKUHelper.pkuhelper, hintString,
 				"https://its.pku.edu.cn:5428/ipgatewayofpku", constantType)
 				.execute(arrayList);
 	}

@@ -17,6 +17,7 @@ import android.widget.*;
 import com.pkuhelper.R;
 import com.pkuhelper.bbs.ViewActivity;
 import com.pkuhelper.lib.Constants;
+import com.pkuhelper.lib.RequestingTask;
 import com.pkuhelper.lib.ViewSetting;
 import com.pkuhelper.lib.view.CustomToast;
 import com.pkuhelper.lib.webconnection.Parameters;

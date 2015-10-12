@@ -5,13 +5,12 @@ import java.io.IOException;
 
 import com.pkuhelper.IPGW;
 import com.pkuhelper.R;
+import com.pkuhelper.lib.BaseActivity;
 import com.pkuhelper.lib.Constants;
 import com.pkuhelper.lib.MyFile;
-import com.pkuhelper.lib.Util;
 import com.pkuhelper.lib.ViewSetting;
 import com.pkuhelper.lib.view.CustomViewPager;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.gesture.GestureLibraries;
 import android.gesture.GestureLibrary;
@@ -21,7 +20,7 @@ import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.*;
 
-public class GestureActivity extends Activity {
+public class GestureActivity extends BaseActivity {
 	
 	CustomViewPager mViewPager;
 	public static GestureActivity gestureActivity;
@@ -32,7 +31,6 @@ public class GestureActivity extends Activity {
 		setContentView(R.layout.gesture_layout);
 		gestureActivity=this;
 		getActionBar().setTitle("手势设置");
-		Util.getOverflowMenu(this);
 		if (!Constants.isLogin()) {
 			finish();
 			return;
@@ -107,12 +105,7 @@ public class GestureActivity extends Activity {
 		resetAllTab();
 		ViewSetting.setTextViewColor(this, R.id.gesture_disconnectall, Color.parseColor("#2d90dc"));
 	}
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		Util.setIconEnable(menu, true);
-		return super.onCreateOptionsMenu(menu);
-	}
+
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		menu.clear();
@@ -120,7 +113,10 @@ public class GestureActivity extends Activity {
 		.setIcon(R.drawable.close).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);		
 		return true;
 	}
-	
+
+
+	protected void finishRequest(int type, String string) {}
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int id = item.getItemId();
@@ -130,13 +126,5 @@ public class GestureActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode==KeyEvent.KEYCODE_BACK && event.getAction()==KeyEvent.ACTION_DOWN) {
-			finish();
-		}
-		return super.onKeyDown(keyCode, event);
-	}
-	
+
 }

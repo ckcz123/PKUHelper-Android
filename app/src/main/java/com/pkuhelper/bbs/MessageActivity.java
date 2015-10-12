@@ -8,15 +8,11 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.pkuhelper.R;
-import com.pkuhelper.lib.Constants;
-import com.pkuhelper.lib.MyCalendar;
-import com.pkuhelper.lib.Util;
-import com.pkuhelper.lib.ViewSetting;
+import com.pkuhelper.lib.*;
 import com.pkuhelper.lib.view.CustomToast;
 import com.pkuhelper.lib.webconnection.Parameters;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -30,7 +26,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 
-public class MessageActivity extends Activity {
+public class MessageActivity extends BaseActivity {
 	static ArrayList<MessageInfo> messageInfos=new ArrayList<MessageInfo>();
 	private static int PAGE_LIST=1;
 	private static int PAGE_DETAIL=2;
@@ -42,7 +38,6 @@ public class MessageActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Util.getOverflowMenu(this);
 		if ("".equals(Userinfo.token)) {
 			CustomToast.showInfoToast(this, "请先登录！");
 			finish();
@@ -161,7 +156,7 @@ public class MessageActivity extends Activity {
 		});
 	}
 	
-	void finishRequest(int type, String string) {
+	protected void finishRequest(int type, String string) {
 		if (type==Constants.REQUEST_BBS_GET_MAIL_LIST)
 			fillList(string);
 		if (type==Constants.REQUEST_BBS_GET_MAIL)
@@ -203,12 +198,6 @@ public class MessageActivity extends Activity {
 			CustomToast.showErrorToast(this, "获取失败", 1500);
 			messageInfos.clear();
 		}
-	}
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		Util.setIconEnable(menu, true);
-		return super.onCreateOptionsMenu(menu);
 	}
 	
 	@Override

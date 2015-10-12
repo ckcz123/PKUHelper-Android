@@ -5,6 +5,7 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 
 import com.pkuhelper.R;
+import com.pkuhelper.lib.BaseActivity;
 import com.pkuhelper.lib.Constants;
 import com.pkuhelper.lib.MyBitmapFactory;
 import com.pkuhelper.lib.MyFile;
@@ -13,7 +14,6 @@ import com.pkuhelper.lib.ViewSetting;
 import com.pkuhelper.lib.view.CustomToast;
 import com.pkuhelper.subactivity.SubActivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -31,7 +31,7 @@ import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.ListView;
 
-public class ViewActivity extends Activity {
+public class ViewActivity extends BaseActivity {
 	static ViewActivity viewActivity;
 	
 	public static final int PAGESIZE = 20;
@@ -59,7 +59,6 @@ public class ViewActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Util.getOverflowMenu(this);
 		viewActivity=this;
 		
 		init();
@@ -148,12 +147,6 @@ public class ViewActivity extends Activity {
 				}
 			}
 		}
-	}
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		Util.setIconEnable(menu, true);
-		return super.onCreateOptionsMenu(menu);
 	}
 	
 	@Override

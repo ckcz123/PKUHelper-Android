@@ -25,14 +25,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 
 import com.pkuhelper.R;
-import com.pkuhelper.lib.Constants;
-import com.pkuhelper.lib.ImageRequest;
-import com.pkuhelper.lib.MyBitmapFactory;
-import com.pkuhelper.lib.MyCalendar;
-import com.pkuhelper.lib.MyFile;
-import com.pkuhelper.lib.Share;
-import com.pkuhelper.lib.Util;
-import com.pkuhelper.lib.ViewSetting;
+import com.pkuhelper.lib.*;
 import com.pkuhelper.lib.view.CustomToast;
 import com.pkuhelper.lib.webconnection.Parameters;
 import com.pkuhelper.subactivity.SubActivity;

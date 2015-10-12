@@ -22,6 +22,7 @@ import android.widget.ListView;
 
 import com.pkuhelper.R;
 import com.pkuhelper.lib.Constants;
+import com.pkuhelper.lib.RequestingTask;
 import com.pkuhelper.lib.ViewSetting;
 import com.pkuhelper.lib.view.CustomToast;
 import com.pkuhelper.lib.webconnection.Parameters;
@@ -33,7 +34,7 @@ public class Found {
 	
 	@SuppressWarnings("unchecked")
 	public static void getFoundInfo() {
-		new RequestingTask("正在获取招领信息...", 
+		new RequestingTask(LostFoundActivity.lostFoundActivity, "正在获取招领信息...",
 				Constants.domain+"/services/LFList.php?type=found&page=0",
 				Constants.REQUEST_LOSTFOUND_GETFOUND).execute(new ArrayList<Parameters>());
 	}

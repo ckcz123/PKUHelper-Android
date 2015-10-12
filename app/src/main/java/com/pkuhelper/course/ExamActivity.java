@@ -12,11 +12,11 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.pkuhelper.R;
+import com.pkuhelper.lib.BaseActivity;
 import com.pkuhelper.lib.Constants;
 import com.pkuhelper.lib.Lib;
 import com.pkuhelper.lib.MyCalendar;
 import com.pkuhelper.lib.MyFile;
-import com.pkuhelper.lib.Util;
 import com.pkuhelper.lib.ViewSetting;
 import com.pkuhelper.lib.view.CustomToast;
 import com.pkuhelper.lib.view.MyDatePickerDialog;
@@ -24,7 +24,6 @@ import com.pkuhelper.lib.view.MyTimePickerDialog;
 import com.pkuhelper.widget.WidgetExamProvider;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -44,7 +43,7 @@ import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.TimePicker;
 
-public class ExamActivity extends Activity {
+public class ExamActivity extends BaseActivity {
 	public static String examString="[]";
 	public static ExamActivity examActivity;
 	ArrayList<ExamInfo> examInfos;
@@ -57,7 +56,6 @@ public class ExamActivity extends Activity {
 		setContentView(R.layout.exam_listview);
 		examActivity=this;
 		getActionBar().setTitle("我的考试");
-		Util.getOverflowMenu(this);
 		init();
 	}
 	
@@ -97,13 +95,15 @@ public class ExamActivity extends Activity {
 			public int compare(ExamInfo lhs, ExamInfo rhs) {
 				if (lhs.finished && !rhs.finished) return 1;
 				if (!lhs.finished && rhs.finished) return -1;
-				int dateCmp=lhs.date.compareTo(rhs.date);
-				if (dateCmp!=0) return dateCmp;
+				int dateCmp = lhs.date.compareTo(rhs.date);
+				if (dateCmp != 0) return dateCmp;
 				return lhs.time.compareTo(rhs.time);
 			}
 		});
 	}
-	
+
+	protected void finishRequest(int type, String string) {}
+
 	void showList() {
 		sort();
 		setContentView(R.layout.exam_listview);
@@ -179,12 +179,6 @@ public class ExamActivity extends Activity {
 				}).show();
 			}
 		});
-	}
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		Util.setIconEnable(menu, true);
-		return super.onCreateOptionsMenu(menu);
 	}
 	
 	@Override

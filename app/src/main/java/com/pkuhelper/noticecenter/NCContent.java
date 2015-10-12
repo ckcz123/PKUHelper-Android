@@ -27,6 +27,7 @@ import android.widget.ListView;
 
 import com.pkuhelper.R;
 import com.pkuhelper.lib.Constants;
+import com.pkuhelper.lib.RequestingTask;
 import com.pkuhelper.lib.ViewSetting;
 import com.pkuhelper.lib.view.CustomToast;
 import com.pkuhelper.lib.webconnection.Parameters;
@@ -40,7 +41,7 @@ public class NCContent {
 	
 	@SuppressWarnings("unchecked")
 	public static void getNotice() {
-		new RequestingTask("正在获取通知列表...", 
+		new RequestingTask(NCActivity.ncActivity, "正在获取通知列表...",
 				Constants.domain+"/pkuhelper/nc/fetch.php?token="+Constants.token
 				+"&p=1&platform=Android", Constants.REQUEST_NOTICECENTER_GETCONTENT_ALL)
 				.execute(new ArrayList<Parameters>());
@@ -49,7 +50,7 @@ public class NCContent {
 	
 	@SuppressWarnings("unchecked")
 	public static void getNotice(String sid) {
-		new RequestingTask("正在获取通知列表...", 
+		new RequestingTask(NCActivity.ncActivity, "正在获取通知列表...",
 				Constants.domain+"/pkuhelper/nc/fetch.php?token="+Constants.token
 				+"&p=1&platform=Android&sid="+sid, Constants.REQUEST_NOTICECENTER_GETCONTENT_ONE)
 				.execute(new ArrayList<Parameters>());

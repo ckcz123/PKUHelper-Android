@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 
 import com.pkuhelper.R;
 import com.pkuhelper.lib.Constants;
+import com.pkuhelper.lib.RequestingTask;
 import com.pkuhelper.lib.ViewSetting;
 import com.pkuhelper.lib.view.CustomToast;
 import com.pkuhelper.lib.webconnection.Parameters;
@@ -92,7 +93,7 @@ public class CommentMessage {
 		arrayList.add(new Parameters("message", string));
 		arrayList.add(new Parameters("mid",mid));
 		url="http://pkuhole.sinaapp.com/PKUhelper/addComment.php";
-		new RequestingTask("正在发布中...", url, Constants.REQUEST_PKUHOLE_POST_COMMENT)
+		new RequestingTask(PKUHoleActivity.pkuHoleActivity, "正在发布中...", url, Constants.REQUEST_PKUHOLE_POST_COMMENT)
 		.execute(arrayList);
 	}
 

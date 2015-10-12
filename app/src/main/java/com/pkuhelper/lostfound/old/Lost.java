@@ -22,6 +22,7 @@ import android.widget.ListView;
 
 import com.pkuhelper.R;
 import com.pkuhelper.lib.Constants;
+import com.pkuhelper.lib.RequestingTask;
 import com.pkuhelper.lib.ViewSetting;
 import com.pkuhelper.lib.view.CustomToast;
 import com.pkuhelper.lib.webconnection.Parameters;
@@ -33,7 +34,7 @@ public class Lost {
 	
 	@SuppressWarnings("unchecked")
 	public static void getLostInfo() {
-		new RequestingTask("正在获取失物信息...", 
+		new RequestingTask(LostFoundActivity.lostFoundActivity, "正在获取失物信息...",
 				Constants.domain+"/services/LFList.php?type=lost&page=0",
 				Constants.REQUEST_LOSTFOUND_GETLOST).execute(new ArrayList<Parameters>());
 	}

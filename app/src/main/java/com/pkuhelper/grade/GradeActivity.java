@@ -5,8 +5,7 @@ import java.util.*;
 import org.json.*;
 
 import com.pkuhelper.R;
-import com.pkuhelper.lib.Constants;
-import com.pkuhelper.lib.ViewSetting;
+import com.pkuhelper.lib.*;
 import com.pkuhelper.lib.view.CustomToast;
 import com.pkuhelper.lib.webconnection.Parameters;
 
@@ -19,7 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 
-public class GradeActivity extends Activity {
+public class GradeActivity extends BaseActivity {
 	
 	public static GradeActivity gradeActivity;
 	
@@ -50,12 +49,12 @@ public class GradeActivity extends Activity {
 	}
 	@SuppressWarnings("unchecked")
 	void getGrades() {
-		new RequestingTask("正在获取成绩...", 
+		new RequestingTask(this, "正在获取成绩...",
 				Constants.domain+"/services/pkuhelper/allGrade.php?phpsessid="+phpsessid,
 				Constants.REQUEST_DEAN_GETTING_GRADE).execute(new ArrayList<Parameters>());
 	}
 
-	public void finishRequest(String string) {
+	public void finishRequest(int type, String string) {
 		try {
 			JSONObject jsonObject=new JSONObject(string);
 			Log.w("grade", string);

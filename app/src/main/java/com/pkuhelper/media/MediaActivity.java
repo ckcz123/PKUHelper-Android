@@ -4,21 +4,18 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import com.pkuhelper.R;
-import com.pkuhelper.lib.Constants;
-import com.pkuhelper.lib.Util;
+import com.pkuhelper.lib.*;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MediaActivity extends Activity {
+public class MediaActivity extends BaseActivity {
 	static MediaActivity mediaActivity;
 	ArrayList<Content> arrayList=new ArrayList<Content>();
 	EventHandler eventHandler;
@@ -42,7 +39,6 @@ public class MediaActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Util.getOverflowMenu(this);
 		mediaActivity=this;
 		eventHandler=new EventHandler(getMainLooper());
 		setContentView(R.layout.nc_viewcontent_listview);
@@ -73,12 +69,6 @@ public class MediaActivity extends Activity {
 		if (type==Constants.REQUEST_MEDIA_FETCH) {
 			MediaList.finishRequest(string);
 		}
-	}
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		Util.setIconEnable(menu, true);
-		return super.onCreateOptionsMenu(menu);
 	}
 	
 	@Override
@@ -121,15 +111,6 @@ public class MediaActivity extends Activity {
 		}
 		
 		return super.onOptionsItemSelected(item);
-	}
-	
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode==KeyEvent.KEYCODE_BACK && event.getAction()==KeyEvent.ACTION_DOWN) {
-			finish();
-			return true;
-		}
-		return super.onKeyDown(keyCode, event);
 	}
 	
 }

@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import com.pkuhelper.lib.Constants;
 import com.pkuhelper.lib.Editor;
 import com.pkuhelper.lib.MyFile;
+import com.pkuhelper.lib.RequestingTask;
 import com.pkuhelper.lib.webconnection.Parameters;
 
 public class Board {
@@ -68,7 +69,7 @@ public class Board {
 	}
 	@SuppressWarnings("unchecked")
 	public static void reload() {
-		new RequestingTask(BBSActivity.bbsActivity, "正在获取所有版面...", "http://www.bdwm.net/client/bbsclient.php?type=getallboards", 
+		new RequestingTask(BBSActivity.bbsActivity, "正在获取所有版面...", "http://www.bdwm.net/client/bbsclient.php?type=getallboards",
 				Constants.REQUEST_BBS_GET_ALL_BOARDS).execute(new ArrayList<Parameters>());
 	}
  	public static void save(String string) {

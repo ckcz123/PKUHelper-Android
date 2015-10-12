@@ -3,13 +3,12 @@ package com.pkuhelper.bbs;
 import java.util.ArrayList;
 
 import com.pkuhelper.R;
+import com.pkuhelper.lib.BaseActivity;
 import com.pkuhelper.lib.Constants;
 import com.pkuhelper.lib.Editor;
-import com.pkuhelper.lib.Util;
 import com.pkuhelper.lib.view.CustomToast;
 import com.pkuhelper.lib.view.CustomViewPager;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -26,7 +25,7 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class BBSActivity extends Activity {
+public class BBSActivity extends BaseActivity {
 	public static BBSActivity bbsActivity;
 	public CustomViewPager mViewPager;
 	
@@ -44,7 +43,6 @@ public class BBSActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.bbs_main);
 		bbsActivity=this;
-		Util.getOverflowMenu(this);
 		mViewPager = (CustomViewPager) findViewById(R.id.bbspager);
 		mViewPager.setAdapter(new FragmentPagerAdapter(getFragmentManager()) {
 			@Override
@@ -143,13 +141,7 @@ public class BBSActivity extends Activity {
 		return super.onContextItemSelected(item);
 				
 	}
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		Util.setIconEnable(menu, true);
-		return super.onCreateOptionsMenu(menu);
-	}
-	
+
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		menu.clear();

@@ -21,6 +21,7 @@ import android.widget.ListView;
 import com.pkuhelper.R;
 import com.pkuhelper.lib.Constants;
 import com.pkuhelper.lib.ViewSetting;
+import com.pkuhelper.lib.RequestingTask;
 import com.pkuhelper.lib.view.CustomToast;
 import com.pkuhelper.lib.webconnection.Parameters;
 
@@ -39,7 +40,8 @@ public class ChatList {
 		//arrayList.add(new Parameters("hash", hash));
 		arrayList.add(new Parameters("token", Constants.token));
 		arrayList.add(new Parameters("type", "getlist"));
-		new RequestingTask("正在获取聊天列表...", Constants.domain+"/services/msg.php", Constants.REQUEST_CHAT_GET_LIST)
+		new RequestingTask(ChatActivity.chatActivity, "正在获取聊天列表...",
+				Constants.domain+"/services/msg.php", Constants.REQUEST_CHAT_GET_LIST)
 			.execute(arrayList);
 	}
 	

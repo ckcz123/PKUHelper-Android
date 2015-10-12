@@ -11,6 +11,7 @@ import com.pkuhelper.R;
 import com.pkuhelper.chat.ChatActivity;
 import com.pkuhelper.lib.Constants;
 import com.pkuhelper.lib.MyFile;
+import com.pkuhelper.lib.RequestingTask;
 import com.pkuhelper.lib.Util;
 import com.pkuhelper.lib.ViewSetting;
 import com.pkuhelper.lib.view.CustomToast;

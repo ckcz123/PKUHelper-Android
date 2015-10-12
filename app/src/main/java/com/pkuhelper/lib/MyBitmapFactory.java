@@ -1,6 +1,8 @@
 package com.pkuhelper.lib;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.EnumMap;
@@ -18,7 +20,11 @@ import com.google.zxing.Result;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.qrcode.QRCodeWriter;
+import com.pkuhelper.lib.view.CustomToast;
+import com.pkuhelper.subactivity.SubActivity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.gesture.Gesture;
 import android.gesture.GestureStroke;
 import android.graphics.Bitmap;
@@ -114,6 +120,38 @@ public class MyBitmapFactory {
 			e.printStackTrace();
 		}
 		return result;
+	}
+
+	public static boolean bitmapToFile(File file, Bitmap bitmap) {
+		return bitmapToFile(file, bitmap, -1, false);
+	}
+
+	public static boolean bitmapToFile(File file, Bitmap bitmap, double size) {
+		return bitmapToFile(file, bitmap, size, false);
+	}
+
+	public static boolean bitmapToFile(File file, Bitmap bitmap, double size, boolean ispng) {
+		try {
+			FileOutputStream fileOutputStream=new FileOutputStream(file);
+			byte[] bts=bitmapToArray(bitmap, size, ispng);
+			fileOutputStream.write(bts);
+			fileOutputStream.close();
+			return true;
+		}
+		catch (Exception e) {return false;}
+	}
+
+	public static void showBitmap(Context context, Bitmap bitmap) {
+		File file=MyFile.getCache(context, bitmap.toString());
+		if (bitmapToFile(file, bitmap)) {
+			Intent intent=new Intent(context, SubActivity.class);
+			intent.putExtra("type", Constants.SUBACTIVITY_TYPE_PICTURE_FILE);
+			intent.putExtra("file", file.getAbsolutePath());
+			context.startActivity(intent);
+		}
+		else {
+			CustomToast.showErrorToast(context, "无法打开图片！");
+		}
 	}
 
 	public static String decodeQRCode(Bitmap bitmap) {

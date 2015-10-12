@@ -4,12 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.pkuhelper.R;
+import com.pkuhelper.lib.BaseActivity;
 import com.pkuhelper.lib.Constants;
-import com.pkuhelper.lib.Util;
 import com.pkuhelper.lib.ViewSetting;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
@@ -24,7 +23,7 @@ import android.view.MenuItem;
 import android.view.ViewTreeObserver;
 import android.widget.ListView;
 
-public class NCActivity extends Activity {
+public class NCActivity extends BaseActivity {
 	
 	static NCActivity ncActivity;
 	HashMap<String, Notice> sourceListMap=new HashMap<String, Notice>();
@@ -68,7 +67,6 @@ public class NCActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Util.getOverflowMenu(this);
 		ncActivity=this;
 		eventHandler=new EventHandler(getMainLooper());
 		Notice.drawableMap=new HashMap<String, Drawable>();
@@ -131,13 +129,6 @@ public class NCActivity extends Activity {
 			NCContent.finishOneRequest(string);
 		else if (type==Constants.REQUEST_NOTICECENTER_COURSE_GETWEBSITE)
 			NCDetail.finishGetCourse(string);
-	}
-	
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		Util.setIconEnable(menu, true);
-		return super.onCreateOptionsMenu(menu);
 	}
 	
 	@Override

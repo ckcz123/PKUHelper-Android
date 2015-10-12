@@ -4,6 +4,7 @@ import java.util.Locale;
 
 import com.pkuhelper.R;
 import com.pkuhelper.chat.ChatActivity;
+import com.pkuhelper.lib.BaseActivity;
 import com.pkuhelper.lib.Constants;
 import com.pkuhelper.lib.DataObject;
 import com.pkuhelper.lib.Share;
@@ -25,7 +26,7 @@ import android.view.*;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.webkit.WebView;
 
-public class SubActivity extends Activity {
+public class SubActivity extends BaseActivity {
 
 	WebView webView;
 	Picture picture;
@@ -87,7 +88,6 @@ public class SubActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Util.getOverflowMenu(this);
 		Intent intent=getIntent();
 		Bundle bundle=intent.getExtras();
 		type=bundle.getInt("type");
@@ -219,9 +219,9 @@ public class SubActivity extends Activity {
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode==KeyEvent.KEYCODE_BACK && event.getAction()==KeyEvent.ACTION_DOWN) {
-			if (type==Constants.SUBACTIVITY_TYPE_WEBVIEW ||
-					type==Constants.SUBACTIVITY_TYPE_WEBVIEW_PKUMAIL)
+		if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+			if (type == Constants.SUBACTIVITY_TYPE_WEBVIEW ||
+					type == Constants.SUBACTIVITY_TYPE_WEBVIEW_PKUMAIL)
 				if (webView.canGoBack()
 						&& !webView.getUrl().equals("http://mail.pku.edu.cn/coremail/xphone/")
 						&& !webView.getUrl().startsWith("http://mail.pku.edu.cn/coremail/xphone/index.jsp")
@@ -234,13 +234,6 @@ public class SubActivity extends Activity {
 		}
 		return super.onKeyDown(keyCode, event);
 	}
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		Util.setIconEnable(menu, true);
-		return super.onCreateOptionsMenu(menu);
-	}
-	
 	
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {

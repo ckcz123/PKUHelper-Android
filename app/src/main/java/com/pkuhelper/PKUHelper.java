@@ -4,7 +4,6 @@ package com.pkuhelper;
 import java.io.File;
 import java.io.FileOutputStream;
 
-import com.pkuhelper.R;
 import com.pkuhelper.chat.ChatActivity;
 import com.pkuhelper.course.CustomCourseActivity;
 import com.pkuhelper.course.DeanCourseActivity;
@@ -30,7 +29,7 @@ import android.widget.TextView;
 import android.graphics.Color;
 import android.hardware.*;
 
-public class PKUHelper extends Activity {
+public class PKUHelper extends BaseActivity {
 
 	public static PKUHelper pkuhelper;
 	public CustomViewPager mViewPager;
@@ -47,7 +46,6 @@ public class PKUHelper extends Activity {
 		MyFile.setUseSDCard(true, this);
 		
 		pkuhelper=this;
-		Util.getOverflowMenu(this);
 		sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE); 
 		vibrator=(Vibrator)getSystemService(VIBRATOR_SERVICE);
 		sensorEventListener=new SensorEventListener() {
@@ -76,36 +74,35 @@ public class PKUHelper extends Activity {
 		
 		mViewPager = (CustomViewPager) findViewById(R.id.tabpager);
 		mViewPager.setAdapter(new FragmentPagerAdapter(getFragmentManager()) {
-			
+
 			@Override
 			public int getCount() {
 				return 4;
 			}
-			
+
 			@Override
 			public Fragment getItem(int position) {
-				if (position==0) {
-					if (Editor.getBoolean(PKUHelper.this, "use_shake")) 
+				if (position == 0) {
+					if (Editor.getBoolean(PKUHelper.this, "use_shake"))
 						return Fragment.instantiate(PKUHelper.this, "com.pkuhelper.IPGW_shake", null);
 					return Fragment.instantiate(PKUHelper.this, "com.pkuhelper.IPGW", null);
-				}
-				else if (position==1)
+				} else if (position == 1)
 					return Fragment.instantiate(PKUHelper.this, "com.pkuhelper.Course", null);
-				else if (position==2)
+				else if (position == 2)
 					return Fragment.instantiate(PKUHelper.this, "com.pkuhelper.MYPKU", null);
 				else return Fragment.instantiate(PKUHelper.this, "com.pkuhelper.Settings", null);
 			}
 		});
 
 		mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-				@Override
-				public void onPageSelected(int position) {
-					if (position==0)
-						clickIPGW(null);
-					else if (position==1) clickCourse(null);
-					else if (position==2) clickMYPKU(null);
-					else if (position==3) clickSettings(null);
-				}
+			@Override
+			public void onPageSelected(int position) {
+				if (position == 0)
+					clickIPGW(null);
+				else if (position == 1) clickCourse(null);
+				else if (position == 2) clickMYPKU(null);
+				else if (position == 3) clickSettings(null);
+			}
 		});
 		init();
 	}
@@ -155,11 +152,6 @@ public class PKUHelper extends Activity {
 		ViewSetting.setImageResource(this, R.id.img_settings, R.drawable.tab_settings_selected);
 		((TextView)findViewById(R.id.title_settings)).setTextColor(Color.parseColor("#319de1"));
 		actionBar.setTitle("设置");
-	}
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		Util.setIconEnable(menu, true);
-		return super.onCreateOptionsMenu(menu);
 	}
 
 	@Override
@@ -242,6 +234,7 @@ public class PKUHelper extends Activity {
 		}
 		if (id==Constants.MENU_COURSE_SHARE) {
 			//Share.readyToShareImage(this, "分享我的课程", Util.captureWebView(Course.courseView));
+			/*
 			try {
 				File file=MyFile.getCache(this, Util.getHash("course"));
 				byte[] bts=MyBitmapFactory.bitmapToArray(Util.captureWebView(Course.courseView));
@@ -255,6 +248,8 @@ public class PKUHelper extends Activity {
 			}
 			catch (Exception e) {CustomToast.showErrorToast(this, "无法打开图片");}
 			return true;
+			*/
+			MyBitmapFactory.showBitmap(this, Util.captureWebView(Course.courseView));
 		}
 		if (id==Constants.MENU_MYPKU_SET) {
 			Intent intent=new Intent(this, SubActivity.class);
@@ -318,7 +313,7 @@ public class PKUHelper extends Activity {
 		}
 	}
 	
-	void finishRequest(int type, String string) {
+	protected void finishRequest(int type, String string) {
 		/*
 		if (type==Constants.REQUEST_IAAA)
 			IAAA.finishLogin(string);

@@ -7,17 +7,18 @@ import java.util.ArrayList;
 import org.json.JSONObject;
 
 import com.pkuhelper.R;
+import com.pkuhelper.lib.BaseActivity;
 import com.pkuhelper.lib.Constants;
+import com.pkuhelper.lib.RequestingTask;
 import com.pkuhelper.lib.ViewSetting;
 import com.pkuhelper.lib.view.CustomToast;
 import com.pkuhelper.lib.webconnection.Parameters;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 
-public class MessagePostActivity extends Activity {
+public class MessagePostActivity extends BaseActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -86,14 +87,14 @@ public class MessagePostActivity extends Activity {
 				arrayList.add(new Parameters("title", title));
 				arrayList.add(new Parameters("text", text));
 				arrayList.add(new Parameters("number", getIntent().getExtras().getString("number", "")));
-				new RequestingTask(MessagePostActivity.this, "正在发送...", 
+				new RequestingTask(MessagePostActivity.this, "正在发送...",
 						"http://www.bdwm.net/client/bbsclient.php", Constants.REQUEST_BBS_POST_MAIL)
 						.execute(arrayList);
 			}
 		});
 	}
 	
-	void finishRequest(int type, String string) {
+	protected void finishRequest(int type, String string) {
 		if (type==Constants.REQUEST_BBS_POST_MAIL) {
 			try {
 				JSONObject jsonObject=new JSONObject(string);
@@ -110,15 +111,6 @@ public class MessagePostActivity extends Activity {
 				CustomToast.showErrorToast(this, "发送失败");
 			}
 		}
-	}
-	
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode==KeyEvent.KEYCODE_BACK && event.getAction()==KeyEvent.ACTION_DOWN) {
-			setResult(RESULT_CANCELED);
-			finish();
-		}
-		return super.onKeyDown(keyCode, event);
 	}
 	
 }

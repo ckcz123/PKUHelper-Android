@@ -314,7 +314,7 @@ public class Settings extends Fragment{
 				arrayList.add(new Parameters("type", "sendmsg"));
 				arrayList.add(new Parameters("token", Constants.token));
 				
-				new RequestingTask("正在发送...", Constants.domain+"/services/msg.php", 
+				new RequestingTask(PKUHelper.pkuhelper, "正在发送...", Constants.domain+"/services/msg.php",
 						Constants.REQUEST_FOUND_USERNAME).execute(arrayList);
 				
 				dialog.dismiss();
@@ -395,7 +395,7 @@ public class Settings extends Fragment{
 				arrayList.add(new Parameters("type", "sendmsg"));
 				arrayList.add(new Parameters("token", Constants.token));
 				
-				new RequestingTask("正在发布...", Constants.domain+"/services/msg.php",
+				new RequestingTask(PKUHelper.pkuhelper, "正在发布...", Constants.domain+"/services/msg.php",
 						Constants.REQUEST_REPORT).execute(arrayList);
 				dialog.dismiss();
 			}

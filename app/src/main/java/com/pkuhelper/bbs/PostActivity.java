@@ -5,12 +5,10 @@ import java.util.ArrayList;
 import org.json.JSONObject;
 
 import com.pkuhelper.R;
-import com.pkuhelper.lib.Constants;
-import com.pkuhelper.lib.ViewSetting;
+import com.pkuhelper.lib.*;
 import com.pkuhelper.lib.view.CustomToast;
 import com.pkuhelper.lib.webconnection.Parameters;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -18,7 +16,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
-public class PostActivity extends Activity {
+public class PostActivity extends BaseActivity {
 	String type="";
 	String board="";
 	String threadid="";
@@ -95,7 +93,7 @@ public class PostActivity extends Activity {
 		
 	}
 
-	void finishRequest(int type, String string) {
+	protected void finishRequest(int type, String string) {
 		if (type==Constants.REQUEST_BBS_GET_QUOTE)
 			setText(string);
 		if (type==Constants.REQUEST_BBS_POST)
@@ -225,15 +223,6 @@ public class PostActivity extends Activity {
 			setResult(RESULT_CANCELED);
 			finish();
 		}
-	}
-	
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode==KeyEvent.KEYCODE_BACK && event.getAction()==KeyEvent.ACTION_DOWN) {
-			setResult(RESULT_CANCELED);
-			finish();
-		}
-		return super.onKeyDown(keyCode, event);
 	}
 	
 }

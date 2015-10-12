@@ -12,15 +12,11 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.pkuhelper.R;
-import com.pkuhelper.lib.Constants;
-import com.pkuhelper.lib.MyFile;
-import com.pkuhelper.lib.Util;
-import com.pkuhelper.lib.ViewSetting;
+import com.pkuhelper.lib.*;
 import com.pkuhelper.lib.view.CustomToast;
 import com.pkuhelper.lib.webconnection.Parameters;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
@@ -39,7 +35,7 @@ import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class CustomCourseActivity extends Activity {
+public class CustomCourseActivity extends BaseActivity {
 	ArrayList<CourseInfo> courseInfos=new ArrayList<CourseInfo>();
 	int currCourseIndex=0;
 	int[][] hasCourse=new int[12][7];
@@ -55,7 +51,6 @@ public class CustomCourseActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.customcourse_listview);
-		Util.getOverflowMenu(this);
 		customCourseActivity=this;
 		getActionBar().setTitle("自选课程");
 		setDefaultCourse();
@@ -105,7 +100,7 @@ public class CustomCourseActivity extends Activity {
 		//arrayList.add(new Parameters("hash", hash));
 		arrayList.add(new Parameters("operation", "get"));
 		arrayList.add(new Parameters("token", Constants.token));
-		new RequestingTask("正在获取自选课表..", 
+		new RequestingTask(this, "正在获取自选课表..",
 				Constants.domain+"/services/course.php", Constants.REQUEST_CUSTOM_COURSE_GET)
 				.execute(arrayList);
 		hasModified=false;
@@ -245,7 +240,7 @@ public class CustomCourseActivity extends Activity {
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				final int index=Integer.valueOf(position);
+				final int index=position;
 				String[] items={"修改","删除"};
 				new AlertDialog.Builder(customCourseActivity)
 				.setTitle("请选择你要的操作")
@@ -442,12 +437,6 @@ public class CustomCourseActivity extends Activity {
 	}
 	
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		Util.setIconEnable(menu, true);
-		return super.onCreateOptionsMenu(menu);
-	}
-	
-	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		menu.clear();
 		if (page==PAGE_LIST)
@@ -497,7 +486,7 @@ public class CustomCourseActivity extends Activity {
 			arrayList.add(new Parameters("token", Constants.token));
 			arrayList.add(new Parameters("operation", "set"));
 			arrayList.add(new Parameters("content", jsonArray.toString()));
-			new RequestingTask("正在保存..", 
+			new RequestingTask(this, "正在保存..",
 					Constants.domain+"/services/course.php", Constants.REQUEST_CUSTOM_COURSE_SAVE)
 					.execute(arrayList);
 		}

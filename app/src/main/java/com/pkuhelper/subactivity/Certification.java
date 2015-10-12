@@ -29,6 +29,7 @@ import com.pkuhelper.R;
 import com.pkuhelper.lib.Constants;
 import com.pkuhelper.lib.MyBitmapFactory;
 import com.pkuhelper.lib.MyFile;
+import com.pkuhelper.lib.RequestingTask;
 import com.pkuhelper.lib.ViewSetting;
 import com.pkuhelper.lib.view.CustomToast;
 import com.pkuhelper.lib.webconnection.Parameters;
@@ -107,7 +108,7 @@ public class Certification {
 		ArrayList<Parameters> arrayList=new ArrayList<Parameters>();
 		arrayList.add(new Parameters("token", Constants.token));
 		
-		new RequestingTask(subActivity, "正在获取我的凭证...", 
+		new RequestingTask(subActivity, "正在获取我的凭证...",
 				Constants.domain+"/services/pass.php", Constants.REQUEST_SUBACTIVITY_CERTIFICATION)
 				.execute(arrayList);
 	}

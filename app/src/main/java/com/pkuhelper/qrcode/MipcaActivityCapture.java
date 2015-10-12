@@ -3,7 +3,6 @@ package com.pkuhelper.qrcode;
 import java.io.IOException;
 import java.util.Vector;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
@@ -23,6 +22,7 @@ import android.widget.Toast;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 import com.pkuhelper.R;
+import com.pkuhelper.lib.BaseActivity;
 import com.pkuhelper.lib.Constants;
 import com.pkuhelper.lib.Util;
 import com.pkuhelper.lib.ViewSetting;
@@ -30,7 +30,7 @@ import com.pkuhelper.lib.ViewSetting;
  * Initial the camera
  * @author Ryan.Tang
  */
-public class MipcaActivityCapture extends Activity implements Callback {
+public class MipcaActivityCapture extends BaseActivity implements Callback {
 
 	private CaptureActivityHandler handler;
 	private ViewfinderView viewfinderView;
@@ -49,7 +49,6 @@ public class MipcaActivityCapture extends Activity implements Callback {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_capture);
 		ViewSetting.setTextView(this, R.id.qrcode_hint, "将会向扫描结果发送你的姓名和学号\n请谨慎扫描");
-		Util.getOverflowMenu(this);
 		//ViewUtil.addTopView(getApplicationContext(), this, R.string.scan_card);
 		CameraManager.init(getApplication());
 		viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
@@ -96,6 +95,8 @@ public class MipcaActivityCapture extends Activity implements Callback {
 		inactivityTimer.shutdown();
 		super.onDestroy();
 	}
+
+	protected void finishRequest(int type, String string) {}
 	
 	/**
 	 * 处理扫描结果
@@ -211,11 +212,6 @@ public class MipcaActivityCapture extends Activity implements Callback {
 		public void onCompletion(MediaPlayer mediaPlayer) {
 			mediaPlayer.seekTo(0);
 		}
-	};
-	
-	public boolean onCreateOptionsMenu(Menu menu) {
-		Util.setIconEnable(menu, true);
-		return super.onCreateOptionsMenu(menu);
 	};
 	
 	@Override

@@ -11,6 +11,7 @@ import org.jsoup.select.Elements;
 import android.util.Log;
 
 import com.pkuhelper.lib.Constants;
+import com.pkuhelper.lib.RequestingTask;
 import com.pkuhelper.lib.view.CustomToast;
 import com.pkuhelper.lib.webconnection.Parameters;
 
@@ -21,7 +22,7 @@ public class CourseNotice {
 		arrayList.add(new Parameters("user_id", Constants.username));
 		arrayList.add(new Parameters("pwd", CourseJSTranslation.strEncode(Constants.password)));
 		
-		new RequestingTask("正在登录教学网...", "http://course.pku.edu.cn/webapps/login/", 
+		new RequestingTask(NCActivity.ncActivity, "正在登录教学网...", "http://course.pku.edu.cn/webapps/login/",
 				Constants.REQUEST_NOTICECENTER_COURSE_LOGIN).execute(arrayList);
 		
 	}
@@ -39,7 +40,7 @@ public class CourseNotice {
 		arrayList.add(new Parameters("modId", "_1_1"));
 		arrayList.add(new Parameters("tabId", "_1_1"));
 		arrayList.add(new Parameters("tab_tab_group_id", "_3_1"));
-		new RequestingTask("正在获取教学网的通知...", 
+		new RequestingTask(NCActivity.ncActivity, "正在获取教学网的通知...",
 			"http://course.pku.edu.cn/webapps/portal/execute/tabs/tabAction", 
 			Constants.REQUEST_NOTICECENTER_COURSE_GETDETAIL).execute(arrayList);
 	}

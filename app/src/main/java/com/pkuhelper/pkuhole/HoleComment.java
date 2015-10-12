@@ -7,9 +7,11 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.pkuhelper.R;
+import com.pkuhelper.lib.BaseActivity;
 import com.pkuhelper.lib.Constants;
 import com.pkuhelper.lib.MyCalendar;
 import com.pkuhelper.lib.MyFile;
+import com.pkuhelper.lib.RequestingTask;
 import com.pkuhelper.lib.Util;
 import com.pkuhelper.lib.ViewSetting;
 import com.pkuhelper.lib.view.CustomToast;
@@ -17,7 +19,6 @@ import com.pkuhelper.lib.webconnection.Parameters;
 import com.pkuhelper.subactivity.SubActivity;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -40,7 +41,7 @@ import android.widget.EditText;
 import android.widget.HeaderViewListAdapter;
 import android.widget.ListView;
 
-public class HoleComment extends Activity {
+public class HoleComment extends BaseActivity {
 	HoleInfo holeInfo;
 	
 	private static final int AUDIO_TYPE_START=0;
@@ -83,7 +84,6 @@ public class HoleComment extends Activity {
 		}
 		mediaPlayer=new MediaPlayer();
 		getActionBar().setTitle("查看评论");
-		Util.getOverflowMenu(this);
 		setContentView(R.layout.hole_comment_listview);
 		setResult(RESULT_CANCELED);
 		
@@ -165,7 +165,7 @@ public class HoleComment extends Activity {
 	
 	@SuppressWarnings("unchecked")
 	public void setAttention() {
-		new RequestingTask(this, "正在"+(attention?"取消":"")+"关注此树洞", 
+		new RequestingTask(this, "正在"+(attention?"取消":"")+"关注此树洞",
 				Constants.domain+"/services/pkuhole/api.php?token="+Constants.token
 				+"&action=attention&pid="+holeInfo.pid+"&switch="+(attention?0:1), 
 				Constants.REQUEST_HOLE_SET_ATTENTION).execute(new ArrayList<Parameters>());
@@ -276,7 +276,7 @@ public class HoleComment extends Activity {
 		}
 	}
 	
-	void finishRequest(int type, String string) {
+	protected void finishRequest(int type, String string) {
 		if (type==Constants.REQUEST_HOLE_GETCOMMENT) {
 			show(string);
 		}
@@ -466,12 +466,6 @@ public class HoleComment extends Activity {
 			return true;
 		}
 		return super.onKeyDown(keyCode, event);
-	}
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		Util.setIconEnable(menu, true);
-		return super.onCreateOptionsMenu(menu);
 	}
 	
 	@Override

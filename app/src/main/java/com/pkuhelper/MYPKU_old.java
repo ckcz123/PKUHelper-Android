@@ -2,7 +2,6 @@ package com.pkuhelper;
 
 import java.util.ArrayList;
 
-import com.pkuhelper.R;
 import com.pkuhelper.bbs.BBSActivity;
 import com.pkuhelper.classroom.ClassActivity;
 import com.pkuhelper.lib.*;

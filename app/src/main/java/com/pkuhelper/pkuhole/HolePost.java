@@ -9,9 +9,11 @@ import java.util.regex.Pattern;
 import org.json.JSONObject;
 
 import com.pkuhelper.R;
+import com.pkuhelper.lib.BaseActivity;
 import com.pkuhelper.lib.Constants;
 import com.pkuhelper.lib.MyBitmapFactory;
 import com.pkuhelper.lib.MyFile;
+import com.pkuhelper.lib.RequestingTask;
 import com.pkuhelper.lib.Util;
 import com.pkuhelper.lib.ViewSetting;
 import com.pkuhelper.lib.view.CustomToast;
@@ -42,7 +44,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 
-public class HolePost extends Activity{
+public class HolePost extends BaseActivity{
 	
 	Uri imageUri=null;
 	File audioFile=null;
@@ -77,7 +79,6 @@ public class HolePost extends Activity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);	
 		setContentView(R.layout.hole_post_view);
-		Util.getOverflowMenu(this);
 		getActionBar().setTitle("发布匿名树洞");
 		mediaRecorder = new MediaRecorder();
 		mediaPlayer=new MediaPlayer();
@@ -489,12 +490,6 @@ public class HolePost extends Activity{
 				CustomToast.showErrorToast(this, "添加图片失败，请重试");
 			}
 		}
-	}
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		Util.setIconEnable(menu, true);
-		return super.onCreateOptionsMenu(menu);
 	}
 	
 	@Override

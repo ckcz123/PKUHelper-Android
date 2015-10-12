@@ -20,6 +20,7 @@ import com.pkuhelper.lib.Constants;
 import com.pkuhelper.lib.MyBitmapFactory;
 import com.pkuhelper.lib.MyFile;
 import com.pkuhelper.lib.Util;
+import com.pkuhelper.lib.RequestingTask;
 import com.pkuhelper.lib.ViewSetting;
 import com.pkuhelper.lib.view.CustomToast;
 import com.pkuhelper.lib.webconnection.Parameters;

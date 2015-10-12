@@ -9,14 +9,11 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.pkuhelper.R;
-import com.pkuhelper.lib.Constants;
-import com.pkuhelper.lib.Util;
-import com.pkuhelper.lib.ViewSetting;
+import com.pkuhelper.lib.*;
 import com.pkuhelper.lib.view.CustomToast;
 import com.pkuhelper.lib.webconnection.Parameters;
 import com.pkuhelper.subactivity.SubActivity;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -35,7 +32,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
 
-public class ChatActivity extends Activity {
+public class ChatActivity extends BaseActivity {
 	ArrayList<ChatListInfo> chatListInfos=new ArrayList<ChatListInfo>();
 	ArrayList<ChatDetailInfo> chatDetailInfos=new ArrayList<ChatDetailInfo>();
 	ArrayList<String> blackList=new ArrayList<String>();
@@ -59,7 +56,6 @@ public class ChatActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.chatlist_listview);
-		Util.getOverflowMenu(this);
 		chatActivity=this;
 		
 		handler=new Handler(new Handler.Callback() {
@@ -151,7 +147,7 @@ public class ChatActivity extends Activity {
 		//arrayList.add(new Parameters("hash", hash));
 		arrayList.add(new Parameters("token", Constants.token));
 		
-		new RequestingTask("正在发送...", Constants.domain+"/services/msg.php", 
+		new RequestingTask(this, "正在发送...", Constants.domain+"/services/msg.php",
 				Constants.REQUEST_CHAT_SEND_CONTENT).execute(arrayList);
 	}
 	
@@ -188,7 +184,7 @@ public class ChatActivity extends Activity {
 		
 	}
 	
-	void finishRequest(int type, String string) {
+	protected void finishRequest(int type, String string) {
 		if (type==Constants.REQUEST_CHAT_GET_LIST)
 			ChatList.finishGetList(string);
 		else if (type==Constants.REQUEST_CHAT_GET_CONTENT)
@@ -236,7 +232,7 @@ public class ChatActivity extends Activity {
 					return;
 				}
 				else if (which==1) {
-					new RequestingTask("正在获取服务号列表...", 
+					new RequestingTask(ChatActivity.this, "正在获取服务号列表...",
 							Constants.domain+"/pkuhelper/nc/getncservices.php", 
 							Constants.REQUEST_CHAT_GET_NC_SERVICES)
 					.		execute(new ArrayList<Parameters>());
@@ -284,12 +280,6 @@ public class ChatActivity extends Activity {
 			e.printStackTrace();
 			CustomToast.showErrorToast(this, "获取服务号列表失败");
 		}
-	}
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		Util.setIconEnable(menu, true);
-		return super.onCreateOptionsMenu(menu);
 	}
 	
 	@Override
@@ -463,7 +453,7 @@ public class ChatActivity extends Activity {
 				arrayList.add(new Parameters("id", idd+""));
 				arrayList.add(new Parameters("token", Constants.token));
 				
-				new RequestingTask("正在删除...", Constants.domain+"/services/msg.php", 
+				new RequestingTask(this, "正在删除...", Constants.domain+"/services/msg.php",
 						Constants.REQUEST_CHAT_DELETE_CONTENT).execute(arrayList);
 				
 				return true;
@@ -477,7 +467,7 @@ public class ChatActivity extends Activity {
 					arrayList.add(new Parameters("type", "dellist"));
 					arrayList.add(new Parameters("to", tmpUid));
 					arrayList.add(new Parameters("token", Constants.token));
-					new RequestingTask("正在删除...", Constants.domain+"/services/msg.php", 
+					new RequestingTask(ChatActivity.this, "正在删除...", Constants.domain+"/services/msg.php",
 							Constants.REQUEST_CHAT_DELETE_LIST).execute(arrayList);
 				}
 			}).setNegativeButton("否", null).show();

@@ -1,7 +1,5 @@
 package com.pkuhelper.lib;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.security.MessageDigest;
 import java.util.Random;
 
@@ -10,8 +8,6 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Picture;
-import android.view.Menu;
-import android.view.ViewConfiguration;
 import android.webkit.WebView;
 
 public class Util {
@@ -76,38 +72,13 @@ public class Util {
 		return string;
 	}
 	private static String intToHex(int i) {
-		if (i<=9) return i+"";
-		if (i==10) return "a";
-		if (i==11) return "b";
-		if (i==12) return "c";
-		if (i==13) return "d";
-		if (i==14) return "e";
+		if (i <= 9) return i + "";
+		if (i == 10) return "a";
+		if (i == 11) return "b";
+		if (i == 12) return "c";
+		if (i == 13) return "d";
+		if (i == 14) return "e";
 		return "f";
-	}
-	
-	public static void getOverflowMenu(Context context) {
-	     try {
-	        ViewConfiguration config = ViewConfiguration.get(context);
-	        Field menuKeyField = ViewConfiguration.class
-	        		.getDeclaredField("sHasPermanentMenuKey");
-	        if(menuKeyField != null) {
-	            menuKeyField.setAccessible(true);
-	            menuKeyField.setBoolean(config, false);
-	        }
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	    }
-	}
-	
-	public static void setIconEnable(Menu menu, boolean enable) {
-		try {
-			Class<?> clazz = Class.forName("com.android.internal.view.menu.MenuBuilder");
-			Method m = clazz.getDeclaredMethod("setOptionalIconsVisible", boolean.class);
-			m.setAccessible(true);
-			m.invoke(menu, enable);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 	
 }

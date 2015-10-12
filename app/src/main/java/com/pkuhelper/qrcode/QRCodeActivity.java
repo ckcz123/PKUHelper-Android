@@ -1,10 +1,10 @@
 package com.pkuhelper.qrcode;
 
+import com.pkuhelper.lib.BaseActivity;
 import com.pkuhelper.lib.Constants;
 import com.pkuhelper.lib.view.CustomToast;
 import com.pkuhelper.subactivity.SubActivity;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -13,7 +13,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
-public class QRCodeActivity extends Activity {
+public class QRCodeActivity extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -61,5 +61,7 @@ public class QRCodeActivity extends Activity {
 		}
 		
 	}
+
+	protected void finishRequest(int type, String string) {}
 	
 }

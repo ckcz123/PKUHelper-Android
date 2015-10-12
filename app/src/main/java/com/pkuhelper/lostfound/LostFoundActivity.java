@@ -11,7 +11,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -39,15 +38,13 @@ import android.widget.Spinner;
 
 import com.pkuhelper.R;
 import com.pkuhelper.chat.ChatActivity;
-import com.pkuhelper.lib.Constants;
-import com.pkuhelper.lib.Util;
-import com.pkuhelper.lib.ViewSetting;
+import com.pkuhelper.lib.*;
 import com.pkuhelper.lib.view.CustomToast;
 import com.pkuhelper.lib.webconnection.Parameters;
 import com.pkuhelper.lib.webconnection.WebConnection;
 
 @SuppressLint({ "UseSparseArrays", "InflateParams" })
-public class LostFoundActivity extends Activity {
+public class LostFoundActivity extends BaseActivity {
 	public HashMap<Integer, LostFoundInfo> lostMap=new HashMap<Integer, LostFoundInfo>();
 	public HashMap<Integer, LostFoundInfo> foundMap=new HashMap<Integer, LostFoundInfo>();
 	public HashMap<Integer, LostFoundInfo> myMap=new HashMap<Integer, LostFoundInfo>();
@@ -103,7 +100,6 @@ public class LostFoundActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		Util.getOverflowMenu(this);
 		getActionBar().setTitle("失物招领");
 		setContentView(R.layout.lf_listview);
 		
@@ -469,7 +465,7 @@ public class LostFoundActivity extends Activity {
 			hint="我发布的失物招领";
 		}
 		
-		new RequestingTask(this, "正在获取"+hint+"...", 
+		new RequestingTask(this, "正在获取"+hint+"...",
 				Constants.domain+"/services/LFList.php?type="+type+"&page=0&token="+token,
 				Constants.REQUEST_LOSTFOUND_GET).execute(new ArrayList<Parameters>());
 	}
@@ -608,12 +604,6 @@ public class LostFoundActivity extends Activity {
 		}
 		else
 			CustomToast.showErrorToast(this, "删除失败，请重试");
-	}
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		Util.setIconEnable(menu, true);
-		return super.onCreateOptionsMenu(menu);
 	}
 	
 	@Override

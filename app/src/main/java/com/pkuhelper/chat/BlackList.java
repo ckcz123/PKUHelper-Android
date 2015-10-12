@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.json.JSONObject;
 
 import com.pkuhelper.lib.Constants;
+import com.pkuhelper.lib.RequestingTask;
 import com.pkuhelper.lib.view.CustomToast;
 import com.pkuhelper.lib.webconnection.Parameters;
 
@@ -23,7 +24,7 @@ public class BlackList {
 		arrayList.add(new Parameters("token", Constants.token));
 		arrayList.add(new Parameters("target", username));
 		arrayList.add(new Parameters("type", "kill"));
-		new RequestingTask("正在加入黑名单...", Constants.domain+"/services/msg.php", 
+		new RequestingTask(ChatActivity.chatActivity, "正在加入黑名单...", Constants.domain+"/services/msg.php",
 				Constants.REQUEST_CHAT_BLACKLIST_MOVE_IN).execute(arrayList);		
 	}
 	@SuppressWarnings("unchecked")
@@ -33,7 +34,7 @@ public class BlackList {
 		arrayList.add(new Parameters("token", Constants.token));
 		arrayList.add(new Parameters("target", username));
 		arrayList.add(new Parameters("type", "rescue"));
-		new RequestingTask("正在移出黑名单...", Constants.domain+"/services/msg.php", 
+		new RequestingTask(ChatActivity.chatActivity, "正在移出黑名单...", Constants.domain+"/services/msg.php",
 				Constants.REQUEST_CHAT_BLACKLIST_MOVE_OUT).execute(arrayList);		
 	}
 	public static void finishRequest(int type, String string) {

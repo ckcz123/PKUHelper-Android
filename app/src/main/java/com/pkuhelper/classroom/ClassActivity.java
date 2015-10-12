@@ -5,9 +5,7 @@ import java.util.ArrayList;
 import org.json.*;
 
 import com.pkuhelper.R;
-import com.pkuhelper.lib.Constants;
-import com.pkuhelper.lib.Util;
-import com.pkuhelper.lib.ViewSetting;
+import com.pkuhelper.lib.*;
 import com.pkuhelper.lib.view.CustomToast;
 import com.pkuhelper.lib.webconnection.Parameters;
 
@@ -19,7 +17,7 @@ import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.*;
 
-public class ClassActivity extends Activity{
+public class ClassActivity extends BaseActivity {
 
 	ViewPager mViewPager;
 	static ClassActivity classActivity;
@@ -41,7 +39,6 @@ public class ClassActivity extends Activity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.classroom_layout);
 		classActivity=this;
-		Util.getOverflowMenu(this);
 		htmls=new String[3];
 		htmls[0]=htmls[1]=htmls[2]=null;
 		getActionBar().setTitle("教室查询");
@@ -105,7 +102,7 @@ public class ClassActivity extends Activity{
 	public void showSelectDialog() {
 		requestBuilding="";
 		if (buildings.size()==0) {
-			new RequestingTask("正在获取教学楼列表...", 
+			new RequestingTask(this, "正在获取教学楼列表...",
 					Constants.domain+"/services/pkuhelper/classroom.php", 
 					Constants.REQUEST_CLASSROOM_LIST).execute(new ArrayList<Parameters>());
 			return;
@@ -123,15 +120,9 @@ public class ClassActivity extends Activity{
 	}
 	@SuppressWarnings("unchecked")
 	public void getClassroowState(String url,String building) {
-		new RequestingTask("正在获取教室状态", url, Constants.REQUEST_CLASSROOM)
+		new RequestingTask(this, "正在获取教室状态", url, Constants.REQUEST_CLASSROOM)
 		.execute(new ArrayList<Parameters>());
 		requestBuilding=building;
-	}
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		Util.setIconEnable(menu, true);
-		return super.onCreateOptionsMenu(menu);
 	}
 	
 	@Override
@@ -246,12 +237,5 @@ public class ClassActivity extends Activity{
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode==KeyEvent.KEYCODE_BACK && event.getAction()==KeyEvent.ACTION_DOWN) {
-			finish();
-		}
-		return super.onKeyDown(keyCode, event);
-	}
+
 }

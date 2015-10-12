@@ -10,6 +10,7 @@ import android.widget.*;
 
 import com.pkuhelper.R;
 import com.pkuhelper.lib.Constants;
+import com.pkuhelper.lib.RequestingTask;
 import com.pkuhelper.lib.view.CustomToast;
 import com.pkuhelper.lib.webconnection.*;
 
@@ -64,7 +65,7 @@ public class ShowLists {
 		int page=PKUHoleActivity.pkuHoleActivity.currPage+1;
 		
 		String string="正在获取树洞内容...";
-		new RequestingTask(string, 
+		new RequestingTask(PKUHoleActivity.pkuHoleActivity, string,
 				Constants.domain+"/services/pkuhelper/pkuhole.php?page="+page, 
 				Constants.REQUEST_PKUHOLE_GET_PAGE).execute(new ArrayList<Parameters>());
 		//new RequestingTask(string, 

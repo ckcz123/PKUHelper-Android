@@ -25,6 +25,7 @@ import android.widget.ListView;
 
 import com.pkuhelper.R;
 import com.pkuhelper.lib.Constants;
+import com.pkuhelper.lib.RequestingTask;
 import com.pkuhelper.lib.ViewSetting;
 import com.pkuhelper.lib.view.CustomToast;
 import com.pkuhelper.lib.webconnection.Parameters;
@@ -36,7 +37,7 @@ public class NCList {
 	
 	@SuppressWarnings("unchecked")
 	public static void getAllSources() {
-		new RequestingTask("正在获取源信息...", 
+		new RequestingTask(NCActivity.ncActivity, "正在获取源信息...",
 			Constants.domain+"/pkuhelper/nc/source.php?token="+Constants.token,
 				Constants.REQUEST_NOTICECENTER_GETSOURCE)
 		.execute(new ArrayList<Parameters>());
@@ -218,7 +219,7 @@ public class NCList {
 			ArrayList<Parameters> arrayList=new ArrayList<Parameters>();
 			arrayList.add(new Parameters("uid",Constants.username));
 			arrayList.add(new Parameters("source", detail.toString()));
-			new RequestingTask("正在保存...", 
+			new RequestingTask(NCActivity.ncActivity, "正在保存...",
 					Constants.domain+"/pkuhelper/nc/setSource.php", Constants.REQUEST_NOTICECENTER_SAVESOURCE)
 				.execute(arrayList);
 		}

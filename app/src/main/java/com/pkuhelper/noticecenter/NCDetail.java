@@ -8,6 +8,7 @@ import org.jsoup.nodes.Element;
 
 import com.pkuhelper.lib.Constants;
 import com.pkuhelper.lib.DataObject;
+import com.pkuhelper.lib.RequestingTask;
 import com.pkuhelper.lib.view.CustomToast;
 import com.pkuhelper.lib.webconnection.Parameters;
 import com.pkuhelper.subactivity.SubActivity;
@@ -21,7 +22,7 @@ public class NCDetail {
 	
 	@SuppressWarnings("unchecked")
 	public static void getCourse(String title, String url) {
-		new RequestingTask("正在获取详细信息...", url, 
+		new RequestingTask(NCActivity.ncActivity, "正在获取详细信息...", url,
 				Constants.REQUEST_NOTICECENTER_COURSE_GETWEBSITE)
 				.execute(new ArrayList<Parameters>());
 		requestURL=url;

@@ -7,9 +7,11 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.pkuhelper.R;
+import com.pkuhelper.lib.BaseActivity;
 import com.pkuhelper.lib.Constants;
 import com.pkuhelper.lib.MyCalendar;
 import com.pkuhelper.lib.MyFile;
+import com.pkuhelper.lib.RequestingTask;
 import com.pkuhelper.lib.Util;
 import com.pkuhelper.lib.ViewSetting;
 import com.pkuhelper.lib.view.CustomToast;
@@ -18,7 +20,6 @@ import com.pkuhelper.lib.webconnection.WebConnection;
 import com.pkuhelper.subactivity.SubActivity;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -45,7 +46,7 @@ import android.widget.CompoundButton;
 import android.widget.HeaderViewListAdapter;
 import android.widget.ListView;
 
-public class HoleActivity extends Activity {
+public class HoleActivity extends BaseActivity {
 	public static final int PAGE_ALL = 0;
 	public static final int PAGE_MINE = 1;
 	
@@ -80,11 +81,8 @@ public class HoleActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		//holeActivity=this;
 		getActionBar().setTitle("P大树洞");
-		
-		MyFile.getCache(this, "").mkdirs();
+
 		mediaPlayer=new MediaPlayer();
-		
-		Util.getOverflowMenu(this);
 		
 		handler=new Handler(new Handler.Callback() {
 			
@@ -486,7 +484,7 @@ public class HoleActivity extends Activity {
 		new RequestingTask(this, "正在获取...", url, requestType).execute(arrayList);
 		
 	}
-	void finishRequest(int type, String string) { 
+	protected void finishRequest(int type, String string) {
 		if (type==Constants.REQUEST_HOLE_GETLIST_ALL 
 				|| type==Constants.REQUEST_HOLE_GETLIST_MINE) {
 			
@@ -607,12 +605,6 @@ public class HoleActivity extends Activity {
 			
 		}
 		catch (Exception e) {}
-	}
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		Util.setIconEnable(menu, true);
-		return super.onCreateOptionsMenu(menu);
 	}
 	
 	@Override

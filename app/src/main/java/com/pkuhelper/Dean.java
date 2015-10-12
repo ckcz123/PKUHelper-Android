@@ -5,6 +5,7 @@ import java.util.*;
 import com.pkuhelper.grade.GradeActivity;
 import com.pkuhelper.lib.Constants;
 import com.pkuhelper.lib.DeanDecode;
+import com.pkuhelper.lib.RequestingTask;
 import com.pkuhelper.lib.ViewSetting;
 import com.pkuhelper.lib.webconnection.*;
 
@@ -129,7 +130,7 @@ public class Dean {
 		arrayList.add(new Parameters("sno", Constants.username));
 		arrayList.add(new Parameters("password", Constants.password));
 		arrayList.add(new Parameters("captcha", captcha));
-		new RequestingTask("正在登录教务...", "http://dean.pku.edu.cn/student/authenticate.php"
+		new RequestingTask(PKUHelper.pkuhelper, "正在登录教务...", "http://dean.pku.edu.cn/student/authenticate.php"
 				, Constants.REQUEST_DEAN_LOGIN).execute(arrayList);
 		
 	}

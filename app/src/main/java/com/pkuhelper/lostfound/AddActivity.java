@@ -9,11 +9,7 @@ import java.util.Locale;
 import org.json.JSONObject;
 
 import com.pkuhelper.R;
-import com.pkuhelper.lib.Constants;
-import com.pkuhelper.lib.MyBitmapFactory;
-import com.pkuhelper.lib.MyFile;
-import com.pkuhelper.lib.Util;
-import com.pkuhelper.lib.ViewSetting;
+import com.pkuhelper.lib.*;
 import com.pkuhelper.lib.view.CustomToast;
 import com.pkuhelper.lib.view.MyDatePickerDialog;
 import com.pkuhelper.lib.view.MyTimePickerDialog;
@@ -44,7 +40,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 
-public class AddActivity extends Activity {
+public class AddActivity extends BaseActivity {
 	ArrayList<String> arrayList=new ArrayList<String>();
 	Calendar calendar=null;
 	Uri imageUri=null, tempUri=null;
@@ -56,7 +52,6 @@ public class AddActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		getActionBar().setTitle("发布新的失物招领");
-		Util.getOverflowMenu(this);
 		setContentView(R.layout.lostfound_add);
 		setResult(RESULT_CANCELED);
 		
@@ -142,13 +137,13 @@ public class AddActivity extends Activity {
 		String name=ViewSetting.getEditTextValue(this, R.id.lostfound_add_name);
 		if ("".equals(name)) {
 			CustomToast.showInfoToast(this, "物品名称必须填写");
-			((EditText)findViewById(R.id.lostfound_add_name)).requestFocus();
+			findViewById(R.id.lostfound_add_name).requestFocus();
 			return;
 		}
 		String phone=ViewSetting.getEditTextValue(this, R.id.lostfound_add_phone);
 		if ("".equals(phone)) {
 			CustomToast.showInfoToast(this, "电话号码必须填写");
-			((EditText)findViewById(R.id.lostfound_add_phone)).requestFocus();
+			findViewById(R.id.lostfound_add_phone).requestFocus();
 			return;
 		}
 		String detail=ViewSetting.getEditTextValue(this, R.id.lostfound_add_detail);
@@ -261,12 +256,6 @@ public class AddActivity extends Activity {
 	}
 	
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		Util.setIconEnable(menu, true);
-		return super.onCreateOptionsMenu(menu);
-	}
-	
-	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		menu.clear();
 		menu.add(Menu.NONE, Constants.MENU_LOSTFOUND_SAVE, 
@@ -292,15 +281,4 @@ public class AddActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode==KeyEvent.KEYCODE_BACK && event.getAction()==KeyEvent.ACTION_DOWN) {
-			setResult(RESULT_CANCELED);
-			finish();
-			return true;
-		}
-		return super.onKeyDown(keyCode, event);
-	}
-	
 }

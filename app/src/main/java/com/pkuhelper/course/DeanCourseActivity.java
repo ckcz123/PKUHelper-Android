@@ -12,17 +12,16 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.pkuhelper.R;
+import com.pkuhelper.lib.BaseActivity;
 import com.pkuhelper.lib.Constants;
 import com.pkuhelper.lib.Lib;
 import com.pkuhelper.lib.MyFile;
-import com.pkuhelper.lib.Util;
 import com.pkuhelper.lib.ViewSetting;
 import com.pkuhelper.lib.view.CustomToast;
 import com.pkuhelper.widget.WidgetCourse2Provider;
 import com.pkuhelper.widget.WidgetCourseProvider;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -37,7 +36,7 @@ import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
-public class DeanCourseActivity extends Activity {
+public class DeanCourseActivity extends BaseActivity {
 	ArrayList<String> courseInfos=new ArrayList<String>();
 	HashMap<String, CourseInfo> courseMap=new HashMap<String, CourseInfo>();
 	boolean hasModified;
@@ -46,7 +45,6 @@ public class DeanCourseActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.customcourse_listview);
-		Util.getOverflowMenu(this);
 		getActionBar().setTitle("修改教务课程地点");
 		getList();
 	}
@@ -110,7 +108,9 @@ public class DeanCourseActivity extends Activity {
 			CustomToast.showErrorToast(this, "未知错误");
 		}
 	}
-	
+
+	protected void finishRequest(int type, String string) {}
+
 	public void showList() {
 		setContentView(R.layout.customcourse_listview);
 		invalidateOptionsMenu();
@@ -278,12 +278,7 @@ public class DeanCourseActivity extends Activity {
 		}
 		return document;
 	}
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		Util.setIconEnable(menu, true);
-		return super.onCreateOptionsMenu(menu);
-	}
+
 	private void wantToExit() {
 		if (hasModified) {
 			new AlertDialog.Builder(this).setTitle("是否保存？")

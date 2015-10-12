@@ -11,7 +11,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.*;
 import org.jsoup.select.Elements;
 
-import com.pkuhelper.R;
 import com.pkuhelper.course.CustomCourseActivity;
 import com.pkuhelper.course.DeanCourseActivity;
 import com.pkuhelper.course.ExamActivity;
@@ -102,20 +101,20 @@ public class Course extends Fragment {
 		parameters.add(new Parameters("randCode","0"));
 		parameters.add(new Parameters("redirUrl",
 				"http://elective.pku.edu.cn:80/elective2008/agent4Iaaa.jsp/../ssoLogin.do"));
-		RequestingTask requestingTask=new RequestingTask("正在连接...", 
+		RequestingTask requestingTask=new RequestingTask(PKUHelper.pkuhelper, "正在连接...",
 				"https://iaaa.pku.edu.cn/iaaa/oauthlogin.do", Constants.REQUEST_ELECTIVE_TOKEN);
 		requestingTask.execute(parameters);
 	}
 	@SuppressWarnings("unchecked")
 	private static void gettingCookie(String token) {
-		RequestingTask requestingTask=new RequestingTask("正在验证...", 
+		RequestingTask requestingTask=new RequestingTask(PKUHelper.pkuhelper, "正在验证...",
 				"http://elective.pku.edu.cn/elective2008/ssoLogin.do?token="+token,
 				Constants.REQUEST_ELECTIVE_COOKIE);
 		requestingTask.execute(new ArrayList<Parameters>());		
 	}
 	@SuppressWarnings("unchecked")
 	private static void connectCourse() {
-		RequestingTask requestingTask=new RequestingTask("正在获取课表...", 
+		RequestingTask requestingTask=new RequestingTask(PKUHelper.pkuhelper, "正在获取课表...",
 				"http://elective.pku.edu.cn/elective2008/edu/pku/stu/elective/controller/electiveWork/showResults.do",
 				Constants.REQUEST_ELECTIVE);
 		requestingTask.execute(new ArrayList<Parameters>());
@@ -155,7 +154,7 @@ public class Course extends Fragment {
 		ArrayList<Parameters> arrayList=new ArrayList<Parameters>();
 		arrayList.add(new Parameters("token", Constants.token));
 		arrayList.add(new Parameters("phpsessid", Constants.phpsessid));
-		new RequestingTask("正在获取课表..", 
+		new RequestingTask(PKUHelper.pkuhelper, "正在获取课表..",
 				Constants.domain+"/services/pkuhelper/course.php", 
 				Constants.REQUEST_ELECTIVE_COURSES).execute(arrayList);
 	}
@@ -236,7 +235,7 @@ public class Course extends Fragment {
 		ArrayList<Parameters> arrayList=new ArrayList<Parameters>();
 		arrayList.add(new Parameters("operation", "get"));
 		arrayList.add(new Parameters("token", Constants.token));
-		new RequestingTask("正在获取自选课表..", 
+		new RequestingTask(PKUHelper.pkuhelper, "正在获取自选课表..",
 				Constants.domain+"/services/course.php", Constants.REQUEST_ELECTIVE_CUSTOM)
 				.execute(arrayList);
 	}

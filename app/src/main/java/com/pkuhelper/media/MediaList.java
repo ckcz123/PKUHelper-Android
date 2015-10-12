@@ -22,6 +22,7 @@ import android.widget.ListView;
 
 import com.pkuhelper.R;
 import com.pkuhelper.lib.Constants;
+import com.pkuhelper.lib.RequestingTask;
 import com.pkuhelper.lib.ViewSetting;
 import com.pkuhelper.lib.view.CustomToast;
 import com.pkuhelper.lib.webconnection.Parameters;
@@ -38,7 +39,7 @@ public class MediaList {
 	
 	@SuppressWarnings("unchecked")
 	public static void getContent() {
-		new RequestingTask("正在获取消息列表...", 
+		new RequestingTask(MediaActivity.mediaActivity, "正在获取消息列表...",
 				Constants.domain+"/pkuhelper/media/fetch.php?p=1",
 				Constants.REQUEST_MEDIA_FETCH)
 				.execute(new ArrayList<Parameters>());
@@ -48,7 +49,7 @@ public class MediaList {
 	
 	@SuppressWarnings("unchecked")
 	public static void getContent(int sid) {
-		new RequestingTask("正在获取消息列表...", 
+		new RequestingTask(MediaActivity.mediaActivity, "正在获取消息列表...",
 				Constants.domain+"/pkuhelper/media/fetch.php?p=1&sid="+sid,
 				Constants.REQUEST_MEDIA_FETCH)
 				.execute(new ArrayList<Parameters>());

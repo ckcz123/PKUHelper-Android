@@ -3,16 +3,15 @@ package com.pkuhelper.pkuhole.old;
 import java.util.*;
 
 import com.pkuhelper.R;
+import com.pkuhelper.lib.BaseActivity;
 import com.pkuhelper.lib.Constants;
 import com.pkuhelper.lib.Lib;
-import com.pkuhelper.lib.Util;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.*;
 import android.widget.ListView;
 
-public class PKUHoleActivity extends Activity {
+public class PKUHoleActivity extends BaseActivity {
 
 	static PKUHoleActivity pkuHoleActivity;
 	EventHandler eventHandler;
@@ -32,7 +31,6 @@ public class PKUHoleActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		pkuHoleActivity=this;
-		Util.getOverflowMenu(this);
 		eventHandler=new EventHandler(getMainLooper());
 		listView=new ListView(this);
 		currPage=0;
@@ -51,13 +49,6 @@ public class PKUHoleActivity extends Activity {
 		else if (type==Constants.REQUEST_PKUHOLE_POST_COMMENT)
 			CommentMessage.finishRequest(string);
 	}
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		Util.setIconEnable(menu, true);
-		return super.onCreateOptionsMenu(menu);
-	}
-	
 	
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {

@@ -10,10 +10,7 @@ import java.util.Scanner;
 
 import com.pkuhelper.R;
 import com.pkuhelper.chat.ChatActivity;
-import com.pkuhelper.lib.Constants;
-import com.pkuhelper.lib.MyFile;
-import com.pkuhelper.lib.Util;
-import com.pkuhelper.lib.ViewSetting;
+import com.pkuhelper.lib.*;
 import com.pkuhelper.lib.view.CustomToast;
 import com.pkuhelper.lib.webconnection.Parameters;
 import com.pkuhelper.subactivity.SubActivity;
@@ -34,7 +31,7 @@ import android.widget.SimpleAdapter;
 public class Detail {
 	@SuppressLint("InflateParams")
 	public static void showDetail(final LostFoundInfo lostFoundInfo) {
-		LostFoundActivity lostFoundActivity=LostFoundActivity.lostFoundActivity;
+		final LostFoundActivity lostFoundActivity=LostFoundActivity.lostFoundActivity;
 		final Dialog detaildialog=new Dialog(lostFoundActivity);
 		detaildialog.setCancelable(true);
 		detaildialog.setCanceledOnTouchOutside(true);
@@ -92,7 +89,7 @@ public class Detail {
 							//arrayList.add(new Parameters("uid", Constants.username));
 							arrayList.add(new Parameters("token", Constants.token));
 							arrayList.add(new Parameters("imageName", imgString));
-							new RequestingTask("正在删除..", Constants.domain+"/services/LFDelete.php",
+							new RequestingTask(lostFoundActivity, "正在删除..", Constants.domain+"/services/LFDelete.php",
 									Constants.REQUEST_LOSTFOUND_DELETE).execute(arrayList);
 						}
 					}).show();
