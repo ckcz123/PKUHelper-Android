@@ -32,7 +32,7 @@ public class GestureActivity extends BaseActivity {
 		gestureActivity=this;
 		getActionBar().setTitle("手势设置");
 		if (!Constants.isLogin()) {
-			finish();
+			wantToExit();
 			return;
 		}
 		gestureLibrary=IPGW.gestureLibrary;
@@ -121,7 +121,7 @@ public class GestureActivity extends BaseActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int id = item.getItemId();
 		if (id == Constants.MENU_SUBACTIVITY_CLOSE) {
-			finish();
+			wantToExit();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

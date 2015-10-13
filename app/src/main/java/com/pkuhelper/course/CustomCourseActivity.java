@@ -23,7 +23,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -494,8 +493,10 @@ public class CustomCourseActivity extends BaseActivity {
 		}
 	}
 	public void wantToExit() {
-		if (!hasModified) 
-			finish();
+		if (page==PAGE_MODIFY)
+			showList();
+		else if (!hasModified)
+			super.wantToExit();
 		else {
 			new AlertDialog.Builder(this).setTitle("是否保存？")
 			.setMessage("你进行了修改，是否保存？")
@@ -509,7 +510,7 @@ public class CustomCourseActivity extends BaseActivity {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					// TODO Auto-generated method stub
-					finish();
+					CustomCourseActivity.super.wantToExit();
 				}
 			}).show();
 		}
@@ -552,25 +553,10 @@ public class CustomCourseActivity extends BaseActivity {
 			}
 		}
 		if (id==Constants.MENU_CUSTOM_COURSE_CLOSE) {
-			if (page==PAGE_LIST)
-				wantToExit();
-			else if (page==PAGE_MODIFY)
-				showList();
+			wantToExit();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
-	}
-	
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode==KeyEvent.KEYCODE_BACK && event.getAction()==KeyEvent.ACTION_DOWN) {
-			if (page==PAGE_LIST)
-				wantToExit();
-			else if (page==PAGE_MODIFY)
-				showList();
-			return true;
-		}
-		return super.onKeyDown(keyCode, event);
 	}
 	
 	private int getColor(int type, boolean hasDefault) {

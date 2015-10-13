@@ -40,7 +40,7 @@ public class MessageActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		if ("".equals(Userinfo.token)) {
 			CustomToast.showInfoToast(this, "请先登录！");
-			finish();
+			super.wantToExit();
 			return;
 		}
 		messageInfos.clear();
@@ -234,17 +234,14 @@ public class MessageActivity extends BaseActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
+
 	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode==KeyEvent.KEYCODE_BACK && event.getAction()==KeyEvent.ACTION_DOWN) {
-			if (showingPage==PAGE_DETAIL) {
-				showList();
-			}
-			else finish();
-			return true;
+	protected void wantToExit() {
+		if (showingPage==PAGE_DETAIL) {
+			showList();
+			return;
 		}
-		return super.onKeyDown(keyCode, event);
+		super.wantToExit();
 	}
 
 	@Override

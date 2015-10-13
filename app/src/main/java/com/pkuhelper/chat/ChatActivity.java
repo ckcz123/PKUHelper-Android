@@ -317,11 +317,7 @@ public class ChatActivity extends BaseActivity {
 			return true;
 		}
 		if (id==Constants.MENU_CHAT_CLOSE) {
-			if (pageShowing==PAGE_CHAT) ChatList.realShowList();
-			else if (pageShowing==PAGE_LIST) {
-				chatThread.setStop();
-				finish();
-			}
+			wantToExit();
 			return true;
 		}
 		if (id==Constants.MENU_CHAT_BLACKLIST) {
@@ -510,21 +506,15 @@ public class ChatActivity extends BaseActivity {
 		}
 		return username;
 	}
-	
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode==KeyEvent.KEYCODE_BACK && event.getAction()==KeyEvent.ACTION_DOWN) {
-			if (pageShowing==PAGE_CHAT) {
-				ChatList.realShowList();
-				return true;
-			}
-			if (pageShowing==PAGE_LIST) {
-				chatThread.setStop();
-				finish();
-				return true;
-			}
+
+	protected void wantToExit() {
+		if (pageShowing==PAGE_CHAT) {
+			ChatList.realShowList();
 		}
-		return super.onKeyDown(keyCode, event);
+		else if (pageShowing==PAGE_LIST) {
+			chatThread.setStop();
+			super.wantToExit();
+		}
 	}
 	
 }

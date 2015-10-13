@@ -275,8 +275,7 @@ public class AddActivity extends BaseActivity {
 			return true;
 		}
 		if (id==Constants.MENU_LOSTFOUND_CLOSE) {
-			setResult(RESULT_CANCELED);
-			finish();
+			wantToExit();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

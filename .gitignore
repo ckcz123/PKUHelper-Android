@@ -57,3 +57,7 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# Android Studio
+.idea
+*.iml

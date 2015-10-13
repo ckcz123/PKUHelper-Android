@@ -734,7 +734,7 @@ public class LostFoundActivity extends BaseActivity {
 			return true;
 		}
 		if (id==Constants.MENU_LOSTFOUND_CLOSE) {
-			finish();
+			wantToExit();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

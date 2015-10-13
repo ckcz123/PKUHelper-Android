@@ -451,13 +451,13 @@ public class HoleActivity extends BaseActivity {
 		
 		ViewSetting.setOnClickListener(headerView, R.id.hole_viewall, new View.OnClickListener() {
 			public void onClick(View v) {
-				if (page==PAGE_ALL) return;
+				if (page == PAGE_ALL) return;
 				else show(PAGE_ALL);
 			}
 		});
 		ViewSetting.setOnClickListener(headerView, R.id.hole_viewmine, new View.OnClickListener() {
 			public void onClick(View v) {
-				if (page==PAGE_MINE) return;
+				if (page == PAGE_MINE) return;
 				else show(PAGE_MINE);
 			}
 		});
@@ -653,8 +653,7 @@ public class HoleActivity extends BaseActivity {
 			return true;
 		}
 		if (id == Constants.MENU_PKUHOLE_CLOSE) {
-			setPlayerStatus(AUDIO_TYPE_STOP);
-			finish();
+			wantToExit();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -895,14 +894,10 @@ public class HoleActivity extends BaseActivity {
 			if (page==PAGE_MINE) show(page);
 		}
 	}
-	
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode==KeyEvent.KEYCODE_BACK && event.getAction()==KeyEvent.ACTION_DOWN) {
-			setPlayerStatus(AUDIO_TYPE_STOP);
-			finish();
-			return true;
-		}
-		return super.onKeyDown(keyCode, event);
+
+	protected void wantToExit() {
+		setPlayerStatus(AUDIO_TYPE_STOP);
+		super.wantToExit();
 	}
 	
 	@Override

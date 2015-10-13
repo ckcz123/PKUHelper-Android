@@ -149,7 +149,10 @@ public class SubActivity extends BaseActivity {
 			new CourseSetting(this).show();
 		else if (type==Constants.SUBACTIVITY_TYPE_INFORMATION)
 			information=new Information(this).init();
-		else finish();
+		else {
+			wantToExit();
+			return;
+		}
 		try {
 			swipeRefreshLayout=(SwipeRefreshLayout)findViewById(R.id.subactivity_swipeRefreshLayout);
 			if (swipeRefreshLayout!=null) {
@@ -229,6 +232,7 @@ public class SubActivity extends BaseActivity {
 					webView.goBack();
 					return true;
 				}
+
 			wantToExit();
 			return true;
 		}
@@ -401,7 +405,7 @@ public class SubActivity extends BaseActivity {
 		return super.onContextItemSelected(item);
 	}
 	
-	private void wantToExit() {
+	protected void wantToExit() {
 		if (type==Constants.SUBACTIVITY_TYPE_NOTIFICATIONS_SETTING
 				&& settingNotification.hasModified) {
 			new AlertDialog.Builder(this).setTitle("是否保存？")
@@ -415,7 +419,7 @@ public class SubActivity extends BaseActivity {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					finish();
+					SubActivity.super.wantToExit();
 				}
 			}).setCancelable(true).show();
 			return;
@@ -431,7 +435,7 @@ public class SubActivity extends BaseActivity {
 			.setNegativeButton("否", new OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					finish();
+					SubActivity.super.wantToExit();
 				}
 			}).setCancelable(true).show();
 			return;
@@ -442,8 +446,7 @@ public class SubActivity extends BaseActivity {
 		}
 		if (gifView!=null) gifView.stop();
 		System.gc();
-		finish();
-		return;
+		super.wantToExit();
 	}
 	
 }
