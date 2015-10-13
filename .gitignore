@@ -59,8 +59,5 @@ Temporary Items
 .apdisk
 
 # Android Studio
-.idea/libraries
-.idea/tasks.xml
-.idea/vcs.xml
-.idea/workspace.xml
+.idea
 *.iml
