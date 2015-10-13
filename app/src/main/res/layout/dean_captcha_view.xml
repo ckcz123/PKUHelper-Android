@@ -1,0 +1,63 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+<LinearLayout
+    android:id="@+id/dean_captcha_line"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true" >
+
+    <EditText
+        android:id="@+id/dean_captcha_input"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:inputType="text"
+        android:maxLength="4"
+        android:singleLine="true" >
+
+    </EditText>
+
+    <ImageView
+        android:id="@+id/dean_captcha_image"
+        android:layout_width="56sp"
+        android:layout_height="27sp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp"
+        android:contentDescription="@string/captcha"
+         />
+
+</LinearLayout>
+
+<LinearLayout android:layout_centerHorizontal="true"
+	        style="?android:attr/buttonBarStyle"
+	        android:layout_below="@+id/dean_captcha_line"
+	        android:layout_width="wrap_content" android:layout_height="wrap_content"
+	        android:paddingTop="5dp"
+	        >
+        	<Button 
+	            android:id="@+id/dean_captcha_connect" 
+	            android:text="@string/confirm"
+	            style="?android:attr/buttonBarButtonStyle"
+	            android:layout_width="wrap_content" android:layout_height="wrap_content"
+	            android:textSize="12sp"
+	        />
+	        <Button 
+	            android:id="@+id/dean_captcha_refresh" 
+	            android:text="@string/refresh"
+	            android:textSize="12sp"
+	            style="?android:attr/buttonBarButtonStyle"
+	            android:layout_width="wrap_content" android:layout_height="wrap_content"
+	        />
+	        <Button 
+	            android:id="@+id/dean_captcha_cancel"
+	            android:text="@string/cancel"
+	            android:textSize="12sp"
+	            style="?android:attr/buttonBarButtonStyle"
+	            android:layout_width="wrap_content" android:layout_height="wrap_content"
+	        />
+        </LinearLayout>
+
+</RelativeLayout>

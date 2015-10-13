@@ -1,0 +1,42 @@
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        
+    <!--     
+        <include 
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.333"
+            layout="@layout/mypku_item"
+            android:id="@+id/mypku_item0"
+            />
+        
+        <include 
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.333"
+            layout="@layout/mypku_item"
+            android:id="@+id/mypku_item1"
+            />
+        
+        <include 
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.333"
+            layout="@layout/mypku_item"
+            android:id="@+id/mypku_item2"
+            />
+        
+        <include 
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.333"
+            layout="@layout/mypku_item"
+            android:id="@+id/mypku_item3"
+            />
+        
+        -->
+        
+    </LinearLayout>
