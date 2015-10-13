@@ -84,19 +84,14 @@ public class PKUHoleActivity extends BaseActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode==KeyEvent.KEYCODE_BACK && event.getAction()==KeyEvent.ACTION_DOWN) {
-			if (isShowing==PAGE_LIST)
-				finish();
-			else if (isShowing==PAGE_DETAIL) {
-				ShowLists.showPage(false);
-				listView.setSelection(lastVisiableItem);
-			}
-			return true;
+
+	protected void wantToExit() {
+		if (isShowing==PAGE_DETAIL) {
+			ShowLists.showPage(false);
+			listView.setSelection(lastVisiableItem);
+			return;
 		}
-		return super.onKeyDown(keyCode, event);
+		super.wantToExit();
 	}
 	
 }

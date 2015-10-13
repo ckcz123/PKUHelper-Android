@@ -245,7 +245,7 @@ public class DeanCourseActivity extends BaseActivity {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				if (finished) {
-					finish();
+					DeanCourseActivity.super.wantToExit();
 				}
 			}
 		}).show();
@@ -279,7 +279,7 @@ public class DeanCourseActivity extends BaseActivity {
 		return document;
 	}
 
-	private void wantToExit() {
+	protected void wantToExit() {
 		if (hasModified) {
 			new AlertDialog.Builder(this).setTitle("是否保存？")
 			.setMessage("你经过了修改，是否保存？").setCancelable(true)
@@ -293,13 +293,12 @@ public class DeanCourseActivity extends BaseActivity {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					// TODO Auto-generated method stub
-					finish();
+					DeanCourseActivity.super.wantToExit();
 				}
 			}).show();
 		}
 		else {
-			finish();
+			super.wantToExit();
 		}
 	}
 	
@@ -326,16 +325,6 @@ public class DeanCourseActivity extends BaseActivity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
-	}
-	
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode==KeyEvent.KEYCODE_BACK && event.getAction()==KeyEvent.ACTION_DOWN) {
-			wantToExit();
-			return true;
-		}
-		return super.onKeyDown(keyCode, event);
-				
 	}
 
 }

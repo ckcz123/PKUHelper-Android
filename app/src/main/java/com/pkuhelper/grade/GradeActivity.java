@@ -43,7 +43,7 @@ public class GradeActivity extends BaseActivity {
 		}
 		if (phpsessid==null || "".equals(phpsessid)) {
 			CustomToast.showInfoToast(this, "请重新输入验证码查看成绩。");
-			finish();
+			wantToExit();
 		}
 		getGrades();
 	}

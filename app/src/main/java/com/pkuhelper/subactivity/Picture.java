@@ -48,7 +48,7 @@ public class Picture {
 		}
 		else {
 			CustomToast.showErrorToast(subActivity, "图片加载失败");
-			subActivity.finish();
+			subActivity.wantToExit();
 			return this;
 		}
 	}

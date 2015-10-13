@@ -76,6 +76,7 @@ public class IPGW extends Fragment{
 					}
 				}
 			}
+
 			PKUHelper.pkuhelper.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(bgFile)));
 		}
 		
@@ -184,6 +185,7 @@ public class IPGW extends Fragment{
 					return;
 				}
 				String name=prediction.name;
+
 				if ("connect".equals(name)) {
 					doConnection(Constants.REQUEST_ITS_CONNECT, "正在连接免费地址...");
 					return;

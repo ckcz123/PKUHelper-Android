@@ -109,15 +109,15 @@ public class ExamActivity extends BaseActivity {
 		setContentView(R.layout.exam_listview);
 		listView=(ListView)findViewById(R.id.exam_listview);
 		listView.setAdapter(new BaseAdapter() {
-			
+
 			@SuppressLint("ViewHolder")
 			@Override
 			public View getView(int position, View convertView, ViewGroup parent) {
-				ExamInfo examInfo=examInfos.get(position);
-				convertView=getLayoutInflater().inflate(R.layout.exam_listitem, parent, false);
+				ExamInfo examInfo = examInfos.get(position);
+				convertView = getLayoutInflater().inflate(R.layout.exam_listitem, parent, false);
 				ViewSetting.setTextView(convertView, R.id.exam_list_name, examInfo.name);
 				ViewSetting.setTextView(convertView, R.id.exam_list_location, examInfo.location);
-				ViewSetting.setTextView(convertView, R.id.exam_list_time, examInfo.date+" "+examInfo.time);
+				ViewSetting.setTextView(convertView, R.id.exam_list_time, examInfo.date + " " + examInfo.time);
 				ViewSetting.setTextView(convertView, R.id.exam_list_days_left, examInfo.daysLeft);
 				if (!examInfo.finished)
 					convertView.setBackgroundColor(Color.parseColor("#FFEC8B"));
@@ -127,19 +127,19 @@ public class ExamActivity extends BaseActivity {
 				}
 				return convertView;
 			}
-			
+
 			@Override
 			public long getItemId(int position) {
 				// TODO Auto-generated method stub
 				return 0;
 			}
-			
+
 			@Override
 			public Object getItem(int position) {
 				// TODO Auto-generated method stub
 				return null;
 			}
-			
+
 			@Override
 			public int getCount() {
 				// TODO Auto-generated method stub
@@ -150,33 +150,32 @@ public class ExamActivity extends BaseActivity {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
-					final int position, long id) {
-				String[] strings={"修改","删除"};
+									final int position, long id) {
+				String[] strings = {"修改", "删除"};
 				new AlertDialog.Builder(ExamActivity.this).setTitle("编辑考试")
-				.setItems(strings, new DialogInterface.OnClickListener() {
-					
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						if (which==0) modifyExam(position);
-						else if (which==1) {
-							if (!examInfos.get(position).finished) {
-								new AlertDialog.Builder(examActivity).setTitle("确认删除？")
-								.setMessage("确认删除此考试条目？")
-								.setPositiveButton("是", new DialogInterface.OnClickListener() {
-									@Override
-									public void onClick(DialogInterface dialog, int which) {
+						.setItems(strings, new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								if (which == 0) modifyExam(position);
+								else if (which == 1) {
+									if (!examInfos.get(position).finished) {
+										new AlertDialog.Builder(examActivity).setTitle("确认删除？")
+												.setMessage("确认删除此考试条目？")
+												.setPositiveButton("是", new DialogInterface.OnClickListener() {
+													@Override
+													public void onClick(DialogInterface dialog, int which) {
+														examInfos.remove(position);
+														makeChange();
+													}
+												}).setNegativeButton("否", null).show();
+									} else {
 										examInfos.remove(position);
 										makeChange();
 									}
-								}).setNegativeButton("否", null).show();
+								}
 							}
-							else {
-								examInfos.remove(position);
-								makeChange();
-							}
-						}
-					}
-				}).show();
+						}).show();
 			}
 		});
 	}
@@ -221,9 +220,9 @@ public class ExamActivity extends BaseActivity {
 		}catch (Exception e) {}
 	}
 	
-	void wantToExit() {
+	protected void wantToExit() {
 		if (!hasModified) 
-			finish();
+			super.wantToExit();
 		else {
 			new AlertDialog.Builder(this).setTitle("是否保存？")
 			.setMessage("你进行了修改，是否保存？")
@@ -236,8 +235,7 @@ public class ExamActivity extends BaseActivity {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					// TODO Auto-generated method stub
-					finish();
+					ExamActivity.super.wantToExit();
 				}
 			}).show();
 		}
@@ -266,7 +264,7 @@ public class ExamActivity extends BaseActivity {
 			
 		}
 		catch (Exception e) {CustomToast.showErrorToast(this, "保存失败");}
-		if (needToFinish) finish();
+		if (needToFinish) super.wantToExit();
 		else init();
 	}
 	
@@ -373,20 +371,11 @@ public class ExamActivity extends BaseActivity {
 	
 	
 	void realSave(int id, String name, String location, String date, String time) {
-		ExamInfo examInfo=new ExamInfo(name, location, date, time);
-		if (id!=-1) examInfos.set(id, examInfo);
+		ExamInfo examInfo = new ExamInfo(name, location, date, time);
+		if (id != -1) examInfos.set(id, examInfo);
 		else examInfos.add(examInfo);
 		makeChange();
 	}
-	
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode==KeyEvent.KEYCODE_BACK && event.getAction()==KeyEvent.ACTION_DOWN) {
-			wantToExit();
-		}
-		return super.onKeyDown(keyCode, event);
-	}
-	
 	
 	class ExamInfo {
 		String name;

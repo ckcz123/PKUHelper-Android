@@ -31,8 +31,7 @@ public class PostActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		if ("".equals(Userinfo.token)) {
 			CustomToast.showInfoToast(this, "请先登录！");
-			setResult(RESULT_CANCELED);
-			finish();
+			super.wantToExit();
 			return;
 		}
 		
@@ -134,7 +133,8 @@ public class PostActivity extends BaseActivity {
 			CustomToast.showErrorToast(this, "标题不能为空！", 1500);
 			return;
 		}
-		text+="\n\n--\n发自 PKU Helper (Android "+Constants.version+")\n";
+		if(!text.contains("发自 PKU Helper"))
+			text+="\n\n--\n发自 PKU Helper (Android "+Constants.version+")\n";
 		CheckBox checkBox=(CheckBox)findViewById(R.id.bbs_postpage_anonymous);
 		String anonymous=checkBox.isChecked()?"1":"0";
 		
@@ -163,7 +163,8 @@ public class PostActivity extends BaseActivity {
 			CustomToast.showErrorToast(this, "标题不能为空！", 1500);
 			return;
 		}
-		text+="\n\n--\n发自 PKU Helper (Android "+Constants.version+")\n\n";
+		if(!text.contains("发自 PKU Helper"))
+			text+="\n\n--\n发自 PKU Helper (Android "+Constants.version+")\n\n";
 		CheckBox checkBox=(CheckBox)findViewById(R.id.bbs_postpage_anonymous);
 		String anonymous=checkBox.isChecked()?"1":"0";
 		
@@ -205,8 +206,7 @@ public class PostActivity extends BaseActivity {
 			if (code!=0) {
 				CustomToast.showErrorToast(this, 
 						jsonObject.optString("msg", "内容拉取失败"), 1300);
-				setResult(RESULT_CANCELED);
-				finish();
+				super.wantToExit();
 				return;
 			}
 			String title=jsonObject.optString("title");
@@ -220,8 +220,7 @@ public class PostActivity extends BaseActivity {
 		}
 		catch (Exception e) {
 			CustomToast.showErrorToast(this, "内容获取失败", 1300);
-			setResult(RESULT_CANCELED);
-			finish();
+			super.wantToExit();
 		}
 	}
 	

@@ -79,7 +79,7 @@ public class HoleComment extends BaseActivity {
 		int pid=getIntent().getIntExtra("pid", -1);
 		holeInfo=HoleInfo.getHoleInfo(pid);
 		if (holeInfo==null) {
-			finish();
+			wantToExit();
 			return;
 		}
 		mediaPlayer=new MediaPlayer();
@@ -458,16 +458,12 @@ public class HoleComment extends BaseActivity {
 			starttime=-1;
 		}
 	}
-	
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode==KeyEvent.KEYCODE_BACK && event.getAction()==KeyEvent.ACTION_DOWN) {
-			setPlayerStatus(AUDIO_TYPE_STOP);
-			finish();
-			return true;
-		}
-		return super.onKeyDown(keyCode, event);
+
+	protected void wantToExit() {
+		setPlayerStatus(AUDIO_TYPE_STOP);
+		super.wantToExit();
 	}
-	
+
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		menu.clear();
@@ -498,8 +494,7 @@ public class HoleComment extends BaseActivity {
 			return true;
 		}
 		if (id==Constants.MENU_PKUHOLE_CLOSE) {
-			setPlayerStatus(AUDIO_TYPE_STOP);
-			finish();
+			wantToExit();
 			return true;
 		}
 		

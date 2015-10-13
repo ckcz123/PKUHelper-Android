@@ -19,6 +19,11 @@ public abstract class BaseActivity extends Activity {
 
     protected abstract void finishRequest(int type, String string);
 
+    protected void wantToExit() {
+        setResult(RESULT_CANCELED);
+        finish();
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         setIconEnable(menu, true);
@@ -28,8 +33,7 @@ public abstract class BaseActivity extends Activity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode==KeyEvent.KEYCODE_BACK && event.getAction()==KeyEvent.ACTION_DOWN) {
-            setResult(RESULT_CANCELED);
-            finish();
+            wantToExit();
             return true;
         }
         return super.onKeyDown(keyCode, event);

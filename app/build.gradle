@@ -19,7 +19,7 @@ android {
 
     signingConfigs {
         debug {
-            storeFile file("E:\\android\\PKUHelper\\debug.keystore")
+            storeFile file("debug.keystore")
         }
     }
 

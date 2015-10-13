@@ -507,20 +507,15 @@ public class HoleSearch extends BaseActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int id = item.getItemId();
 		if (id == Constants.MENU_PKUHOLE_CLOSE) {
-			setPlayerStatus(AUDIO_TYPE_STOP);
-			finish();
+			wantToExit();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode==KeyEvent.KEYCODE_BACK && event.getAction()==KeyEvent.ACTION_DOWN) {
-			setPlayerStatus(AUDIO_TYPE_STOP);
-			finish();
-			return true;
-		}
-		return super.onKeyDown(keyCode, event);
+
+	protected void wantToExit() {
+		setPlayerStatus(AUDIO_TYPE_STOP);
+		super.wantToExit();
 	}
 	
 	@Override

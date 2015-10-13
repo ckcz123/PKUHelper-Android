@@ -141,13 +141,13 @@ public class MYPKUSetting {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				if (exit) subActivity.finish();
+				if (exit) subActivity.wantToExit();
 			}
 		}).setCancelable(true).setOnCancelListener(new DialogInterface.OnCancelListener() {
 			
 			@Override
 			public void onCancel(DialogInterface dialog) {
-				if (exit) subActivity.finish();
+				if (exit) subActivity.wantToExit();
 			}
 		}).show();
 		

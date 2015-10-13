@@ -196,7 +196,7 @@ public class NCActivity extends BaseActivity {
 				return true;
 			}
 			if (nowShowing==PAGE_VIEW) {
-				finish();
+				wantToExit();
 				return true;
 			}
 			if (nowShowing==PAGE_ONE_VIEW) {
