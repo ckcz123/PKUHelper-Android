@@ -5,7 +5,7 @@ com.pkuhelper
 	- webconnection
 		- [Cookies](./pkuhelper/lib/webconnection/Cookies.md)
 		- HTTPSClient
-		- Parameters
+		- [Parameters](./pkuhelper/lib/webconnection/Parameters.md)
 		- WebConnection
 	- BaseActivity
 	- ...	
