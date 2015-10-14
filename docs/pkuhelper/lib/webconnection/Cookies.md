@@ -21,3 +21,5 @@ com.pkuhelper.lib.webconnection.Cookies
 将本地暂存的cookies加入Http请求的header标头。
 - **Parameters**
 	- *httpRequestBase* - 将被加入cookies的Http请求。
+	
+[Back to API docs](../../../docs.md)
