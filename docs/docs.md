@@ -3,9 +3,9 @@
 com.pkuhelper
 - lib
 	- webconnection
-		- [Cookies](/pkuhelper/lib/webconnection/Cookies.md)
+		- [Cookies](./pkuhelper/lib/webconnection/Cookies.md)
 		- HTTPSClient
-		- [Parameters](/pkuhelper/lib/webconnection/Parameters.md)
+		- [Parameters](./pkuhelper/lib/webconnection/Parameters.md)
 		- WebConnection
 	- BaseActivity
 	- ...	
