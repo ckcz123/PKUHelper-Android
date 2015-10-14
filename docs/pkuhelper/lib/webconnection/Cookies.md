@@ -4,6 +4,7 @@ com.pkuhelper.lib.webconnection.Cookies
 
 ### Class Overview
 一个用来设置和添加cookies的工具类。
+
 含有一个私有静态成员变量**cookies**，以Key-Value形式存储域名和cookies内容。
 
 ### Public Methods
