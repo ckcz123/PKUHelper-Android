@@ -23,4 +23,4 @@ com.pkuhelper.lib.webconnection.Parameters
 	- *name* - Ãû³Æ¡£
 	- *value* - Öµ¡£
 	
-[Back to API docs](../../../docs/docs.md)
+[Back to API docs](../../../docs.md)
