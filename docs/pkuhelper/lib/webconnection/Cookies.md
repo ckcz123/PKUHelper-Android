@@ -4,20 +4,20 @@ public class
 com.pkuhelper.lib.webconnection.Cookies
 
 ### Class Overview
-Ò»¸öÓÃÀ´ÉèÖÃºÍÌí¼ÓcookiesµÄ¹¤¾ßÀà¡£
-º¬ÓĞÒ»¸öË½ÓĞ¾²Ì¬³ÉÔ±±äÁ¿**cookies**£¬ÒÔKey-ValueĞÎÊ½´æ´¢ÓòÃûºÍcookiesÄÚÈİ¡£
+ä¸€ä¸ªç”¨æ¥è®¾ç½®å’Œæ·»åŠ cookiesçš„å·¥å…·ç±»ã€‚
+å«æœ‰ä¸€ä¸ªç§æœ‰é™æ€æˆå‘˜å˜é‡**cookies**ï¼Œä»¥Key-Valueå½¢å¼å­˜å‚¨åŸŸåå’Œcookieså†…å®¹ã€‚
 
 ### Public Methods
 > public static void **setCookie**(HttpResponse response, String url)
 
-½«responseÖĞ¡°Set-Cookie¡±Ó¦´ğÍ·ÄÚÈİÒÔKey-ValueĞÎÊ½¸ñÊ½»¯¡£»ñÈ¡urlËùÔÚµÄÓòÃû£¬²¢½«ÓòÃûÓëcookiesÒÔKey-ValueĞÎÊ½Ôİ´æÔÚ±¾µØÄÚ´æ¡£
+å°†responseä¸­â€œSet-Cookieâ€åº”ç­”å¤´å†…å®¹ä»¥Key-Valueå½¢å¼æ ¼å¼åŒ–ã€‚è·å–urlæ‰€åœ¨çš„åŸŸåï¼Œå¹¶å°†åŸŸåä¸cookiesä»¥Key-Valueå½¢å¼æš‚å­˜åœ¨æœ¬åœ°å†…å­˜ã€‚
 - **Parameters**
-	- *response* - cookiesµÄÔ´¡£
-	- *url* - cookies½«±»Ôİ´æÔÚ*url*ËùÔÚµÄÓòÃûµÄKeyÏÂ¡£
+	- *response* - cookiesçš„æºã€‚
+	- *url* - cookieså°†è¢«æš‚å­˜åœ¨*url*æ‰€åœ¨çš„åŸŸåçš„Keyä¸‹ã€‚
 
 ***
 > public static void **addCookie**(HttpRequestBase httpRequestBase)
 
-½«±¾µØÔİ´æµÄcookies¼ÓÈëHttpÇëÇóµÄheader±êÍ·¡£
+å°†æœ¬åœ°æš‚å­˜çš„cookiesåŠ å…¥Httpè¯·æ±‚çš„headeræ ‡å¤´ã€‚
 - **Parameters**
-	- *httpRequestBase* - ½«±»¼ÓÈëcookiesµÄHttpÇëÇó¡£
+	- *httpRequestBase* - å°†è¢«åŠ å…¥cookiesçš„Httpè¯·æ±‚ã€‚
