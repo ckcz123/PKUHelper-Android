@@ -12,4 +12,5 @@ PKU Helper-Android
   3. 对现有的版本改进建议(To-Do List)请看这里 https://github.com/ckcz123/PKUHelper-Android/issues/2
   4. 欢迎读懂现有代码并提出自己的改进建议，为PKU Helper for Android做出自己的贡献！
   5. 如果有任何问题，请直接提出，我们很欢迎并乐于进行解答
+  6. 进入[文档页面](./docs/docs.md)，查看或继续添加文档。
   
