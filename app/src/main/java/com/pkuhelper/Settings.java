@@ -176,7 +176,6 @@ public class Settings extends Fragment{
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				Intent intent=new Intent(PKUHelper.pkuhelper, SubActivity.class);
 				intent.putExtra("type", Constants.SUBACTIVITY_TYPE_ABOUT);
 				PKUHelper.pkuhelper.startActivity(intent);
@@ -209,8 +208,8 @@ public class Settings extends Fragment{
 		ViewSetting.setOnClickListener(settingView, R.id.settings_recommended, new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Share.urlToWx(Constants.domain+"/applications/detail.php?id=2", 
-						"快来使用PKU Helper吧~", "（需要在浏览器中打开）\n网关，课表，BBS等等应有尽有~\n快来下载使用吧~", 
+				Share.urlToWx(PKUHelper.pkuhelper, Constants.domain+"/applications/detail.php?id=2",
+						"快来使用PKU Helper吧~", "（请在浏览器中打开）\n网关，课表，BBS等等应有尽有~\n快来下载使用吧~",
 						null, false);
 			}
 		});

@@ -124,10 +124,9 @@ public class MyFile {
 			int len;
 			while ((len=inputStream.read(bts))!=-1)
 				fileOutputStream.write(bts, 0, len);
-			file.delete();
-			tmpFile.renameTo(file);
 			fileOutputStream.close();
-			return true;
+			file.delete();
+			return tmpFile.renameTo(file);
 		}
 		catch (Exception e) {
 			tmpFile.delete();
