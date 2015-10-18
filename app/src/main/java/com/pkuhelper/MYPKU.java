@@ -21,7 +21,9 @@ import com.pkuhelper.pkuhole.old.PKUHoleActivity;
 import com.pkuhelper.subactivity.SubActivity;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
@@ -203,6 +205,13 @@ public class MYPKU extends Fragment {
 						click(name);
 					}
 				});
+				itemView.setOnLongClickListener(new View.OnLongClickListener() {
+					@Override
+					public boolean onLongClick(View v) {
+						longClick();
+						return true;
+					}
+				});
 				if (!"".equals(name))
 					itemView.setTag("mypkuitem_"+name);
 				lineView.addView(itemView);
@@ -212,7 +221,7 @@ public class MYPKU extends Fragment {
 		}
 	}
 	
-	public static void click(String string) {
+	private static void click(String string) {
 		if ("tzzx".equals(string))
 			PKUHelper.pkuhelper.startActivity(
 				new Intent(PKUHelper.pkuhelper, NCActivity.class));
@@ -294,7 +303,7 @@ public class MYPKU extends Fragment {
 		}
 	}
 	
-	public static void click(ArrayList<Features> arrayList, int offset) {
+	private static void click(ArrayList<Features> arrayList, int offset) {
 		if (offset>=arrayList.size()) return;
 		String url=arrayList.get(offset).url;
 		Intent intent=new Intent(PKUHelper.pkuhelper, SubActivity.class);
@@ -304,6 +313,18 @@ public class MYPKU extends Fragment {
 		intent.putExtra("post", "user_token="+Constants.user_token);
 		PKUHelper.pkuhelper.startActivity(intent);
 		return;
+	}
+
+	private static void longClick() {
+		String[] strings=new String[] {"编辑项目"};
+		new AlertDialog.Builder(PKUHelper.pkuhelper).setItems(strings, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				Intent intent=new Intent(PKUHelper.pkuhelper, SubActivity.class);
+				intent.putExtra("type", Constants.SUBACTIVITY_TYPE_MYPKU_SET);
+				PKUHelper.pkuhelper.startActivity(intent);
+			}
+		}).show();
 	}
 	
 }

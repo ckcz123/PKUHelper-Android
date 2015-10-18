@@ -349,7 +349,27 @@ public class PKUHelper extends BaseActivity {
 		if (type==Constants.REQUEST_FOUND_USERNAME)
 			Settings.finishFound(string);
 	}
-	
+	/*
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+		super.onCreateContextMenu(menu, v, menuInfo);
+		if (mViewPager.getCurrentItem()==2) {
+			menu.add(Menu.NONE, Constants.CONTEXT_MENU_MYPKU_SET, Constants.CONTEXT_MENU_MYPKU_SET,
+					"编辑项目");
+		}
+	}
+
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+		if (item.getItemId()==Constants.CONTEXT_MENU_MYPKU_SET) {
+			Intent intent=new Intent(this, SubActivity.class);
+			intent.putExtra("type", Constants.SUBACTIVITY_TYPE_MYPKU_SET);
+			startActivity(intent);
+			return true;
+		}
+		return super.onContextItemSelected(item);
+	}
+	*/
 	@Override
 	protected void onResume() {  
         super.onResume();  

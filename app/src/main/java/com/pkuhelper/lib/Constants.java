@@ -151,24 +151,25 @@ public class Constants {
 	public static final int MENU_BBS_VIEW_EXIT = 10910;
 	public static final int MENU_BBS_MESSAGE_POST = 10911;
 	public static final int MENU_MEDIA_CHOOSE=11000;
-	
-	public static final int CONTEXT_MENU_CHAT_COPY = 15000;
-	public static final int CONTEXT_MENU_CHAT_BLACKLIST = 15001;
-	public static final int CONTEXT_MENU_CHAT_DELETE = 15002;
-	public static final int CONTEXT_MENU_CHAT_GET_URL = 15003;
-	// do not use 15004-15099 !!!
-	public static final int CONTEXT_MENU_BBS_FAVORITE = 15100;
-	public static final int CONTEXT_MENU_BBS_ATTACHES = 15101;
-	public static final int CONTEXT_MENU_BBS_IMAGES = 15102;
-	public static final int CONTEXT_MENU_BBS_POST = 15103;
-	public static final int CONTEXT_MENU_BBS_MESSAGE = 15104;
-	public static final int CONTEXT_MENU_BBS_REPRINT = 15105;
-	public static final int CONTEXT_MENU_BBS_EDIT = 15106;
-	public static final int CONTEXT_MENU_BBS_URL = 15107;
-	// do not use 15108-15199 !!!
-	public static final int CONTEXT_MENU_SUBACTIVITY_SHARE_PICTURE = 15200;
-	public static final int CONTEXT_MENU_SUBACTIVITY_SAVE_PICTURE = 15201;
-	public static final int CONTEXT_MENU_SUBACTIVITY_DECODE_PICTURE = 15202;
+
+	public static final int CONTEXT_MENU_MYPKU_SET = 15000;
+	public static final int CONTEXT_MENU_CHAT_COPY = 15100;
+	public static final int CONTEXT_MENU_CHAT_BLACKLIST = 15101;
+	public static final int CONTEXT_MENU_CHAT_DELETE = 15102;
+	public static final int CONTEXT_MENU_CHAT_GET_URL = 15103;
+	// do not use 15104-15199 !!!
+	public static final int CONTEXT_MENU_BBS_FAVORITE = 15200;
+	public static final int CONTEXT_MENU_BBS_ATTACHES = 15201;
+	public static final int CONTEXT_MENU_BBS_IMAGES = 15202;
+	public static final int CONTEXT_MENU_BBS_POST = 15203;
+	public static final int CONTEXT_MENU_BBS_MESSAGE = 15204;
+	public static final int CONTEXT_MENU_BBS_REPRINT = 15205;
+	public static final int CONTEXT_MENU_BBS_EDIT = 15206;
+	public static final int CONTEXT_MENU_BBS_URL = 15207;
+	// do not use 15208-15299 !!!
+	public static final int CONTEXT_MENU_SUBACTIVITY_SHARE_PICTURE = 15300;
+	public static final int CONTEXT_MENU_SUBACTIVITY_SAVE_PICTURE = 15301;
+	public static final int CONTEXT_MENU_SUBACTIVITY_DECODE_PICTURE = 15302;
 	
 	public static final int MESSAGE_CHECK_CONNECTED_FINISHED = 20000;
 	public static final int MESSAGE_SLEEP_FINISHED = 20001;
