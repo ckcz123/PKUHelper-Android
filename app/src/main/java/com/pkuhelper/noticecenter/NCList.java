@@ -217,7 +217,8 @@ public class NCList {
 			}
 			
 			ArrayList<Parameters> arrayList=new ArrayList<Parameters>();
-			arrayList.add(new Parameters("uid",Constants.username));
+//			arrayList.add(new Parameters("uid",Constants.username));
+			arrayList.add(new Parameters("token", Constants.token));
 			arrayList.add(new Parameters("source", detail.toString()));
 			new RequestingTask(NCActivity.ncActivity, "正在保存...",
 					Constants.domain+"/pkuhelper/nc/setSource.php", Constants.REQUEST_NOTICECENTER_SAVESOURCE)
