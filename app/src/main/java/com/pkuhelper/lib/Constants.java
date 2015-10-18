@@ -9,8 +9,8 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 
 public class Constants {
-	public static final String version="2.0.2";
-	public static final String update_time="2015-09-24";
+	public static final String version="2.0.3";
+	public static final String update_time="2015-10-18";
 
 	public static final String domain="http://www.xiongdianpku.com";
 	
