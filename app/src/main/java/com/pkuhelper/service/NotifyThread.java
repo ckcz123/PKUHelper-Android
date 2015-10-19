@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 
+import com.pkuhelper.PKUHelper;
 import com.pkuhelper.lib.Constants;
 import com.pkuhelper.lib.Editor;
 import com.pkuhelper.lib.MyCalendar;
@@ -148,7 +149,7 @@ public class NotifyThread extends Thread implements Runnable {
 			String content=name+"将于"+time;
 			if (!"".equals(location)) content+="在"+location;
 			content+="开考。";
-			MyNotification.sendNotification(title, content, content, context, "exam");
+			MyNotification.sendNotification(title, content, content, context, "exam", PKUHelper.class);
 			last_notify_exam_day=t;
 		}
 	}
@@ -278,7 +279,7 @@ public class NotifyThread extends Thread implements Runnable {
 			String title="您明天有"+num+"门课程哦！";
 			String content="明天的第一门课程是第"+firstToHaveClass+"节。";
 			String ticker="您明天有"+num+"门课程，第一门课程是第"+firstToHaveClass+"节。";
-			MyNotification.sendNotification(title, content, ticker, context, "course");
+			MyNotification.sendNotification(title, content, ticker, context, "course", PKUHelper.class);
 			last_notify_course_day=t;
 		}
 		// 存在下一堂课，提醒
@@ -292,7 +293,7 @@ public class NotifyThread extends Thread implements Runnable {
 				ticker+="在"+nextPlace;
 			}
 			ticker+="上课";
-			MyNotification.sendNotification(title, content, ticker, context, "course");
+			MyNotification.sendNotification(title, content, ticker, context, "course", PKUHelper.class);
 			last_notify_course_index=nxtIndex+t*30;
 		}
 		
@@ -316,7 +317,7 @@ public class NotifyThread extends Thread implements Runnable {
 		}
 		if (content.length()>=50)
 			content=content.substring(0, 48)+"...";
-		MyNotification.sendNotification(title, content, title, context, type);
+		MyNotification.sendNotification(title, content, title, context, type, PKUHelper.class);
 	}
 	private void setAlarm() {
 		Intent intent=new Intent(context, AlarmReceiver.class);

@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.Locale;
 import java.util.Random;
 
-import com.pkuhelper.PKUHelper;
 import com.pkuhelper.R;
 
 import android.annotation.SuppressLint;
@@ -19,7 +18,7 @@ import android.net.Uri;
 @SuppressLint("NewApi")
 public class MyNotification {
 	public static void sendNotification(String title,
-			String content, String ticker, Context context, String type) {
+			String content, String ticker, Context context, String type, Class<?> cls) {
 		if (android.os.Build.VERSION.SDK_INT<16) return;
 		Notification.Builder builder=new Notification.Builder(context);
 		builder.setAutoCancel(true);
@@ -27,14 +26,14 @@ public class MyNotification {
 		builder.setContentTitle(title);
 		builder.setContentText(content);
 		builder.setTicker(ticker);
-		Intent resultIntent=new Intent(context, PKUHelper.class);
+		Intent resultIntent=new Intent(context, cls);
 		if (type!=null && !"".equals(type)) {
-			resultIntent.setAction("com.pkuhelper.action."+type);
+			resultIntent.setAction(context.getPackageName()+".action."+type);
 			resultIntent.putExtra("type", type);
 		}
 		resultIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 		TaskStackBuilder taskStackBuilder=TaskStackBuilder.create(context);
-		taskStackBuilder.addParentStack(PKUHelper.class);
+		taskStackBuilder.addParentStack(cls);
 		taskStackBuilder.addNextIntent(resultIntent);
 		PendingIntent pendingIntent=taskStackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 		builder.setContentIntent(pendingIntent);
