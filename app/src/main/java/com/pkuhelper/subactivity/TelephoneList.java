@@ -1,7 +1,7 @@
 package com.pkuhelper.subactivity;
 
 public class TelephoneList {
-	public static final String phone= "数学科学学院 62751804 物理学院 62751732 "
+	public static final String phone = "数学科学学院 62751804 物理学院 62751732 "
 			+ "化学与分子工程学院 62751710 生命科学学院 62751840 城市与环境学院 62751172 "
 			+ "地球与空间科学学院 62751150 心理学系 62751831 建筑与景观设计学院 62759003 "
 			+ "信息科学技术学院 62751760 工学院 62751812 计算机科学技术研究所 82529922 "

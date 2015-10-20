@@ -1,77 +1,88 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal"
-		android:paddingTop="5dp"
-         >
-        
-        <ImageView
-			android:layout_marginTop="5dp"
-			android:layout_marginBottom="5dp"
-            android:layout_width="38dp"
-            android:layout_height="38dp"
-			android:layout_gravity="center_vertical"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_launcher" />
+              android:layout_width="match_parent"
+              android:layout_height="fill_parent"
+              android:gravity="center_horizontal"
+              android:orientation="horizontal"
+              android:paddingTop="5dp"
+    >
 
-		<RelativeLayout
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_gravity="center_vertical"
-			android:layout_marginLeft="10dp"
-			android:layout_marginStart="10dp"
-			>
+    <ImageView
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:layout_gravity="center_vertical"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/ic_launcher"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        >
 
         <LinearLayout
             style="?android:attr/buttonBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-			android:layout_marginTop="-8dp"
-			android:id="@+id/its_noti_buttonbar"
+            android:layout_marginTop="-8dp"
+            android:id="@+id/its_noti_buttonbar"
             >
 
-        	<Button 
-	            android:id="@+id/widget_connect" android:text="@string/ipgw_free"
-	            style="?android:attr/buttonBarButtonStyle"
-	            android:layout_width="wrap_content" android:layout_height="wrap_content"
-	            android:textSize="12sp"
-	            android:background="@android:color/transparent"
-	        />
-	        <Button 
-	            android:id="@+id/widget_connect_nofree" android:text="@string/ipgw_nofree"
-	            android:textSize="12sp"
-	            style="?android:attr/buttonBarButtonStyle"
-	            android:layout_width="wrap_content" android:layout_height="wrap_content"
-	            android:background="@android:color/transparent"
-	        />
-	        <Button 
-	            android:id="@+id/widget_disconnect" android:text="@string/ipgw_disconnect"
-	            android:textSize="12sp"
-	            style="?android:attr/buttonBarButtonStyle"
-	            android:layout_width="wrap_content" android:layout_height="wrap_content"
-	            android:background="@android:color/transparent"
-	        />
-	        <Button 
-	            android:id="@+id/widget_disconnectall" android:text="@string/ipgw_disconnect_all"
-	            android:textSize="12sp"
-	            style="?android:attr/buttonBarButtonStyle"
-	            android:layout_width="wrap_content" android:layout_height="wrap_content"
-	        />
+            <Button
+                android:id="@+id/widget_connect"
+                android:text="@string/ipgw_free"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:background="@android:color/transparent"
+                />
+
+            <Button
+                android:id="@+id/widget_connect_nofree"
+                android:text="@string/ipgw_nofree"
+                android:textSize="12sp"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                />
+
+            <Button
+                android:id="@+id/widget_disconnect"
+                android:text="@string/ipgw_disconnect"
+                android:textSize="12sp"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                />
+
+            <Button
+                android:id="@+id/widget_disconnectall"
+                android:text="@string/ipgw_disconnect_all"
+                android:textSize="12sp"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
         </LinearLayout>
 
-		<TextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:textSize="12sp"
-			android:textColor="#CCCCCC"
-			android:text="@string/widget_text"
-			android:id="@+id/widget_text"
-			android:layout_marginTop="-8dp"
-			android:layout_below="@id/its_noti_buttonbar"
-			android:layout_centerHorizontal="true"
-			/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="#CCCCCC"
+            android:text="@string/widget_text"
+            android:id="@+id/widget_text"
+            android:layout_marginTop="-8dp"
+            android:layout_below="@id/its_noti_buttonbar"
+            android:layout_centerHorizontal="true"
+            />
 
-		</RelativeLayout>
+    </RelativeLayout>
 
-    </LinearLayout>
+</LinearLayout>

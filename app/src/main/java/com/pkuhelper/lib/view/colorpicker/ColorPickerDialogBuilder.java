@@ -1,7 +1,5 @@
 package com.pkuhelper.lib.view.colorpicker;
 
-import java.util.Locale;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -17,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.pkuhelper.R;
+
+import java.util.Locale;
 
 public class ColorPickerDialogBuilder {
 	private AlertDialog.Builder builder;
@@ -50,7 +50,7 @@ public class ColorPickerDialogBuilder {
 	public static ColorPickerDialogBuilder with(Context context) {
 		return new ColorPickerDialogBuilder(context);
 	}
-	
+
 	public static ColorPickerDialogBuilder with(Context context, int dialogTheme) {
 		return new ColorPickerDialogBuilder(new ContextThemeWrapper(context, dialogTheme));
 	}

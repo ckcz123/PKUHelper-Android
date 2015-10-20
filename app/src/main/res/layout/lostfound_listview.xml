@@ -1,7 +1,8 @@
-<ListView android:layout_width="fill_parent" 
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_height="fill_parent"
-         android:divider="#222222"
-         android:id="@+id/lostfound_listview">
+<ListView
+    android:layout_width="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="fill_parent"
+    android:divider="#222222"
+    android:id="@+id/lostfound_listview">
 
 </ListView>

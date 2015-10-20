@@ -10,7 +10,10 @@ import com.pkuhelper.widget.IPGWNotification;
 public class IPGWSetting {
 	SubActivity subActivity;
 
-	public IPGWSetting(SubActivity _subactivity) {subActivity=_subactivity;}
+	public IPGWSetting(SubActivity _subactivity) {
+		subActivity = _subactivity;
+	}
+
 	public void show() {
 		subActivity.setContentView(R.layout.settings_ipgw);
 		subActivity.getActionBar().setTitle("网关控制");
@@ -24,7 +27,7 @@ public class IPGWSetting {
 			}
 		});
 
-		if (android.os.Build.VERSION.SDK_INT<16) {
+		if (android.os.Build.VERSION.SDK_INT < 16) {
 			subActivity.findViewById(R.id.settings_its_noti).setEnabled(false);
 			subActivity.findViewById(R.id.settings_its_noti_switch).setEnabled(false);
 			subActivity.findViewById(R.id.settings_its_noti_icon).setEnabled(false);

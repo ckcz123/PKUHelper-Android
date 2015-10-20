@@ -5,20 +5,21 @@
     android:layout_height="match_parent"
     android:id="@+id/subactivity_swipeRefreshLayout"
     >
-    <WebView 
-    android:id="@+id/subactivity_webview"
-	android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_gravity="center"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".PKUHelper" >
-    
-</WebView>
-    
-    
+
+    <WebView
+        android:id="@+id/subactivity_webview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        tools:context=".PKUHelper">
+
+    </WebView>
+
+
 </android.support.v4.widget.SwipeRefreshLayout>
 

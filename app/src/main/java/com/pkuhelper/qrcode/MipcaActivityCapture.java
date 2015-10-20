@@ -1,8 +1,5 @@
 package com.pkuhelper.qrcode;
 
-import java.io.IOException;
-import java.util.Vector;
-
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
@@ -24,10 +21,14 @@ import com.google.zxing.Result;
 import com.pkuhelper.R;
 import com.pkuhelper.lib.BaseActivity;
 import com.pkuhelper.lib.Constants;
-import com.pkuhelper.lib.Util;
 import com.pkuhelper.lib.ViewSetting;
+
+import java.io.IOException;
+import java.util.Vector;
+
 /**
  * Initial the camera
+ *
  * @author Ryan.Tang
  */
 public class MipcaActivityCapture extends BaseActivity implements Callback {
@@ -43,7 +44,9 @@ public class MipcaActivityCapture extends BaseActivity implements Callback {
 	private static final float BEEP_VOLUME = 0.10f;
 	private boolean vibrate;
 
-	/** Called when the activity is first created. */
+	/**
+	 * Called when the activity is first created.
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -77,7 +80,7 @@ public class MipcaActivityCapture extends BaseActivity implements Callback {
 		}
 		initBeepSound();
 		vibrate = true;
-		
+
 	}
 
 	@Override
@@ -96,10 +99,12 @@ public class MipcaActivityCapture extends BaseActivity implements Callback {
 		super.onDestroy();
 	}
 
-	protected void finishRequest(int type, String string) {}
-	
+	protected void finishRequest(int type, String string) {
+	}
+
 	/**
 	 * 处理扫描结果
+	 *
 	 * @param result
 	 * @param barcode
 	 */
@@ -109,7 +114,7 @@ public class MipcaActivityCapture extends BaseActivity implements Callback {
 		String resultString = result.getText();
 		if (resultString.equals("")) {
 			Toast.makeText(MipcaActivityCapture.this, "Scan failed!", Toast.LENGTH_SHORT).show();
-		}else {
+		} else {
 			Intent resultIntent = new Intent();
 			Bundle bundle = new Bundle();
 			bundle.putString("result", resultString);
@@ -119,7 +124,7 @@ public class MipcaActivityCapture extends BaseActivity implements Callback {
 		}
 		MipcaActivityCapture.this.finish();
 	}
-	
+
 	private void initCamera(SurfaceHolder surfaceHolder) {
 		try {
 			CameraManager.get().openDriver(surfaceHolder);
@@ -136,7 +141,7 @@ public class MipcaActivityCapture extends BaseActivity implements Callback {
 
 	@Override
 	public void surfaceChanged(SurfaceHolder holder, int format, int width,
-			int height) {
+							   int height) {
 
 	}
 
@@ -213,17 +218,17 @@ public class MipcaActivityCapture extends BaseActivity implements Callback {
 			mediaPlayer.seekTo(0);
 		}
 	};
-	
+
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		menu.add(Menu.NONE, Constants.MENU_SUBACTIVITY_CLOSE, Constants.MENU_SUBACTIVITY_CLOSE, "")
-		.setIcon(R.drawable.close).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);		
+				.setIcon(R.drawable.close).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		return true;
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		if (item.getItemId()==Constants.MENU_SUBACTIVITY_CLOSE) {
+		if (item.getItemId() == Constants.MENU_SUBACTIVITY_CLOSE) {
 			finish();
 			return true;
 		}
