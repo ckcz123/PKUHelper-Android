@@ -11,10 +11,15 @@ import java.lang.reflect.Method;
 
 public abstract class BaseActivity extends Activity {
 
+    private SystemBarTintManager tintManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getOverflowMenu();
+        tintManager=new SystemBarTintManager(this);
+        tintManager.setStatusBarTintEnabled(true);
+        tintManager.setNavigationBarTintEnabled(true);
     }
 
     protected abstract void finishRequest(int type, String string);
@@ -22,6 +27,11 @@ public abstract class BaseActivity extends Activity {
     protected void wantToExit() {
         setResult(RESULT_CANCELED);
         finish();
+    }
+
+    protected void setStatusBarColor(int color) {
+        tintManager.setStatusBarTintColor(color);
+        tintManager.setNavigationBarTintColor(color);
     }
 
     @Override

@@ -14,6 +14,7 @@ import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 
 @SuppressLint("NewApi")
 public class MyNotification {
@@ -22,7 +23,7 @@ public class MyNotification {
 		if (android.os.Build.VERSION.SDK_INT<16) return;
 		Notification.Builder builder=new Notification.Builder(context);
 		builder.setAutoCancel(true);
-		builder.setSmallIcon(R.drawable.ic_launcher);
+		builder.setSmallIcon(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP?R.drawable.p_white:R.drawable.ic_launcher);
 		builder.setContentTitle(title);
 		builder.setContentText(content);
 		builder.setTicker(ticker);
@@ -47,7 +48,7 @@ public class MyNotification {
 		if (file==null || !file.exists()) return;
 		Notification.Builder builder=new Notification.Builder(context);
 		builder.setAutoCancel(true);
-		builder.setSmallIcon(R.drawable.ic_launcher);
+		builder.setSmallIcon(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP?R.drawable.p_white:R.drawable.ic_launcher);
 		
 		builder.setContentTitle(title);
 		builder.setContentText(content);

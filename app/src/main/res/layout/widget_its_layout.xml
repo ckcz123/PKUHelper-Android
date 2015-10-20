@@ -2,29 +2,34 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#aaE8E8E7"
-        android:gravity="center_vertical"
+        android:gravity="center_horizontal"
         android:orientation="horizontal"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp" >
+        >
         
         <ImageView
             android:layout_width="38dp"
             android:layout_height="38dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:contentDescription="@string/app_name"
+            android:layout_gravity="center_vertical"
             android:src="@drawable/ic_launcher" />
-        
-        <LinearLayout 
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        >
         
         <LinearLayout
             style="?android:attr/buttonBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:layout_gravity="center_horizontal" >
+            android:layout_marginTop="-5dp"
+            android:id="@+id/widget_its_buttonbar"
+            android:layout_centerHorizontal="true" >
 
         	<Button 
 	            android:id="@+id/widget_connect" android:text="@string/ipgw_free"
@@ -58,17 +63,16 @@
 
         <TextView
             android:id="@+id/widget_text"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginStart="15dp"
             android:text="@string/widget_text"
             android:layout_marginTop="-9dp"
             android:textColor="#555555"
-            android:layout_marginBottom="9dp"
-            android:gravity="center_horizontal"
+            android:paddingBottom="9dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/widget_its_buttonbar"
             android:textSize="12sp" />
         
-        </LinearLayout>
+        </RelativeLayout>
         
     </LinearLayout>

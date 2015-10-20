@@ -3,7 +3,7 @@
         android:layout_height="fill_parent"
         android:gravity="center_horizontal"
         android:orientation="horizontal"
-			  android:paddingTop="5dp"
+		android:paddingTop="5dp"
          >
         
         <ImageView

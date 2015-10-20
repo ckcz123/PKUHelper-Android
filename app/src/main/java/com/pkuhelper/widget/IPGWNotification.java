@@ -107,9 +107,9 @@ public class IPGWNotification extends BroadcastReceiver {
 		}
 
 		Notification.Builder builder=new Notification.Builder(context).setAutoCancel(false)
-				.setTicker("PKU Helper ITS网关控制").setSmallIcon(R.drawable.icon)
+				.setTicker("PKU Helper IPGW 网关控制").setSmallIcon(R.drawable.p_white)
 				.setContent(getRemoteViews(context, hint)).setContentIntent(null)
-				.setPriority(Notification.PRIORITY_HIGH);
+				.setPriority(Notification.PRIORITY_MIN);
 
 		Notification notification=builder.build();
 		notification.flags |= Notification.FLAG_NO_CLEAR | Notification.FLAG_ONGOING_EVENT;
@@ -166,7 +166,7 @@ public class IPGWNotification extends BroadcastReceiver {
 			update(context, "你还没有登录！");
 			return;
 		}
-		final ArrayList<Parameters> arrayList=new ArrayList<Parameters>();
+		final ArrayList<Parameters> arrayList=new ArrayList<>();
 		arrayList.add(new Parameters("uid", username));
 		arrayList.add(new Parameters("password", password));
 		arrayList.add(new Parameters("operation", type));
@@ -240,7 +240,7 @@ public class IPGWNotification extends BroadcastReceiver {
 	}
 
 	private static Map<String, String> getReturnMsg(String string) {
-		Map<String, String> map=new HashMap<String, String>();
+		Map<String, String> map=new HashMap<>();
 		int pos1=string.indexOf("SUCCESS=");
 		int pos2=string.indexOf("IPGWCLIENT_END-->");
 
