@@ -106,10 +106,12 @@ public class IPGWNotification extends BroadcastReceiver {
 			return;
 		}
 
+		int priority=Editor.getBoolean(context, "ipgwnotishow", true)?Notification.PRIORITY_HIGH:Notification.PRIORITY_MIN;
+
 		Notification.Builder builder=new Notification.Builder(context).setAutoCancel(false)
 				.setTicker("PKU Helper IPGW 网关控制").setSmallIcon(R.drawable.p_white)
 				.setContent(getRemoteViews(context, hint)).setContentIntent(null)
-				.setPriority(Notification.PRIORITY_MIN);
+				.setPriority(priority);
 
 		Notification notification=builder.build();
 		notification.flags |= Notification.FLAG_NO_CLEAR | Notification.FLAG_ONGOING_EVENT;

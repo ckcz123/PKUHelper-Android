@@ -100,7 +100,7 @@ public class Lib {
 			public void run() {
 				String deviceString= "35" + //we make this look like a valid IMEI 
 						Build.BOARD.length()%10+ Build.BRAND.length()%10 + 
-						Build.CPU_ABI.length()%10 + Build.DEVICE.length()%10 + 
+						Build.DEVICE.length()%10 + Build.DEVICE.length()%10 +
 						Build.DISPLAY.length()%10 + Build.HOST.length()%10 + 
 						Build.ID.length()%10 + Build.MANUFACTURER.length()%10 + 
 						Build.MODEL.length()%10 + Build.PRODUCT.length()%10 + 
@@ -143,6 +143,7 @@ public class Lib {
 		
 		// 更新桌面小部件course2
 		Lib.sendBroadcast(context, WidgetCourse2Provider.class, Constants.ACTION_REFRESH_COURSE);
+		IPGWNotification.update(context);
 
 	}
 	

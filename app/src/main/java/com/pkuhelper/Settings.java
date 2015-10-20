@@ -109,28 +109,13 @@ public class Settings extends Fragment{
 				PKUHelper.pkuhelper.startActivity(intent);
 			}
 		});
+		ViewSetting.setOnClickListener(settingView, R.id.settings_ipgw, new View.OnClickListener() {
 
-		ViewSetting.setSwitchChecked(settingView, R.id.settings_switch_its_noti,
-				android.os.Build.VERSION.SDK_INT>=16 && Editor.getBoolean(PKUHelper.pkuhelper, "ipgwnoti", true));
-		ViewSetting.setSwitchOnCheckChangeListener(settingView, R.id.settings_switch_its_noti, new CompoundButton.OnCheckedChangeListener() {
 			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				if (android.os.Build.VERSION.SDK_INT<16) {
-					new AlertDialog.Builder(PKUHelper.pkuhelper).setTitle("提示")
-							.setMessage("Android 4.1及以上方支持此项。").setPositiveButton("确定",null).show();
-					return;
-				}
-				Editor.putBoolean(PKUHelper.pkuhelper, "ipgwnoti", isChecked);
-				IPGWNotification.update(PKUHelper.pkuhelper);
-			}
-		});
-
-		ViewSetting.setSwitchChecked(settingView, R.id.settings_switch_shake, Editor.getBoolean(PKUHelper.pkuhelper, "use_shake"));
-		ViewSetting.setSwitchOnCheckChangeListener(settingView, R.id.settings_switch_shake, new CompoundButton.OnCheckedChangeListener() {
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				Editor.putBoolean(PKUHelper.pkuhelper, "use_shake", isChecked);
-				CustomToast.showInfoToast(PKUHelper.pkuhelper, "退出并重进后方可生效", 1200);
+			public void onClick(View v) {
+				Intent intent = new Intent(PKUHelper.pkuhelper, SubActivity.class);
+				intent.putExtra("type", Constants.SUBACTIVITY_TYPE_IPGW_SET);
+				PKUHelper.pkuhelper.startActivity(intent);
 			}
 		});
 		ViewSetting.setSwitchChecked(settingView, R.id.settings_switch_pkumail, Editor.getBoolean(PKUHelper.pkuhelper, "pkumail_fill",true));
@@ -282,7 +267,7 @@ public class Settings extends Fragment{
 		dialog.setTitle("为捡到的校园卡寻找失主");
 		Spinner spinner=(Spinner)dialog.findViewById(R.id.settings_found_type);
 		final String[] strings={"校园卡","学生证","其他"};		
-		spinner.setAdapter(new ArrayAdapter<String>(PKUHelper.pkuhelper, android.R.layout.simple_spinner_item, strings));
+		spinner.setAdapter(new ArrayAdapter<>(PKUHelper.pkuhelper, android.R.layout.simple_spinner_item, strings));
 		spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
 			@Override
@@ -323,7 +308,7 @@ public class Settings extends Fragment{
 				
 				String content=to+"同学你好！我拾到了你的"+name+"，请尽快找我认领，谢谢。我的联系方式是"+phone+"。";
 				
-				ArrayList<Parameters> arrayList=new ArrayList<Parameters>();
+				ArrayList<Parameters> arrayList=new ArrayList<>();
 				arrayList.add(new Parameters("to", to));
 				arrayList.add(new Parameters("content", content));
 				arrayList.add(new Parameters("type", "sendmsg"));
@@ -404,7 +389,7 @@ public class Settings extends Fragment{
 					return;
 				}
 				
-				ArrayList<Parameters> arrayList=new ArrayList<Parameters>();
+				ArrayList<Parameters> arrayList=new ArrayList<>();
 				arrayList.add(new Parameters("to", "10"));
 				arrayList.add(new Parameters("content", string));
 				arrayList.add(new Parameters("type", "sendmsg"));

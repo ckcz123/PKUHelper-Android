@@ -249,6 +249,7 @@ public class Constants {
 	public static final int SUBACTIVITY_TYPE_MYPKU_SET = 30060;
 	public static final int SUBACTIVITY_TYPE_COURSE_SET = 30070;
 	public static final int SUBACTIVITY_TYPE_INFORMATION = 30080;
+	public static final int SUBACTIVITY_TYPE_IPGW_SET = 30090;
 	
 	// 课程单周还是双周，或者每周
 	public static final int COURSE_TYPE_NONE = -1;
@@ -285,7 +286,7 @@ public class Constants {
 	public static boolean hasUpdate=false;
 	public static int newMsg=0;
 	public static int newPass=0;
-	public static ArrayList<Features> features=new ArrayList<Features>();	
+	public static ArrayList<Features> features=new ArrayList<>();
 	public static String updateVersion=Constants.version;
 	public static String updateMessage="";
 	

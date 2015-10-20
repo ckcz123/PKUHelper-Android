@@ -147,6 +147,8 @@ public class SubActivity extends BaseActivity {
 			mypkuSetting=new MYPKUSetting(this).set();
 		else if (type==Constants.SUBACTIVITY_TYPE_COURSE_SET)
 			new CourseSetting(this).show();
+		else if (type==Constants.SUBACTIVITY_TYPE_IPGW_SET)
+			new IPGWSetting(this).show();
 		else if (type==Constants.SUBACTIVITY_TYPE_INFORMATION)
 			information=new Information(this).init();
 		else {
