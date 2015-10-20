@@ -183,7 +183,7 @@
         
         <activity android:name="com.renn.rennsdk.oauth.OAuthActivity"
 			android:configChanges="orientation|navigation|keyboardHidden"/>
-        
+
         <receiver android:name="com.pkuhelper.widget.WidgetItsProvider" 
             android:label="@string/widget_its">
     		<intent-filter>
@@ -192,6 +192,9 @@
     		<meta-data android:name="android.appwidget.provider"
                android:resource="@xml/widget_its_provider" />
 		</receiver>
+
+        <receiver android:name="com.pkuhelper.widget.IPGWNotification" android:label="@string/widget_its"
+                  />
 		
 		<receiver android:name="com.pkuhelper.widget.WidgetCourseProvider" 
             android:label="@string/widget_course">

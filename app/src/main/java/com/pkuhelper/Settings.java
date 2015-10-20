@@ -11,6 +11,7 @@ import com.pkuhelper.lib.*;
 import com.pkuhelper.lib.view.CustomToast;
 import com.pkuhelper.lib.webconnection.Parameters;
 import com.pkuhelper.subactivity.SubActivity;
+import com.pkuhelper.widget.IPGWNotification;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -91,21 +92,36 @@ public class Settings extends Fragment{
 			}
 		});
 		ViewSetting.setOnClickListener(settingView, R.id.settings_course, new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				Intent intent=new Intent(PKUHelper.pkuhelper, SubActivity.class);
+				Intent intent = new Intent(PKUHelper.pkuhelper, SubActivity.class);
 				intent.putExtra("type", Constants.SUBACTIVITY_TYPE_COURSE_SET);
 				PKUHelper.pkuhelper.startActivity(intent);
 			}
 		});
 		ViewSetting.setOnClickListener(settingView, R.id.settings_notifications, new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				Intent intent=new Intent(PKUHelper.pkuhelper, SubActivity.class);
+				Intent intent = new Intent(PKUHelper.pkuhelper, SubActivity.class);
 				intent.putExtra("type", Constants.SUBACTIVITY_TYPE_NOTIFICATIONS);
 				PKUHelper.pkuhelper.startActivity(intent);
+			}
+		});
+
+		ViewSetting.setSwitchChecked(settingView, R.id.settings_switch_its_noti,
+				android.os.Build.VERSION.SDK_INT>=16 && Editor.getBoolean(PKUHelper.pkuhelper, "ipgwnoti", true));
+		ViewSetting.setSwitchOnCheckChangeListener(settingView, R.id.settings_switch_its_noti, new CompoundButton.OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				if (android.os.Build.VERSION.SDK_INT<16) {
+					new AlertDialog.Builder(PKUHelper.pkuhelper).setTitle("提示")
+							.setMessage("Android 4.1及以上方支持此项。").setPositiveButton("确定",null).show();
+					return;
+				}
+				Editor.putBoolean(PKUHelper.pkuhelper, "ipgwnoti", isChecked);
+				IPGWNotification.update(PKUHelper.pkuhelper);
 			}
 		});
 

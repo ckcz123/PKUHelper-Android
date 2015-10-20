@@ -202,6 +202,27 @@
               android:paddingRight="10dp"
               android:text="@string/settings_notifications"
               />
+       <View
+           android:layout_height="1dip"  android:layout_width="fill_parent"
+           android:background="#e8e8e7" />
+       <TableRow android:id="@+id/settings_ipgw_noti" android:padding="10dip">
+
+           <TextView android:layout_width="wrap_content"
+                     android:layout_height="wrap_content" android:textSize="15sp"
+                     android:paddingLeft="10dp"
+                     android:paddingRight="10dp"
+                     android:text="@string/settings_its_noti"
+               />
+           <TextView android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"/>
+           <Switch
+               android:id="@+id/settings_switch_its_noti"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               />
+       </TableRow>
+
 		<View
             android:layout_height="1dip"  android:layout_width="fill_parent"
             android:background="#e8e8e7" /> 

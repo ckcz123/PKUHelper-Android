@@ -60,6 +60,7 @@
 	<string name="settings_pkumail">自动登录邮箱</string>
 	<string name="settings_gesture">手势设置</string>
 	<string name="settings_notifications">提醒设置</string>
+	<string name="settings_its_noti">通知栏网关控制</string>
 	<string name="settings_shake">使用按钮连接网关</string>
 	<string name="settings_autoweek">自动获取周数</string>
 	<string name="settings_week">当前周数</string>

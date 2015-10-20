@@ -22,6 +22,7 @@ import com.pkuhelper.lib.view.BadgeView;
 import com.pkuhelper.lib.webconnection.Parameters;
 import com.pkuhelper.lib.webconnection.WebConnection;
 import com.pkuhelper.service.PKUHelperService;
+import com.pkuhelper.widget.IPGWNotification;
 import com.pkuhelper.widget.WidgetCourse2Provider;
 import com.pkuhelper.widget.WidgetCourseProvider;
 import com.pkuhelper.widget.WidgetItsProvider;
@@ -186,7 +187,9 @@ public class Lib {
 		intent.putExtra("inschool", Constants.inSchool);
 		intent.putExtra("nofree", Constants.connectedToNoFree);
 		context.sendBroadcast(intent);
-		
+
+		IPGWNotification.update(context, Constants.connected, Constants.inSchool, Constants.connectedToNoFree);
+
 	}
 	
 	public static void sendBroadcast(Context context, Class<?> cls,
