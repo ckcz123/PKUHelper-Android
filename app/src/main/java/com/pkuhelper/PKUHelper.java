@@ -234,7 +234,7 @@ public class PKUHelper extends BaseActivity {
 			return true;
 		}
 		if (id == Constants.MENU_COURSE_ADD) {
-			String[] strings = {"编辑教务课程", "添加自定义课程", "考试倒计时"};
+			String[] strings = {"编辑教务课程地点", "添加自定义课程", "添加考试倒计时"};
 			new AlertDialog.Builder(this).setTitle("选择项目")
 					.setItems(strings, new DialogInterface.OnClickListener() {
 
@@ -252,22 +252,6 @@ public class PKUHelper extends BaseActivity {
 			return true;
 		}
 		if (id == Constants.MENU_COURSE_SHARE) {
-			//Share.readyToShareImage(this, "分享我的课程", Util.captureWebView(Course.courseView));
-			/*
-			try {
-				File file=MyFile.getCache(this, Util.getHash("course"));
-				byte[] bts=MyBitmapFactory.bitmapToArray(Util.captureWebView(Course.courseView));
-				FileOutputStream fileOutputStream=new FileOutputStream(file);
-				fileOutputStream.write(bts);
-				fileOutputStream.close();
-				Intent intent=new Intent(this, SubActivity.class);
-				intent.putExtra("type", Constants.SUBACTIVITY_TYPE_PICTURE_FILE);
-				intent.putExtra("file", file.getAbsolutePath());
-				startActivity(intent);
-			}
-			catch (Exception e) {CustomToast.showErrorToast(this, "无法打开图片");}
-			return true;
-			*/
 			MyBitmapFactory.showBitmap(this, Util.captureWebView(Course.courseView));
 		}
 		if (id == Constants.MENU_MYPKU_SET) {
@@ -293,9 +277,7 @@ public class PKUHelper extends BaseActivity {
 	void doWhenFirstLaunch() {
 		try {
 			if (Editor.getBoolean(this, "launch_" + Constants.version, true)) {
-				getPreferences(0).edit().clear().commit();
-				MyFile.deleteFile(Environment.getExternalStorageDirectory() + "/pkuhelper/");
-				Editor.remove(this, Constants.username + "_course");
+				
 			}
 			Editor.putBoolean(this, "launch_" + Constants.version, false);
 		} catch (Exception e) {
@@ -327,14 +309,7 @@ public class PKUHelper extends BaseActivity {
 	}
 
 	protected void finishRequest(int type, String string) {
-		/*
-		if (type==Constants.REQUEST_IAAA)
-			IAAA.finishLogin(string);
-		if (type==Constants.REQUEST_IAAA_TOKEN)
-			IAAA.gettingInfo();
-		if (type==Constants.REQUEST_IAAA_INFO)
-			IAAA.finishGettingInfo(string);
-		*/
+
 		if (type == Constants.REQUEST_IAAA)
 			IAAA.finishLogin(string);
 		if (type == Constants.REQUEST_ITS_CONNECT
@@ -363,27 +338,6 @@ public class PKUHelper extends BaseActivity {
 			Settings.finishFound(string);
 	}
 
-	/*
-	@Override
-	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-		super.onCreateContextMenu(menu, v, menuInfo);
-		if (mViewPager.getCurrentItem()==2) {
-			menu.add(Menu.NONE, Constants.CONTEXT_MENU_MYPKU_SET, Constants.CONTEXT_MENU_MYPKU_SET,
-					"编辑项目");
-		}
-	}
-
-	@Override
-	public boolean onContextItemSelected(MenuItem item) {
-		if (item.getItemId()==Constants.CONTEXT_MENU_MYPKU_SET) {
-			Intent intent=new Intent(this, SubActivity.class);
-			intent.putExtra("type", Constants.SUBACTIVITY_TYPE_MYPKU_SET);
-			startActivity(intent);
-			return true;
-		}
-		return super.onContextItemSelected(item);
-	}
-	*/
 	@Override
 	protected void onResume() {
 		super.onResume();

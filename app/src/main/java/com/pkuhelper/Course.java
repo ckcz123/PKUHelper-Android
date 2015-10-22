@@ -1,18 +1,12 @@
 package com.pkuhelper;
 
-import android.app.AlertDialog;
 import android.app.Fragment;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 
-import com.pkuhelper.course.CustomCourseActivity;
-import com.pkuhelper.course.DeanCourseActivity;
-import com.pkuhelper.course.ExamActivity;
 import com.pkuhelper.lib.Constants;
 import com.pkuhelper.lib.Editor;
 import com.pkuhelper.lib.Lib;
@@ -41,9 +35,6 @@ public class Course extends Fragment {
 	static WebView courseView;
 	static String html;
 
-	// 是否有错误的教务地点
-	static boolean hasQuestion = false;
-
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
@@ -69,30 +60,6 @@ public class Course extends Fragment {
 			e.printStackTrace();
 		}
 		courseView.loadDataWithBaseURL(null, showHtml(html), "text/html", "utf-8", null);
-		if (hasQuestion) {
-			final PKUHelper pkuhelper = PKUHelper.pkuhelper;
-			new AlertDialog.Builder(pkuhelper).setTitle("提示")
-					.setMessage("你存在教务课程的地点无法识别，请点击菜单栏的加号手动修改其地点。")
-					.setCancelable(true).setPositiveButton("确定", new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					String[] strings = {"编辑教务课程", "添加自定义课程", "考试倒计时"};
-					new AlertDialog.Builder(pkuhelper).setTitle("选择项目")
-							.setItems(strings, new DialogInterface.OnClickListener() {
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									if (which == 0)
-										pkuhelper.startActivity(new Intent(pkuhelper, DeanCourseActivity.class));
-									else if (which == 1)
-										pkuhelper.startActivity(new Intent(pkuhelper, CustomCourseActivity.class));
-									else if (which == 2)
-										pkuhelper.startActivity(new Intent(pkuhelper, ExamActivity.class));
-								}
-							}).show();
-				}
-			}).setNegativeButton("取消", null).show();
-		}
-		hasQuestion = false;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -109,7 +76,7 @@ public class Course extends Fragment {
 			return;
 		}
 
-		ArrayList<Parameters> parameters = new ArrayList<Parameters>();
+		ArrayList<Parameters> parameters = new ArrayList<>();
 		parameters.add(new Parameters("appid", "syllabus"));
 		parameters.add(new Parameters("userName", Constants.username));
 		parameters.add(new Parameters("password", Constants.password));
@@ -166,7 +133,7 @@ public class Course extends Fragment {
 
 	@SuppressWarnings("unchecked")
 	public static void getCourses() {
-		ArrayList<Parameters> arrayList = new ArrayList<Parameters>();
+		ArrayList<Parameters> arrayList = new ArrayList<>();
 		arrayList.add(new Parameters("token", Constants.token));
 		arrayList.add(new Parameters("phpsessid", Constants.phpsessid));
 		new RequestingTask(PKUHelper.pkuhelper, "正在获取课表..",
@@ -183,9 +150,9 @@ public class Course extends Fragment {
 				return;
 			}
 			JSONArray jsonArray = jsonObject.optJSONArray("courses");
-			ArrayList<CourseInfo> deanCourseInfos = new ArrayList<Course.CourseInfo>();
-			ArrayList<CourseInfo> customCourseInfos = new ArrayList<Course.CourseInfo>();
-			ArrayList<CourseInfo> dualCourseInfos = new ArrayList<Course.CourseInfo>();
+			ArrayList<CourseInfo> deanCourseInfos = new ArrayList<>();
+			ArrayList<CourseInfo> customCourseInfos = new ArrayList<>();
+			ArrayList<CourseInfo> dualCourseInfos = new ArrayList<>();
 			int len = jsonArray.length();
 			for (int i = 0; i < len; i++) {
 				JSONObject object = jsonArray.optJSONObject(i);
@@ -208,7 +175,7 @@ public class Course extends Fragment {
 					courseInfo.addTime(day, num, type);
 					if ("".equals(location) || location.contains("备注")) {
 						courseInfo.where = "？";
-						hasQuestion = true;
+					//	hasQuestion = true;
 					}
 
 				}
@@ -220,7 +187,7 @@ public class Course extends Fragment {
 			if (Editor.getBoolean(PKUHelper.pkuhelper, "course_dean", true))
 				addCourse(deanCourseInfos, true);
 			addCourse(dualCourseInfos, false);
-			MyFile.putString(PKUHelper.pkuhelper, Constants.username, "course", html);
+			MyFile.putString(PKUHelper.pkuhelper, Constants.username, "deancourse", html);
 			if (Editor.getBoolean(PKUHelper.pkuhelper, "course_custom", true))
 				addCourse(customCourseInfos, true);
 		} catch (Exception e) {
@@ -242,11 +209,11 @@ public class Course extends Fragment {
 	@SuppressWarnings("unchecked")
 	public static void getCustom() {
 		try {
-			html = MyFile.getString(PKUHelper.pkuhelper, Constants.username, "course", CourseString.defaultCouseHtml);
+			html = MyFile.getString(PKUHelper.pkuhelper, Constants.username, "deancourse", CourseString.defaultCouseHtml);
 		} catch (Exception e) {
 			html = CourseString.defaultCouseHtml;
 		}
-		ArrayList<Parameters> arrayList = new ArrayList<Parameters>();
+		ArrayList<Parameters> arrayList = new ArrayList<>();
 		arrayList.add(new Parameters("operation", "get"));
 		arrayList.add(new Parameters("token", Constants.token));
 		new RequestingTask(PKUHelper.pkuhelper, "正在获取自选课表..",
@@ -302,7 +269,7 @@ public class Course extends Fragment {
 			if ("".equals(location)
 					|| location.contains("备注")) {
 				location = "？";
-				hasQuestion = true;
+				//hasQuestion = true;
 			}
 			CourseInfo courseInfo = new CourseInfo(name, location);
 			JSONArray times = jsonObject.optJSONArray("times");
@@ -388,7 +355,7 @@ public class Course extends Fragment {
 							location = where.substring(0, pos + 1);
 							if (location.contains("备注")) location = "(？)";
 						}
-						if ("(？)".equals(location)) hasQuestion = true;
+						//if ("(？)".equals(location)) hasQuestion = true;
 						String type = "";
 						if (span.text().contains("单周")) type = "<br>单周";
 						if (span.text().contains("双周")) type = "<br>双周";
@@ -430,7 +397,7 @@ public class Course extends Fragment {
 			name = new String(_name).trim();
 			where = new String(_where).trim();
 			color = Util.generateColorString();
-			when = new ArrayList<Integer>();
+			when = new ArrayList<>();
 		}
 
 		public void addTime(String _week, String _times, int _type) throws Exception {
@@ -508,16 +475,76 @@ public class Course extends Fragment {
 
 				for (int j = 1; j <= 7; j++) {
 					Element td = tds.get(j);
-					if (td.hasAttr("style")) {
-						Element span = td.child(0);
-						span.html(span.html().replace("<br>每周", ""));
-						if (week == 0 || (span.html().contains("单周") && week % 2 == 0)
-								|| (span.html().contains("双周") && week % 2 != 0)) {
-							td.attr("style", td.attr("style") + "; opacity:0.4;");
-						}
+					td.attr("align","left");
+					td.attr("valign","top");
+					Element span = td.child(0);
+					span.html(span.html()
+							.replaceAll("^([^<>]+)<br>", "<span style='font-size:13px; font-weight:bold'>$1</span><br>")
+							.replaceAll("<br>\\((.+?)\\)", "<br>@$1")
+							.replaceAll("<br>([^@<>]+)$", "<br>[$1]")
+							.replace("@？", "@未知地点")
+							.replace("<br>[每周]", ""));
+					if (week == 0 || (span.html().contains("单周") && week % 2 == 0)
+							|| (span.html().contains("双周") && week % 2 != 0)) {
+						td.attr("style", td.attr("style") + "; opacity:0.4;");
 					}
 				}
 			}
+
+			for (int i=1;i<=12;i++) {
+				Element tr = trs.get(i);
+				Elements tds = tr.getElementsByTag("td");
+				for (int j = 1; j <= 7; j++) {
+					Element td = tds.get(j);
+					if (td.hasAttr("style") && !td.attr("style").contains("display")) {
+						int cnt=1;
+						for (int w=i+1;w<=12;w++) {
+							Element trw = trs.get(w);
+							Element tdw = trw.getElementsByTag("td").get(j);
+							if (td.text().equals(tdw.text())) {
+								tdw.attr("style", tdw.attr("style")+"; display: none;");
+								cnt++;
+							}
+							else break;
+						}
+						td.attr("rowspan", cnt+"");
+					}
+				}
+			}
+
+			// 判断周六和周日是否有课
+			boolean hascourse=false;
+			for (int i = 1; i <= 12; i++) {
+				Element tr = trs.get(i);
+				Elements tds = tr.getElementsByTag("td");
+				for (int j = 6; j <= 7; j++) {
+					if (tds.get(j).hasAttr("style"))
+						hascourse=true;
+				}
+			}
+
+			Elements ths=trs.get(0).getElementsByTag("th");
+			ths.get(0).attr("width", "10%");
+			if (hascourse) {
+				for (int i=1;i<=7;i++) {
+					ths.get(i).attr("width", "12.857%");
+				}
+			}
+			else {
+				for (int i=1;i<=5;i++) {
+					ths.get(i).attr("width", "18%");
+				}
+				ths.get(6).attr("style", "display:none;");
+				ths.get(7).attr("style", "display:none;");
+				for (int i = 1; i <= 12; i++) {
+					Element tr = trs.get(i);
+					Elements tds = tr.getElementsByTag("td");
+					for (int j = 6; j <= 7; j++) {
+						tds.get(j).attr("style", "display:none;");
+					}
+				}
+			}
+
 			return addLine(document.toString());
 		} catch (Exception e) {
 			return CourseString.defaultHtml;
@@ -552,15 +579,25 @@ public class Course extends Fragment {
 			Element table = document.getElementById("classAssignment");
 			Elements trs = table.getElementsByTag("tr");
 
-			Element tr = trs.get(index);
-			String hr_string = String.format(Locale.getDefault(), CourseString.HR_STRING, percentage);
+			Element td = trs.get(index).child(dayofweek);
 
-			Element td1 = tr.child(0);
-			td1.attr("style", td1.attr("style") + ";position:relative;");
-			td1.html(td1.html() + hr_string);
-			Element td2 = tr.child(dayofweek);
-			td2.attr("style", td2.attr("style") + ";position:relative;");
-			td2.html(td2.html() + hr_string);
+			if (td.hasAttr("style")) {
+				int u=0;
+				while (td.attr("style").contains("display")) {
+					index--;
+					if (index<=0) return html;
+					td = trs.get(index).child(dayofweek);
+					u++;
+				}
+				int cnt=Integer.parseInt(td.attr("rowspan"));
+				percentage=(100*u+percentage)/cnt;
+				td.attr("style", td.attr("style")+"; position:relative");
+				td.html(td.html()+String.format(Locale.getDefault(), CourseString.HR_STRING, percentage));
+			}
+			else {
+				td.attr("style", "position:relative");
+				td.html(td.html()+String.format(Locale.getDefault(), CourseString.HR_STRING, percentage));
+			}
 
 			return document.toString();
 		} catch (Exception e) {
@@ -577,34 +614,34 @@ public class Course extends Fragment {
 	 */
 	private static Parameters getCourseIndex(int hour, int minute) {
 		if (hour < 8) return new Parameters("-1", "-1");
-		if (hour == 8 && minute <= 50) return new Parameters("1", minute * 2 + "");
-		if (hour == 8) return new Parameters("1", "100");
-		if (hour == 9 && minute <= 50) return new Parameters("2", minute * 2 + "");
-		if (hour == 9) return new Parameters("2", "100");
-		if (hour == 10 && minute <= 10) return new Parameters("3", "0");
+		if (hour == 8 && minute < 50) return new Parameters("1", minute * 2 + "");
+		if (hour == 8) return new Parameters("2", "0");
+		if (hour == 9 && minute < 50) return new Parameters("2", minute * 2 + "");
+		if (hour == 9) return new Parameters("3", "0");
+		if (hour == 10 && minute < 10) return new Parameters("3", "0");
 		if (hour == 10) return new Parameters("3", (minute - 10) * 2 + "");
-		if (hour == 11 && minute <= 10) return new Parameters("4", "0");
+		if (hour == 11 && minute < 10) return new Parameters("4", "0");
 		if (hour == 11) return new Parameters("4", (minute - 10) * 2 + "");
-		if (hour == 12) return new Parameters("4", "100");
-		if (hour == 13 && minute <= 50) return new Parameters("5", minute * 2 + "");
-		if (hour == 13) return new Parameters("5", "100");
-		if (hour == 14 && minute <= 50) return new Parameters("6", minute * 2 + "");
-		if (hour == 14) return new Parameters("6", "100");
-		if (hour == 15 && minute <= 10) return new Parameters("7", "0");
+		if (hour == 12) return new Parameters("5", "0");
+		if (hour == 13 && minute < 50) return new Parameters("5", minute * 2 + "");
+		if (hour == 13) return new Parameters("6", "0");
+		if (hour == 14 && minute < 50) return new Parameters("6", minute * 2 + "");
+		if (hour == 14) return new Parameters("7", "0");
+		if (hour == 15 && minute < 10) return new Parameters("7", "0");
 		if (hour == 15) return new Parameters("7", (minute - 10) * 2 + "");
-		if (hour == 16 && minute <= 10) return new Parameters("8", "0");
+		if (hour == 16 && minute < 10) return new Parameters("8", "0");
 		if (hour == 16) return new Parameters("8", (minute - 10) * 2 + "");
-		if (hour == 17 && minute <= 10) return new Parameters("8", "100");
+		if (hour == 17 && minute < 10) return new Parameters("9", "0");
 		if (hour == 17) return new Parameters("9", (minute - 10) * 2 + "");
-		if (hour == 18 && minute <= 40) return new Parameters("9", "100");
+		if (hour == 18 && minute < 40) return new Parameters("10", "0");
 		if (hour == 18) return new Parameters("10", (minute - 40) * 2 + "");
-		if (hour == 19 && minute <= 30) return new Parameters("10", (minute + 20) * 2 + "");
-		if (hour == 19 && minute <= 40) return new Parameters("10", "100");
+		if (hour == 19 && minute < 30) return new Parameters("10", (minute + 20) * 2 + "");
+		if (hour == 19 && minute < 40) return new Parameters("11", "0");
 		if (hour == 19) return new Parameters("11", (minute - 40) * 2 + "");
-		if (hour == 20 && minute <= 30) return new Parameters("11", (minute + 20) * 2 + "");
-		if (hour == 20 && minute <= 40) return new Parameters("11", "100");
+		if (hour == 20 && minute < 30) return new Parameters("11", (minute + 20) * 2 + "");
+		if (hour == 20 && minute < 40) return new Parameters("12", "0");
 		if (hour == 20) return new Parameters("12", (minute - 40) * 2 + "");
-		if (hour == 21 && minute <= 30) return new Parameters("12", (minute + 20) * 2 + "");
+		if (hour == 21 && minute < 30) return new Parameters("12", (minute + 20) * 2 + "");
 		return new Parameters("-1", "-1");
 	}
 

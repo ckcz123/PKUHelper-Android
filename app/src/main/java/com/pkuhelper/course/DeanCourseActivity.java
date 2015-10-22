@@ -36,8 +36,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DeanCourseActivity extends BaseActivity {
-	ArrayList<String> courseInfos = new ArrayList<String>();
-	HashMap<String, CourseInfo> courseMap = new HashMap<String, CourseInfo>();
+	ArrayList<String> courseInfos = new ArrayList<>();
+	HashMap<String, CourseInfo> courseMap = new HashMap<>();
 	boolean hasModified;
 
 	@Override
@@ -52,7 +52,7 @@ public class DeanCourseActivity extends BaseActivity {
 		//String html=Editor.getString(this, Constants.username+"_course");
 		String html;
 		try {
-			html = MyFile.getString(this, Constants.username, "course", "");
+			html = MyFile.getString(this, Constants.username, "deancourse", "");
 		} catch (Exception e) {
 			html = "";
 		}
@@ -237,6 +237,10 @@ public class DeanCourseActivity extends BaseActivity {
 			MyFile.putString(this, Constants.username, "course",
 					doWithDocument(Jsoup.parse(
 							MyFile.getString(this, Constants.username, "course", null)))
+							.toString());
+			MyFile.putString(this, Constants.username, "deancourse",
+					doWithDocument(Jsoup.parse(
+							MyFile.getString(this, Constants.username, "deancourse", null)))
 							.toString());
 		} catch (Exception e) {
 		}
