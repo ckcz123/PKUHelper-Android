@@ -1,6 +1,7 @@
 package com.pkuhelper;
 
 import android.app.Fragment;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,6 +54,7 @@ public class Course extends Fragment {
 		return rootView;
 	}
 
+	@SuppressWarnings("deprecation")
 	public static void showView() {
 		try {
 			MyFile.putString(PKUHelper.pkuhelper, Constants.username, "course", html);
@@ -60,6 +62,8 @@ public class Course extends Fragment {
 			e.printStackTrace();
 		}
 		courseView.loadDataWithBaseURL(null, showHtml(html), "text/html", "utf-8", null);
+		courseView.setBackgroundColor(Color.TRANSPARENT);
+		courseView.setBackgroundDrawable(PKUHelper.pkuhelper.getResources().getDrawable(R.drawable.mypku_bg));
 	}
 
 	@SuppressWarnings("unchecked")
@@ -545,7 +549,7 @@ public class Course extends Fragment {
 				}
 			}
 
-			return addLine(document.toString());
+			return addLine(document.toString().replace("background-color: #ffffff;",""));
 		} catch (Exception e) {
 			return CourseString.defaultHtml;
 		}

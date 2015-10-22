@@ -234,7 +234,7 @@ public class PKUHelper extends BaseActivity {
 			return true;
 		}
 		if (id == Constants.MENU_COURSE_ADD) {
-			String[] strings = {"编辑教务课程地点", "添加自定义课程", "添加考试倒计时"};
+			String[] strings = {"编辑教务课程地点", "编辑自定义课程", "编辑考试倒计时"};
 			new AlertDialog.Builder(this).setTitle("选择项目")
 					.setItems(strings, new DialogInterface.OnClickListener() {
 
@@ -277,7 +277,7 @@ public class PKUHelper extends BaseActivity {
 	void doWhenFirstLaunch() {
 		try {
 			if (Editor.getBoolean(this, "launch_" + Constants.version, true)) {
-				
+
 			}
 			Editor.putBoolean(this, "launch_" + Constants.version, false);
 		} catch (Exception e) {
