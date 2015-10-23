@@ -248,13 +248,10 @@ public class ViewActivity extends BaseActivity {
 		super.onCreateContextMenu(menu, v, menuInfo);
 		if (showingPage == PAGE_POST) {
 			PostInfo postInfo = ViewPost.postInfos.get(ViewPost.index);
-			/*
-			if (postInfo.attaches.size()!=0)
-				menu.add(Menu.NONE, Constants.CONTEXT_MENU_BBS_ATTACHES, 
-						Constants.CONTEXT_MENU_BBS_ATTACHES, "查看附件");
-			*/
 			String content = postInfo.content;
 
+			menu.add(Menu.NONE, Constants.CONTEXT_MENU_BBS_FAVORITE,
+					Constants.CONTEXT_MENU_BBS_FAVORITE, "收藏此主题帖");
 			menu.add(Menu.NONE, Constants.CONTEXT_MENU_BBS_POST,
 					Constants.CONTEXT_MENU_BBS_POST, "回复");
 			menu.add(Menu.NONE, Constants.CONTEXT_MENU_BBS_MESSAGE,
@@ -288,15 +285,14 @@ public class ViewActivity extends BaseActivity {
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
 		int id = item.getItemId();
-		/*
-		if (id==Constants.CONTEXT_MENU_BBS_ATTACHES) {
-			PostInfo postInfo=ViewPost.postInfos.get(ViewPost.index);
-			ArrayList<Parameters> attaches=postInfo.attaches;
-			if (attaches.size()==0) CustomToast.showInfoToast(this, "没有附件");
-			else ViewPost.showAttaches(attaches);
-			return true;
+		if (id == Constants.CONTEXT_MENU_BBS_FAVORITE && showingPage==PAGE_POST) {
+			PostInfo postInfo = ViewPost.postInfos.get(ViewPost.index);
+			if (FavoriteActivity.addFavorite(this, board, Integer.parseInt(threadid), ViewPost.title,
+					boardName)) {
+				CustomToast.showSuccessToast(this, "收藏成功！");
+			}
+
 		}
-		*/
 		if (id == Constants.CONTEXT_MENU_BBS_POST
 				&& showingPage == PAGE_POST) {
 			PostInfo postInfo = ViewPost.postInfos.get(ViewPost.index);

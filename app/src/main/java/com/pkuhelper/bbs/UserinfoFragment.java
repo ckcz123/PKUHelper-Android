@@ -30,6 +30,13 @@ public class UserinfoFragment extends Fragment {
 	public static void set() {
 		if (userinfoView == null) return;
 		try {
+			ViewSetting.setTextView(userinfoView, R.id.bbs_userinfo_favorite, "收藏的主题帖");
+			ViewSetting.setOnClickListener(userinfoView, R.id.bbs_userinfo_favorite, new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					BBSActivity.bbsActivity.startActivity(new Intent(BBSActivity.bbsActivity, FavoriteActivity.class));
+				}
+			});
 			if ("".equals(Userinfo.token)) {
 				ViewSetting.setTextView(userinfoView, R.id.bbs_userinfo_username, "点击登录...");
 				ViewSetting.setOnClickListener(userinfoView, R.id.bbs_userinfo_username, new View.OnClickListener() {

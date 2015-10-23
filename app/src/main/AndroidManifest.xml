@@ -157,6 +157,11 @@
             android:launchMode="singleTask"
             android:label="@string/app_name"/>
         <activity
+            android:name="com.pkuhelper.bbs.FavoriteActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask"
+            android:label="@string/app_name"/>
+        <activity
             android:name="com.pkuhelper.bbs.MessagePostActivity"
             android:screenOrientation="portrait"
             android:label="@string/app_name"/>
