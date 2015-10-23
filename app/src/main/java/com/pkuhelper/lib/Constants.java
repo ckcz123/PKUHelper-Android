@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class Constants {
 	public static final String version = "2.0.4";
-	public static final String update_time = "2015-10-18";
+	public static final String update_time = "2015-10-23";
 
 	public static final String domain = "http://www.xiongdianpku.com";
 
