@@ -37,6 +37,8 @@ import com.pkuhelper.pkuhole.HoleActivity;
 import com.pkuhelper.qrcode.QRCodeActivity;
 import com.pkuhelper.subactivity.SubActivity;
 
+import java.io.File;
+
 public class PKUHelper extends BaseActivity {
 
 	public static PKUHelper pkuhelper;
@@ -265,26 +267,27 @@ public class PKUHelper extends BaseActivity {
 
 	void init() {
 		clickIPGW(null);
-		doWhenFirstLaunch();
 		Constants.init(this);
 		if (!Constants.isLogin()) {
 			IAAA.showLoginView();
 		} else {
+			//doWhenFirstLaunch();
 			dealWithActionType(getIntent().getStringExtra("type"));
 		}
 	}
-
+/*
 	void doWhenFirstLaunch() {
 		try {
 			if (Editor.getBoolean(this, "launch_" + Constants.version, true)) {
-				MyFile.deleteFile(MyFile.getFile(this, Constants.username, "deancourse"));
-				MyFile.deleteFile(MyFile.getFile(this, Constants.username, "course"));
+				//MyFile.deleteFile(MyFile.getFile(this, Constants.username, "deancourse"));
+				//MyFile.deleteFile(MyFile.getFile(this, Constants.username, "course"));
+
 			}
 			Editor.putBoolean(this, "launch_" + Constants.version, false);
 		} catch (Exception e) {
 		}
 	}
-
+*/
 	void dealWithActionType(String type) {
 		if (type == null) return;
 		if ("course".equals(type)) {

@@ -51,6 +51,8 @@ public class Course extends Fragment {
 		} catch (Exception e) {
 			html = CourseString.defaultHtml;
 		}
+		if (!MyFile.getFile(PKUHelper.pkuhelper, Constants.username, "deancourse").exists())
+			html=CourseString.defaultHtml;
 		showView();
 		return rootView;
 	}
@@ -132,6 +134,10 @@ public class Course extends Fragment {
 		} else if (type == Constants.REQUEST_ELECTIVE) {
 			html = decodeHtml(string);
 			showView();
+			try {
+				MyFile.putString(PKUHelper.pkuhelper, Constants.username, "deancourse", html);
+			}
+			catch (Exception e) {}
 			Dean.getSessionId(Dean.FLAG_GETTING_COURSE);
 		}
 	}
