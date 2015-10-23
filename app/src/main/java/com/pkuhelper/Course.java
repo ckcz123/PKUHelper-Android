@@ -45,6 +45,12 @@ public class Course extends Fragment {
 		courseView = (WebView) rootView.findViewById(R.id.course_view);
 		courseView.getSettings().setJavaScriptEnabled(false);
 		courseView.setVerticalScrollBarEnabled(false);
+		courseView.setBackgroundColor(Color.TRANSPARENT);
+		//courseView.setBackgroundDrawable(PKUHelper.pkuhelper.getResources().getDrawable(R.drawable.mypku_bg));
+		try {
+			courseView.setBackgroundResource(R.drawable.mypku_bg);
+		}
+		catch (Exception | OutOfMemoryError e) {}
 		try {
 			html = MyFile.getString(PKUHelper.pkuhelper, Constants.username, "course", CourseString.defaultHtml);
 			if ("".equals(html)) html = CourseString.defaultHtml;
@@ -57,7 +63,6 @@ public class Course extends Fragment {
 		return rootView;
 	}
 
-	@SuppressWarnings("deprecation")
 	public static void showView() {
 		try {
 			MyFile.putString(PKUHelper.pkuhelper, Constants.username, "course", html);
@@ -65,8 +70,6 @@ public class Course extends Fragment {
 			e.printStackTrace();
 		}
 		courseView.loadDataWithBaseURL(null, showHtml(html), "text/html", "utf-8", null);
-		courseView.setBackgroundColor(Color.TRANSPARENT);
-		courseView.setBackgroundDrawable(PKUHelper.pkuhelper.getResources().getDrawable(R.drawable.mypku_bg));
 	}
 
 	@SuppressWarnings("unchecked")
