@@ -4,7 +4,9 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Picture;
+import android.graphics.drawable.BitmapDrawable;
 import android.webkit.WebView;
 
 import java.security.MessageDigest;
@@ -17,7 +19,15 @@ public class Util {
 		if (webView == null) return null;
 		Picture snapShot = webView.capturePicture();
 		Bitmap bmp = Bitmap.createBitmap(snapShot.getWidth(), snapShot.getHeight(), Bitmap.Config.ARGB_8888);
+		Bitmap bg=null;
+		try {
+			Bitmap bgr = ((BitmapDrawable) webView.getBackground()).getBitmap();
+			bg=Bitmap.createScaledBitmap(bgr, snapShot.getWidth(), snapShot.getHeight(), true);
+		}
+		catch (Exception | OutOfMemoryError e) {bg=null;}
 		Canvas canvas = new Canvas(bmp);
+		if (bg!=null)
+			canvas.drawBitmap(bg,0,0,new Paint());
 		snapShot.draw(canvas);
 		return bmp;
 	}
