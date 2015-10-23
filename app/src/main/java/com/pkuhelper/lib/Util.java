@@ -12,6 +12,7 @@ import java.util.Random;
 
 public class Util {
 
+	@SuppressWarnings("deprecation")
 	public static Bitmap captureWebView(WebView webView) {
 		if (webView == null) return null;
 		Picture snapShot = webView.capturePicture();
@@ -63,10 +64,10 @@ public class Util {
 		Random random = new Random();
 		int[] x = new int[6];
 		while (true) {
-			for (int i = 0; i < 6; i++)
-				x[i] = random.nextInt(16);
-			if (x[0] + x[2] + x[4] >= 22)
-				break;
+			for (int i=0;i<6;i++)
+				x[i]=random.nextInt(16);
+			int val=x[0]+x[2]+x[4];
+			if (val>=27 && val<=40) break;
 		}
 		String string = "#";
 		for (int i = 0; i < 6; i++)

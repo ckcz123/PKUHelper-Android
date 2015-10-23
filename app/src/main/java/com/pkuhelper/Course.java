@@ -30,6 +30,7 @@ import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Locale;
 
 public class Course extends Fragment {
@@ -190,7 +191,8 @@ public class Course extends Fragment {
 			}
 			if (Editor.getBoolean(PKUHelper.pkuhelper, "course_dean", true))
 				addCourse(deanCourseInfos, true);
-			addCourse(dualCourseInfos, false);
+			if (Editor.getBoolean(PKUHelper.pkuhelper, "course_dual", true))
+				addCourse(dualCourseInfos, false);
 			MyFile.putString(PKUHelper.pkuhelper, Constants.username, "deancourse", html);
 			if (Editor.getBoolean(PKUHelper.pkuhelper, "course_custom", true))
 				addCourse(customCourseInfos, true);
@@ -549,7 +551,7 @@ public class Course extends Fragment {
 				}
 			}
 
-			return addLine(document.toString().replace("background-color: #ffffff;",""));
+			return addLine(document.toString().replace("body{background-color: #ffffff;", "body{"));
 		} catch (Exception e) {
 			return CourseString.defaultHtml;
 		}
@@ -600,7 +602,7 @@ public class Course extends Fragment {
 			}
 			else {
 				td.attr("style", "position:relative");
-				td.html(td.html()+String.format(Locale.getDefault(), CourseString.HR_STRING, percentage));
+				td.html(td.html() + String.format(Locale.getDefault(), CourseString.HR_STRING, percentage));
 			}
 
 			return document.toString();
@@ -647,6 +649,58 @@ public class Course extends Fragment {
 		if (hour == 20) return new Parameters("12", (minute - 40) * 2 + "");
 		if (hour == 21 && minute < 30) return new Parameters("12", (minute + 20) * 2 + "");
 		return new Parameters("-1", "-1");
+	}
+
+	public static void changeColor() {
+		final HashMap<String, String> map=new HashMap<>();
+		try {
+			html=changeColor(html, map);
+			showView();
+			new Thread(new Runnable() {
+				@Override
+				public void run() {
+					try {
+						MyFile.putString(PKUHelper.pkuhelper, Constants.username, "deancourse",
+								changeColor(MyFile.getString(PKUHelper.pkuhelper,
+										Constants.username, "deancourse", CourseString.defaultCouseHtml), map));
+					}
+					catch (Exception e) {}
+				}
+			}).start();
+		}
+		catch (Exception e) {}
+	}
+
+	private static String changeColor(String html, HashMap<String, String> map) {
+		try {
+			String dehtml=new String(html);
+			Document document=Jsoup.parse(html);
+
+			Element table = document.getElementById("classAssignment");
+			Elements trs = table.getElementsByTag("tr");
+			for (int i = 1; i <= 12; i++) {
+				Element tr = trs.get(i);
+				Elements tds = tr.getElementsByTag("td");
+				for (int j = 1; j <= 7; j++) {
+					Element td = tds.get(j);
+					if (td.hasAttr("style")) {
+						Element span = td.child(0);
+						String[] strings = span.html().split("<br>");
+						String name = strings[0].trim();
+
+						String color = map.get(name);
+						if (color == null || "".equals(color)) color = Util.generateColorString();
+						map.put(name, color);
+
+						//String style=td.attr("style");
+						td.attr("style", "background-color: " + color);
+
+					}
+				}
+			}
+			return document.toString();
+		}
+		catch (Exception e) {return html;}
 	}
 
 }

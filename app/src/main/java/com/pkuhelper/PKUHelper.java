@@ -12,7 +12,6 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Vibrator;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -220,14 +219,15 @@ public class PKUHelper extends BaseActivity {
 		}
 		if (id == Constants.MENU_COURSE_REFRESH) {
 
-			String[] strings = {"重新导入教务课程", "只导入自定义课程"};
+			String[] strings = {"更换颜色", "重新导入教务课程", "只导入自定义课程"};
 			new AlertDialog.Builder(this).setTitle("选择项目")
 					.setItems(strings, new DialogInterface.OnClickListener() {
 
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
-							if (which == 0) Course.gettingCourse();
-							else if (which == 1) Course.getCustom();
+							if (which==0) Course.changeColor();
+							else if (which == 1) Course.gettingCourse();
+							else if (which == 2) Course.getCustom();
 						}
 					}).show();
 
@@ -277,7 +277,8 @@ public class PKUHelper extends BaseActivity {
 	void doWhenFirstLaunch() {
 		try {
 			if (Editor.getBoolean(this, "launch_" + Constants.version, true)) {
-
+				MyFile.deleteFile(MyFile.getFile(this, Constants.username, "deancourse"));
+				MyFile.deleteFile(MyFile.getFile(this, Constants.username, "course"));
 			}
 			Editor.putBoolean(this, "launch_" + Constants.version, false);
 		} catch (Exception e) {

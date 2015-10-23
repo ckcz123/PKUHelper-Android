@@ -39,7 +39,7 @@ import java.util.Collections;
 import java.util.Comparator;
 
 public class CustomCourseActivity extends BaseActivity {
-	ArrayList<CourseInfo> courseInfos = new ArrayList<CourseInfo>();
+	ArrayList<CourseInfo> courseInfos = new ArrayList<>();
 	int currCourseIndex = 0;
 	int[][] hasCourse = new int[12][7];
 
@@ -63,7 +63,7 @@ public class CustomCourseActivity extends BaseActivity {
 	public void setDefaultCourse() {
 		String html = "";
 		try {
-			html = MyFile.getString(this, Constants.username, "course", "");
+			html = MyFile.getString(this, Constants.username, "deancourse", "");
 		} catch (Exception e) {
 			html = "";
 		}
@@ -95,7 +95,7 @@ public class CustomCourseActivity extends BaseActivity {
 
 	@SuppressWarnings("unchecked")
 	public void getList() {
-		ArrayList<Parameters> arrayList = new ArrayList<Parameters>();
+		ArrayList<Parameters> arrayList = new ArrayList<>();
 		//arrayList.add(new Parameters("uid", Constants.username));
 		//String timestamp=System.currentTimeMillis()/1000+"";
 		//String hash=Util.getHash(Constants.username+timestamp+"CHAW68ERFR23G");
@@ -500,7 +500,7 @@ public class CustomCourseActivity extends BaseActivity {
 				object.put("times", array);
 				jsonArray.put(object);
 			}
-			ArrayList<Parameters> arrayList = new ArrayList<Parameters>();
+			ArrayList<Parameters> arrayList = new ArrayList<>();
 			//arrayList.add(new Parameters("uid", Constants.username));
 			//String timestamp=System.currentTimeMillis()/1000+"";
 			//String hash=Util.getHash(Constants.username+timestamp+"CHAW68ERFR23G");
