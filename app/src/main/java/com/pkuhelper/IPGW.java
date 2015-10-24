@@ -107,7 +107,7 @@ public class IPGW extends Fragment {
 
 	@Override
 	public void onViewCreated(final View view, Bundle savedInstanceState) {
-		final ViewTreeObserver observer = view.getViewTreeObserver();
+		ViewTreeObserver observer = view.getViewTreeObserver();
 		observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 
 			@SuppressLint("NewApi")
@@ -118,9 +118,9 @@ public class IPGW extends Fragment {
 				if (width != 0 && height != 0) {
 					ViewSetting.setBackground(getActivity(), view, drawable);
 					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-						observer.removeOnGlobalLayoutListener(this);
+						view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
 					} else {
-						observer.removeGlobalOnLayoutListener(this);
+						view.getViewTreeObserver().removeGlobalOnLayoutListener(this);
 					}
 				}
 			}
@@ -254,7 +254,7 @@ public class IPGW extends Fragment {
 			IAAA.showLoginView();
 			return;
 		}
-		ArrayList<Parameters> arrayList = new ArrayList<Parameters>();
+		ArrayList<Parameters> arrayList = new ArrayList<>();
 		arrayList.add(new Parameters("uid", Constants.username));
 		arrayList.add(new Parameters("password", Constants.password));
 		arrayList.add(new Parameters("operation", type));
@@ -331,7 +331,7 @@ public class IPGW extends Fragment {
 	}
 
 	private static Map<String, String> getReturnMsg(String string) {
-		Map<String, String> map = new HashMap<String, String>();
+		Map<String, String> map = new HashMap<>();
 		int pos1 = string.indexOf("SUCCESS=");
 		int pos2 = string.indexOf("IPGWCLIENT_END-->");
 
