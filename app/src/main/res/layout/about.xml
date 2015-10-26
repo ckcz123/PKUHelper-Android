@@ -1,263 +1,334 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:background="#f3f3f3" android:orientation="vertical"
-    android:paddingBottom="20dp"
-    android:layout_height="fill_parent">
+            android:layout_width="fill_parent"
+            android:background="#f3f3f3"
+            android:orientation="vertical"
+            android:paddingBottom="20dp"
+            android:layout_height="fill_parent">
 
 
-<RelativeLayout  android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    
-        >
-
-    <ImageView
-        android:id="@+id/about_image"
-        android:contentDescription="@string/app_name"
-        android:layout_width="90sp"
-        android:layout_height="90sp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:src="@drawable/ic_launcher" />
-
-    <TextView
-        android:id="@+id/about_app"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/about_image"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:text="@string/app_name_text" />
-    
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/about_app"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
-        android:textSize="15sp"
-        android:text="@string/about_recommend"
-        android:id="@+id/about_recommend"
-    	/>
-
-    <TableLayout
-        android:id="@+id/about_table"
+    <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/about_recommend"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/corners_bg" >
 
-        <TableRow android:padding="10dip">
-            <TextView android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:textSize="15sp"
-                android:paddingLeft="10dp" 
-                android:paddingRight="10dp" 
-                android:text="@string/about_version"
-                />
-            <TextView android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_weight="1"/>
-            <TextView
-                   android:id="@+id/about_version"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:textSize="15sp" android:paddingLeft="10dp"
-                   android:layout_gravity="end"
-                   android:paddingRight="10dp"
-                   />
-        </TableRow>
-        <View
-            android:layout_height="1dip"  android:layout_width="fill_parent"
-            android:background="#e8e8e7" /> 
-        <TableRow android:padding="10dip">
-            <TextView android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:textSize="15sp"
-                android:paddingLeft="10dp" 
-                android:paddingRight="10dp" 
-                android:text="@string/about_time"
-                />
-            <TextView android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_weight="1"/>
+        >
 
-            <TextView
-                android:id="@+id/about_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:textSize="15sp" />
+        <ImageView
+            android:id="@+id/about_image"
+            android:contentDescription="@string/app_name"
+            android:layout_width="90sp"
+            android:layout_height="90sp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/ic_launcher"/>
 
-        </TableRow>
-         <View
-            android:layout_height="1dip"  android:layout_width="fill_parent"
-            android:background="#e8e8e7" /> 
-        <TableRow android:padding="10dip">
-            <TextView android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:textSize="15sp"
-                android:paddingLeft="10dp" 
-                android:paddingRight="10dp" 
-                android:text="@string/about_dev_name"
-                />
-            <TextView android:layout_width="0dp"
-                   android:layout_height="wrap_content"
-                   android:layout_weight="1"/>
-            <TextView
-                   android:text="@string/about_dev_chenzhang"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:textSize="15sp" android:paddingLeft="10dp"
-                android:layout_gravity="end"
-                   android:paddingRight="10dp"
-                   />
+        <TextView
+            android:id="@+id/about_app"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/about_image"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="@string/app_name_text"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/about_app"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:textSize="15sp"
+            android:text="@string/about_recommend"
+            android:id="@+id/about_recommend"
+            />
+
+        <TableLayout
+            android:id="@+id/about_table"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/about_recommend"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/corners_bg">
+
+            <TableRow android:padding="10dip">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/about_version"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/about_version"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:paddingLeft="10dp"
+                    android:layout_gravity="end"
+                    android:paddingRight="10dp"
+                    />
             </TableRow>
+
             <View
-            android:layout_height="1dip"  android:layout_width="fill_parent"
-            android:background="#e8e8e7" /> 
-        <TableRow android:padding="10dip">
-            <TextView android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:textSize="15sp"
-                android:paddingLeft="10dp" 
-                android:paddingRight="10dp" 
-                android:text="@string/about_help_name"
-                />
-            <TextView android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_weight="1"/>
-            <TextView
-                   android:text="@string/about_help_xiongdian"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:textSize="15sp"
-               	 	android:paddingLeft="10dp" 
-                android:layout_gravity="end"
-                	android:paddingRight="10dp" 
-                   />
+                android:layout_height="1dip"
+                android:layout_width="fill_parent"
+                android:background="#e8e8e7"/>
+
+            <TableRow android:padding="10dip">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/about_time"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/about_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:textSize="15sp"/>
+
             </TableRow>
+
             <View
-            android:layout_height="1dip"  android:layout_width="fill_parent"
-            android:background="#e8e8e7" /> 
-        <TableRow android:padding="10dip">
-            <TextView android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:textSize="15sp"
-                android:paddingLeft="10dp" 
-                android:paddingRight="10dp" 
-                android:text="@string/about_art_name"
-                />
-            <TextView android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_weight="1"/>
-            <TextView
-                   android:text="@string/about_art_value"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:textSize="15sp"
-               	 	android:paddingLeft="10dp" 
-                	android:paddingRight="10dp" 
-                android:layout_gravity="end"
-                   />
+                android:layout_height="1dip"
+                android:layout_width="fill_parent"
+                android:background="#e8e8e7"/>
+
+            <TableRow android:padding="10dip">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/about_dev_name"
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:text="@string/about_dev_chenzhang"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:paddingLeft="10dp"
+                    android:layout_gravity="end"
+                    android:paddingRight="10dp"
+                    />
             </TableRow>
+
             <View
-            android:layout_height="1dip"  android:layout_width="fill_parent"
-            android:background="#e8e8e7" /> 
-        <TableRow android:padding="10dip">
-            <TextView android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:textSize="15sp"
-                android:paddingLeft="10dp" 
-                android:paddingRight="10dp" 
-                android:text="@string/about_guide_name"
-                />
-            <TextView android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_weight="1"/>
-            <TextView
-                   android:text="@string/about_guide_value"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:textSize="15sp"
-               	 	android:paddingLeft="10dp" 
-                	android:paddingRight="10dp" 
-                android:layout_gravity="end"
-                   />
+                android:layout_height="1dip"
+                android:layout_width="fill_parent"
+                android:background="#e8e8e7"/>
+
+            <TableRow android:padding="10dip">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/about_help_name"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:text="@string/about_help_xiongdian"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:paddingLeft="10dp"
+                    android:layout_gravity="end"
+                    android:paddingRight="10dp"
+                    />
             </TableRow>
+
             <View
-            android:layout_height="1dip"  android:layout_width="fill_parent"
-            android:background="#e8e8e7" /> 
-            <RelativeLayout android:padding="10dip"
+                android:layout_height="1dip"
+                android:layout_width="fill_parent"
+                android:background="#e8e8e7"/>
+
+            <TableRow android:padding="10dip">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/about_art_name"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:text="@string/about_art_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:layout_gravity="end"
+                    />
+            </TableRow>
+
+            <View
+                android:layout_height="1dip"
+                android:layout_width="fill_parent"
+                android:background="#e8e8e7"/>
+
+            <TableRow android:padding="10dip">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/about_guide_name"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:text="@string/about_guide_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:layout_gravity="end"
+                    />
+            </TableRow>
+
+            <View
+                android:layout_height="1dip"
+                android:layout_width="fill_parent"
+                android:background="#e8e8e7"/>
+
+            <RelativeLayout
+                android:padding="10dip"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-            <TextView android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:textSize="15sp"
-                android:layout_marginLeft="10dp" 
-                android:layout_marginStart="10dp" 
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:text="@string/about_team_name"
-                />
-            <TextView
-                   android:text="@string/about_team_value"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:textSize="15sp"
-                   android:layout_marginRight="10dp" 
-                android:layout_marginEnd="10dp" 
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                   />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:text="@string/about_team_name"
+                    />
+
+                <TextView
+                    android:text="@string/about_team_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    />
             </RelativeLayout>
+
             <View
-            android:layout_height="1dip"  android:layout_width="fill_parent"
-            android:background="#e8e8e7" /> 
-        <TableRow android:padding="10dip">
-            <TextView android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:textSize="15sp"
-                android:paddingLeft="10dp" 
-                android:paddingRight="10dp" 
-                android:text="@string/about_contact"
-                />
-            <TextView android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_weight="1"/>
-            <TextView
-                   android:text="@string/about_ckcz123"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:textSize="15sp"
-               	 	android:paddingLeft="10dp" 
-                	android:paddingRight="10dp" 
-                android:layout_gravity="end"
-                   />
-            
-        </TableRow>
-         
-   	</TableLayout>
-    <!-- 
-     <TextView
-        android:id="@+id/about_copyright"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/about_table"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="19dp"
-        android:textSize="12sp"
-        android:text="@string/about_copyright"
-    	/>
-     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/about_copyright"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="3dp"
-        android:textSize="12sp"
-        android:text="@string/about_rights"
-    	/>
-   	-->
-</RelativeLayout>
+                android:layout_height="1dip"
+                android:layout_width="fill_parent"
+                android:background="#e8e8e7"/>
+
+            <TableRow android:padding="10dip">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/about_contact"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:text="@string/about_ckcz123"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:layout_gravity="end"
+                    />
+
+            </TableRow>
+
+        </TableLayout>
+        <!--
+         <TextView
+            android:id="@+id/about_copyright"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/about_table"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="19dp"
+            android:textSize="12sp"
+            android:text="@string/about_copyright"
+            />
+         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/about_copyright"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="3dp"
+            android:textSize="12sp"
+            android:text="@string/about_rights"
+            />
+           -->
+    </RelativeLayout>
 </ScrollView>

@@ -6,13 +6,13 @@ public class ChatDetailInfo {
 	String mime;
 	long timestamp;
 	String type;
-	
-	public ChatDetailInfo(int _id,String _content, String _mime, long _timestamp,
-			String _type) {
-		id=_id;
-		content=new String(_content);
-		mime=new String(_mime).trim();
-		timestamp=_timestamp;
-		type=new String(_type).trim();
+
+	public ChatDetailInfo(int _id, String _content, String _mime, long _timestamp,
+						  String _type) {
+		id = _id;
+		content = new String(_content);
+		mime = new String(_mime).trim();
+		timestamp = _timestamp;
+		type = new String(_type).trim();
 	}
 }

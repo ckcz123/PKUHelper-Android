@@ -1,7 +1,8 @@
-<ListView android:layout_width="fill_parent" 
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_height="fill_parent"
-         android:background="#E8E8E7"
-         android:id="@+id/pkuhole_detail_listview">
+<ListView
+    android:layout_width="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="fill_parent"
+    android:background="#E8E8E7"
+    android:id="@+id/pkuhole_detail_listview">
 
 </ListView>

@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="#eee"
-    android:orientation="vertical" >
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="#eee"
+                android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/main_bottom"
         android:layout_width="match_parent"
         android:layout_height="50sp"
         android:layout_alignParentBottom="true"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:baselineAligned="false"
-            android:paddingBottom="2sp" >
+            android:paddingBottom="2sp">
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -26,7 +26,7 @@
                 android:gravity="center_horizontal"
                 android:clickable="true"
                 android:onClick="clickIPGW"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <FrameLayout
                     android:layout_width="wrap_content"
@@ -51,7 +51,7 @@
                     android:text="@string/title_ipgw"
                     android:textColor="#000"
                     android:id="@+id/title_ipgw"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"/>
 
             </LinearLayout>
 
@@ -62,7 +62,7 @@
                 android:gravity="center_horizontal"
                 android:clickable="true"
                 android:onClick="clickCourse"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <FrameLayout
                     android:layout_width="wrap_content"
@@ -87,7 +87,7 @@
                     android:text="@string/title_course"
                     android:textColor="#000"
                     android:id="@+id/title_course"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"/>
 
             </LinearLayout>
 
@@ -98,7 +98,7 @@
                 android:gravity="center_horizontal"
                 android:clickable="true"
                 android:onClick="clickMYPKU"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <FrameLayout
                     android:layout_width="wrap_content"
@@ -123,7 +123,7 @@
                     android:text="@string/title_mypku"
                     android:textColor="#000"
                     android:id="@+id/title_mypku"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"/>
 
             </LinearLayout>
 
@@ -134,7 +134,7 @@
                 android:gravity="center_horizontal"
                 android:clickable="true"
                 android:onClick="clickSettings"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <FrameLayout
                     android:layout_width="wrap_content"
@@ -159,7 +159,7 @@
                     android:text="@string/title_settings"
                     android:textColor="#000"
                     android:id="@+id/title_settings"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"/>
 
             </LinearLayout>
         </LinearLayout>
@@ -170,13 +170,13 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/main_bottom"
         android:layout_alignParentTop="true"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <com.pkuhelper.lib.view.CustomViewPager
             android:id="@+id/tabpager"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"/>
     </LinearLayout>
 
 </RelativeLayout>

@@ -1,175 +1,178 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content">
-    <View android:layout_width="0dp" android:layout_height="0dp"/>
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
 
-<LinearLayout 
-    android:layout_marginTop="10dp"
-    android:layout_marginBottom="10dp"
-    android:layout_marginLeft="40dp"
-    android:layout_marginRight="40dp"
-    android:layout_marginStart="40dp"
-    android:layout_marginEnd="40dp"
-    android:background="@drawable/corners_bg"
-    android:layout_centerInParent="true"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/subactivity_listitem_layout"
-    android:orientation="vertical" >
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"/>
 
-    <TextView 
-        android:id="@+id/subactivity_listitem_title"
-        android:textSize="20sp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
+    <LinearLayout
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/corners_bg"
+        android:layout_centerInParent="true"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textColor="#000000"
-        android:singleLine="true"
-        />
-	
-    <View 
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="#aaaaaa"
-        />
-    
-    <TextView 
-        android:id="@+id/subactivity_listitem_description"
-        android:textSize="17sp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="8dp"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:singleLine="false"
-        android:textColor="#636363"
-        android:lineSpacingMultiplier="1.3"
-        />
-    
-    <View 
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="#dddddd"
-        />
-    
-    <RelativeLayout 
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="10dp"
-        >
-        
-        <ImageView 
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_height="17sp"
-            android:layout_width="17sp"
-            android:layout_centerVertical="true"
-            android:src="@drawable/listitem_location"
-            android:contentDescription="@string/app_name"
-            android:id="@+id/subactivity_listitem_location_image"
-            />
-        
-        <TextView 
-            android:layout_width="wrap_content"
-            android:textSize="14sp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_toRightOf="@+id/subactivity_listitem_location_image"
-            android:layout_toEndOf="@+id/subactivity_listitem_location_image"
-            android:id="@+id/subactivity_listitem_location_text"
+        android:id="@+id/subactivity_listitem_layout"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/subactivity_listitem_title"
+            android:textSize="20sp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
+            android:textColor="#000000"
+            android:singleLine="true"
             />
-        
-        
-    </RelativeLayout>
-    
-    <RelativeLayout 
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="10dp"
-        >
-        
-        <ImageView 
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_height="17sp"
-            android:layout_width="17sp"
-            android:layout_centerVertical="true"
-            android:src="@drawable/listitem_time"
-            android:contentDescription="@string/app_name"
-            android:id="@+id/subactivity_listitem_time_image"
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#aaaaaa"
             />
-        
-        <TextView 
-            android:layout_width="wrap_content"
-            android:textSize="14sp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_toRightOf="@+id/subactivity_listitem_time_image"
-            android:layout_toEndOf="@+id/subactivity_listitem_time_image"
-            android:id="@+id/subactivity_listitem_time_text"
+
+        <TextView
+            android:id="@+id/subactivity_listitem_description"
+            android:textSize="17sp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="8dp"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
+            android:singleLine="false"
+            android:textColor="#636363"
+            android:lineSpacingMultiplier="1.3"
             />
-        
-        
-    </RelativeLayout>
-    
-    <RelativeLayout 
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        >
-        
-        <ImageView 
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_height="17sp"
-            android:layout_width="17sp"
-            android:layout_centerVertical="true"
-            android:src="@drawable/listitem_seat"
-            android:contentDescription="@string/app_name"
-            android:id="@+id/subactivity_listitem_seat_image"
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#dddddd"
             />
-        
-        <TextView 
-            android:layout_width="wrap_content"
-            android:textSize="14sp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_toRightOf="@+id/subactivity_listitem_seat_image"
-            android:layout_toEndOf="@+id/subactivity_listitem_seat_image"
-            android:id="@+id/subactivity_listitem_seat_text"
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            />
-        
-        
-    </RelativeLayout>
-    
-    
-</LinearLayout>
-    
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="10dp"
+            >
+
+            <ImageView
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_height="17sp"
+                android:layout_width="17sp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/listitem_location"
+                android:contentDescription="@string/app_name"
+                android:id="@+id/subactivity_listitem_location_image"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_toRightOf="@+id/subactivity_listitem_location_image"
+                android:layout_toEndOf="@+id/subactivity_listitem_location_image"
+                android:id="@+id/subactivity_listitem_location_text"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="10dp"
+            >
+
+            <ImageView
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_height="17sp"
+                android:layout_width="17sp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/listitem_time"
+                android:contentDescription="@string/app_name"
+                android:id="@+id/subactivity_listitem_time_image"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_toRightOf="@+id/subactivity_listitem_time_image"
+                android:layout_toEndOf="@+id/subactivity_listitem_time_image"
+                android:id="@+id/subactivity_listitem_time_text"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            >
+
+            <ImageView
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_height="17sp"
+                android:layout_width="17sp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/listitem_seat"
+                android:contentDescription="@string/app_name"
+                android:id="@+id/subactivity_listitem_seat_image"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_toRightOf="@+id/subactivity_listitem_seat_image"
+                android:layout_toEndOf="@+id/subactivity_listitem_seat_image"
+                android:id="@+id/subactivity_listitem_seat_text"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                />
+
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
 </RelativeLayout>

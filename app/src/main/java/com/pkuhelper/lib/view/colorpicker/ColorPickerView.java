@@ -96,7 +96,7 @@ public class ColorPickerView extends View {
 		lightnessSliderViewId = typedArray.getResourceId(R.styleable.ColorPickerPreference_lightnessSliderView, 0);
 
 		typedArray.recycle();
-		
+
 		setRenderer(renderer);
 		setDensity(density);
 		setInitialColor(initialColor);
@@ -184,13 +184,13 @@ public class ColorPickerView extends View {
 			squareDimen = height;
 		setMeasuredDimension(squareDimen, squareDimen);
 	}
-	
+
 	@Override
 	public boolean performClick() {
 		// TODO Auto-generated method stub
 		return super.performClick();
 	}
-	
+
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		switch (event.getAction()) {
@@ -410,7 +410,7 @@ public class ColorPickerView extends View {
 					Object tag = v.getTag();
 					if (tag == null || !(tag instanceof Integer))
 						return;
-					setSelectedColor((Integer)tag);
+					setSelectedColor((Integer) tag);
 				}
 			});
 		}

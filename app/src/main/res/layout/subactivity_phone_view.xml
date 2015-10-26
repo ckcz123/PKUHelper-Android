@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical" >
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:orientation="vertical">
 
     <SearchView
         android:id="@+id/subactivity_phone_search"
@@ -11,17 +11,17 @@
         android:layout_marginStart="-8dp"
         android:gravity="center_horizontal"
         android:iconifiedByDefault="false"
-        android:queryHint="@string/query_phone" >
+        android:queryHint="@string/query_phone">
 
     </SearchView>
-    
-    <ListView 
+
+    <ListView
         android:id="@+id/subactivity_phone_list"
-   	 	android:layout_width="fill_parent"
-    	android:divider="#e1e1e1"
-    	android:background="#E8E8E7"
-    	android:dividerHeight="1dp"
-    	android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+        android:divider="#e1e1e1"
+        android:background="#E8E8E7"
+        android:dividerHeight="1dp"
+        android:layout_height="fill_parent"
         ></ListView>
 
 </LinearLayout>

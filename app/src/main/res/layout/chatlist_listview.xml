@@ -1,19 +1,19 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="#e8e8e7"
-    android:id="@+id/chat_bg"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="#e8e8e7"
+                android:id="@+id/chat_bg"
     >
-    
-    <ListView 
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:id="@+id/chatlist_listview"
-    android:divider="@drawable/dash_line"
-    android:layerType="software"
-    >
-   
-</ListView>
-    
+
+    <ListView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/chatlist_listview"
+        android:divider="@drawable/dash_line"
+        android:layerType="software"
+        >
+
+    </ListView>
+
 </RelativeLayout>
 

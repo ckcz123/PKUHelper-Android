@@ -1,10 +1,11 @@
-<RelativeLayout  android:layout_width="fill_parent" 
+<RelativeLayout
+    android:layout_width="fill_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="wrap_content"
     android:background="#E8E8E7"
     android:paddingBottom="14dp"
     >
-    
+
     <TextView
         android:id="@+id/nc_setsource_hint_1"
         android:layout_width="wrap_content"
@@ -16,7 +17,7 @@
         android:layout_centerInParent="false"
         android:layout_marginTop="13dp"
         android:text="@string/nc_setsource_hint_1"
-        android:textSize="14sp" />
+        android:textSize="14sp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -29,7 +30,8 @@
         android:textColor="#428BCA"
         android:layout_below="@+id/nc_setsource_hint_1"
         android:textSize="14sp"
-        android:layout_marginTop="2dp" />
+        android:layout_marginTop="2dp"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -41,7 +43,7 @@
         android:id="@+id/nc_setsource_hint_3"
         android:layout_below="@+id/nc_setsource_hint_2"
         android:textSize="14sp"
-        android:layout_marginTop="2dp" 
+        android:layout_marginTop="2dp"
         />
-    
+
 </RelativeLayout>

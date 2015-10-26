@@ -1,68 +1,85 @@
-<LinearLayout  android:layout_width="fill_parent" 
+<LinearLayout
+    android:layout_width="fill_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="wrap_content"
-    android:orientation="vertical" 
+    android:orientation="vertical"
     android:background="#E8E8E7"
     >
 
-    <TextView android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textSize="13sp"
-            android:layout_marginTop="30dp"
-            android:textColor="#aaaaaa"
-            android:text="@string/original"
-            android:layout_marginLeft="18dp"
-            android:layout_marginRight="18dp"
-            android:layout_marginBottom="10dp"
-            />
-    
-    <LinearLayout android:background="#ffffff"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical" >
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="13sp"
+        android:layout_marginTop="30dp"
+        android:textColor="#aaaaaa"
+        android:text="@string/original"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:layout_marginBottom="10dp"
+        />
 
-    <LinearLayout android:orientation="horizontal" android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-         android:layout_marginBottom="7dp" 
-        android:layout_width="fill_parent">
-       <TextView android:id="@+id/pkuhole_detail_id" android:textColor="#FF000000"
-            android:textSize="13sp" android:layout_width="wrap_content"
+    <LinearLayout
+        android:background="#ffffff"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_height="wrap_content"
-            android:paddingLeft="10dp" 
-            android:paddingRight="10dp" 
-            /> 
-		<TextView android:layout_width="0dp"
-                   android:layout_height="wrap_content"
-                   android:layout_weight="1"/>
-       <TextView android:id="@+id/pkuhole_detail_time" android:textColor="#FF800080"
-            android:textSize="13sp" android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-            android:paddingLeft="15dp"
-             android:paddingRight="15dp"
-            />       
-   </LinearLayout>
-    
-    <TextView android:layout_width="wrap_content"
-        		android:textSize="15sp"
-        		android:textColor="#006060"
-       			android:layout_height="wrap_content"
-       			 android:layout_marginLeft="13dp"
-       			  android:layout_marginRight="13dp" 
-                android:id="@+id/pkuhole_detail_text"
-                android:layout_marginBottom="10dp" 
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="7dp"
+            android:layout_width="fill_parent">
+
+            <TextView
+                android:id="@+id/pkuhole_detail_id"
+                android:textColor="#FF000000"
+                android:textSize="13sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
                 />
-   
-</LinearLayout>
-    
-    <TextView android:layout_width="fill_parent"
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:id="@+id/pkuhole_detail_time"
+                android:textColor="#FF800080"
+                android:textSize="13sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:textSize="15sp"
+            android:textColor="#006060"
             android:layout_height="wrap_content"
-            android:textSize="13sp"
-            android:layout_marginTop="40dp"
-            android:textColor="#aaaaaa"
-            android:text="@string/comment"
-            android:layout_marginLeft="18dp"
-            android:layout_marginRight="18dp"
+            android:layout_marginLeft="13dp"
+            android:layout_marginRight="13dp"
+            android:id="@+id/pkuhole_detail_text"
             android:layout_marginBottom="10dp"
             />
-    
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="13sp"
+        android:layout_marginTop="40dp"
+        android:textColor="#aaaaaa"
+        android:text="@string/comment"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:layout_marginBottom="10dp"
+        />
+
 </LinearLayout>

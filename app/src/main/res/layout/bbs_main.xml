@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="#eee"
-    android:orientation="vertical" >
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="#eee"
+                android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/bbs_bottom"
         android:layout_width="match_parent"
         android:layout_height="50sp"
         android:layout_alignParentBottom="true"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:baselineAligned="false"
-            android:paddingBottom="2sp" >
+            android:paddingBottom="2sp">
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -26,7 +26,7 @@
                 android:gravity="center_horizontal"
                 android:clickable="true"
                 android:onClick="clickTop"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <FrameLayout
                     android:layout_width="wrap_content"
@@ -41,7 +41,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="21sp"
                         android:layout_gravity="center"
-                        android:src="@drawable/hot" />
+                        android:src="@drawable/hot"/>
                 </FrameLayout>
 
                 <TextView
@@ -50,7 +50,7 @@
                     android:text="@string/bbs_bottom_top"
                     android:textColor="#000"
                     android:id="@+id/bbs_bottom_top"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"/>
 
             </LinearLayout>
 
@@ -61,7 +61,7 @@
                 android:gravity="center_horizontal"
                 android:clickable="true"
                 android:onClick="clickAllBoards"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <FrameLayout
                     android:layout_width="wrap_content"
@@ -76,7 +76,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="21sp"
                         android:layout_gravity="center"
-                        android:src="@drawable/list" />
+                        android:src="@drawable/list"/>
                 </FrameLayout>
 
                 <TextView
@@ -85,10 +85,10 @@
                     android:text="@string/bbs_bottom_allboards"
                     android:textColor="#000"
                     android:id="@+id/bbs_bottom_allboards"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"/>
 
             </LinearLayout>
-            
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -96,7 +96,7 @@
                 android:gravity="center_horizontal"
                 android:clickable="true"
                 android:onClick="clickSearch"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <FrameLayout
                     android:layout_width="wrap_content"
@@ -111,7 +111,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="21sp"
                         android:layout_gravity="center"
-                        android:src="@drawable/search" />
+                        android:src="@drawable/search"/>
                 </FrameLayout>
 
                 <TextView
@@ -120,7 +120,7 @@
                     android:text="@string/bbs_bottom_search"
                     android:textColor="#000"
                     android:id="@+id/bbs_bottom_search"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"/>
 
             </LinearLayout>
 
@@ -131,7 +131,7 @@
                 android:gravity="center_horizontal"
                 android:clickable="true"
                 android:onClick="clickMe"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <FrameLayout
                     android:layout_width="wrap_content"
@@ -146,7 +146,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="21sp"
                         android:layout_gravity="center"
-                        android:src="@drawable/user" />
+                        android:src="@drawable/user"/>
                 </FrameLayout>
 
                 <TextView
@@ -155,10 +155,10 @@
                     android:text="@string/bbs_bottom_me"
                     android:textColor="#000"
                     android:id="@+id/bbs_bottom_me"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"/>
 
             </LinearLayout>
-            
+
         </LinearLayout>
     </RelativeLayout>
 
@@ -167,13 +167,13 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/bbs_bottom"
         android:layout_alignParentTop="true"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <com.pkuhelper.lib.view.CustomViewPager
             android:id="@+id/bbspager"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"/>
     </LinearLayout>
 
 </RelativeLayout>

@@ -1,92 +1,110 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-         android:layout_width="fill_parent" android:layout_height="fill_parent"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-    	android:paddingLeft="@dimen/activity_horizontal_margin"
-    	android:paddingRight="@dimen/activity_horizontal_margin"
-    	android:paddingTop="@dimen/activity_vertical_margin"
-        android:background="#E8E8E7"
-        >
-        
-        <TextView android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textSize="13sp"
-        	android:layout_marginTop="3dp"
-            android:textColor="#aaaaaa"
-            android:text="@string/custom_course_hint"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp"
-            />
-        
-        <TableLayout
-        	android:layout_width="fill_parent"
-        	android:layout_height="wrap_content"
-        	android:layout_marginTop="8dp"
-        	android:background="@drawable/corners_bg" >
-        
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:orientation="vertical"
+              android:paddingBottom="@dimen/activity_vertical_margin"
+              android:paddingLeft="@dimen/activity_horizontal_margin"
+              android:paddingRight="@dimen/activity_horizontal_margin"
+              android:paddingTop="@dimen/activity_vertical_margin"
+              android:background="#E8E8E7"
+    >
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="13sp"
+        android:layout_marginTop="3dp"
+        android:textColor="#aaaaaa"
+        android:text="@string/custom_course_hint"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        />
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/corners_bg">
+
         <TableRow android:padding="10dip">
-            <TextView android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:textSize="15sp"
-                android:paddingLeft="10dp" 
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:text="@string/custom_course_name"
                 />
-            <TextView android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_weight="1"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
             <EditText
-                   android:id="@+id/custom_course_name"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:textSize="14sp"
-                   android:width="130dp"
-                   android:singleLine="true"
-                   android:inputType="text"
-                   android:hint="@string/must"
-                   />
+                android:id="@+id/custom_course_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:width="130dp"
+                android:singleLine="true"
+                android:inputType="text"
+                android:hint="@string/must"
+                />
         </TableRow>
+
         <View
-            android:layout_height="1dip"  android:layout_width="fill_parent"
-            android:background="#e8e8e7" /> 
+            android:layout_height="1dip"
+            android:layout_width="fill_parent"
+            android:background="#e8e8e7"/>
+
         <TableRow android:padding="10dip">
-            <TextView android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:textSize="15sp"
-                android:paddingLeft="10dp" 
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:text="@string/custom_course_location"
                 />
-            <TextView android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_weight="1"/>
-            <EditText
-                   android:id="@+id/custom_course_location"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:textSize="14sp"
-                   android:width="130dp"
-                   android:singleLine="true"
-                   android:inputType="text"
-                   android:hint="@string/must"
-                   />
-        </TableRow>
-        </TableLayout>
-        
-        <TextView android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textSize="13sp"
-            android:layout_marginTop="20dp"
-            android:textColor="#aaaaaa"
-            android:id="@+id/custom_course_when_hint"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp"
-            />
 
-        <RelativeLayout
-            android:layout_width="247dp"
-            android:layout_marginTop="8dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal" >
-        
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+            <EditText
+                android:id="@+id/custom_course_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:width="130dp"
+                android:singleLine="true"
+                android:inputType="text"
+                android:hint="@string/must"
+                />
+        </TableRow>
+    </TableLayout>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="13sp"
+        android:layout_marginTop="20dp"
+        android:textColor="#aaaaaa"
+        android:id="@+id/custom_course_when_hint"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        />
+
+    <RelativeLayout
+        android:layout_width="247dp"
+        android:layout_marginTop="8dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+
         <GridView
             android:id="@+id/custom_course_time"
             android:layout_width="fill_parent"
@@ -96,8 +114,8 @@
             android:horizontalSpacing="1dp"
             android:numColumns="8"
             android:stretchMode="columnWidth"
-            android:verticalSpacing="1dp" >
+            android:verticalSpacing="1dp">
 
         </GridView>
-        </RelativeLayout>
-    </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>
