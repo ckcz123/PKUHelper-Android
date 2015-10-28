@@ -37,8 +37,6 @@ import com.pkuhelper.pkuhole.HoleActivity;
 import com.pkuhelper.qrcode.QRCodeActivity;
 import com.pkuhelper.subactivity.SubActivity;
 
-import java.io.File;
-
 public class PKUHelper extends BaseActivity {
 
 	public static PKUHelper pkuhelper;
@@ -221,15 +219,16 @@ public class PKUHelper extends BaseActivity {
 		}
 		if (id == Constants.MENU_COURSE_REFRESH) {
 
-			String[] strings = {"更换颜色", "重新导入教务课程", "只导入自定义课程"};
+			String[] strings = {"更换颜色", "更换背景", "重新导入教务课程", "只导入自定义课程"};
 			new AlertDialog.Builder(this).setTitle("选择项目")
 					.setItems(strings, new DialogInterface.OnClickListener() {
 
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
-							if (which==0) Course.changeColor();
-							else if (which == 1) Course.gettingCourse();
-							else if (which == 2) Course.getCustom();
+							if (which == 0) Course.changeColor();
+							else if (which == 1) Course.setBackground();
+							else if (which == 2) Course.gettingCourse();
+							else if (which == 3) Course.getCustom();
 						}
 					}).show();
 
@@ -363,5 +362,6 @@ public class PKUHelper extends BaseActivity {
 		super.onActivityResult(requestCode, resultCode, data);
 		if (resultCode != RESULT_OK) return;
 		if (requestCode == 0) IPGW.realSetBackground(data);
+		if (requestCode == 1) Course.realSetBackground(data);
 	}
 }
