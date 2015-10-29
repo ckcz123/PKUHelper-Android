@@ -72,20 +72,20 @@ public class IPGW extends Fragment {
 					FileOutputStream fileOutputStream = new FileOutputStream(bgFile);
 					bitmap.compress(CompressFormat.JPEG, 100, fileOutputStream);
 					fileOutputStream.flush();
-				} catch (Exception e) {
+				} catch (Exception | OutOfMemoryError e) {
 					e.printStackTrace();
 				}
 			} else {
 				try {
 					drawable = Drawable.createFromPath(bgFile.getAbsolutePath());
-				} catch (Exception e) {
+				} catch (Exception | OutOfMemoryError e) {
 					drawable = PKUHelper.pkuhelper.getResources().getDrawable(R.drawable.bg);
 					try {
 						Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
 						FileOutputStream fileOutputStream = new FileOutputStream(bgFile);
 						bitmap.compress(CompressFormat.JPEG, 100, fileOutputStream);
 						fileOutputStream.flush();
-					} catch (Exception ee) {
+					} catch (Exception | OutOfMemoryError ee) {
 						e.printStackTrace();
 					}
 				}
@@ -107,8 +107,7 @@ public class IPGW extends Fragment {
 
 	@Override
 	public void onViewCreated(final View view, Bundle savedInstanceState) {
-		ViewTreeObserver observer = view.getViewTreeObserver();
-		observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+		view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 
 			@SuppressLint("NewApi")
 			@SuppressWarnings("deprecation")
@@ -254,7 +253,7 @@ public class IPGW extends Fragment {
 			IAAA.showLoginView();
 			return;
 		}
-		ArrayList<Parameters> arrayList = new ArrayList<>();
+		ArrayList<Parameters> arrayList = new ArrayList<Parameters>();
 		arrayList.add(new Parameters("uid", Constants.username));
 		arrayList.add(new Parameters("password", Constants.password));
 		arrayList.add(new Parameters("operation", type));
@@ -331,7 +330,7 @@ public class IPGW extends Fragment {
 	}
 
 	private static Map<String, String> getReturnMsg(String string) {
-		Map<String, String> map = new HashMap<>();
+		Map<String, String> map = new HashMap<String, String>();
 		int pos1 = string.indexOf("SUCCESS=");
 		int pos2 = string.indexOf("IPGWCLIENT_END-->");
 
@@ -399,7 +398,7 @@ public class IPGW extends Fragment {
 				PKUHelper.pkuhelper.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(file)));
 
 			}
-		} catch (Exception e) {
+		} catch (Exception | OutOfMemoryError e) {
 			CustomToast.showErrorToast(PKUHelper.pkuhelper, "设置失败");
 		}
 	}

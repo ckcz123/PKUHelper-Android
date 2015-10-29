@@ -1,11 +1,20 @@
 package com.pkuhelper;
 
+import android.annotation.SuppressLint;
 import android.app.Fragment;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.webkit.WebView;
 
 import com.pkuhelper.lib.Constants;
@@ -15,6 +24,7 @@ import com.pkuhelper.lib.MyCalendar;
 import com.pkuhelper.lib.MyFile;
 import com.pkuhelper.lib.RequestingTask;
 import com.pkuhelper.lib.Util;
+import com.pkuhelper.lib.ViewSetting;
 import com.pkuhelper.lib.view.CustomToast;
 import com.pkuhelper.lib.webconnection.Parameters;
 import com.pkuhelper.widget.WidgetCourse2Provider;
@@ -28,6 +38,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -36,6 +48,7 @@ import java.util.Locale;
 public class Course extends Fragment {
 	static WebView courseView;
 	static String html;
+	static Drawable drawable;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,10 +60,11 @@ public class Course extends Fragment {
 		courseView.setVerticalScrollBarEnabled(false);
 		courseView.setBackgroundColor(Color.TRANSPARENT);
 		//courseView.setBackgroundDrawable(PKUHelper.pkuhelper.getResources().getDrawable(R.drawable.mypku_bg));
-		try {
-			courseView.setBackgroundResource(R.drawable.mypku_bg);
-		}
-		catch (Exception | OutOfMemoryError e) {}
+		initBackgroundFromFile();
+//		try {
+//			courseView.setBackgroundResource(R.drawable.mypku_bg);
+//		}
+//		catch (Exception | OutOfMemoryError e) {}
 		try {
 			html = MyFile.getString(PKUHelper.pkuhelper, Constants.username, "course", CourseString.defaultHtml);
 			if ("".equals(html)) html = CourseString.defaultHtml;
@@ -61,6 +75,28 @@ public class Course extends Fragment {
 			html=CourseString.defaultHtml;
 		showView();
 		return rootView;
+	}
+
+	@Override
+	public void onViewCreated(final View view, Bundle savedInstanceState) {
+		view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+
+			@SuppressLint("NewApi")
+			@SuppressWarnings("deprecation")
+			@Override
+			public void onGlobalLayout() {
+				int width = view.getWidth(), height = view.getHeight();
+				if (width != 0 && height != 0) {
+					ViewSetting.setBackground(getActivity(), view, drawable);
+					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+						view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+					} else {
+						view.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+					}
+				}
+			}
+		});
+		super.onViewCreated(view, savedInstanceState);
 	}
 
 	public static void showView() {
@@ -712,6 +748,73 @@ public class Course extends Fragment {
 		catch (Exception e) {return html;}
 	}
 
+	public static void setBackground() {
+		int width = PKUHelper.pkuhelper.findViewById(R.id.course_view).getWidth();
+		int height = PKUHelper.pkuhelper.findViewById(R.id.course_view).getHeight();
+		Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+		intent.putExtra("crop", "true");
+		intent.putExtra("aspectX", width);
+		intent.putExtra("aspectY", height);
+		intent.putExtra("return-data", false);
+		intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(
+				MyFile.getFile(PKUHelper.pkuhelper, null, "bg_course_temp.jpg")));
+		PKUHelper.pkuhelper.startActivityForResult(intent, 1);
+	}
+
+	@SuppressWarnings("deprecation")
+	public static void realSetBackground(Intent data) {
+		try {
+			File file = MyFile.getFile(PKUHelper.pkuhelper, null, "bg_course_temp.jpg");
+			if (file.exists()) {
+				drawable = Drawable.createFromPath(file.getAbsolutePath());
+				courseView.setBackgroundDrawable(drawable);
+
+				File file2 = MyFile.getFile(PKUHelper.pkuhelper, null, "bg_course.jpg");
+				file2.delete();
+				file.renameTo(file2);
+
+				PKUHelper.pkuhelper.sendBroadcast(
+						new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(file)));
+			}
+		} catch (Exception | OutOfMemoryError e) {
+			CustomToast.showErrorToast(PKUHelper.pkuhelper, "设置失败");
+		}
+	}
+
+	private void initBackgroundFromFile() {
+		if (drawable == null) {
+			File bgFile = MyFile.getFile(getActivity(), null, "bg_course.jpg");
+			if (!bgFile.exists()) {
+				drawable = PKUHelper.pkuhelper.getResources().getDrawable(R.drawable.mypku_bg);
+				try {
+					Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
+					FileOutputStream fileOutputStream = new FileOutputStream(bgFile);
+					bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
+					fileOutputStream.flush();
+				} catch (Exception | OutOfMemoryError e) {
+					e.printStackTrace();
+				}
+			} else {
+				try {
+					drawable = Drawable.createFromPath(bgFile.getAbsolutePath());
+				} catch (Exception | OutOfMemoryError e) {
+					drawable = PKUHelper.pkuhelper.getResources().getDrawable(R.drawable.mypku_bg);
+					try {
+						Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
+						FileOutputStream fileOutputStream = new FileOutputStream(bgFile);
+						bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
+						fileOutputStream.flush();
+					} catch (Exception | OutOfMemoryError ee) {
+						e.printStackTrace();
+					}
+				}
+			}
+
+			PKUHelper.pkuhelper.sendBroadcast(
+					new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(bgFile)));
+
+		}
+	}
 }
 
 class CourseString {
