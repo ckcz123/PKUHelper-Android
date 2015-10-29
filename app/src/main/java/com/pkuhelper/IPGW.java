@@ -72,20 +72,20 @@ public class IPGW extends Fragment {
 					FileOutputStream fileOutputStream = new FileOutputStream(bgFile);
 					bitmap.compress(CompressFormat.JPEG, 100, fileOutputStream);
 					fileOutputStream.flush();
-				} catch (Exception e) {
+				} catch (Exception | OutOfMemoryError e) {
 					e.printStackTrace();
 				}
 			} else {
 				try {
 					drawable = Drawable.createFromPath(bgFile.getAbsolutePath());
-				} catch (Exception e) {
+				} catch (Exception | OutOfMemoryError e) {
 					drawable = PKUHelper.pkuhelper.getResources().getDrawable(R.drawable.bg);
 					try {
 						Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
 						FileOutputStream fileOutputStream = new FileOutputStream(bgFile);
 						bitmap.compress(CompressFormat.JPEG, 100, fileOutputStream);
 						fileOutputStream.flush();
-					} catch (Exception ee) {
+					} catch (Exception | OutOfMemoryError ee) {
 						e.printStackTrace();
 					}
 				}
@@ -107,8 +107,7 @@ public class IPGW extends Fragment {
 
 	@Override
 	public void onViewCreated(final View view, Bundle savedInstanceState) {
-		final ViewTreeObserver observer = view.getViewTreeObserver();
-		observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+		view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 
 			@SuppressLint("NewApi")
 			@SuppressWarnings("deprecation")
@@ -118,9 +117,9 @@ public class IPGW extends Fragment {
 				if (width != 0 && height != 0) {
 					ViewSetting.setBackground(getActivity(), view, drawable);
 					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-						observer.removeOnGlobalLayoutListener(this);
+						view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
 					} else {
-						observer.removeGlobalOnLayoutListener(this);
+						view.getViewTreeObserver().removeGlobalOnLayoutListener(this);
 					}
 				}
 			}
@@ -399,7 +398,7 @@ public class IPGW extends Fragment {
 				PKUHelper.pkuhelper.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(file)));
 
 			}
-		} catch (Exception e) {
+		} catch (Exception | OutOfMemoryError e) {
 			CustomToast.showErrorToast(PKUHelper.pkuhelper, "设置失败");
 		}
 	}
