@@ -830,7 +830,7 @@ public class Course extends Fragment {
 				e.printStackTrace();
 			}
 			ViewSetting.setBackground(PKUHelper.pkuhelper,
-					PKUHelper.pkuhelper.findViewById(R.id.course_view), drawable);
+					courseView, drawable);
 			PKUHelper.pkuhelper.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(bgFile)));
 		} catch (Exception | OutOfMemoryError e) {
 			e.printStackTrace();
