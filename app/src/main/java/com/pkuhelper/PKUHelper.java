@@ -219,16 +219,25 @@ public class PKUHelper extends BaseActivity {
 		}
 		if (id == Constants.MENU_COURSE_REFRESH) {
 
-			String[] strings = {"更换颜色", "更换背景", "重新导入教务课程", "只导入自定义课程"};
+			String[] strings = {"更换颜色或背景", "重新导入教务课程", "只导入自定义课程"};
 			new AlertDialog.Builder(this).setTitle("选择项目")
 					.setItems(strings, new DialogInterface.OnClickListener() {
 
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
-							if (which == 0) Course.changeColor();
-							else if (which == 1) Course.setBackground();
-							else if (which == 2) Course.gettingCourse();
-							else if (which == 3) Course.getCustom();
+							if (which == 0) {
+								String[] stringsSec = {"更换背景图", "更换课程颜色", "重置为默认"};
+								new AlertDialog.Builder(pkuhelper).setTitle("选择项目")
+										.setItems(stringsSec, new DialogInterface.OnClickListener() {
+											@Override
+											public void onClick(DialogInterface dialogInterface, int i) {
+												if (i == 0) Course.setBackground();
+												else if (i == 1) Course.changeColor();
+												else if (i == 2) Course.resetBackground();
+											}
+										}).show();
+							} else if (which == 1) Course.gettingCourse();
+							else if (which == 2) Course.getCustom();
 						}
 					}).show();
 

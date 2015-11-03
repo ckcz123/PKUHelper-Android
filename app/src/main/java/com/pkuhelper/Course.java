@@ -815,6 +815,28 @@ public class Course extends Fragment {
 
 		}
 	}
+
+	public static void resetBackground() {
+		try {
+			drawable = PKUHelper.pkuhelper.getResources().getDrawable(R.drawable.mypku_bg);
+			File bgFile = MyFile.getFile(PKUHelper.pkuhelper, null, "bg_course.jpg");
+			try {
+				Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
+				FileOutputStream fileOutputStream = new FileOutputStream(bgFile);
+				bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
+				fileOutputStream.flush();
+				fileOutputStream.close();
+			} catch (Exception | OutOfMemoryError e) {
+				e.printStackTrace();
+			}
+			ViewSetting.setBackground(PKUHelper.pkuhelper,
+					courseView, drawable);
+			PKUHelper.pkuhelper.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(bgFile)));
+		} catch (Exception | OutOfMemoryError e) {
+			e.printStackTrace();
+			CustomToast.showErrorToast(PKUHelper.pkuhelper, "无法重置为默认....");
+		}
+	}
 }
 
 class CourseString {
