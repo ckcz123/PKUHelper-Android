@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:orientation="horizontal"
-    android:paddingTop="10dp"
-    android:descendantFocusability="blocksDescendants"
-    android:layout_height="wrap_content" >
-    
+                android:layout_width="fill_parent"
+                android:orientation="horizontal"
+                android:paddingTop="10dp"
+                android:descendantFocusability="blocksDescendants"
+                android:layout_height="wrap_content">
+
     <ImageView
         android:id="@+id/lostfound_item_image"
         android:layout_width="80sp"
@@ -18,8 +18,8 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:visibility="gone"
-        android:contentDescription="@string/app_name" />
-    
+        android:contentDescription="@string/app_name"/>
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -31,9 +31,9 @@
         android:layout_toLeftOf="@+id/lostfound_item_image"
         android:layout_toStartOf="@+id/lostfound_item_image"
         >
-    
-    
-        <TextView 
+
+
+        <TextView
             android:id="@+id/lostfound_item_name"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -45,46 +45,47 @@
             android:textSize="18sp"
             android:textColor="#000000"
             />
-        
-    
-    <TextView
-        android:textSize="15sp"
-        android:textColor="#104E8B"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginTop="6dp"
-        android:id="@+id/lostfound_item_detail"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        />
-    
-    <TextView
-        android:textSize="13sp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="6dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="6dp"
-        android:layout_marginTop="5dp"
-        android:id="@+id/lostfound_item_actiontime"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textColor="#8e388e"
-        />
-    <TextView
-        android:textSize="13sp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="10dp"
-        android:id="@+id/lostfound_item_posttime"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textColor="#8e388e"
-        />
-    
+
+
+        <TextView
+            android:textSize="15sp"
+            android:textColor="#104E8B"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginTop="6dp"
+            android:id="@+id/lostfound_item_detail"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            />
+
+        <TextView
+            android:textSize="13sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="6dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginTop="5dp"
+            android:id="@+id/lostfound_item_actiontime"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#8e388e"
+            />
+
+        <TextView
+            android:textSize="13sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/lostfound_item_posttime"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#8e388e"
+            />
+
     </LinearLayout>
-    
+
 </RelativeLayout>

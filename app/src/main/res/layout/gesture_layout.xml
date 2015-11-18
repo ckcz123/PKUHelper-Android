@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="#eee"
-    android:orientation="vertical" >
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="#eee"
+                android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/gesture_bottom"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_alignParentBottom="true"
-        android:orientation="vertical" >
-        
+        android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:baselineAligned="false"
-            android:paddingBottom="2dp" >
-            
+            android:paddingBottom="2dp">
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -26,8 +26,8 @@
                 android:gravity="center_horizontal"
                 android:clickable="true"
                 android:onClick="selectConnect"
-                android:orientation="vertical" >
-                
+                android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/gesture_connect"
                     android:layout_width="wrap_content"
@@ -35,10 +35,10 @@
                     android:text="@string/ipgw_free"
                     android:layout_marginBottom="5dp"
                     android:textColor="#000"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"/>
 
-           </LinearLayout>
-           
+            </LinearLayout>
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -46,8 +46,8 @@
                 android:gravity="center_horizontal"
                 android:clickable="true"
                 android:onClick="selectConnectNoFree"
-                android:orientation="vertical" >
-             
+                android:orientation="vertical">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -55,9 +55,9 @@
                     android:textColor="#000"
                     android:id="@+id/gesture_connect_no_free"
                     android:layout_marginBottom="5dp"
-                    android:textSize="12sp" />
-           </LinearLayout>
-           
+                    android:textSize="12sp"/>
+            </LinearLayout>
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -65,8 +65,8 @@
                 android:gravity="center_horizontal"
                 android:clickable="true"
                 android:onClick="selectDisconnect"
-                android:orientation="vertical" >
-               
+                android:orientation="vertical">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -74,17 +74,18 @@
                     android:textColor="#000"
                     android:id="@+id/gesture_disconnect"
                     android:layout_marginBottom="5dp"
-                    android:textSize="12sp" />
-          </LinearLayout>
-          <LinearLayout
+                    android:textSize="12sp"/>
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
                 android:clickable="true"
                 android:onClick="selectDisconnectall"
-                android:orientation="vertical" >
-               
+                android:orientation="vertical">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -92,24 +93,24 @@
                     android:textColor="#000"
                     android:id="@+id/gesture_disconnectall"
                     android:layout_marginBottom="5dp"
-                    android:textSize="12sp" />
-          </LinearLayout>
-            
-       </LinearLayout>
-     </RelativeLayout>
-     
+                    android:textSize="12sp"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </RelativeLayout>
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/gesture_bottom"
         android:layout_alignParentTop="true"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <com.pkuhelper.lib.view.CustomViewPager
             android:id="@+id/gesture_pager"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"/>
     </LinearLayout>
-    
+
 </RelativeLayout>

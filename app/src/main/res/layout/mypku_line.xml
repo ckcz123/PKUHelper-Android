@@ -1,9 +1,9 @@
-<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
-        
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+    >
+
     <!--     
         <include 
             android:layout_width="0dp"
@@ -38,5 +38,5 @@
             />
         
         -->
-        
-    </LinearLayout>
+
+</LinearLayout>

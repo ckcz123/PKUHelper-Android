@@ -1,14 +1,14 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <style name="PickerEditText">
-		<item name="android:layout_width">match_parent</item>
-		<item name="android:layout_height">wrap_content</item>
-		<item name="android:layout_margin">4dp</item>
-		<item name="android:imeOptions">actionNext</item>
-		<item name="android:singleLine">true</item>
-		<item name="android:textSize">22sp</item>
-	</style>
-    
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:imeOptions">actionNext</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textSize">22sp</item>
+    </style>
+
     <!--
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
@@ -23,37 +23,38 @@
 
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
-        <item name="android:windowTitleSize">48dp</item> 
+        <item name="android:windowTitleSize">48dp</item>
         <item name="android:actionBarStyle">@style/CustomizedWindowTitleBackground</item>
         <item name="android:actionBarTabBarStyle">@style/MyActionBarTabBars</item>
         <item name="android:actionBarTabTextStyle">@style/actionBarTabText</item>
-        <item name="android:actionOverflowButtonStyle">@style/MyActionButtonOverflow</item> 
-        <!-- All customizations that are NOT specific to a particular API-level can go here. -->    
+        <item name="android:actionOverflowButtonStyle">@style/MyActionButtonOverflow</item>
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
-    
-    <style name="CustomizedWindowTitleBackground" parent="@android:style/Widget.Holo.Light.ActionBar"> 
- <!--        <item name="android:background">#2d90dc</item> -->
+
+    <style name="CustomizedWindowTitleBackground" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <!--        <item name="android:background">#2d90dc</item> -->
         <item name="android:background">@drawable/actionbar</item>
-        
+
         <item name="android:titleTextStyle">@style/titleTextStyle</item>
-    </style> 
-    
+    </style>
+
     <style name="MyActionButtonOverflow" parent="@android:style/Widget.Holo.Light.ActionButton.Overflow">
         <item name="android:src">@drawable/item</item>
-        
+
     </style>
-    
+
     <style name="MyActionBarTabBars" parent="@android:style/Widget.Holo.ActionBar.TabView">
         <item name="android:background">#171115</item>
-        
+
     </style>
-    
+
     <style name="titleTextStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
-<!--     	 <item name="android:textColor">#ffffff</item>   -->
-    	 <item name="android:textColor">#000000</item>
-  	</style>
-  	<style name="actionBarTabText" parent="@android:style/Widget.Holo.ActionBar.TabText">  
-        <item name="android:textColor">#929292</item>  
-    </style>  
-    
+        <!--     	 <item name="android:textColor">#ffffff</item>   -->
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <style name="actionBarTabText" parent="@android:style/Widget.Holo.ActionBar.TabText">
+        <item name="android:textColor">#929292</item>
+    </style>
+
 </resources>

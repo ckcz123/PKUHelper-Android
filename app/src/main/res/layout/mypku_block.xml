@@ -1,17 +1,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical" >
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:orientation="vertical">
 
-     <TextView
-         android:id="@+id/mypku_title"
-         android:layout_width="fill_parent"
-         android:layout_height="wrap_content"
-         android:layout_marginLeft="15dp"
-         android:layout_marginRight="15dp"
-         android:layout_marginTop="20dp"
-         android:textStyle="bold"
-         android:textSize="16sp" />
+    <TextView
+        android:id="@+id/mypku_title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"
+        android:textSize="16sp"/>
     <!-- 
      <include 
          android:layout_width="fill_parent"
@@ -35,6 +35,6 @@
          layout="@layout/mypku_line"
          android:visibility="gone"
          />
-    --> 
-    
+    -->
+
 </LinearLayout>

@@ -61,15 +61,15 @@ public class ColorPickerPreference extends Preference {
 			selectedColor = typedArray.getInt(R.styleable.ColorPickerPreference_initialColor, 0xffffffff);
 
 			pickerTitle = typedArray.getString(R.styleable.ColorPickerPreference_pickerTitle);
-			if (pickerTitle==null)
+			if (pickerTitle == null)
 				pickerTitle = "Choose color";
 
 			pickerButtonCancel = typedArray.getString(R.styleable.ColorPickerPreference_pickerButtonCancel);
-			if (pickerButtonCancel==null)
+			if (pickerButtonCancel == null)
 				pickerButtonCancel = "cancel";
 
 			pickerButtonOk = typedArray.getString(R.styleable.ColorPickerPreference_pickerButtonOk);
-			if (pickerButtonOk==null)
+			if (pickerButtonOk == null)
 				pickerButtonOk = "ok";
 
 		} finally {
@@ -90,23 +90,23 @@ public class ColorPickerPreference extends Preference {
 		colorIndicator = (ImageView) view.findViewById(R.id.color_indicator);
 
 		Drawable currentDrawable = colorIndicator.getDrawable();
-		if (currentDrawable!=null && currentDrawable instanceof GradientDrawable)
+		if (currentDrawable != null && currentDrawable instanceof GradientDrawable)
 			colorChoiceDrawable = (GradientDrawable) currentDrawable;
 
-		if (colorChoiceDrawable==null) {
+		if (colorChoiceDrawable == null) {
 			colorChoiceDrawable = new GradientDrawable();
 			colorChoiceDrawable.setShape(GradientDrawable.OVAL);
 		}
 
 		int tmpColor = isEnabled()
-			? selectedColor
-			: darken(selectedColor, .5f);
+				? selectedColor
+				: darken(selectedColor, .5f);
 
 		colorChoiceDrawable.setColor(tmpColor);
 		colorChoiceDrawable.setStroke((int) TypedValue.applyDimension(
-			TypedValue.COMPLEX_UNIT_DIP,
-			1,
-			res.getDisplayMetrics()
+				TypedValue.COMPLEX_UNIT_DIP,
+				1,
+				res.getDisplayMetrics()
 		), darken(tmpColor, .8f));
 
 		colorIndicator.setImageDrawable(colorChoiceDrawable);
@@ -129,18 +129,18 @@ public class ColorPickerPreference extends Preference {
 	@Override
 	protected void onClick() {
 		ColorPickerDialogBuilder builder = ColorPickerDialogBuilder
-			.with(getContext())
-			.setTitle(pickerTitle)
-			.initialColor(selectedColor)
-			.wheelType(wheelType)
-			.density(density)
-			.setPositiveButton(pickerButtonOk, new ColorPickerClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int selectedColorFromPicker, Integer[] allColors) {
-					setValue(selectedColorFromPicker);
-				}
-			})
-			.setNegativeButton(pickerButtonCancel, null);
+				.with(getContext())
+				.setTitle(pickerTitle)
+				.initialColor(selectedColor)
+				.wheelType(wheelType)
+				.density(density)
+				.setPositiveButton(pickerButtonOk, new ColorPickerClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int selectedColorFromPicker, Integer[] allColors) {
+						setValue(selectedColorFromPicker);
+					}
+				})
+				.setNegativeButton(pickerButtonCancel, null);
 
 		if (!alphaSlider && !lightSlider) builder.noSliders();
 		else if (!alphaSlider) builder.lightnessSliderOnly();
@@ -148,8 +148,8 @@ public class ColorPickerPreference extends Preference {
 
 
 		builder
-			.build()
-			.show();
+				.build()
+				.show();
 	}
 
 	public static int darken(int color, float factor) {
@@ -159,8 +159,8 @@ public class ColorPickerPreference extends Preference {
 		int b = Color.blue(color);
 
 		return Color.argb(a,
-			Math.max((int)(r * factor), 0),
-			Math.max((int)(g * factor), 0),
-			Math.max((int)(b * factor), 0));
+				Math.max((int) (r * factor), 0),
+				Math.max((int) (g * factor), 0),
+				Math.max((int) (b * factor), 0));
 	}
 }

@@ -1,15 +1,18 @@
-<ScrollView  android:layout_width="fill_parent" 
+<ScrollView
+    android:layout_width="fill_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="wrap_content"
     android:background="#E8E8E7"
     >
-    
-    <LinearLayout 
-        android:layout_width="fill_parent" android:layout_height="wrap_content"
-    android:orientation="vertical" 
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         >
-    
-    <TextView android:layout_width="fill_parent"
+
+        <TextView
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textSize="13sp"
             android:layout_marginTop="15dp"
@@ -19,132 +22,168 @@
             android:layout_marginRight="18dp"
             android:layout_marginBottom="10dp"
             />
-    
-    <TableLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:background="@drawable/corners_bg" >
-        
-        <TableRow android:padding="10dip">
-            <TextView android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:textSize="15sp"
-                android:paddingLeft="10dp" 
-                android:paddingRight="10dp"
-                android:text="@string/settings_found_username"
-                />
-            <TextView android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_weight="1"/>
 
-            <EditText
-                android:id="@+id/settings_found_username"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:hint="@string/must"
-                android:inputType="number"
-                android:maxLength="10"
-                android:singleLine="true"
-                android:textSize="14sp"
-                android:width="140dp" />
+        <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/corners_bg">
 
-        </TableRow>
-        <View
-            android:layout_height="1dip"  android:layout_width="fill_parent"
-            android:background="#e8e8e7" />
-        <TableRow android:padding="10dip">
-            <TextView android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:textSize="15sp"
-                android:paddingLeft="10dp" 
-                android:paddingRight="10dp"
-                android:text="@string/settings_found_type"
-                />
-            <TextView android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_weight="1"/>
-            <Spinner
-                android:id="@+id/settings_found_type"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-       </TableRow>
-        <View
-            android:layout_height="1dip"  android:layout_width="fill_parent"
-            android:background="#e8e8e7" />
-        <TableRow android:padding="10dip">
-            <TextView android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:textSize="15sp"
-                android:paddingLeft="10dp" 
-                android:paddingRight="10dp"
-                android:text="@string/settings_found_name"
-                />
-            <TextView android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_weight="1"/>
-            <EditText
-                   android:id="@+id/settings_found_name"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:textSize="14sp"
-                   android:width="140dp"
-                   android:singleLine="true"
-                   android:inputType="text"
-                   android:hint="@string/must"
-                   />
+            <TableRow android:padding="10dip">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/settings_found_username"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+                <EditText
+                    android:id="@+id/settings_found_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:hint="@string/must"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:singleLine="true"
+                    android:textSize="14sp"
+                    android:width="140dp"/>
+
             </TableRow>
-             <View
-            android:layout_height="1dip"  android:layout_width="fill_parent"
-            android:background="#e8e8e7" />
-        <TableRow android:padding="10dip">
-            <TextView android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:textSize="15sp"
-                android:paddingLeft="10dp" 
-                android:paddingRight="10dp"
-                android:text="@string/settings_found_phone"
-                />
-            <TextView android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_weight="1"/>
 
-            <EditText
-                android:id="@+id/settings_found_phone"
+            <View
+                android:layout_height="1dip"
+                android:layout_width="fill_parent"
+                android:background="#e8e8e7"/>
+
+            <TableRow android:padding="10dip">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/settings_found_type"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+                <Spinner
+                    android:id="@+id/settings_found_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </TableRow>
+
+            <View
+                android:layout_height="1dip"
+                android:layout_width="fill_parent"
+                android:background="#e8e8e7"/>
+
+            <TableRow android:padding="10dip">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/settings_found_name"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+                <EditText
+                    android:id="@+id/settings_found_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:width="140dp"
+                    android:singleLine="true"
+                    android:inputType="text"
+                    android:hint="@string/must"
+                    />
+            </TableRow>
+
+            <View
+                android:layout_height="1dip"
+                android:layout_width="fill_parent"
+                android:background="#e8e8e7"/>
+
+            <TableRow android:padding="10dip">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/settings_found_phone"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+                <EditText
+                    android:id="@+id/settings_found_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/must"
+                    android:inputType="phone"
+                    android:maxLength="11"
+                    android:singleLine="true"
+                    android:textSize="14sp"
+                    android:width="140dp"/>
+
+            </TableRow>
+        </TableLayout>
+
+        <LinearLayout
+            android:layout_gravity="center_horizontal"
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            >
+
+            <Button
+                android:id="@+id/settings_found_send"
+                android:text="@string/confirm"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="@string/must"
-                android:inputType="phone"
-                android:maxLength="11"
-                android:singleLine="true"
-                android:textSize="14sp"
-                android:width="140dp" />
-            
-        </TableRow>
-        </TableLayout>
-        
-    	<LinearLayout
-    		android:layout_gravity="center_horizontal"
-	        style="?android:attr/buttonBarStyle"
-	        android:layout_width="wrap_content" android:layout_height="wrap_content"
-	        android:layout_marginTop="12dp"
-	        android:layout_marginBottom="12dp"
-	        >
-        	<Button 
-	            android:id="@+id/settings_found_send" 
-	            android:text="@string/confirm"
-	            style="?android:attr/buttonBarButtonStyle"
-	            android:layout_width="wrap_content" android:layout_height="wrap_content"
-	            android:textSize="12sp"
-	        />
-	        <Button 
-	            android:id="@+id/settings_found_cancel" 
-	            android:text="@string/cancel"
-	            android:textSize="12sp"
-	            style="?android:attr/buttonBarButtonStyle"
-	            android:layout_width="wrap_content" android:layout_height="wrap_content"
-	        />
+                android:textSize="12sp"
+                />
+
+            <Button
+                android:id="@+id/settings_found_cancel"
+                android:text="@string/cancel"
+                android:textSize="12sp"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
         </LinearLayout>
-    
-    
-</LinearLayout>
+
+
+    </LinearLayout>
 </ScrollView>

@@ -1,457 +1,348 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    android:id="@+id/settings_view"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#f3f3f3"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".PKUHelper" android:id="@+id/settings_view"
-    android:background="#f3f3f3"
+    tools:context=".PKUHelper"
     >
-    
-    <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
-    
-    <RelativeLayout
+
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="2dp"
-        android:layout_marginRight="2dp"
-        android:layout_marginTop="7dp"
         android:orientation="vertical"
         >
-        
-        <TextView android:layout_width="fill_parent"
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textSize="13sp"
-            android:textColor="#aaaaaa"
-            android:text="@string/settings_title_username"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp"
-            android:id="@+id/settings_title_username"
-            />
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginTop="7dp"
+            android:orientation="vertical"
+            >
 
-    <TableLayout
-        android:id="@+id/settings_table_name"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/settings_title_username"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/corners_bg" >
-
-        <TableRow android:id="@+id/settings_tablerow_name" android:padding="10dip">
-            <TextView android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:textSize="15sp"
-                android:paddingLeft="10dp" 
-                android:paddingRight="10dp" 
-                android:id="@+id/settings_name"
-                />
-            <TextView android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_weight="1"/>
             <TextView
-                   android:id="@+id/settings_id"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:textSize="15sp" android:paddingLeft="10dp"
-                   android:paddingRight="10dp"
-                   />
-        </TableRow>
-   	</TableLayout>
-    </RelativeLayout>
- <!--     
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="2dp"
-        android:layout_marginRight="2dp"
-        android:layout_marginTop="15dp"
-        android:orientation="vertical"
-        >
-     
-        <TextView android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textSize="13sp"
-            android:textColor="#aaaaaa"
-            android:text="@string/settings_title_me"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp"
-            android:id="@+id/settings_title_me"
-            />
-
-    <TableLayout
-        android:id="@+id/settings_table_me"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/settings_title_me"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/corners_bg" >
-        <TableRow android:layout_width="fill_parent" 
-            android:id="@+id/settings_tablerow_message"
-            android:paddingLeft="10dp" android:paddingRight="10dp">
-        <TextView android:layout_width="wrap_content" 
-              android:id="@+id/settings_message"
-              android:layout_height="wrap_content" android:textSize="15sp"
-              android:layout_margin="10dp"
-              android:text="@string/settings_message"
-              />
-        </TableRow>
-
-        <View
-            android:layout_height="1dip"  android:layout_width="fill_parent"
-            android:background="#e8e8e7" />
-        <TableRow android:layout_width="fill_parent" 
-            android:id="@+id/settings_tablerow_certification"
-            android:paddingLeft="10dp" android:paddingRight="10dp">
-        <TextView android:layout_width="wrap_content" 
-              android:id="@+id/settings_certification"
-              android:layout_height="wrap_content" android:textSize="15sp"
-              android:layout_margin="10dp"
-              android:text="@string/settings_certification"
-              />
-		</TableRow>
-
-		<View
-            android:layout_height="1dip"  android:layout_width="fill_parent"
-            android:background="#e8e8e7" />
-		<TextView android:layout_width="wrap_content" 
-              android:id="@+id/settings_qrcode"
-              android:layout_height="wrap_content" android:textSize="15sp"
-              android:layout_margin="10dp"
-              android:paddingLeft="10dp"
-              android:paddingRight="10dp"
-              android:text="@string/settings_qrcode"
-              />
-
-		<View
-            android:layout_height="1dip"  android:layout_width="fill_parent"
-            android:background="#e8e8e7" />
-		<TextView android:layout_width="wrap_content" 
-              android:id="@+id/settings_lostfound"
-              android:layout_height="wrap_content" android:textSize="15sp"
-              android:layout_margin="10dp"
-              android:paddingLeft="10dp"
-              android:paddingRight="10dp"
-              android:text="@string/settings_lostfound"
-              />
-		
-		
-	</TableLayout>
-	</RelativeLayout>
-    
---> 
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="2dp"
-        android:layout_marginRight="2dp"
-        android:layout_marginTop="15dp"
-        android:orientation="vertical"
-        >
-        
-        <TextView android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textSize="13sp"
-            android:textColor="#aaaaaa"
-            android:text="@string/settings_title_settings"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp"
-            android:id="@+id/settings_title_settings"
-            />
-
-   <TableLayout
-        android:id="@+id/settings_table_settings"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/settings_title_settings"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/corners_bg" >
-        <TextView android:layout_width="wrap_content" 
-              android:id="@+id/settings_gesture"
-              android:layout_height="wrap_content" android:textSize="15sp"
-              android:layout_margin="10dp"
-              android:paddingLeft="10dp"
-              android:paddingRight="10dp"
-              android:text="@string/settings_gesture"
-              />
-        <View
-            android:layout_height="1dip"  android:layout_width="fill_parent"
-            android:background="#e8e8e7" /> 
-        <TextView android:layout_width="wrap_content" 
-              android:id="@+id/settings_course"
-              android:layout_height="wrap_content" android:textSize="15sp"
-              android:layout_margin="10dp"
-              android:paddingLeft="10dp"
-              android:paddingRight="10dp"
-              android:text="@string/settings_course"
-              />
-        
-		<View
-            android:layout_height="1dip"  android:layout_width="fill_parent"
-            android:background="#e8e8e7" /> 
-        <TextView android:layout_width="wrap_content" 
-              android:id="@+id/settings_notifications"
-              android:layout_height="wrap_content" android:textSize="15sp"
-              android:layout_margin="10dp"
-              android:paddingLeft="10dp"
-              android:paddingRight="10dp"
-              android:text="@string/settings_notifications"
-              />
-		<View
-            android:layout_height="1dip"  android:layout_width="fill_parent"
-            android:background="#e8e8e7" /> 
-        <TableRow android:id="@+id/settings_shake" android:padding="10dip">
-            
-            <TextView android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:textSize="15sp"
-                android:paddingLeft="10dp" 
-                android:paddingRight="10dp" 
-                android:text="@string/settings_shake"
+                android:id="@+id/settings_title_username"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:text="@string/settings_title_username"
+                android:textColor="#aaaaaa"
+                android:textSize="13sp"
                 />
-            <TextView android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_weight="1"/>
-            <Switch
-                   android:id="@+id/settings_switch_shake"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   />
-        </TableRow>
-        <View
-            android:layout_height="1dip"  android:layout_width="fill_parent"
-            android:background="#e8e8e7" /> 
-        
-        
-        <TableRow android:id="@+id/settings_pkumail" android:padding="10dip">
-            <TextView android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:textSize="15sp"
-                android:paddingLeft="10dp" 
-                android:paddingRight="10dp" 
-                android:text="@string/settings_pkumail"
-                />
-            <TextView android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_weight="1"/>
-            <Switch
-                   android:id="@+id/settings_switch_pkumail"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   />
-        </TableRow>
-        <View
-            android:layout_height="1dip"  android:layout_width="fill_parent"
-            android:background="#e8e8e7" /> 
-  <!-- 
-        <TableRow android:id="@+id/settings_ipgw" android:padding="10dip">
-            <TextView android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:textSize="15sp"
-                android:paddingLeft="10dp" 
-                android:paddingRight="10dp" 
-                android:text="@string/settings_ipgw"
-                />
-            <TextView android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_weight="1"/>
-            <Switch
-                   android:id="@+id/settings_switch_ipgw"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   />
-        </TableRow>
-         <View
-            android:layout_height="1dip"  android:layout_width="fill_parent"
-            android:background="#e8e8e7" /> 
-    -->
-        <TextView android:layout_width="wrap_content" 
-            android:id="@+id/settings_petest"
-              android:layout_height="wrap_content" android:textSize="15sp"
-              android:layout_margin="10dp"
-              android:paddingLeft="10dp"
-              android:paddingRight="10dp"
-              android:text="@string/settings_petest"
-              />
-        <View
-            android:layout_height="1dip"  android:layout_width="fill_parent"
-            android:background="#e8e8e7" /> 
-        <TextView android:layout_width="wrap_content" 
-            android:id="@+id/settings_clearcache"
-              android:layout_height="wrap_content" android:textSize="15sp"
-              android:layout_margin="10dp"
-              android:paddingLeft="10dp"
-              android:paddingRight="10dp"
-              android:text="@string/settings_clearcache"
-              />
-         
-   	</TableLayout>
-    </RelativeLayout>
-    <!--  
-    
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="2dp"
-        android:layout_marginRight="2dp"
-        android:layout_marginTop="15dp"
-        android:orientation="vertical"
-        >
-        
-        <TextView android:layout_width="fill_parent"
+
+            <TableLayout
+                android:id="@+id/settings_table_name"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/settings_title_username"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/corners_bg">
+
+                <TableRow
+                    android:id="@+id/settings_tablerow_name"
+                    android:padding="10dip">
+
+                    <TextView
+                        android:id="@+id/settings_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:textSize="15sp"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+
+                    <TextView
+                        android:id="@+id/settings_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:textSize="15sp"
+                        />
+                </TableRow>
+            </TableLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textSize="13sp"
-            android:textColor="#aaaaaa"
-            android:text="@string/settings_title_info"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp"
-            android:id="@+id/settings_title_info"
-            />
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginTop="15dp"
+            android:orientation="vertical"
+            >
 
-   <TableLayout
-        android:id="@+id/settings_table_info"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/settings_title_info"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/corners_bg" >
+            <TextView
+                android:id="@+id/settings_title_settings"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:text="@string/settings_title_settings"
+                android:textColor="#aaaaaa"
+                android:textSize="13sp"
+                />
 
-        <TextView android:layout_width="wrap_content" 
-              android:id="@+id/settings_phone"
-              android:layout_height="wrap_content" android:textSize="15sp"
-              android:layout_margin="10dp"
-              android:paddingLeft="10dp"
-              android:paddingRight="10dp"
-              android:text="@string/settings_phone"
-              />
-        <View
-            android:layout_height="1dip"  android:layout_width="fill_parent"
-            android:background="#e8e8e7" /> 
-        <TextView android:layout_width="wrap_content" 
-              android:id="@+id/settings_map"
-              android:layout_height="wrap_content" android:textSize="15sp"
-              android:layout_margin="10dp"
-              android:paddingLeft="10dp"
-              android:paddingRight="10dp"
-              android:text="@string/settings_map"
-              />
-        <View
-            android:layout_height="1dip"  android:layout_width="fill_parent"
-            android:background="#e8e8e7" /> 
-        <TextView android:layout_width="wrap_content" 
-              android:id="@+id/settings_calendar"
-              android:layout_height="wrap_content" android:textSize="15sp"
-              android:layout_margin="10dp"
-              android:paddingLeft="10dp"
-              android:paddingRight="10dp"
-              android:text="@string/settings_calendar"
-              />
-        <View
-            android:layout_height="1dip"  android:layout_width="fill_parent"
-            android:background="#e8e8e7" /> 
-        <TextView android:layout_width="wrap_content" 
-              android:id="@+id/settings_subway"
-              android:layout_height="wrap_content" android:textSize="15sp"
-              android:layout_margin="10dp"
-              android:paddingLeft="10dp"
-              android:paddingRight="10dp"
-              android:text="@string/settings_subway"
-              />
-        
-   	</TableLayout>
+            <TableLayout
+                android:id="@+id/settings_table_settings"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/settings_title_settings"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/corners_bg">
 
-    </RelativeLayout>
- -->   
-    
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="2dp"
-        android:layout_marginRight="2dp"
-        android:layout_marginTop="15dp"
-        android:orientation="vertical"
-        >
-        
-        <TextView android:layout_width="fill_parent"
+                <TextView
+                    android:id="@+id/settings_ipgw"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/settings_ipgw"
+                    android:textSize="15sp"
+                    />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dip"
+                    android:background="#e8e8e7"/>
+
+                <TextView
+                    android:id="@+id/settings_course"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/settings_course"
+                    android:textSize="15sp"
+                    />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dip"
+                    android:background="#e8e8e7"/>
+
+                <TextView
+                    android:id="@+id/settings_notifications"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/settings_notifications"
+                    android:textSize="15sp"
+                    />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dip"
+                    android:background="#e8e8e7"/>
+
+
+                <TextView
+                    android:id="@+id/settings_gesture"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/settings_gesture"
+                    android:textSize="15sp"
+                    />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dip"
+                    android:background="#e8e8e7"/>
+
+                <TableRow
+                    android:id="@+id/settings_pkumail"
+                    android:padding="10dip">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="@string/settings_pkumail"
+                        android:textSize="15sp"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+
+                    <Switch
+                        android:id="@+id/settings_switch_pkumail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        />
+                </TableRow>
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dip"
+                    android:background="#e8e8e7"/>
+
+                <TextView
+                    android:id="@+id/settings_petest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/settings_petest"
+                    android:textSize="15sp"
+                    />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dip"
+                    android:background="#e8e8e7"/>
+
+                <TextView
+                    android:id="@+id/settings_clearcache"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/settings_clearcache"
+                    android:textSize="15sp"
+                    />
+
+            </TableLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textSize="13sp"
-            android:textColor="#aaaaaa"
-            android:text="@string/settings_title_about"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp"
-            android:id="@+id/settings_title_about"
-            />
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginTop="15dp"
+            android:orientation="vertical"
+            >
 
-   <TableLayout
-        android:id="@+id/settings_table_about"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/settings_title_about"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/corners_bg" >
+            <TextView
+                android:id="@+id/settings_title_about"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:text="@string/settings_title_about"
+                android:textColor="#aaaaaa"
+                android:textSize="13sp"
+                />
 
-        <TextView android:layout_width="wrap_content" 
-              android:id="@+id/settings_faq"
-              android:layout_height="wrap_content" android:textSize="15sp"
-              android:layout_margin="10dp"
-              android:paddingLeft="10dp"
-              android:paddingRight="10dp"
-              android:text="@string/settings_faq"
-              />
-        <View
-            android:layout_height="1dip"  android:layout_width="fill_parent"
-            android:background="#e8e8e7" />
-        <TextView android:layout_width="wrap_content" 
-              android:id="@+id/settings_report"
-              android:layout_height="wrap_content" android:textSize="15sp"
-              android:layout_margin="10dp"
-              android:paddingLeft="10dp"
-              android:paddingRight="10dp"
-              android:text="@string/settings_report"
-              />
+            <TableLayout
+                android:id="@+id/settings_table_about"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/settings_title_about"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/corners_bg">
 
-        <View
-            android:layout_height="1dip"  android:layout_width="fill_parent"
-            android:background="#e8e8e7" /> 
-        <TextView android:layout_width="wrap_content" 
-              android:id="@+id/settings_about"
-              android:layout_height="wrap_content" android:textSize="15sp"
-              android:layout_margin="10dp"
-              android:paddingLeft="10dp"
-              android:paddingRight="10dp"
-              android:text="@string/settings_about"
-              />
-        <View
-            android:layout_height="1dip"  android:layout_width="fill_parent"
-            android:background="#e8e8e7" /> 
-            <TextView android:layout_width="wrap_content" 
-              android:id="@+id/settings_recommended"
-              android:layout_height="wrap_content" android:textSize="15sp"
-              android:layout_margin="10dp"
-              android:paddingLeft="10dp"
-              android:paddingRight="10dp"
-              android:text="@string/settings_recommended"
-              />
-        <View
-            android:layout_height="1dip"  android:layout_width="fill_parent"
-            android:background="#e8e8e7" /> 
-        <TableRow android:layout_width="fill_parent" android:id="@+id/settings_tablerow_update"
-            android:paddingLeft="10dp" android:paddingRight="10dp">
-        <TextView android:layout_width="wrap_content" 
-              android:id="@+id/settings_update"
-              android:layout_height="wrap_content" android:textSize="15sp"
-              android:layout_margin="10dp"
-              android:text="@string/settings_update"
-              />
-		</TableRow>
-   	</TableLayout>
-   	
-    </RelativeLayout>
-    
-    
+                <TextView
+                    android:id="@+id/settings_faq"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/settings_faq"
+                    android:textSize="15sp"
+                    />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dip"
+                    android:background="#e8e8e7"/>
+
+                <TextView
+                    android:id="@+id/settings_report"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/settings_report"
+                    android:textSize="15sp"
+                    />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dip"
+                    android:background="#e8e8e7"/>
+
+                <TextView
+                    android:id="@+id/settings_about"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/settings_about"
+                    android:textSize="15sp"
+                    />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dip"
+                    android:background="#e8e8e7"/>
+
+                <TextView
+                    android:id="@+id/settings_recommended"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/settings_recommended"
+                    android:textSize="15sp"
+                    />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dip"
+                    android:background="#e8e8e7"/>
+
+                <TableRow
+                    android:id="@+id/settings_tablerow_update"
+                    android:layout_width="fill_parent"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp">
+
+                    <TextView
+                        android:id="@+id/settings_update"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="@string/settings_update"
+                        android:textSize="15sp"
+                        />
+                </TableRow>
+            </TableLayout>
+
+        </RelativeLayout>
+
+
     </LinearLayout>
 </ScrollView>
