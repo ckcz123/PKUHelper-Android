@@ -140,7 +140,7 @@ public class PostActivity extends BaseActivity {
 		CheckBox checkBox = (CheckBox) findViewById(R.id.bbs_postpage_anonymous);
 		String anonymous = checkBox.isChecked() ? "1" : "0";
 
-		ArrayList<Parameters> arrayList = new ArrayList<Parameters>();
+		ArrayList<Parameters> arrayList = new ArrayList<>();
 		arrayList.add(new Parameters("type", "post"));
 		arrayList.add(new Parameters("token", Userinfo.token));
 		arrayList.add(new Parameters("board", board));
@@ -150,6 +150,7 @@ public class PostActivity extends BaseActivity {
 		if ("reply".equals(type)) {
 			arrayList.add(new Parameters("threadid", threadid));
 			arrayList.add(new Parameters("postid", postid));
+			arrayList.add(new Parameters("number", number));
 			arrayList.add(new Parameters("author", author));
 		}
 		new RequestingTask(this, "正在发表...", "http://www.bdwm.net/client/bbsclient.php",
@@ -170,7 +171,7 @@ public class PostActivity extends BaseActivity {
 		CheckBox checkBox = (CheckBox) findViewById(R.id.bbs_postpage_anonymous);
 		String anonymous = checkBox.isChecked() ? "1" : "0";
 
-		ArrayList<Parameters> arrayList = new ArrayList<Parameters>();
+		ArrayList<Parameters> arrayList = new ArrayList<>();
 		arrayList.add(new Parameters("type", "edit"));
 		arrayList.add(new Parameters("token", Userinfo.token));
 		arrayList.add(new Parameters("board", board));

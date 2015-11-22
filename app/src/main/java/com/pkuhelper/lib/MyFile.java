@@ -73,6 +73,7 @@ public class MyFile {
 				FileOutputStream fileOutputStream = new FileOutputStream(file);
 				fileOutputStream.write(Base64.encode(defaultString.getBytes(), Base64.DEFAULT));
 				fileOutputStream.close();
+				return defaultString;
 			}
 		}
 		if (file.length() == 0) return "";
