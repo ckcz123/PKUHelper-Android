@@ -43,6 +43,7 @@ public class NCList {
 				.execute(new ArrayList<Parameters>());
 	}
 
+	//读取NClist，json解析
 	public static void finishGetSource(String string) {
 		NCActivity ncActivity = NCActivity.ncActivity;
 		Log.w("nclist", string);
@@ -66,8 +67,9 @@ public class NCList {
 			arrayList.add("0");
 			Notice.hasSelected = hasSelected;
 			if (!hasSelected) {
+                //如果是notice是默认的，则全选wantsToSelect
 				for (Map.Entry<String, Notice> entry : map.entrySet()) {
-					Notice notice = entry.getValue();
+                        Notice notice = entry.getValue();
 					if (notice.isDefault)
 						notice.wantsToSelect = "1";
 					else
@@ -75,6 +77,7 @@ public class NCList {
 				}
 			}
 			ncActivity.sourceListMap = map;
+            //将所有未选的源放在最后
 			Collections.sort(arrayList, new Comparator<String>() {
 				@Override
 				public int compare(String s1, String s2) {
