@@ -57,4 +57,34 @@
         <item name="android:textColor">#929292</item>
     </style>
 
+    <style name="Style_RecordText" mce_bogus="1" >
+        <item name="android:textColor">@color/color_text_record</item>
+    </style>
+    <style name="Style_RecordText_FirstLine"  parent="Style_RecordText">
+        <item name="android:textSize">24sp</item>
+    </style>
+    <style name="Style_RecordText_SecondLine"  parent="Style_RecordText">
+        <item name="android:textSize">16sp</item>
+    </style>
+    <style name="Style_RecordItemDividerHeight"  parent="Style_RecordText">
+        <item name="android:height">25dp</item>
+    </style>
+    <style name="Style_RecordBG"  >
+        <item name="android:layout_width">32dp</item>
+        <item name="android:layout_height">8dp</item>
+    </style>
+    
+    <style name="Style_RecordRadius"  >
+        <item name="android:radius">10dp</item>
+    </style>
+    
+    <style name="Style_RecordRecent_Text"  >
+        <item name="android:textSize">7sp</item>
+        <item name="android:textColor">@color/color_text_default</item>
+        <item name="android:textScaleX">1.6</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:clickable">false</item>
+    </style>
+
+
 </resources>

@@ -19,6 +19,7 @@ public abstract class BaseActivity extends Activity {
 		getOverflowMenu();
 		tintManager = new SystemBarTintManager(this);
 		tintManager.setStatusBarTintEnabled(true);
+		tintManager.setNavigationBarTintEnabled(true);
 	}
 
 	protected abstract void finishRequest(int type, String string);

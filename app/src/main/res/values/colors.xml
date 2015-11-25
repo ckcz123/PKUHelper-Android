@@ -1,4 +1,6 @@
 <resources>
     <drawable name="hole_line">#333333</drawable>
     <!--     <drawable name="hole_line">#330ba8b</drawable>  -->
+    <color name="color_text_default">#442000</color>
+    <color name="color_text_record">#482800</color>
 </resources>
