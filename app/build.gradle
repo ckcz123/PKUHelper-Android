@@ -19,6 +19,7 @@ android {
 }
 
 dependencies {
+    compile 'com.google.code.gson:gson:2.5'
     compile files('libs/android-support-v13.jar')
     compile files('libs/core-3.2.0.jar')
     compile files('libs/jsoup-1.8.1.jar')
