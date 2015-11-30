@@ -21,7 +21,6 @@ public class CourseNotice {
 		ArrayList<Parameters> arrayList = new ArrayList<Parameters>();
 		arrayList.add(new Parameters("user_id", Constants.username));
 		arrayList.add(new Parameters("pwd", CourseJSTranslation.strEncode(Constants.password)));
-
 		new RequestingTask(NCActivity.ncActivity, "正在登录教学网...", "http://course.pku.edu.cn/webapps/login/",
 				Constants.REQUEST_NOTICECENTER_COURSE_LOGIN).execute(arrayList);
 
