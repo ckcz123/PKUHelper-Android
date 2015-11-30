@@ -57,6 +57,7 @@ public class NCContent {
 		NCActivity.ncActivity.lastRequestSid = sid;
 	}
 
+    //已经获得一部分json格式的通知，在string中
 	public static void finishRequest(String string) {
 		try {
 			JSONObject jsonObject = new JSONObject(string);
@@ -96,6 +97,7 @@ public class NCContent {
 			NCActivity.ncActivity.firstTimeToBottom = true;
 			NCActivity.ncActivity.contentPosition = 0;
 			if (Notice.courseNotice.isSelected) {
+                showContent();
 				CourseNotice.loginToCourse();
 				return;
 			} else {

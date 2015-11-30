@@ -72,24 +72,21 @@ public class NCActivity extends BaseActivity {
 		Notice.drawableMap = new HashMap<String, Drawable>();
 		Notice.courseNotice = new Notice();
 		setContentView(R.layout.nc_viewcontent_listview);
+
+		//设置刷新控件
 		swipeRefreshLayout = (SwipeRefreshLayout) ncActivity.findViewById(R.id.nc_swipeRefreshLayout);
 		swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_purple,
 				android.R.color.holo_green_light,
 				android.R.color.holo_blue_bright,
 				android.R.color.holo_orange_light);
+
+        //设置0.5秒的刷新动画
 		swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
 			public void onRefresh() {
-				new Thread(new Runnable() {
-					public void run() {
-						try {
-							Thread.sleep(500);
-						} catch (Exception e) {
-						}
-						NCActivity.ncActivity.handler.sendEmptyMessage(Constants.MESSAGE_SLEEP_FINISHED);
-					}
-				}).start();
-			}
-		});
+
+                NCActivity.ncActivity.handler.sendEmptyMessageDelayed(Constants.MESSAGE_SLEEP_FINISHED, 500);
+            }
+        });
 		swipeRefreshLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 
 			@SuppressLint("NewApi")
@@ -110,6 +107,8 @@ public class NCActivity extends BaseActivity {
 				}
 			}
 		});
+
+        //获得NCList
 		NCList.getAllSources();
 	}
 

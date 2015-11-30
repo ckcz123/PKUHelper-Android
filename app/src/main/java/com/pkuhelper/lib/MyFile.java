@@ -49,7 +49,8 @@ public class MyFile {
 	}
 
 	private static File getFilesDir(Context context) {
-		return useSDCard ? context.getExternalFilesDir(null) : context.getFilesDir();
+		return useSDCard && Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())?
+				context.getExternalFilesDir(null) : context.getFilesDir();
 	}
 
 	public static File getFile(Context context, String _dir, String _name) {
@@ -72,6 +73,7 @@ public class MyFile {
 				FileOutputStream fileOutputStream = new FileOutputStream(file);
 				fileOutputStream.write(Base64.encode(defaultString.getBytes(), Base64.DEFAULT));
 				fileOutputStream.close();
+				return defaultString;
 			}
 		}
 		if (file.length() == 0) return "";
@@ -95,7 +97,8 @@ public class MyFile {
 	}
 
 	public static File getCache(Context context, String name) {
-		File cacheDir = useSDCard ? context.getExternalCacheDir() : context.getCacheDir();
+		File cacheDir = useSDCard && Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
+				? context.getExternalCacheDir() : context.getCacheDir();
 		return name == null || "".equals(name) ? cacheDir : new File(cacheDir, name);
 	}
 

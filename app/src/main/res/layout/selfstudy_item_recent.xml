@@ -1,0 +1,31 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rlItem"
+    android:clickable="false"
+    android:background="@drawable/shape_round_rect_recent"
+    style="@style/Style_RecordBG" >
+
+    <TextView
+        style="@style/Style_RecordRecent_Text"
+        android:id="@+id/tvHigh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:text="02"/>
+
+    <TextView
+        style="@style/Style_RecordRecent_Text"
+        android:id="@+id/tvSemicolon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text=":"/>
+
+    <TextView
+        style="@style/Style_RecordRecent_Text"
+        android:id="@+id/tvLow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="00"/>
+
+</RelativeLayout>
