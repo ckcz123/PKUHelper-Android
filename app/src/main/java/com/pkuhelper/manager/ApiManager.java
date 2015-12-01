@@ -7,12 +7,9 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.pkuhelper.AppContext;
-
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -169,7 +166,7 @@ public class ApiManager {
         mReqQueue.add(stringRequest);
     }
 
-    public Parameter makeParameter(String name, String value) {
+    public Parameter makeParam(String name, String value) {
         return new Parameter(name, value);
     }
 

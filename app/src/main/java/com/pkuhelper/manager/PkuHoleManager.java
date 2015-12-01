@@ -6,12 +6,12 @@ import android.util.Log;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonSyntaxException;
 import com.pkuhelper.AppContext;
 import com.pkuhelper.model.HoleListItemMod;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -23,6 +23,7 @@ public class PkuHoleManager {
 
     private AppContext mContext;
     private ApiManager mApiManager;
+    private Gson gson = new Gson();
 
     public PkuHoleManager(Context context) {
         mContext = (AppContext) context.getApplicationContext();
@@ -48,33 +49,32 @@ public class PkuHoleManager {
      */
     public void getHoleList(int page, final Callback<ArrayList<HoleListItemMod>> callback) {
         ArrayList<ApiManager.Parameter> params = new ArrayList<>();
-        params.add(mApiManager.makeParameter("action", "getlist"));
-        params.add(mApiManager.makeParameter("p", "" + page));
+        params.add(mApiManager.makeParam("action", "getlist"));
+        params.add(mApiManager.makeParam("p", "" + page));
 
         sendRequest(params, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String jsonStr) {
                         try {
-                            JSONObject response = new JSONObject(jsonStr);
-                            int code = response.getInt("code");
+                            JsonObject response = gson.fromJson(jsonStr, JsonObject.class);
+                            int code = response.get("code").getAsInt();
                             switch (code) {
                                 case 0:
                                     ArrayList<HoleListItemMod> mods = new ArrayList<>();
-                                    JSONArray array = response.getJSONArray("data");
+                                    JsonArray array = response.getAsJsonArray("data");
                                     Log.v(TAG, "HoleList: " + array.toString());
-                                    for (int i = 0; i < array.length(); ++i) {
-                                        Gson gson = new Gson();
-                                        String data = array.getJSONObject(i).toString();
+                                    for (int i = 0; i < array.size(); ++i) {
+                                        JsonElement data = array.get(i);
                                         mods.add(gson.fromJson(data, HoleListItemMod.class));
                                     }
-                                    callback.onSuccess(mods);
+                                    callback.onSuccess(code, mods);
                                     break;
                                 default:
-                                    String msg = response.getString("msg");
+                                    String msg = response.get("msg").getAsString();
                                     Log.v(TAG, ("error, code=" + code) + " " + msg);
                                     callback.onError(msg);
                             }
-                        } catch (JSONException e) {
+                        } catch (JsonSyntaxException e) {
                             e.printStackTrace();
                             callback.onError(e.getMessage());
                         }
