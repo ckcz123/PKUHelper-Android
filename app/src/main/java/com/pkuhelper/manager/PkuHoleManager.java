@@ -10,7 +10,9 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
 import com.pkuhelper.AppContext;
+import com.pkuhelper.model.HoleCommentListItemMod;
 import com.pkuhelper.model.HoleListItemMod;
 
 import java.util.ArrayList;
@@ -23,11 +25,13 @@ public class PkuHoleManager {
 
     private AppContext mContext;
     private ApiManager mApiManager;
+    private UserManager mUserManager;
     private Gson gson = new Gson();
 
     public PkuHoleManager(Context context) {
         mContext = (AppContext) context.getApplicationContext();
         mApiManager = ApiManager.getInstance();
+        mUserManager = new UserManager(mContext);
     }
 
     /**
@@ -53,37 +57,73 @@ public class PkuHoleManager {
         params.add(mApiManager.makeParam("p", "" + page));
 
         sendRequest(params, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String jsonStr) {
-                        try {
-                            JsonObject response = gson.fromJson(jsonStr, JsonObject.class);
-                            int code = response.get("code").getAsInt();
-                            switch (code) {
-                                case 0:
-                                    ArrayList<HoleListItemMod> mods = new ArrayList<>();
-                                    JsonArray array = response.getAsJsonArray("data");
-                                    Log.v(TAG, "HoleList: " + array.toString());
-                                    for (int i = 0; i < array.size(); ++i) {
-                                        JsonElement data = array.get(i);
-                                        mods.add(gson.fromJson(data, HoleListItemMod.class));
-                                    }
-                                    callback.onSuccess(code, mods);
-                                    break;
-                                default:
-                                    String msg = response.get("msg").getAsString();
-                                    Log.v(TAG, ("error, code=" + code) + " " + msg);
-                                    callback.onError(msg);
-                            }
-                        } catch (JsonSyntaxException e) {
-                            e.printStackTrace();
-                            callback.onError(e.getMessage());
-                        }
+            @Override
+            public void onResponse(String jsonStr) {
+                try {
+                    JsonObject response = gson.fromJson(jsonStr, JsonObject.class);
+                    int code = response.get("code").getAsInt();
+                    switch (code) {
+                        case 0:
+                            ArrayList<HoleListItemMod> mods;
+                            mods = gson.fromJson(response.get("data"), new TypeToken<ArrayList<HoleListItemMod>>() {}.getType());
+                            callback.onFinished(code, mods);
+                            break;
+                        default:
+                            String msg = response.get("msg").getAsString();
+                            Log.v(TAG, ("error, code=" + code) + " " + msg);
+                            callback.onFinished(code, null);
                     }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        callback.onError(volleyError.getMessage());
+                } catch (JsonSyntaxException e) {
+                    e.printStackTrace();
+                    callback.onError(e.getMessage());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                callback.onError(volleyError.getMessage());
+            }
+        });
+    }
+
+    /**
+     * 获取指定pid的树洞评论列表
+     * @param pid PID
+     * @param callback 回调
+     */
+    public void getCommentList(int pid, final Callback<ArrayList<HoleCommentListItemMod>> callback) {
+        ArrayList<ApiManager.Parameter> params = new ArrayList<>();
+        params.add(mApiManager.makeParam("action", "getcomment"));
+        params.add(mApiManager.makeParam("pid", "" + pid));
+        params.add(mApiManager.makeParam("token", mUserManager.getUserMod().getToken()));
+
+        sendRequest(params, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String jsonStr) {
+                try {
+                    JsonObject response = gson.fromJson(jsonStr, JsonObject.class);
+                    int code = response.get("code").getAsInt();
+                    switch (code) {
+                        case 0:
+                            ArrayList<HoleCommentListItemMod> mods;
+                            mods = gson.fromJson(response.get("data"), new TypeToken<ArrayList<HoleCommentListItemMod>>() {}.getType());
+                            callback.onFinished(code, mods);
+                            break;
+                        default:
+                            String msg = response.get("msg").getAsString();
+                            Log.v(TAG, ("error, code=" + code) + " " + msg);
+                            callback.onFinished(code, null);
                     }
-                });
+                } catch (JsonSyntaxException e) {
+                    e.printStackTrace();
+                    callback.onError(e.getMessage());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                callback.onError(volleyError.getMessage());
+            }
+        });
     }
 }

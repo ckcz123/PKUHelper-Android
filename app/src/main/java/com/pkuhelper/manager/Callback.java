@@ -5,7 +5,7 @@ package com.pkuhelper.manager;
  */
 public interface Callback<T> {
 
-    void onSuccess(int code, T data);
+    void onFinished(int code, T data);
 
     void onError(String msg);
 }

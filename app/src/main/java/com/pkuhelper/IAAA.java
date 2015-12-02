@@ -7,12 +7,15 @@ import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.view.View;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.pkuhelper.lib.Constants;
 import com.pkuhelper.lib.Editor;
 import com.pkuhelper.lib.ViewSetting;
 import com.pkuhelper.lib.view.CustomToast;
 import com.pkuhelper.lib.webconnection.Parameters;
 import com.pkuhelper.lib.webconnection.WebConnection;
+import com.pkuhelper.model.UserMod;
 
 import org.json.JSONObject;
 
@@ -95,7 +98,6 @@ public class IAAA {
 				IPGW.setOthers();
 			}
 		}).show();
-		return;
 	}
 
 	public static void doLogin(String username, String password) {
@@ -129,18 +131,28 @@ public class IAAA {
 
 	static void finishLogin(String string) {
 		try {
-			JSONObject jsonObject = new JSONObject(string);
-			int code = jsonObject.getInt("code");
+			Gson gson = new Gson();
+			JsonObject jsonObject = gson.fromJson(string, JsonObject.class);
+			int code = jsonObject.get("code").getAsInt();
+//			JSONObject jsonObject = new JSONObject(string);
+//			int code = jsonObject.getInt("code");
 			if (code != 0) {
-				CustomToast.showErrorToast(PKUHelper.pkuhelper, jsonObject.optString("msg", "登录失败"));
+//				CustomToast.showErrorToast(PKUHelper.pkuhelper, jsonObject.optString("msg", "登录失败"));
+				CustomToast.showErrorToast(PKUHelper.pkuhelper, jsonObject.get("msg").getAsString());
 				return;
 			}
-			Constants.token = jsonObject.getString("token");
-			Constants.user_token = jsonObject.getString("user_token");
-			Constants.name = jsonObject.optString("name");
-			Constants.sex = jsonObject.optString("gender");
-			Constants.major = jsonObject.optString("department");
-			Constants.birthday = jsonObject.optString("birthday");
+//			Constants.token = jsonObject.getString("token");
+//			Constants.user_token = jsonObject.getString("user_token");
+//			Constants.name = jsonObject.optString("name");
+//			Constants.sex = jsonObject.optString("gender");
+//			Constants.major = jsonObject.optString("department");
+//			Constants.birthday = jsonObject.optString("birthday");
+			Constants.token = jsonObject.get("token").getAsString();
+			Constants.user_token = jsonObject.get("user_token").getAsString();
+			Constants.name = jsonObject.get("name").getAsString();
+			Constants.sex = jsonObject.get("gender").getAsString();
+			Constants.major = jsonObject.get("department").getAsString();
+			Constants.birthday = jsonObject.get("birthday").getAsString();
 			Constants.username = username;
 			Constants.password = password;
 			Editor.putString(PKUHelper.pkuhelper, "token", Constants.token);
@@ -151,6 +163,13 @@ public class IAAA {
 			Editor.putString(PKUHelper.pkuhelper, "major", Constants.major);
 			Editor.putString(PKUHelper.pkuhelper, "sex", Constants.sex);
 			Editor.putString(PKUHelper.pkuhelper, "birthday", Constants.birthday);
+
+			// 整体存入
+			// TO-DO: 移入UserManager中
+			UserMod userMod = gson.fromJson(jsonObject, UserMod.class);
+			String mUserModJson = gson.toJson(userMod);
+			Editor.putString(PKUHelper.pkuhelper, "mUserMod", mUserModJson);
+
 			dialog.dismiss();
 			finishIAAA();
 		} catch (Exception e) {
@@ -209,7 +228,7 @@ class LoginTask extends AsyncTask<String, String, Parameters> {
 			boolean local = jsonObject.optInt("local") != 0;
 			String token = "";
 			if (local) {
-				ArrayList<Parameters> arrayList = new ArrayList<Parameters>();
+				ArrayList<Parameters> arrayList = new ArrayList<>();
 				arrayList.add(new Parameters("appid", "portal"));
 				arrayList.add(new Parameters("userName", username));
 				arrayList.add(new Parameters("password", password));
@@ -231,7 +250,7 @@ class LoginTask extends AsyncTask<String, String, Parameters> {
 				username = "";
 				password = "";
 			}
-			ArrayList<Parameters> arrayList = new ArrayList<Parameters>();
+			ArrayList<Parameters> arrayList = new ArrayList<>();
 			arrayList.add(new Parameters("uid", username));
 			arrayList.add(new Parameters("password", password));
 			arrayList.add(new Parameters("token", token));
