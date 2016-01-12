@@ -1,7 +1,9 @@
-package com.pkuhelper.M_PKUhole;
+package com.pkuhelper.view;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,27 +17,34 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.pkuhelper.R;
+import com.pkuhelper.lib.MyBitmapFactory;
 import com.pkuhelper.lib.MyCalendar;
 import com.pkuhelper.entity.HoleListItemEntity;
+import com.pkuhelper.lib.MyFile;
+import com.pkuhelper.lib.Util;
 
 import java.util.ArrayList;
 
 /**
  * Created by zyxu on 16/1/12.
  */
-public class MHoleView implements IMHoleView {
+public class HoleView implements IHoleView {
 
     private Context context;
-
     private ListView listView;
-
-    public MHoleView(Context context) {
+    private ProgressDialog pd;
+    private Activity activity;
+    public HoleView(Context context) {
 
         this.context = context;
+        activity = (Activity) context;
+        listView = (ListView) activity.findViewById(R.id.MHole_listview);
     }
 
     @Override
     public void firstLoad(final ArrayList<HoleListItemEntity> list){
+        pd.dismiss();
+        Log.d("List Num:", "" + list.size());
         listView.setAdapter(new BaseAdapter() {
             @Override
             public int getCount() {
@@ -57,7 +66,7 @@ public class MHoleView implements IMHoleView {
                 ViewHolder holder = null;
 
                 HoleListItemEntity item = list.get(position);
-                if (convertView == null){
+                if (convertView == null) {
                     holder = new ViewHolder();
 
                     convertView = LayoutInflater.from(context).inflate(R.layout.mhole_list_item, parent, false);
@@ -65,8 +74,7 @@ public class MHoleView implements IMHoleView {
 
                     //set tag
                     convertView.setTag(holder);
-                }
-                else{
+                } else {
                     holder = (ViewHolder) convertView.getTag();
                 }
 
@@ -77,15 +85,18 @@ public class MHoleView implements IMHoleView {
                     case "audio":
                         holder.setAudio(item);
                         break;
+                    case "text":
+                        holder.setText(item);
+                        break;
                     default:
                         break;
                 }
-                holder.setOther(item);
 
                 return convertView;
             }
         });
-    };
+
+    }
 
     @Override
     public void moreLoad(final ArrayList<HoleListItemEntity> list){
@@ -94,13 +105,18 @@ public class MHoleView implements IMHoleView {
 
     @Override
     public void refreshLoad(final ArrayList<HoleListItemEntity> list) {
-
+        //TO-DO 加入
     }
 
     @Override
     public void error(){
         Toast.makeText(context, "加载失败", Toast.LENGTH_SHORT).show();
         Log.e("ERROR:","树洞加载失败");
+    }
+
+    @Override
+    public void loading(){
+        pd = ProgressDialog.show(context,"正在加载","正在加载数据");
     }
 
     public final class ViewHolder{
@@ -119,23 +135,35 @@ public class MHoleView implements IMHoleView {
             likeNumTextView = (TextView) view.findViewById(R.id.hole_star);
             cmtNumTextView = (TextView) view.findViewById(R.id.hole_comment);
             listView = (ListView) view.findViewById(R.id.MHole_listview);
-
-            //SET image, button as gone
-            contentImageView.setVisibility(View.GONE);
-            button.setVisibility(View.GONE);
         }
 
         public void setImage(HoleListItemEntity item) {
             contentImageView.setVisibility(View.VISIBLE);
+            button.setVisibility(View.GONE);
+            setOther(item);
 
-            //SHOULD get Bitmap from the entity
-            //contentImageView.setImageBitmap(item.getBitmap(context));
+            String url = item.getUrl();
+            Bitmap bitmap=null;
+            try {
+                String hash = Util.getHash(url);
+                bitmap = MyBitmapFactory.getCompressedBitmap(MyFile.getCache(context, hash).getAbsolutePath(), 2);
+                contentImageView.setImageBitmap(bitmap);
+            } catch (Exception e) {
+            }
+
         }
         public void setAudio(HoleListItemEntity item){
             contentImageView.setVisibility(View.VISIBLE);
             button.setVisibility(View.VISIBLE);
-
+            setOther(item);
             //TO-DO add audio
+        }
+
+        public void setText(HoleListItemEntity item){
+            //SET image, button as gone
+            contentImageView.setVisibility(View.GONE);
+            button.setVisibility(View.GONE);
+            setOther(item);
         }
 
         public void updateAudio(){
@@ -145,10 +173,15 @@ public class MHoleView implements IMHoleView {
         public void setOther(HoleListItemEntity item){
             if (item.getText().equals(""))
                 contentTextView.setVisibility(View.GONE);
-            pidTextView.setText("#"+item.getPid());
-            likeNumTextView.setText(""+item.getLikenum());
-            cmtNumTextView.setText(""+item.getReply());
+            else {
+                contentTextView.setVisibility(View.VISIBLE);
+                contentTextView.setText(item.getText());
+            }
+            pidTextView.setText("#" + item.getPid());
+            likeNumTextView.setText("" + item.getLikenum());
+            cmtNumTextView.setText("" + item.getReply());
             timeTextView.setText(MyCalendar.format(item.getTimestamp()));
+            long timestamp = item.getTimestamp();
         }
     }
 }
