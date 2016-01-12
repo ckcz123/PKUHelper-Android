@@ -18,7 +18,9 @@ public class MHoleActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mhole);
 
-        mHolePresenter = new MHolePresenter();
+        mHolePresenter = new MHolePresenter(this);
+
+        mHolePresenter.firstLoad();
     }
 
 }

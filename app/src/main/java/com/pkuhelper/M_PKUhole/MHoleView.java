@@ -2,8 +2,9 @@ package com.pkuhelper.M_PKUhole;
 
 import android.app.Activity;
 import android.content.Context;
-import android.net.Uri;
 import android.support.v7.widget.CardView;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -11,36 +12,30 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.pkuhelper.R;
 import com.pkuhelper.lib.MyCalendar;
-import com.pkuhelper.lib.ViewSetting;
-import com.pkuhelper.model.HoleListItemMod;
-import com.pkuhelper.pkuhole.HoleInfo;
+import com.pkuhelper.entity.HoleListItemEntity;
 
-import java.net.URI;
 import java.util.ArrayList;
 
 /**
  * Created by zyxu on 16/1/12.
  */
-public class MHoleView implements MHoleView_I {
+public class MHoleView implements IMHoleView {
 
-    private View view;
-    private Activity activity;
     private Context context;
 
     private ListView listView;
 
-    public MHoleView(Activity activity, View view, Context context) {
+    public MHoleView(Context context) {
 
-        this.activity = activity;
-        this.view = view;
         this.context = context;
     }
 
     @Override
-    public void firstLoad(final ArrayList<HoleListItemMod> list){
+    public void firstLoad(final ArrayList<HoleListItemEntity> list){
         listView.setAdapter(new BaseAdapter() {
             @Override
             public int getCount() {
@@ -61,11 +56,11 @@ public class MHoleView implements MHoleView_I {
             public View getView(int position, View convertView, ViewGroup parent) {
                 ViewHolder holder = null;
 
-                HoleListItemMod item = list.get(position);
+                HoleListItemEntity item = list.get(position);
                 if (convertView == null){
                     holder = new ViewHolder();
 
-                    convertView = activity.getLayoutInflater().inflate(R.layout.mhole_list_item, parent, false);
+                    convertView = LayoutInflater.from(context).inflate(R.layout.mhole_list_item, parent, false);
                     holder.findWidgets(convertView);
 
                     //set tag
@@ -93,15 +88,20 @@ public class MHoleView implements MHoleView_I {
     };
 
     @Override
-    public void moreLoad(final ArrayList<HoleListItemMod> list){
+    public void moreLoad(final ArrayList<HoleListItemEntity> list){
 
     }
 
     @Override
-    public void refreshLoad(final ArrayList<HoleListItemMod> list) {
+    public void refreshLoad(final ArrayList<HoleListItemEntity> list) {
 
     }
 
+    @Override
+    public void error(){
+        Toast.makeText(context, "加载失败", Toast.LENGTH_SHORT).show();
+        Log.e("ERROR:","树洞加载失败");
+    }
 
     public final class ViewHolder{
         public CardView cardView;
@@ -125,11 +125,13 @@ public class MHoleView implements MHoleView_I {
             button.setVisibility(View.GONE);
         }
 
-        public void setImage(HoleListItemMod item) {
+        public void setImage(HoleListItemEntity item) {
             contentImageView.setVisibility(View.VISIBLE);
-            contentImageView.setImageBitmap(item.getBitmap(context));
+
+            //SHOULD get Bitmap from the entity
+            //contentImageView.setImageBitmap(item.getBitmap(context));
         }
-        public void setAudio(HoleListItemMod item){
+        public void setAudio(HoleListItemEntity item){
             contentImageView.setVisibility(View.VISIBLE);
             button.setVisibility(View.VISIBLE);
 
@@ -140,7 +142,7 @@ public class MHoleView implements MHoleView_I {
 
         }
 
-        public void setOther(HoleListItemMod item){
+        public void setOther(HoleListItemEntity item){
             if (item.getText().equals(""))
                 contentTextView.setVisibility(View.GONE);
             pidTextView.setText("#"+item.getPid());

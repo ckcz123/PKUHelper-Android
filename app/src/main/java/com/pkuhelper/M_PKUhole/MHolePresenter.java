@@ -3,12 +3,10 @@ package com.pkuhelper.M_PKUhole;
 import android.app.Activity;
 import android.content.Context;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Toast;
 
-import com.pkuhelper.manager.Callback;
-import com.pkuhelper.manager.PkuHoleManager;
-import com.pkuhelper.model.HoleListItemMod;
+import com.pkuhelper.model.Callback;
+import com.pkuhelper.model.impl.PkuHoleMod;
+import com.pkuhelper.entity.HoleListItemEntity;
 
 import java.util.ArrayList;
 
@@ -16,36 +14,36 @@ import java.util.ArrayList;
  * Created by zyxu on 16/1/11.
  */
 public class MHolePresenter {
-    private MHoleView mHoleView;
-    private PkuHoleManager pkuHoleManager;
+    private IMHoleView mHoleView = null;
+    private PkuHoleMod pkuHoleManager;
     private Activity activity;
     private View view;
     private Context context;
     private int requestPage;
-    private ArrayList<HoleListItemMod> mods;
+    private ArrayList<HoleListItemEntity> mods;
 
     private Callback callback = new Callback() {
         @Override
         public void onFinished(int code, Object data) {
             if (code == 0) {
-                 mods = (ArrayList<HoleListItemMod>) data;
+                mods = (ArrayList<HoleListItemEntity>) data;
                 //TO-DO load data
+                mHoleView.firstLoad(mods);
             } else {
                 //TO-DO error solver
+                mHoleView.error();
             }
         }
 
         @Override
         public void onError(String msg) {
-            //TO-DO error solver
+            mHoleView.error();
         }
     };
 
-    public MHolePresenter(Activity activity1, View view1) {
-        this.activity = activity1;
-        this.view = view1;
-
-        mHoleView = new MHoleView(activity, view, context);
+    public MHolePresenter(Context context) {
+        this.context = context;
+        mHoleView = new MHoleView(context);
     }
 
     public void firstLoad() {
