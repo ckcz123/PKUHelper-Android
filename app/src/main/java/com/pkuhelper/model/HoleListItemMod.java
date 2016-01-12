@@ -1,5 +1,12 @@
 package com.pkuhelper.model;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+
+import com.pkuhelper.lib.MyBitmapFactory;
+import com.pkuhelper.lib.MyFile;
+import com.pkuhelper.lib.Util;
+
 /**
  * Created by LuoLiangchen on 15/11/30.
  */
@@ -12,6 +19,8 @@ public class HoleListItemMod {
     private int likenum;
     private int extra;
     private String url;
+    //add by zy
+    private Bitmap bitmap;
 
     public int getPid() {
         return pid;
@@ -75,5 +84,18 @@ public class HoleListItemMod {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    //add by zy
+    public Bitmap getBitmap(Context context) {
+        if (!type.equals("image")) return null;
+        if (bitmap != null) return bitmap;
+        try {
+            String hash = Util.getHash(url);
+            bitmap = MyBitmapFactory.getCompressedBitmap(MyFile.getCache(context, hash).getAbsolutePath(), 2);
+            return bitmap;
+        } catch (Exception e) {
+        }
+        return null;
     }
 }

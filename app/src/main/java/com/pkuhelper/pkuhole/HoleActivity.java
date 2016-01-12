@@ -279,7 +279,6 @@ public class HoleActivity extends BaseActivity {
 				public Object getItem(int position) {
 					return null;
 				}
-
 				public int getCount() {
 					return 0;
 				}
