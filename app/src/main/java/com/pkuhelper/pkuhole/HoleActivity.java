@@ -359,7 +359,6 @@ public class HoleActivity extends BaseActivity {
 				}
 
 				ViewSetting.setTextView(convertView, R.id.hole_listitem_time, MyCalendar.format(holeInfo.timestamp));
-				Log.d("timeStamp:",""+holeInfo.timestamp);
 				ViewSetting.setTextView(convertView, R.id.hole_listitem_like, "(" + holeInfo.like + ")");
 				ViewSetting.setTextView(convertView, R.id.hole_listitem_reply, "(" + holeInfo.reply + ")");
 

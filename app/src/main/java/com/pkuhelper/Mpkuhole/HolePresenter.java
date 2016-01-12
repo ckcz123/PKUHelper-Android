@@ -23,6 +23,7 @@ public class HolePresenter {
     private Context context;
     private int requestPage;
     private ArrayList<HoleListItemEntity> mods;
+    private boolean isLoading = false;
 
     private Callback callback = null;
 
@@ -33,35 +34,45 @@ public class HolePresenter {
         callback = new Callback() {
             @Override
             public void onFinished(int code, Object data) {
+
+                isLoading = false;
                 if (code == 0) {
                     mods = (ArrayList<HoleListItemEntity>) data;
+                    requestPage++;
                     //TO-DO load data
-                    mHoleView.firstLoad(mods);
+                    if (requestPage == 1)
+                        mHoleView.firstLoad(mods);
+                    else
+                        mHoleView.moreLoad(mods);
                 } else {
-                    //TO-DO error solver
                     mHoleView.error();
                 }
             }
 
             @Override
             public void onError(String msg) {
+                isLoading = false;
                 mHoleView.error();
             }
         };
     }
 
     public void firstLoad() {
-        requestPage = 1;
+
+        isLoading = true;
+        requestPage = 0;
 
         mHoleView.loading();
         //request from manager
-        pkuHoleMod.getHoleList(requestPage, callback);
+        pkuHoleMod.getHoleList(requestPage+1, callback);
     }
 
     public void moreLoad() {
-        requestPage++;
-
-        pkuHoleMod.getHoleList(requestPage, callback);
+        if (isLoading)
+            return;
+        isLoading = true;
+        mHoleView.loading();
+        pkuHoleMod.getHoleList(requestPage+1, callback);
     }
 
     public void refreshLoad() {

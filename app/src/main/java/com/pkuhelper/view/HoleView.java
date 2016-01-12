@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.HeaderViewListAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -34,6 +35,8 @@ public class HoleView implements IHoleView {
     private ListView listView;
     private ProgressDialog pd;
     private Activity activity;
+    private ArrayList<HoleListItemEntity> allItems;
+
     public HoleView(Context context) {
 
         this.context = context;
@@ -45,10 +48,12 @@ public class HoleView implements IHoleView {
     public void firstLoad(final ArrayList<HoleListItemEntity> list){
         pd.dismiss();
         Log.d("List Num:", "" + list.size());
+        allItems = new ArrayList<>();
+        allItems.addAll(list);
         listView.setAdapter(new BaseAdapter() {
             @Override
             public int getCount() {
-                return (list.size());
+                return (allItems.size());
             }
 
             @Override
@@ -65,7 +70,7 @@ public class HoleView implements IHoleView {
             public View getView(int position, View convertView, ViewGroup parent) {
                 ViewHolder holder = null;
 
-                HoleListItemEntity item = list.get(position);
+                HoleListItemEntity item = allItems.get(position);
                 if (convertView == null) {
                     holder = new ViewHolder();
 
@@ -95,11 +100,16 @@ public class HoleView implements IHoleView {
                 return convertView;
             }
         });
-
     }
 
     @Override
     public void moreLoad(final ArrayList<HoleListItemEntity> list){
+        pd.dismiss();
+        listView = (ListView) activity.findViewById(R.id.MHole_listview);
+        if (listView != null) {
+            allItems.addAll(list);
+            ((BaseAdapter) listView.getAdapter()).notifyDataSetChanged();
+        }
 
     }
 
@@ -116,7 +126,8 @@ public class HoleView implements IHoleView {
 
     @Override
     public void loading(){
-        pd = ProgressDialog.show(context,"正在加载","正在加载数据");
+        if (pd==null || !pd.isShowing())
+            pd = ProgressDialog.show(context,"正在加载","正在加载数据");
     }
 
     public final class ViewHolder{
@@ -142,14 +153,14 @@ public class HoleView implements IHoleView {
             button.setVisibility(View.GONE);
             setOther(item);
 
-            String url = item.getUrl();
-            Bitmap bitmap=null;
-            try {
-                String hash = Util.getHash(url);
-                bitmap = MyBitmapFactory.getCompressedBitmap(MyFile.getCache(context, hash).getAbsolutePath(), 2);
-                contentImageView.setImageBitmap(bitmap);
-            } catch (Exception e) {
-            }
+//            String url = item.getUrl();
+//            Bitmap bitmap=null;
+//            try {
+//                String hash = Util.getHash(url);
+//                bitmap = MyBitmapFactory.getCompressedBitmap(MyFile.getCache(context, hash).getAbsolutePath(), 2);
+//                contentImageView.setImageBitmap(bitmap);
+//            } catch (Exception e) {
+//            }
 
         }
         public void setAudio(HoleListItemEntity item){
