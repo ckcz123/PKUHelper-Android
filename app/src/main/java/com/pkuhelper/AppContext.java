@@ -4,9 +4,9 @@ import android.app.Application;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.pkuhelper.entity.UserEntity;
 import com.pkuhelper.lib.Editor;
 import com.pkuhelper.manager.ApiManager;
-import com.pkuhelper.model.UserMod;
 
 /**
  * Created by LuoLiangchen on 15/11/30.
@@ -14,7 +14,8 @@ import com.pkuhelper.model.UserMod;
 public class AppContext extends Application {
     private static final String TAG = "AppContext";
 
-    private UserMod mUserMod;
+    private UserEntity mUserEntity;
+    private long holeTimestamp;
 
     private Gson gson = new Gson();
 
@@ -25,15 +26,23 @@ public class AppContext extends Application {
         // 初始化ApiManager
         ApiManager.newInstance(this);
 
-        initUserMod();
+        initUserEntity();
     }
 
-    private void initUserMod() {
-        mUserMod = gson.fromJson(Editor.getString(this, "mUserMod"), UserMod.class);
-        if (mUserMod == null) mUserMod = new UserMod();
+    private void initUserEntity() {
+        mUserEntity = gson.fromJson(Editor.getString(this, "mUserEntity"), UserEntity.class);
+        if (mUserEntity == null) mUserEntity = new UserEntity();
     }
 
-    public UserMod getUserMod() {
-        return mUserMod;
+    public void updateHoleTimestamp(long timestamp) {
+        holeTimestamp = timestamp;
+    }
+
+    public long getHoleTimestamp() {
+        return holeTimestamp;
+    }
+
+    public UserEntity getUserEntity() {
+        return mUserEntity;
     }
 }

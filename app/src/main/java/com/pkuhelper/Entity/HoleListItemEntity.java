@@ -1,9 +1,9 @@
-package com.pkuhelper.model;
+package com.pkuhelper.entity;
 
 /**
- * Created by LuoLiangchen on 15/11/30.
+ * Created by LuoLiangchen on 16/1/8.
  */
-public class HoleListItemMod {
+public class HoleListItemEntity {
     private int pid;
     private String text;
     private String type;
@@ -12,6 +12,7 @@ public class HoleListItemMod {
     private int likenum;
     private int extra;
     private String url;
+    private long hot;
 
     public int getPid() {
         return pid;
@@ -75,5 +76,13 @@ public class HoleListItemMod {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public long getHot() {
+        return hot;
+    }
+
+    public void setHot(long hot) {
+        this.hot = hot;
     }
 }

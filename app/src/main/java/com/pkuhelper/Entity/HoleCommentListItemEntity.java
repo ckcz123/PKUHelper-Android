@@ -1,9 +1,9 @@
-package com.pkuhelper.model;
+package com.pkuhelper.entity;
 
 /**
- * Created by LuoLiangchen on 15/12/2.
+ * Created by LuoLiangchen on 16/1/9.
  */
-public class HoleCommentListItemMod {
+public class HoleCommentListItemEntity {
     private int cid;
     private int pid;
     private String text;
