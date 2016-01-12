@@ -227,5 +227,4 @@
     <string name="lf_found">招领启事</string>
     <string name="lf_mine">我发布的</string>
     <string name="gesture_hint">左右滑动可以设置其他几个项目的手势</string>
-    <string name="title_activity_mhole">MHoleActivity</string>
 </resources>

@@ -9,13 +9,13 @@ import android.view.View;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.pkuhelper.entity.UserEntity;
 import com.pkuhelper.lib.Constants;
 import com.pkuhelper.lib.Editor;
 import com.pkuhelper.lib.ViewSetting;
 import com.pkuhelper.lib.view.CustomToast;
 import com.pkuhelper.lib.webconnection.Parameters;
 import com.pkuhelper.lib.webconnection.WebConnection;
-import com.pkuhelper.model.UserMod;
 
 import org.json.JSONObject;
 
@@ -165,10 +165,10 @@ public class IAAA {
 			Editor.putString(PKUHelper.pkuhelper, "birthday", Constants.birthday);
 
 			// 整体存入
-			// TO-DO: 移入UserManager中
-			UserMod userMod = gson.fromJson(jsonObject, UserMod.class);
-			String mUserModJson = gson.toJson(userMod);
-			Editor.putString(PKUHelper.pkuhelper, "mUserMod", mUserModJson);
+			// TO-DO: 移入UserMod中
+			UserEntity userEntity = gson.fromJson(jsonObject, UserEntity.class);
+			String mUserEntityJson = gson.toJson(userEntity);
+			Editor.putString(PKUHelper.pkuhelper, "mUserEntity", mUserEntityJson);
 
 			dialog.dismiss();
 			finishIAAA();

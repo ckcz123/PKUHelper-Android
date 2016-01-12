@@ -1,9 +1,9 @@
-package com.pkuhelper.model;
+package com.pkuhelper.entity;
 
 /**
- * Created by LuoLiangchen on 15/12/2.
+ * Created by LuoLiangchen on 16/1/9.
  */
-public class UserMod {
+public class UserEntity {
     private String token;
     private String user_token;
     private String name;
