@@ -66,6 +66,13 @@
             android:launchMode="singleTask"
             android:label="@string/app_name">
         </activity>
+
+        <activity
+            android:name="com.pkuhelper.Mpkuhole.MHoleActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask"
+            android:label="@string/app_name">
+        </activity>
         <activity
             android:name="com.pkuhelper.pkuhole.HolePost"
             android:screenOrientation="portrait"

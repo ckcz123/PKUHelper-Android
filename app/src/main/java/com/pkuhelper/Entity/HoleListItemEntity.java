@@ -1,5 +1,13 @@
 package com.pkuhelper.entity;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.util.Log;
+
+import com.pkuhelper.lib.MyBitmapFactory;
+import com.pkuhelper.lib.MyFile;
+import com.pkuhelper.lib.Util;
+
 /**
  * Created by LuoLiangchen on 16/1/8.
  */
@@ -13,6 +21,7 @@ public class HoleListItemEntity {
     private int extra;
     private String url;
     private long hot;
+    private Bitmap bitmap;
 
     public int getPid() {
         return pid;
@@ -84,5 +93,13 @@ public class HoleListItemEntity {
 
     public void setHot(long hot) {
         this.hot = hot;
+    }
+
+    public Bitmap getBitmap() {
+        return bitmap;
+    }
+
+    public void setBitmap(Bitmap bitmap) {
+        this.bitmap = bitmap;
     }
 }

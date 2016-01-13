@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 
+import com.pkuhelper.Mpkuhole.MHoleActivity;
 import com.pkuhelper.bbs.BBSActivity;
 import com.pkuhelper.chat.ChatActivity;
 import com.pkuhelper.classroom.ClassActivity;
@@ -29,7 +30,6 @@ import com.pkuhelper.lib.view.CustomToast;
 import com.pkuhelper.lostfound.old.LostFoundActivity;
 import com.pkuhelper.media.MediaActivity;
 import com.pkuhelper.noticecenter.NCActivity;
-import com.pkuhelper.pkuhole.HoleActivity;
 import com.pkuhelper.pkuhole.old.PKUHoleActivity;
 import com.pkuhelper.subactivity.SubActivity;
 
@@ -261,7 +261,10 @@ public class MYPKU extends Fragment {
 					new Intent(PKUHelper.pkuhelper, BBSActivity.class));
 		else if ("pkuhole".equals(string))
 			PKUHelper.pkuhelper.startActivity(
-					new Intent(PKUHelper.pkuhelper, HoleActivity.class));
+
+					//TEST
+					new Intent(PKUHelper.pkuhelper, MHoleActivity.class));
+					//new Intent(PKUHelper.pkuhelper, HoleActivity.class));
 		else if (("pdsd").equals(string))
 			PKUHelper.pkuhelper.startActivity(
 					new Intent(PKUHelper.pkuhelper, PKUHoleActivity.class));

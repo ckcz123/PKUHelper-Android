@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/hole_card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="8dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:text="#00000"
+                android:id="@+id/hole_pid"
+                android:maxLines="1"
+                android:layout_margin="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <View
+                android:layout_below="@id/hole_pid"
+                android:layout_width="fill_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="1px"
+                android:background="#808080"/>
+
+            <RelativeLayout
+                android:id="@+id/layout_hole_pic"
+                android:layout_below="@id/hole_pid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/hole_content_image"
+                    android:scaleType="centerCrop"
+                    android:layout_alignParentTop="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"/>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/hole_content_button"
+                    android:layout_centerInParent="true"/>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/hole_content_text"
+                android:maxLines="3"
+                android:layout_below="@id/layout_hole_pic"
+                android:layout_margin="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <View
+                android:layout_below="@id/hole_content_text"
+                android:layout_width="fill_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="1px"
+                android:background="#808080"/>
+
+            <RelativeLayout
+                android:orientation="horizontal"
+                android:layout_below="@+id/hole_content_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <TextView
+                    android:id="@+id/hole_time"
+                    android:text="1分钟前"
+                    android:textColor="#808080"
+                    android:textSize="10sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="20dp"/>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_gravity="center_vertical"
+                        android:alpha="0.7"
+                        android:layout_width="18sp"
+                        android:layout_height="18sp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_star_rate_black_18dp" />
+                    <TextView
+                        android:layout_gravity="center_vertical"
+                        android:textColor="#808080"
+                        android:text="0"
+                        android:textSize="10sp"
+                        android:id="@+id/hole_star"
+                        android:layout_marginLeft="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <ImageView
+                        android:layout_gravity="center_vertical"
+                        android:alpha="0.7"
+                        android:layout_marginLeft="10dp"
+                        android:layout_width="15sp"
+                        android:layout_height="15sp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_email_black_18dp"/>
+                    <TextView
+                        android:layout_gravity="center_vertical"
+                        android:textColor="#808080"
+                        android:text="0"
+                        android:textSize="10sp"
+                        android:id="@+id/hole_comment"
+                        android:layout_marginLeft="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.CardView>
+</RelativeLayout>
