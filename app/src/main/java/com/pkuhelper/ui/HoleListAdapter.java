@@ -2,6 +2,7 @@ package com.pkuhelper.ui;
 
 import android.content.Context;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,9 @@ import android.widget.TextView;
 
 import com.pkuhelper.R;
 import com.pkuhelper.entity.HoleListItemEntity;
+import com.pkuhelper.lib.Constants;
 import com.pkuhelper.lib.MyCalendar;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -104,15 +107,9 @@ public class HoleListAdapter extends BaseAdapter {
             button.setVisibility(View.GONE);
             setOther(item);
 
-//            String url = item.getUrl();
-//            Bitmap bitmap=null;
-//            try {
-//                String hash = Util.getHash(url);
-//                bitmap = MyBitmapFactory.getCompressedBitmap(MyFile.getCache(context, hash).getAbsolutePath(), 2);
-//                contentImageView.setImageBitmap(bitmap);
-//            } catch (Exception e) {
-//            }
-
+            String url = item.getUrl();
+            url = Constants.domain + "/services/pkuhole/images/" +url;
+            Picasso.with(context).load(url).into(contentImageView);
         }
         public void setAudio(HoleListItemEntity item){
             contentImageView.setVisibility(View.VISIBLE);

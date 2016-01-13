@@ -26,4 +26,5 @@ dependencies {
     compile files('libs/libammsdk.jar')
     compile files('libs/volley.jar')
     compile 'com.android.support:cardview-v7:23.0.1'
+    compile files('libs/picasso-2.5.2.jar')
 }
