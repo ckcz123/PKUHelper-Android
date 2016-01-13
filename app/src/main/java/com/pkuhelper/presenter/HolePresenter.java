@@ -1,14 +1,14 @@
-package com.pkuhelper.Mpkuhole;
+package com.pkuhelper.presenter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 
 import com.pkuhelper.model.Callback;
 import com.pkuhelper.model.impl.PkuHoleMod;
 import com.pkuhelper.entity.HoleListItemEntity;
-import com.pkuhelper.view.IHoleView;
-import com.pkuhelper.view.HoleView;
+import com.pkuhelper.ui.IHoleUI;
 
 import java.util.ArrayList;
 
@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * Created by zyxu on 16/1/11.
  */
 public class HolePresenter {
-    private IHoleView mHoleView = null;
+    private IHoleUI mHoleView = null;
     private PkuHoleMod pkuHoleMod;
     private Activity activity;
     private View view;
@@ -29,13 +29,12 @@ public class HolePresenter {
 
     public HolePresenter(Context context) {
         this.context = context;
-        mHoleView = new HoleView(context);
+        mHoleView = (IHoleUI) context;
         pkuHoleMod = new PkuHoleMod(context);
         callback = new Callback() {
             @Override
             public void onFinished(int code, Object data) {
 
-                isLoading = false;
                 if (code == 0) {
                     mods = (ArrayList<HoleListItemEntity>) data;
                     requestPage++;
@@ -47,6 +46,7 @@ public class HolePresenter {
                 } else {
                     mHoleView.error();
                 }
+                isLoading = false;
             }
 
             @Override
@@ -68,6 +68,7 @@ public class HolePresenter {
     }
 
     public void moreLoad() {
+        Log.d("Presenter Status:",String.valueOf(isLoading));
         if (isLoading)
             return;
         isLoading = true;
