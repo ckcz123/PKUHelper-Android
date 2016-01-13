@@ -139,8 +139,7 @@ public class HoleListAdapter extends BaseAdapter {
             pidTextView.setText("#" + item.getPid());
             likeNumTextView.setText("" + item.getLikenum());
             cmtNumTextView.setText("" + item.getReply());
-            timeTextView.setText(MyCalendar.format(item.getTimestamp()));
-            long timestamp = item.getTimestamp();
+            timeTextView.setText(MyCalendar.format(item.getTimestamp()*1000));
         }
     }
 }
