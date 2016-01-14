@@ -21,7 +21,6 @@ public class HoleListItemEntity {
     private int extra;
     private String url;
     private long hot;
-    private Bitmap bitmap;
 
     public int getPid() {
         return pid;
@@ -95,11 +94,4 @@ public class HoleListItemEntity {
         this.hot = hot;
     }
 
-    public Bitmap getBitmap() {
-        return bitmap;
-    }
-
-    public void setBitmap(Bitmap bitmap) {
-        this.bitmap = bitmap;
-    }
 }
