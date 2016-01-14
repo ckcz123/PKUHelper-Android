@@ -1,4 +1,4 @@
-package com.pkuhelper.ui;
+package com.pkuhelper.ui.hole;
 
 import com.pkuhelper.entity.HoleListItemEntity;
 

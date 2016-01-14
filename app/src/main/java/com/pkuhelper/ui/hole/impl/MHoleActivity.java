@@ -1,4 +1,4 @@
-package com.pkuhelper.ui.impl;
+package com.pkuhelper.ui.hole.impl;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -11,8 +11,8 @@ import android.widget.Toast;
 import com.pkuhelper.presenter.HolePresenter;
 import com.pkuhelper.R;
 import com.pkuhelper.entity.HoleListItemEntity;
-import com.pkuhelper.ui.HoleListAdapter;
-import com.pkuhelper.ui.IHoleUI;
+import com.pkuhelper.ui.hole.HoleListAdapter;
+import com.pkuhelper.ui.hole.IHoleUI;
 
 import java.util.ArrayList;
 

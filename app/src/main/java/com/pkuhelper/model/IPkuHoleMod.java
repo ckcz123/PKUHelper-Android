@@ -10,6 +10,16 @@ import java.util.ArrayList;
  */
 public interface IPkuHoleMod {
     /**
+     * URL片段 - 图片
+     */
+    String URL_IMAGES = "images";
+
+    /**
+     * URL片段 - 语音
+     */
+    String URL_AUDIOS = "audios";
+
+    /**
      * 树洞类型 - 文字树洞
      */
     String TYPE_TEXT = "text";
@@ -133,4 +143,12 @@ public interface IPkuHoleMod {
      * @param callback 回调
      */
     void search(String keywords, int page, int pageSize, String type, Callback<ArrayList<HoleListItemEntity>> callback);
+
+    /**
+     * 获取树洞中图片或语音的URL
+     * @param type 树洞类型
+     * @param url URL后缀
+     * @return 完整URL
+     */
+    String getResourceUrl(String type, String url);
 }

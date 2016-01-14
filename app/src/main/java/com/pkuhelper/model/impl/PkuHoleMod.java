@@ -125,7 +125,6 @@ public class PkuHoleMod implements IPkuHoleMod {
         ArrayList<ApiManager.Parameter> params = new ArrayList<>();
         params.add(mApiManager.makeParam("action", "getcomment"));
         params.add(mApiManager.makeParam("pid", "" + pid));
-        params.add(mApiManager.makeParam("token", mUserMod.getToken()));
 
         sendRequest(params, new Response.Listener<String>() {
             @Override
@@ -369,5 +368,16 @@ public class PkuHoleMod implements IPkuHoleMod {
                 callback.onError(volleyError.getMessage());
             }
         });
+    }
+
+    @Override
+    public String getResourceUrl(String type, String url) {
+        String baseUrl = ApiManager.PROTOCOL + "://" + ApiManager.DOMAIN + "/" + ApiManager.SERVICES + "/pkuhole/";
+        if (type.equals(TYPE_IMAGE)) {
+            return baseUrl + URL_IMAGES + "/" + url;
+        } else if (type.equals(TYPE_AUDIO)) {
+            return baseUrl + URL_IMAGES + "/" + url;
+        }
+        return null;
     }
 }

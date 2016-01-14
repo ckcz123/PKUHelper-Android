@@ -1,4 +1,4 @@
-package com.pkuhelper.ui;
+package com.pkuhelper.ui.hole;
 
 import android.content.Context;
 import android.support.v7.widget.CardView;
@@ -11,10 +11,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.pkuhelper.AppContext;
 import com.pkuhelper.R;
 import com.pkuhelper.entity.HoleListItemEntity;
 import com.pkuhelper.lib.Constants;
 import com.pkuhelper.lib.MyCalendar;
+import com.pkuhelper.manager.ImageManager;
+import com.pkuhelper.model.IPkuHoleMod;
+import com.pkuhelper.model.impl.PkuHoleMod;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -23,11 +27,17 @@ import java.util.ArrayList;
  * Created by zyxu on 16/1/13.
  */
 public class HoleListAdapter extends BaseAdapter {
-    private Context context;
+    private static final String TAG = "HoleListAdapter";
+
+    private AppContext mContext;
+    private IPkuHoleMod mPkuHoleMod;
+    private ImageManager mImageManager;
     private ArrayList<HoleListItemEntity> allItems;
 
     public HoleListAdapter(Context context, ArrayList<HoleListItemEntity> items){
-        this.context = context;
+        mContext = (AppContext) context.getApplicationContext();
+        mPkuHoleMod = new PkuHoleMod(mContext);
+        mImageManager = new ImageManager(mContext);
         allItems = new ArrayList<>();
         allItems.addAll(items);
     }
@@ -53,13 +63,13 @@ public class HoleListAdapter extends BaseAdapter {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            ViewHolder holder = null;
+            ViewHolder holder;
 
             HoleListItemEntity item = allItems.get(position);
             if (convertView == null) {
                 holder = new ViewHolder();
 
-                convertView = LayoutInflater.from(context).inflate(R.layout.mhole_list_item, parent, false);
+                convertView = LayoutInflater.from(mContext).inflate(R.layout.mhole_list_item, parent, false);
                 holder.findWidgets(convertView);
 
                 //set tag
@@ -69,13 +79,13 @@ public class HoleListAdapter extends BaseAdapter {
             }
 
             switch (item.getType()) {
-                case "image":
+                case IPkuHoleMod.TYPE_IMAGE:
                     holder.setImage(item);
                     break;
-                case "audio":
+                case IPkuHoleMod.TYPE_AUDIO:
                     holder.setAudio(item);
                     break;
-                case "text":
+                case IPkuHoleMod.TYPE_TEXT:
                     holder.setText(item);
                     break;
                 default:
@@ -107,9 +117,8 @@ public class HoleListAdapter extends BaseAdapter {
             button.setVisibility(View.GONE);
             setOther(item);
 
-            String url = item.getUrl();
-            url = Constants.domain + "/services/pkuhole/images/" +url;
-            Picasso.with(context).load(url).into(contentImageView);
+            String url = mPkuHoleMod.getResourceUrl(IPkuHoleMod.TYPE_IMAGE, item.getUrl());
+            mImageManager.displayBigImage(url, contentImageView);
         }
         public void setAudio(HoleListItemEntity item){
             contentImageView.setVisibility(View.VISIBLE);
@@ -140,6 +149,7 @@ public class HoleListAdapter extends BaseAdapter {
             likeNumTextView.setText("" + item.getLikenum());
             cmtNumTextView.setText("" + item.getReply());
             timeTextView.setText(MyCalendar.format(item.getTimestamp()*1000));
+            Log.v(TAG, "Timestamp: " + item.getTimestamp());
         }
     }
 }

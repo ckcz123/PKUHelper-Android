@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 
-import com.pkuhelper.ui.impl.MHoleActivity;
+import com.pkuhelper.ui.hole.impl.MHoleActivity;
 import com.pkuhelper.bbs.BBSActivity;
 import com.pkuhelper.chat.ChatActivity;
 import com.pkuhelper.classroom.ClassActivity;

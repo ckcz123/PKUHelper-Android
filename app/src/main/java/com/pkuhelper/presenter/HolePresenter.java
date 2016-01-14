@@ -5,10 +5,11 @@ import android.content.Context;
 import android.util.Log;
 import android.view.View;
 
+import com.pkuhelper.AppContext;
 import com.pkuhelper.model.Callback;
 import com.pkuhelper.model.impl.PkuHoleMod;
 import com.pkuhelper.entity.HoleListItemEntity;
-import com.pkuhelper.ui.IHoleUI;
+import com.pkuhelper.ui.hole.IHoleUI;
 
 import java.util.ArrayList;
 
@@ -20,7 +21,7 @@ public class HolePresenter {
     private PkuHoleMod pkuHoleMod;
     private Activity activity;
     private View view;
-    private Context context;
+    private AppContext mContext;
     private int requestPage;
     private ArrayList<HoleListItemEntity> mods;
     private boolean isLoading = false;
@@ -28,7 +29,7 @@ public class HolePresenter {
     private Callback callback = null;
 
     public HolePresenter(Context context) {
-        this.context = context;
+        mContext = (AppContext) context.getApplicationContext();
         mHoleView = (IHoleUI) context;
         pkuHoleMod = new PkuHoleMod(context);
         callback = new Callback() {
