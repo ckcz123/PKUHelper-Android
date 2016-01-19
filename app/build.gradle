@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 21
+    compileSdkVersion 22
     buildToolsVersion "23.0.1"
 
     defaultConfig {
         applicationId "com.pkuhelper"
         minSdkVersion 14
-        targetSdkVersion 21
+        targetSdkVersion 22
     }
 
     signingConfigs {
