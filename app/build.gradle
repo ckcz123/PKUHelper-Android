@@ -10,6 +10,9 @@ android {
         targetSdkVersion 23
         versionCode 20
         versionName "2.0.4"
+
+        // default channel : offical
+        manifestPlaceholders = [UMENG_CHANNEL_VALUE: "offical"]
     }
 
     signingConfigs {

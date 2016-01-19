@@ -3,6 +3,7 @@ package com.pkuhelper.ui.hole.impl;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.app.Activity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.AbsListView;
 import android.widget.ListView;
@@ -11,12 +12,13 @@ import android.widget.Toast;
 import com.pkuhelper.presenter.HolePresenter;
 import com.pkuhelper.R;
 import com.pkuhelper.entity.HoleListItemEntity;
+import com.pkuhelper.ui.BaseActivity;
 import com.pkuhelper.ui.hole.HoleListAdapter;
 import com.pkuhelper.ui.hole.IHoleUI;
 
 import java.util.ArrayList;
 
-public class MHoleActivity extends Activity implements IHoleUI {
+public class MHoleActivity extends BaseActivity implements IHoleUI {
 
     private HolePresenter holePresenter;
     private HoleListAdapter holeListAdapter;
@@ -27,6 +29,9 @@ public class MHoleActivity extends Activity implements IHoleUI {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mhole);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         holePresenter = new HolePresenter(this);
 

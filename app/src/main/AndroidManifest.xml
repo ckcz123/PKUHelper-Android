@@ -6,6 +6,8 @@
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.VIBRATE"/>
     <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
@@ -27,6 +29,13 @@
         android:logo="@drawable/icon"
         android:theme="@style/AppTheme">
 
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="569de34b67e58e97f4000028" />
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="${UMENG_CHANNEL_VALUE}" />
+
         <activity
             android:name="com.pkuhelper.PKUHelper"
             android:screenOrientation="portrait"
@@ -37,23 +46,27 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
         <activity
             android:name="com.pkuhelper.grade.GradeActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleTask"
             android:label="@string/app_name">
         </activity>
+
         <activity
             android:name="com.pkuhelper.classroom.ClassActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleTask"
             android:label="@string/app_name">
         </activity>
+
         <activity
             android:name="com.pkuhelper.subactivity.SubActivity"
             android:screenOrientation="portrait"
             android:label="@string/app_name">
         </activity>
+
         <activity
             android:name="com.pkuhelper.pkuhole.HoleActivity"
             android:screenOrientation="portrait"
@@ -61,12 +74,15 @@
             android:label="@string/app_name">
         </activity>
 
+        <!-- New -->
         <activity
             android:name=".ui.hole.impl.MHoleActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleTask"
+            android:theme="@style/AppThemeNew.NoActionBar"
             android:label="@string/app_name">
         </activity>
+
         <activity
             android:name="com.pkuhelper.pkuhole.HolePost"
             android:screenOrientation="portrait"

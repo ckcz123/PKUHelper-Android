@@ -376,7 +376,7 @@ public class PkuHoleMod implements IPkuHoleMod {
         if (type.equals(TYPE_IMAGE)) {
             return baseUrl + URL_IMAGES + "/" + url;
         } else if (type.equals(TYPE_AUDIO)) {
-            return baseUrl + URL_IMAGES + "/" + url;
+            return baseUrl + URL_AUDIOS + "/" + url;
         }
         return null;
     }

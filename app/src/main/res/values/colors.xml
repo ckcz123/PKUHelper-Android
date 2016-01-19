@@ -3,4 +3,8 @@
     <!--     <drawable name="hole_line">#330ba8b</drawable>  -->
     <color name="color_text_default">#442000</color>
     <color name="color_text_record">#482800</color>
+
+    <color name="colorPrimary">#00B9E6</color>
+    <color name="colorPrimaryDark">#0094B8</color>
+    <color name="colorAccent">#50E3C2</color>
 </resources>
