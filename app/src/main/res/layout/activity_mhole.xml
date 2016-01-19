@@ -6,6 +6,7 @@
     tools:context="com.pkuhelper.M_pkuhole.MHoleActivity">
 
     <ListView
+        android:divider="@null"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/MHole_listview"
