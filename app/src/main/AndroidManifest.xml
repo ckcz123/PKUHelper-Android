@@ -74,6 +74,14 @@
             android:label="@string/app_name">
         </activity>
 
+        <activity
+            android:name="com.pkuhelper.ui.hole.impl.HoleCommentActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask"
+            android:theme="@style/AppThemeNew.NoActionBar"
+            android:label="@string/app_name">>
+        </activity>
+
         <!-- New -->
         <activity
             android:name=".ui.hole.impl.MHoleActivity"
