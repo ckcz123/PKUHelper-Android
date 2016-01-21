@@ -6,12 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#EEEEEE"
-    tools:context=".M_pkuhole.MHoleActivity">
+    tools:context=".ui.hole.impl.MHoleActivity">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <android.support.design.widget.AppBarLayout
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:id="@+id/view">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -27,8 +31,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/MHole_listview"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_below="@+id/view"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
+    <android.support.design.widget.FloatingActionButton
+        android:visibility="gone"
+        app:fabSize="normal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/button_full"
+        android:id="@+id/view2"
+        android:layout_margin="10sp"
+        app:elevation="10sp"
+        android:layout_alignBottom="@+id/MHole_listview"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+    </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>

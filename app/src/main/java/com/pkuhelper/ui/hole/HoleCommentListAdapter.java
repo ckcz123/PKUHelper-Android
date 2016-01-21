@@ -82,7 +82,7 @@ public class HoleCommentListAdapter extends BaseAdapter {
 
         public void setContent(HoleCommentListItemEntity item){
             tvContent.setText(item.getText());
-            tvPid.setText("#"+item.getPid());
+            tvPid.setText("#"+item.getCid());
             tvTime.setText(MyCalendar.format(item.getTimestamp()*1000));
             if (item.getIslz()==1)
                 imgLz.setVisibility(View.VISIBLE);
