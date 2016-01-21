@@ -41,12 +41,13 @@
         app:fabSize="normal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/button_full"
-        android:id="@+id/view2"
+        android:src="@drawable/add"
+        android:id="@+id/fab_hole_post"
         android:layout_margin="10sp"
         app:elevation="10sp"
         android:layout_alignBottom="@+id/MHole_listview"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
     </RelativeLayout>
+
 </android.support.design.widget.CoordinatorLayout>
