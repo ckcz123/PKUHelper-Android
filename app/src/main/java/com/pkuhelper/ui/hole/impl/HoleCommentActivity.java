@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -17,6 +18,7 @@ import com.pkuhelper.R;
 import com.pkuhelper.entity.HoleCommentListItemEntity;
 import com.pkuhelper.entity.HoleListItemEntity;
 import com.pkuhelper.lib.MyCalendar;
+import com.pkuhelper.manager.CalendarManager;
 import com.pkuhelper.manager.ImageManager;
 import com.pkuhelper.model.IPkuHoleMod;
 import com.pkuhelper.model.impl.PkuHoleMod;
@@ -103,7 +105,13 @@ public class HoleCommentActivity extends BaseActivity implements IHoleCommentUI 
 
     @Override
     public void error() {
-
+        Snackbar.make(lvComment,"评论加载失败",Snackbar.LENGTH_LONG).setAction("重试", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holeCommentPresenter.load(pid);
+            }
+        }).show();
+        Log.e("ERROR:","树洞评论加载失败");
     }
 
     //这段代码在adapter里有，但如何复用?
@@ -160,7 +168,7 @@ public class HoleCommentActivity extends BaseActivity implements IHoleCommentUI 
                 contentTextView.setText(item.getText());
             }
             pidTextView.setText("#" + item.getPid());
-            timeTextView.setText(MyCalendar.format(item.getTimestamp() * 1000));
+            timeTextView.setText(CalendarManager.getDeltaTime(item.getTimestamp() * 1000));
         }
     }
 }

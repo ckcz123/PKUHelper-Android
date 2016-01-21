@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -37,8 +38,8 @@ public class MHoleActivity extends BaseActivity implements IHoleUI {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        holePresenter = new HolePresenter(this);
 
+        holePresenter = new HolePresenter(this);
         holePresenter.firstLoad();
 
         listView = (ListView) findViewById(R.id.MHole_listview);
@@ -87,7 +88,8 @@ public class MHoleActivity extends BaseActivity implements IHoleUI {
 
     @Override
     public void error(){
-        Toast.makeText(this, "加载失败", Toast.LENGTH_SHORT).show();
+        pd.dismiss();
+        Snackbar.make(listView, "加载失败", Snackbar.LENGTH_LONG).show();
         Log.e("ERROR:","树洞加载失败");
     }
 

@@ -19,6 +19,7 @@ import com.pkuhelper.R;
 import com.pkuhelper.entity.HoleListItemEntity;
 import com.pkuhelper.lib.Constants;
 import com.pkuhelper.lib.MyCalendar;
+import com.pkuhelper.manager.CalendarManager;
 import com.pkuhelper.manager.ImageManager;
 import com.pkuhelper.model.IPkuHoleMod;
 import com.pkuhelper.model.impl.PkuHoleMod;
@@ -161,8 +162,7 @@ public class HoleListAdapter extends BaseAdapter {
             tvPid.setText("#" + item.getPid());
             tvLikeCount.setText("" + item.getLikenum());
             tvCommentCount.setText("" + item.getReply());
-            tvTime.setText(MyCalendar.format(item.getTimestamp()*1000));
-            Log.v(TAG, "Timestamp: " + item.getTimestamp());
+            tvTime.setText(CalendarManager.getDeltaTime(item.getTimestamp() * 1000));
 
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
