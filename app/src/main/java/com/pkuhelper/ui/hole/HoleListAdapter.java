@@ -54,27 +54,34 @@ public class HoleListAdapter extends BaseAdapter {
     public int getCount() {
         return (allItems.size());
     }
+
     @Override
     public Object getItem(int position) {
-        return null;
+        return allItems.get(position);
     }
+
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
+
         HoleListItemEntity item = allItems.get(position);
         if (convertView == null) {
             holder = new ViewHolder(position);
+
             convertView = LayoutInflater.from(mContext).inflate(R.layout.mhole_list_item, parent, false);
             holder.findWidgets(convertView);
+
             //set tag
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
+
         switch (item.getType()) {
             case IPkuHoleMod.TYPE_IMAGE:
                 holder.setImage(item);
@@ -88,41 +95,46 @@ public class HoleListAdapter extends BaseAdapter {
             default:
                 break;
         }
+
         return convertView;
     }
 
     public final class ViewHolder{
-        public CardView cardView;
-        public TextView pidTextView, contentTextView, timeTextView, likeNumTextView, cmtNumTextView;
-        public ImageView contentImageView;
-        public Button button;
-        public int position;
+        CardView cardView;
+        TextView tvPid;
+        TextView tvTextContent;
+        TextView tvTime;
+        TextView tvLikeCount;
+        TextView tvCommentCount;
+        ImageView imgImageContent;
+        Button button;
+        int position;
 
         public ViewHolder(int position){
             this.position = position;
         }
 
         public void findWidgets(View view) {
-            cardView = (CardView) view.findViewById(R.id.hole_card_view);
-            pidTextView = (TextView) view.findViewById(R.id.hole_pid);
-            contentTextView = (TextView) view.findViewById(R.id.hole_content_text);
-            contentImageView = (ImageView) view.findViewById(R.id.hole_content_image);
+            cardView = (CardView) view.findViewById(R.id.card_hole_item);
+            tvPid = (TextView) view.findViewById(R.id.tv_pid);
+            tvTextContent = (TextView) view.findViewById(R.id.tv_text_content);
+            imgImageContent = (ImageView) view.findViewById(R.id.img_image_content);
             button = (Button) view.findViewById(R.id.hole_content_button);
-            timeTextView = (TextView) view.findViewById(R.id.hole_time);
-            likeNumTextView = (TextView) view.findViewById(R.id.hole_star);
-            cmtNumTextView = (TextView) view.findViewById(R.id.hole_comment);
+            tvTime = (TextView) view.findViewById(R.id.tv_time);
+            tvLikeCount = (TextView) view.findViewById(R.id.tv_like_count);
+            tvCommentCount = (TextView) view.findViewById(R.id.tv_comment_count);
         }
 
         public void setImage(HoleListItemEntity item) {
-            contentImageView.setVisibility(View.VISIBLE);
+            imgImageContent.setVisibility(View.VISIBLE);
             button.setVisibility(View.GONE);
             setOther(item);
 
             String url = mPkuHoleMod.getResourceUrl(IPkuHoleMod.TYPE_IMAGE, item.getUrl());
-            mImageManager.displayBigImage(url, contentImageView);
+            mImageManager.displayBigImage(url, imgImageContent);
         }
         public void setAudio(HoleListItemEntity item){
-            contentImageView.setVisibility(View.VISIBLE);
+            imgImageContent.setVisibility(View.VISIBLE);
             button.setVisibility(View.VISIBLE);
             setOther(item);
             //TO-DO add audio
@@ -130,7 +142,7 @@ public class HoleListAdapter extends BaseAdapter {
 
         public void setText(HoleListItemEntity item){
             //SET image, button as gone
-            contentImageView.setVisibility(View.GONE);
+            imgImageContent.setVisibility(View.GONE);
             button.setVisibility(View.GONE);
             setOther(item);
         }
@@ -140,22 +152,22 @@ public class HoleListAdapter extends BaseAdapter {
         }
 
         public void setOther(final HoleListItemEntity item){
-            if (item.getText().equals(""))
-                contentTextView.setVisibility(View.GONE);
-            else {
-                contentTextView.setVisibility(View.VISIBLE);
-                contentTextView.setText(item.getText());
+            if (item.getText().equals("")) {
+                tvTextContent.setVisibility(View.GONE);
+            } else {
+                tvTextContent.setVisibility(View.VISIBLE);
+                tvTextContent.setText(item.getText());
             }
-            pidTextView.setText("#" + item.getPid());
-            likeNumTextView.setText("" + item.getLikenum());
-            cmtNumTextView.setText("" + item.getReply());
-            timeTextView.setText(MyCalendar.format(item.getTimestamp()*1000));
+            tvPid.setText("#" + item.getPid());
+            tvLikeCount.setText("" + item.getLikenum());
+            tvCommentCount.setText("" + item.getReply());
+            tvTime.setText(MyCalendar.format(item.getTimestamp()*1000));
             Log.v(TAG, "Timestamp: " + item.getTimestamp());
 
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    TextView tv = (TextView) v.findViewById(R.id.hole_pid);
+                    TextView tv = (TextView) v.findViewById(R.id.tv_pid);
                     int pid = Integer.parseInt(tv.getText().toString().substring(1));
                     Intent intent;
                     intent = new Intent(mContext, HoleCommentActivity.class);
