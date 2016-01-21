@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -46,7 +47,8 @@ public class MHoleActivity extends BaseActivity implements IHoleUI {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                HolePostFragment holePostFragment=new HolePostFragment();
+                holePostFragment.show(getSupportFragmentManager(),"发布新树洞");
             }
         });
 

@@ -161,7 +161,7 @@ public class PkuHoleMod implements IPkuHoleMod {
         // TO-DO: 边界检查，参数检查
         ArrayList<ApiManager.Parameter> params = new ArrayList<>();
         params.add(mApiManager.makeParam("action", "dopost"));
-
+        params.add(mApiManager.makeParam("token", mUserMod.getToken()));
         params.add(mApiManager.makeParam("type", type));
         params.add(mApiManager.makeParam("text", text));
         params.add(mApiManager.makeParam("data", data));

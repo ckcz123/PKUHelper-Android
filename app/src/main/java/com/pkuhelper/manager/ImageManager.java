@@ -20,4 +20,8 @@ public class ImageManager {
     public void displayBigImage(String imgUrl, ImageView imageView) {
         Picasso.with(mContext).load(imgUrl).into(imageView);
     }
+
+    public void displayImage(String imgUrl, ImageView imageView, int width, int height){
+        Picasso.with(mContext).load(imgUrl).resize(width,height).into(imageView);
+    }
 }
