@@ -4,7 +4,9 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -28,7 +30,9 @@ public class MHoleActivity extends BaseActivity implements IHoleUI {
     private HolePresenter holePresenter;
     private HoleListAdapter holeListAdapter;
     private ListView listView;
-    private ProgressDialog pd;
+    private ContentLoadingProgressBar pbMore, pbRefresh;
+    private FloatingActionButton fab;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +42,18 @@ public class MHoleActivity extends BaseActivity implements IHoleUI {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        fab = (FloatingActionButton) findViewById(R.id.fab_hole_post);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        pbMore = (ContentLoadingProgressBar) findViewById(R.id.pb_hole_more);
+        pbRefresh = (ContentLoadingProgressBar) findViewById(R.id.pb_hole_refresh);
+        pbMore.setVisibility(View.GONE);
+        pbRefresh.setVisibility(View.VISIBLE);
 
         holePresenter = new HolePresenter(this);
         holePresenter.firstLoad();
@@ -62,7 +78,10 @@ public class MHoleActivity extends BaseActivity implements IHoleUI {
 
     @Override
     public void firstLoad(final ArrayList<HoleListItemEntity> list){
-        pd.dismiss();
+        pbRefresh.setVisibility(View.GONE);
+
+        fab.setVisibility(View.VISIBLE);
+
         Log.d("List Num:", "" + list.size());
         holeListAdapter = new HoleListAdapter(this,list);
         listView.setAdapter(holeListAdapter);
@@ -70,8 +89,7 @@ public class MHoleActivity extends BaseActivity implements IHoleUI {
 
     @Override
     public void moreLoad(final ArrayList<HoleListItemEntity> list){
-        pd.dismiss();
-        //listView = (ListView)findViewById(R.id.MHole_listview);
+        pbMore.setVisibility(View.GONE);
 
         if (listView != null) {
             Log.d("listview","should in");
@@ -88,15 +106,21 @@ public class MHoleActivity extends BaseActivity implements IHoleUI {
 
     @Override
     public void error(){
-        pd.dismiss();
+        pbMore.setVisibility(View.GONE);
+        pbRefresh.setVisibility(View.GONE);
+
         Snackbar.make(listView, "加载失败", Snackbar.LENGTH_LONG).show();
         Log.e("ERROR:","树洞加载失败");
     }
 
     @Override
     public void loading(){
-        if (pd==null || !pd.isShowing())
-            pd = ProgressDialog.show(this, "正在加载", "正在加载数据");
+        pbRefresh.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void loadingMore(){
+        pbMore.setVisibility(View.VISIBLE);
     }
 
 }

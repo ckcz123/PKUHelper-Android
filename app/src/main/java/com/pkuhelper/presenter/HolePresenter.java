@@ -73,7 +73,7 @@ public class HolePresenter {
         if (isLoading)
             return;
         isLoading = true;
-        mHoleView.loading();
+        mHoleView.loadingMore();
         pkuHoleMod.getHoleList(requestPage+1, callback);
     }
 

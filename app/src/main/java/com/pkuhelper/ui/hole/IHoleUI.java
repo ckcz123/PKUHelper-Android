@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 public interface IHoleUI {
     void loading();
+    void loadingMore();
     void firstLoad(final ArrayList<HoleListItemEntity> list);
     void moreLoad(final ArrayList<HoleListItemEntity> list);
     void refreshLoad(final ArrayList<HoleListItemEntity> list);

@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/MHole_listview"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:layout_below="@+id/view"
+        android:layout_below="@id/view"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
@@ -41,13 +41,34 @@
         app:fabSize="normal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/add"
+        android:src="@drawable/ic_create_white_36dp"
         android:id="@+id/fab_hole_post"
-        android:layout_margin="10sp"
-        app:elevation="10sp"
-        android:layout_alignBottom="@+id/MHole_listview"
+        android:layout_margin="16dp"
+        app:elevation="6dp"
+        app:pressedTranslationZ="12dp"
+        app:rippleColor="@color/colorAccentDark"
+        android:layout_alignBottom="@id/MHole_listview"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+        <android.support.v4.widget.ContentLoadingProgressBar
+            android:id="@+id/pb_hole_more"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/fab_hole_post"
+            android:layout_centerHorizontal="true" />
+        <android.support.v4.widget.ContentLoadingProgressBar
+            android:id="@+id/pb_hole_refresh"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/MHole_listview"
+            android:layout_centerHorizontal="true" />
+
     </RelativeLayout>
+
+
+
 
 </android.support.design.widget.CoordinatorLayout>
