@@ -9,13 +9,14 @@
     tools:context=".M_pkuhole.MHoleActivity"
     android:orientation="horizontal">
 
-    <LinearLayout
+    <RelativeLayout
         android:divider="@null"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout_hole_comment"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:theme="@style/AppTheme.AppBarOverlay">
@@ -30,9 +31,10 @@
     </android.support.design.widget.AppBarLayout>
 
     <TextView
-        android:paddingTop="10sp"
-        android:paddingLeft="10sp"
-        android:paddingBottom="10sp"
+        android:id="@+id/tv_hole_comment_yuanwen"
+        android:layout_below="@id/appBarLayout_hole_comment"
+        android:layout_margin="10dp"
+        android:paddingTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="#4A4A4A"
@@ -41,6 +43,7 @@
         android:text="原文"/>
 
         <android.support.v7.widget.CardView
+            android:layout_below="@id/tv_hole_comment_yuanwen"
             android:id="@+id/cv_hole_comment_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -138,9 +141,10 @@
         </android.support.v7.widget.CardView>
 
     <TextView
+        android:layout_below="@id/cv_hole_comment_card"
         android:id="@+id/tv_hole_comment_num"
-        android:paddingTop="10sp"
-        android:paddingLeft="10sp"
+        android:paddingTop="10dp"
+        android:paddingLeft="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="#4A4A4A"
@@ -148,25 +152,36 @@
         android:textStyle="bold"
         android:text="评论"/>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
         <ListView
+            android:layout_below="@id/tv_hole_comment_num"
         android:divider="@null"
-        android:paddingTop="10sp"
+        android:paddingTop="10dp"
         android:id="@+id/lv_hole_comment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
+
+
+            <android.support.design.widget.FloatingActionButton
+                app:fabSize="normal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_create_white_36dp"
+                android:id="@+id/fab_hole_comment"
+                app:elevation="6dp"
+                app:pressedTranslationZ="12dp"
+                app:rippleColor="@color/colorAccentDark"
+                android:layout_margin="16dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+
         <android.support.v4.widget.ContentLoadingProgressBar
             android:id="@+id/pb_hole_comment_load"
             style="?android:attr/progressBarStyle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true" />
-        </RelativeLayout>
-    </LinearLayout>
-
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>

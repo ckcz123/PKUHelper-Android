@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.widget.CardView;
@@ -42,6 +43,7 @@ public class HoleCommentActivity extends BaseActivity implements IHoleCommentUI 
     private CardView card;
     private ContentLoadingProgressBar pbLoading;
     private int pid;
+    private FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,11 +53,27 @@ public class HoleCommentActivity extends BaseActivity implements IHoleCommentUI 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        pbLoading = (ContentLoadingProgressBar) findViewById(R.id.pb_hole_comment_load);
-
-        holeCommentPresenter = new HoleCommentPresenter(this);
         Intent intent = getIntent();
         pid = intent.getIntExtra("pid",0);
+
+        pbLoading = (ContentLoadingProgressBar) findViewById(R.id.pb_hole_comment_load);
+
+        fab = (FloatingActionButton) findViewById(R.id.fab_hole_comment);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("start-type","comment");
+                bundle.putBoolean("isReply", false);
+                bundle.putInt("pid",pid);
+                HolePostFragment holePostFragment=new HolePostFragment();
+                holePostFragment.setArguments(bundle);
+                holePostFragment.show(getSupportFragmentManager(), holePostFragment.getTag());
+            }
+        });
+
+        holeCommentPresenter = new HoleCommentPresenter(this);
+
 
         if (pid>0) {
 
@@ -63,6 +81,7 @@ public class HoleCommentActivity extends BaseActivity implements IHoleCommentUI 
             card = (CardView) findViewById(R.id.cv_hole_comment_card);
             holeCommentPresenter.load(pid);
         }
+
     }
 
 

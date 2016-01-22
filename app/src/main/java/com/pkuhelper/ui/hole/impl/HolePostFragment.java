@@ -29,11 +29,14 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.pkuhelper.R;
 import com.pkuhelper.lib.MyBitmapFactory;
 import com.pkuhelper.manager.ImageManager;
 import com.pkuhelper.manager.MediaPathManager;
+import com.pkuhelper.model.Callback;
+import com.pkuhelper.model.impl.PkuHoleMod;
 import com.pkuhelper.presenter.HolePresenter;
 import com.pkuhelper.presenter.IHolePresenter;
 import com.pkuhelper.ui.hole.IHolePostUI;
@@ -53,12 +56,19 @@ public class HolePostFragment extends DialogFragment implements IHolePostUI {
     private ImageButton btnPost;
     private ImageButton btnImg;
     private ImageButton btnAudio;
+    private TextView tvHolePost;
     private EditText etContent;
     private ImageView imgPreview;
     private View buttons;
     private String uri;
     private int type=TYPE_TEXT;
+    private String startType;
+    private int pid = 0;
+    private boolean isReply;
+    private int replyCid;
     Bitmap bitmap;
+
+
     public HolePostFragment() {
         // Required empty public constructor
     }
@@ -67,8 +77,19 @@ public class HolePostFragment extends DialogFragment implements IHolePostUI {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mHolePresenter =  new HolePresenter(getContext());
 
+        Bundle bundle = getArguments();
+        startType = bundle.getString("start-type");
+        Log.d("startType:", startType);
+        if (startType.equals("comment")){
+            pid = bundle.getInt("pid");
+        }
+        else if (startType.equals("hole")){
+            mHolePresenter =  new HolePresenter(getContext());
+        }
+        if (isReply = bundle.getBoolean("isReply",false)){
+            replyCid = bundle.getInt("cid");
+        }
     }
 
     @Override
@@ -77,12 +98,28 @@ public class HolePostFragment extends DialogFragment implements IHolePostUI {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_hole_post, container, false);
 
+        tvHolePost = (TextView) view.findViewById(R.id.tv_hole_post);
         btnPost = (ImageButton) view.findViewById(R.id.btn_hole_post);
         btnImg = (ImageButton) view.findViewById(R.id.btn_hole_post_image);
         btnAudio =(ImageButton) view.findViewById(R.id.btn_hole_post_audio);
         imgPreview = (ImageView) view.findViewById(R.id.img_hole_post_preview);
         etContent = (EditText) view.findViewById(R.id.et_hole_post);
         buttons = view.findViewById(R.id.linearLayout_hole_post_button);
+
+        if (startType.equals("comment")){
+            tvHolePost.setText("发布评论");
+            view.findViewById(R.id.linearLayout_hole_post_button).setVisibility(View.GONE);
+        }
+        else if (startType.equals("hole")){
+            tvHolePost.setText("发布新树洞");
+        }
+        //设置回复字符串
+        if (isReply){
+            tvHolePost.setText("回复评论");
+            String text = "Re #"+replyCid+": ";
+            etContent.setText(text);
+            etContent.setSelection(text.length());
+        }
 
         btnImg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,37 +136,59 @@ public class HolePostFragment extends DialogFragment implements IHolePostUI {
             }
         });
 
+
+
         btnPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String text = etContent.getText().toString();
-                Bundle bundle=new Bundle();
 
-                switch (type) {
-                    case TYPE_TEXT:
-                        bundle.putString("type","text");
-                        bundle.putString("text", text);
-                        break;
-                    case TYPE_AUDIO:
-                        bundle.putString("type","audio");
-                        bundle.putString("uri",uri);
-                        break;
-                    case TYPE_IMAGE:
+                if (startType.equals("comment")){
+                    Callback simpleCallback = new Callback<Void>() {
+                        @Override
+                        public void onFinished(int code, Void data) {
+                            Log.d("success code:",""+code);
+                        }
 
-                        Log.d("bitmap size:",""+bitmap.getByteCount());
-                        byte[] bts = MyBitmapFactory.bitmapToArray(bitmap);
-                        String data = Base64.encodeToString(bts, Base64.DEFAULT);
-                        bundle.putString("data",data);
-                        bundle.putString("type","image");
-                        bundle.putString("uri",uri);
-                        bundle.putString("text",text);
+                        @Override
+                        public void onError(String msg) {
+                            Log.d("error",msg);
+                        }
+                    };
+
+                    new PkuHoleMod(getContext()).reply(pid, text, simpleCallback);
                 }
-                try {
-                    mHolePresenter.post(bundle);
-                } catch (IOException e) {
-                    e.printStackTrace();
+                else{
+                    Bundle bundle=new Bundle();
+                    switch (type) {
+                        case TYPE_TEXT:
+                            bundle.putString("type","text");
+                            bundle.putString("text", text);
+                            break;
+                        case TYPE_AUDIO:
+                            bundle.putString("type","audio");
+                            bundle.putString("uri",uri);
+                            break;
+                        case TYPE_IMAGE:
+
+                            Log.d("bitmap size:",""+bitmap.getByteCount());
+                            byte[] bts = MyBitmapFactory.bitmapToArray(bitmap);
+                            String data = Base64.encodeToString(bts, Base64.DEFAULT);
+                            bundle.putString("data",data);
+                            bundle.putString("type","image");
+                            bundle.putString("uri",uri);
+                            bundle.putString("text",text);
+                    }
+                    try {
+                        mHolePresenter.post(bundle);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
+
+                dismiss();
             }
+
         });
 
         return view;

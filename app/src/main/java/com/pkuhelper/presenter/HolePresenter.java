@@ -34,6 +34,7 @@ public class HolePresenter {
     private PkuHoleMod pkuHoleMod;
     private Activity activity;
     private View view;
+    private Context context;
     private AppContext mContext;
     private int requestPage;
     private ArrayList<HoleListItemEntity> mods;
@@ -42,6 +43,7 @@ public class HolePresenter {
     private Callback callback = null;
 
     public HolePresenter(Context context) {
+        this.context = context;
         mContext = (AppContext) context.getApplicationContext();
         mHoleUI = (IHoleUI) context;
         pkuHoleMod = new PkuHoleMod(context);
@@ -129,7 +131,22 @@ public class HolePresenter {
         else if(type.equals("audio")){
             uri = bundle.getString("uri");
         }
+    }
 
+    public void reply(int pid, String text){
 
+        Callback simpleCallback = new Callback<Void>() {
+            @Override
+            public void onFinished(int code, Void data) {
+                Log.d("success code:",""+code);
+            }
+
+            @Override
+            public void onError(String msg) {
+                Log.d("error",msg);
+            }
+        };
+
+        pkuHoleMod.reply(pid,text,simpleCallback);
     }
 }
