@@ -4,6 +4,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
+import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -17,6 +19,7 @@ import com.pkuhelper.R;
 import com.pkuhelper.entity.HoleCommentListItemEntity;
 import com.pkuhelper.entity.HoleListItemEntity;
 import com.pkuhelper.lib.MyCalendar;
+import com.pkuhelper.manager.CalendarManager;
 import com.pkuhelper.manager.ImageManager;
 import com.pkuhelper.model.IPkuHoleMod;
 import com.pkuhelper.model.impl.PkuHoleMod;
@@ -37,7 +40,7 @@ public class HoleCommentActivity extends BaseActivity implements IHoleCommentUI 
     private HoleCommentListAdapter holeCommentListAdapter;
     private ListView lvComment;
     private CardView card;
-    private ProgressDialog pd;
+    private ContentLoadingProgressBar pbLoading;
     private int pid;
 
     @Override
@@ -47,6 +50,8 @@ public class HoleCommentActivity extends BaseActivity implements IHoleCommentUI 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        pbLoading = (ContentLoadingProgressBar) findViewById(R.id.pb_hole_comment_load);
 
         holeCommentPresenter = new HoleCommentPresenter(this);
         Intent intent = getIntent();
@@ -63,8 +68,7 @@ public class HoleCommentActivity extends BaseActivity implements IHoleCommentUI 
 
     @Override
     public void loading() {
-        if (pd==null || !pd.isShowing())
-            pd = ProgressDialog.show(this, "正在加载", "正在加载数据");
+        pbLoading.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -87,7 +91,6 @@ public class HoleCommentActivity extends BaseActivity implements IHoleCommentUI 
                 break;
         }
 
-        pd.dismiss();
     }
 
     @Override
@@ -98,12 +101,21 @@ public class HoleCommentActivity extends BaseActivity implements IHoleCommentUI 
         TextView tvHoleCommentNum = (TextView) findViewById(R.id.tv_hole_comment_num);
         int commentNum = data.size();
         tvHoleCommentNum.setText(""+commentNum+"条评论");
+
+        pbLoading.setVisibility(View.GONE);
     }
 
 
     @Override
     public void error() {
-
+        pbLoading.setVisibility(View.GONE);
+        Snackbar.make(lvComment,"评论加载失败",Snackbar.LENGTH_LONG).setAction("重试", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holeCommentPresenter.load(pid);
+            }
+        }).show();
+        Log.e("ERROR:","树洞评论加载失败");
     }
 
     //这段代码在adapter里有，但如何复用?
@@ -160,7 +172,7 @@ public class HoleCommentActivity extends BaseActivity implements IHoleCommentUI 
                 contentTextView.setText(item.getText());
             }
             pidTextView.setText("#" + item.getPid());
-            timeTextView.setText(MyCalendar.format(item.getTimestamp() * 1000));
+            timeTextView.setText(CalendarManager.getDeltaTime(item.getTimestamp() * 1000));
         }
     }
 }

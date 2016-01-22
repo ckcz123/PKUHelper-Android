@@ -148,7 +148,10 @@
         android:textStyle="bold"
         android:text="评论"/>
 
-    <ListView
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <ListView
         android:divider="@null"
         android:paddingTop="10sp"
         android:id="@+id/lv_hole_comment"
@@ -156,6 +159,14 @@
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
+        <android.support.v4.widget.ContentLoadingProgressBar
+            android:id="@+id/pb_hole_comment_load"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
+        </RelativeLayout>
     </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

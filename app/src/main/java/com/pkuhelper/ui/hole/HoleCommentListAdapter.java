@@ -13,6 +13,7 @@ import com.pkuhelper.R;
 import com.pkuhelper.entity.HoleCommentListItemEntity;
 import com.pkuhelper.entity.HoleListItemEntity;
 import com.pkuhelper.lib.MyCalendar;
+import com.pkuhelper.manager.CalendarManager;
 import com.pkuhelper.model.IPkuHoleMod;
 import com.pkuhelper.model.impl.PkuHoleMod;
 
@@ -82,8 +83,8 @@ public class HoleCommentListAdapter extends BaseAdapter {
 
         public void setContent(HoleCommentListItemEntity item){
             tvContent.setText(item.getText());
-            tvPid.setText("#"+item.getPid());
-            tvTime.setText(MyCalendar.format(item.getTimestamp()*1000));
+            tvPid.setText("#"+item.getCid());
+            tvTime.setText(CalendarManager.getDeltaTime(item.getTimestamp() * 1000));
             if (item.getIslz()==1)
                 imgLz.setVisibility(View.VISIBLE);
             else
