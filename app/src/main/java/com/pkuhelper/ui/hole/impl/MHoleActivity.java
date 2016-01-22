@@ -1,5 +1,7 @@
 package com.pkuhelper.ui.hole.impl;
 
+import android.app.ActivityOptions;
+import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,9 +9,12 @@ import android.app.Activity;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.util.Pair;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
@@ -48,7 +53,9 @@ public class MHoleActivity extends BaseActivity implements IHoleUI {
             @Override
             public void onClick(View v) {
                 HolePostFragment holePostFragment=new HolePostFragment();
-                holePostFragment.show(getSupportFragmentManager(),"发布新树洞");
+                
+                holePostFragment.show(getSupportFragmentManager(), holePostFragment.getTag());
+
             }
         });
 
@@ -111,8 +118,13 @@ public class MHoleActivity extends BaseActivity implements IHoleUI {
         pbMore.setVisibility(View.GONE);
         pbRefresh.setVisibility(View.GONE);
 
-        Snackbar.make(listView, "加载失败", Snackbar.LENGTH_LONG).show();
-        Log.e("ERROR:","树洞加载失败");
+        Snackbar.make(listView, "加载失败", Snackbar.LENGTH_LONG).setAction("重试", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holePresenter.firstLoad();
+            }
+        }).show();
+        Log.e("ERROR:", "树洞加载失败");
     }
 
     @Override
