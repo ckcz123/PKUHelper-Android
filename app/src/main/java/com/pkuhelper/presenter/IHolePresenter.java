@@ -10,4 +10,5 @@ public interface IHolePresenter {
     void moreLoad();
     void refreshLoad();
     void post(Bundle bundle);
+    void reply(int pid, String text);
 }

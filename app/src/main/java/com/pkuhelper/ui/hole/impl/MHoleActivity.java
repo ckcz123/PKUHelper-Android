@@ -53,9 +53,10 @@ public class MHoleActivity extends BaseActivity implements IHoleUI {
             @Override
             public void onClick(View v) {
                 HolePostFragment holePostFragment=new HolePostFragment();
-                
+                Bundle bundle = new Bundle();
+                bundle.putString("start-type","hole");
+                holePostFragment.setArguments(bundle);
                 holePostFragment.show(getSupportFragmentManager(), holePostFragment.getTag());
-
             }
         });
 
