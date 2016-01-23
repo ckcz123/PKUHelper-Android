@@ -19,6 +19,7 @@ import com.pkuhelper.lib.MyCalendar;
 import com.pkuhelper.manager.CalendarManager;
 import com.pkuhelper.model.IPkuHoleMod;
 import com.pkuhelper.model.impl.PkuHoleMod;
+import com.pkuhelper.ui.BaseListAdapter;
 import com.pkuhelper.ui.hole.impl.HoleCommentActivity;
 import com.pkuhelper.ui.hole.impl.HolePostFragment;
 
@@ -27,39 +28,20 @@ import java.util.ArrayList;
 /**
  * Created by zyxu on 1/20/16.
  */
-public class HoleCommentListAdapter extends BaseAdapter {
+public class HoleCommentListAdapter extends BaseListAdapter<HoleCommentListItemEntity> {
+    private static final String TAG = "HoleCommentListAdapter";
 
-    private AppContext mContext;
     private IPkuHoleMod mPkuHoleMod;
-    private ArrayList<HoleCommentListItemEntity> allItems;
     private HoleCommentActivity activity;
 
     public HoleCommentListAdapter(Context context, ArrayList<HoleCommentListItemEntity> entities){
-        mContext = (AppContext) context.getApplicationContext();
+        super(context, entities);
         activity = (HoleCommentActivity) context;
         mPkuHoleMod = new PkuHoleMod(mContext);
-        allItems = new ArrayList<>();
-        allItems.addAll(entities);
-    }
-
-    @Override
-    public int getCount() {
-        return allItems.size();
-    }
-
-    @Override
-    public Object getItem(int position) {
-        return null;
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return 0;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
         ViewHolder holder;
         HoleCommentListItemEntity item = allItems.get(position);
         if (convertView == null) {
