@@ -8,9 +8,6 @@
     android:background="#EEEEEE"
     tools:context=".ui.hole.impl.MHoleActivity">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
     <android.support.design.widget.AppBarLayout
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
@@ -37,38 +34,35 @@
         android:layout_alignParentEnd="true" />
 
     <android.support.design.widget.FloatingActionButton
-        android:visibility="gone"
-        app:fabSize="normal"
+        android:id="@+id/fab_hole_post"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fab_margin"
+        android:layout_gravity="bottom|end"
+        android:visibility="gone"
+        app:fabSize="normal"
+        app:elevation="@dimen/fab_elevation"
+        app:pressedTranslationZ="@dimen/fab_pressed_translation"
+        app:borderWidth="0dp"
         android:src="@drawable/ic_create_white_36dp"
-        android:id="@+id/fab_hole_post"
-        android:layout_margin="16dp"
-        app:elevation="6dp"
-        app:pressedTranslationZ="12dp"
-        app:rippleColor="@color/colorAccentDark"
-        android:layout_alignBottom="@id/MHole_listview"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        app:rippleColor="@color/colorAccentDark" />
 
-        <android.support.v4.widget.ContentLoadingProgressBar
-            android:id="@+id/pb_hole_more"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/fab_hole_post"
-            android:layout_centerHorizontal="true" />
-        <android.support.v4.widget.ContentLoadingProgressBar
-            android:id="@+id/pb_hole_refresh"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@id/MHole_listview"
-            android:layout_centerHorizontal="true" />
+    <android.support.v4.widget.ContentLoadingProgressBar
+        android:id="@+id/pb_hole_more"
+        style="?android:attr/progressBarStyle"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:indeterminate="true" />
 
-    </RelativeLayout>
-
-
-
+    <android.support.v4.widget.ContentLoadingProgressBar
+        android:id="@+id/pb_hole_refresh"
+        style="?android:attr/progressBarStyle"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:indeterminate="true" />
 
 </android.support.design.widget.CoordinatorLayout>

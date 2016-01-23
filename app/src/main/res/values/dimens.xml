@@ -19,6 +19,10 @@
     <dimen name="card_vertical_margin">4dp</dimen>
     <dimen name="card_corner_radius">2dp</dimen>
 
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="fab_elevation">4dp</dimen>
+    <dimen name="fab_pressed_translation">8dp</dimen>
+
     <!-- Models -->
     <dimen name="hole_main_card_horizontal_inner_margin">16dp</dimen>
 
