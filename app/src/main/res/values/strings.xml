@@ -230,4 +230,16 @@
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!-- pku helper -->
+    <string name="helper_nav_menu_ip_gateway">网关连接</string>
+    <string name="helper_nav_menu_course_table">课程表</string>
+    <string name="helper_nav_menu_school_life">校园生活</string>
+    <string name="helper_nav_menu_my_pku">我的PKU</string>
+    <string name="helper_nav_menu_community">社区</string>
+    <string name="helper_nav_menu_hole">P大树洞</string>
+    <string name="helper_nav_menu_bbs">未名BBS</string>
 </resources>

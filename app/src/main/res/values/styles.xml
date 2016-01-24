@@ -22,7 +22,7 @@
     </style>
 
     <!-- Application theme. -->
-    <style name="AppTheme" parent="AppBaseTheme">
+    <style name="AppThemeOld" parent="AppBaseTheme">
         <item name="android:windowTitleSize">48dp</item>
         <item name="android:actionBarStyle">@style/CustomizedWindowTitleBackground</item>
         <item name="android:actionBarTabBarStyle">@style/MyActionBarTabBars</item>
@@ -88,13 +88,13 @@
 
     <!-- New -->
     <!-- Base application theme. -->
-    <style name="AppThemeNew" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-    <style name="AppThemeNew.NoActionBar">
+    <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
