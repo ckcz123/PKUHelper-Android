@@ -27,7 +27,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:logo="@drawable/icon"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppThemeOld">
 
         <meta-data
             android:name="UMENG_APPKEY"
@@ -36,6 +36,20 @@
             android:name="UMENG_CHANNEL"
             android:value="${UMENG_CHANNEL_VALUE}" />
 
+        <!-- new -->
+        <!-- on exported debug -->
+        <activity
+            android:exported="true"
+            android:name=".ui.main.impl.PkuHelperActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN"/>-->
+                <!--<category android:name="android.intent.category.LAUNCHER"/>-->
+            <!--</intent-filter>-->
+        </activity>
+
+        <!-- old -->
         <activity
             android:name="com.pkuhelper.PKUHelper"
             android:screenOrientation="portrait"
@@ -78,7 +92,7 @@
             android:name="com.pkuhelper.ui.hole.impl.HoleCommentActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleTask"
-            android:theme="@style/AppThemeNew.NoActionBar"
+            android:theme="@style/AppTheme.NoActionBar"
             android:label="@string/app_name">>
         </activity>
 
@@ -87,7 +101,7 @@
             android:name=".ui.hole.impl.MHoleActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleTask"
-            android:theme="@style/AppThemeNew.NoActionBar"
+            android:theme="@style/AppTheme.NoActionBar"
             android:label="@string/app_name">
         </activity>
 

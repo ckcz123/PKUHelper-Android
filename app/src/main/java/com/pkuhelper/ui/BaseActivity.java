@@ -1,8 +1,10 @@
 package com.pkuhelper.ui;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.pkuhelper.AppContext;
 import com.umeng.analytics.MobclickAgent;
 
 /**
@@ -10,9 +12,12 @@ import com.umeng.analytics.MobclickAgent;
  */
 public class BaseActivity extends AppCompatActivity {
 
+    protected Context mContext;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mContext = this;
     }
 
     @Override

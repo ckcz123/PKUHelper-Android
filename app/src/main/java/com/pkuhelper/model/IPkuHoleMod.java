@@ -151,4 +151,6 @@ public interface IPkuHoleMod {
      * @return 完整URL
      */
     String getResourceUrl(String type, String url);
+
+    <Entity> String getJson(Entity entity);
 }

@@ -380,4 +380,9 @@ public class PkuHoleMod implements IPkuHoleMod {
         }
         return null;
     }
+
+    @Override
+    public <Entity> String getJson(Entity entity) {
+        return gson.toJson(entity);
+    }
 }

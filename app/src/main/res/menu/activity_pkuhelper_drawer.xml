@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_ip_gateway"
+            android:icon="@android:drawable/ic_menu_camera"
+            android:title="@string/helper_nav_menu_ip_gateway" />
+        <item
+            android:id="@+id/nav_course_table"
+            android:icon="@android:drawable/ic_menu_gallery"
+            android:title="@string/helper_nav_menu_course_table" />
+        <item
+            android:id="@+id/nav_school_life"
+            android:icon="@android:drawable/ic_menu_slideshow"
+            android:title="@string/helper_nav_menu_school_life" />
+        <item
+            android:id="@+id/nav_my_pku"
+            android:icon="@android:drawable/ic_menu_manage"
+            android:title="@string/helper_nav_menu_my_pku" />
+    </group>
+
+    <item android:title="@string/helper_nav_menu_community">
+        <menu>
+            <item
+                android:id="@+id/nav_hole"
+                android:icon="@android:drawable/ic_menu_share"
+                android:title="@string/helper_nav_menu_hole" />
+            <item
+                android:id="@+id/nav_bbs"
+                android:icon="@android:drawable/ic_menu_send"
+                android:title="@string/helper_nav_menu_bbs" />
+        </menu>
+    </item>
+</menu>
