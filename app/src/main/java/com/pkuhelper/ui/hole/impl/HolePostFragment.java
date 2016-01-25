@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.text.Layout;
 import android.util.Base64;
@@ -30,6 +31,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.pkuhelper.R;
 import com.pkuhelper.lib.MyBitmapFactory;
@@ -147,12 +149,11 @@ public class HolePostFragment extends DialogFragment implements IHolePostUI {
                     Callback simpleCallback = new Callback<Void>() {
                         @Override
                         public void onFinished(int code, Void data) {
-                            Log.d("success code:",""+code);
+                            Log.d("code:",""+code);
                         }
 
                         @Override
                         public void onError(String msg) {
-                            Log.d("error",msg);
                         }
                     };
 
