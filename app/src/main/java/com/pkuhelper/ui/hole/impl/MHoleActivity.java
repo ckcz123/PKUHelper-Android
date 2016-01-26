@@ -1,31 +1,21 @@
 package com.pkuhelper.ui.hole.impl;
 
-import android.app.ActivityOptions;
-import android.app.Fragment;
-import android.app.ProgressDialog;
-import android.content.Intent;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.util.Pair;
 import android.view.View;
 import android.widget.AbsListView;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.pkuhelper.presenter.HolePresenter;
 import com.pkuhelper.R;
 import com.pkuhelper.entity.HoleListItemEntity;
 import com.pkuhelper.ui.BaseActivity;
+import com.pkuhelper.ui.CompatListView;
 import com.pkuhelper.ui.hole.HoleListAdapter;
 import com.pkuhelper.ui.hole.IHoleUI;
 
@@ -35,7 +25,7 @@ public class MHoleActivity extends BaseActivity implements IHoleUI {
 
     private HolePresenter holePresenter;
     private HoleListAdapter holeListAdapter;
-    private ListView listView;
+    private CompatListView listView;
     private ContentLoadingProgressBar pbMore, pbRefresh;
     private FloatingActionButton fab;
 
@@ -68,11 +58,12 @@ public class MHoleActivity extends BaseActivity implements IHoleUI {
         holePresenter = new HolePresenter(this);
         holePresenter.firstLoad();
 
-        listView = (ListView) findViewById(R.id.MHole_listview);
+        listView = (CompatListView) findViewById(R.id.MHole_listview);
         listView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
             }
+
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
                 if (totalItemCount != 0) {
