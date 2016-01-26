@@ -242,4 +242,6 @@
     <string name="helper_nav_menu_community">社区</string>
     <string name="helper_nav_menu_hole">P大树洞</string>
     <string name="helper_nav_menu_bbs">未名BBS</string>
+    <string name="action_searching">Search</string>
+    <string name="action_attention">MyAttention</string>
 </resources>

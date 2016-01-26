@@ -15,6 +15,8 @@ import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.util.Pair;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
@@ -46,7 +48,22 @@ public class MHoleActivity extends BaseActivity implements IHoleUI {
         setContentView(R.layout.activity_mhole);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.action_hole_search:
+                        break;
+                    case R.id.action_hole_settings:
+                        break;
+                }
+
+                return false;
+            }
+        });
         setSupportActionBar(toolbar);
+
+
 
         fab = (FloatingActionButton) findViewById(R.id.fab_hole_post);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -138,4 +155,9 @@ public class MHoleActivity extends BaseActivity implements IHoleUI {
         pbMore.setVisibility(View.VISIBLE);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_hole,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 }
