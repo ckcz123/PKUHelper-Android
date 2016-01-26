@@ -14,6 +14,8 @@ import android.widget.ListView;
 
 /**
  * Created by zyxu on 1/26/16.
+ *
+ * 为了ListView兼容coordinateLayout的一些功能 添加了NestedScrolling
  */
 public class CompatListView extends ListView implements NestedScrollingChild {
     private NestedScrollingChildHelper helper;
@@ -91,13 +93,17 @@ public class CompatListView extends ListView implements NestedScrollingChild {
 //        super.onNestedScroll(target, dxConsumed, dyUnconsumed, dxUnconsumed, dyConsumed);
 //    }
 
-    @Override public boolean onTouchEvent(MotionEvent event) {
+    @Override
+
+    public boolean onTouchEvent(MotionEvent event) {
         boolean rs = false;
         final int action = MotionEventCompat.getActionMasked(event);
+
         if (action == MotionEvent.ACTION_DOWN) {
             mNestedOffsetY = 0;
         }
         int y = (int) event.getY();
+
         event.offsetLocation(0,mNestedOffsetY);
         switch (action) {
             case MotionEvent.ACTION_DOWN:
@@ -106,8 +112,14 @@ public class CompatListView extends ListView implements NestedScrollingChild {
                 break;
             case MotionEvent.ACTION_MOVE:
 
+                if (mLastY==0)
+                    mLastY = y;
                 int dy = mLastY - y;
+
                 int oldY = getScrollY();
+                Log.d("dy1", dy + "");
+                Log.d("oldy2", oldY+"");
+                Log.d("mlasty3", mLastY + "");
                 startNestedScroll(ViewCompat.SCROLL_AXIS_VERTICAL);
 
                 if (dispatchNestedPreScroll(0, dy, mScrollConsumed, mScrollOffset)) {
@@ -132,10 +144,11 @@ public class CompatListView extends ListView implements NestedScrollingChild {
                 stopNestedScroll();
                 break;
             case MotionEvent.ACTION_UP:
+                //mLastY = 0;
             case MotionEvent.ACTION_CANCEL:
                 rs = super.onTouchEvent(event);
-//                mLastY = 0;
-//                mNestedOffsetY = 0;
+                mLastY = 0;
+                mNestedOffsetY = 0;
                 stopNestedScroll();
                 break;
         }

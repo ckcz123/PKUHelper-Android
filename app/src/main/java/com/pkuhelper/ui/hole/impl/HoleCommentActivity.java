@@ -26,6 +26,7 @@ import com.pkuhelper.model.IPkuHoleMod;
 import com.pkuhelper.model.impl.PkuHoleMod;
 import com.pkuhelper.presenter.HoleCommentPresenter;
 import com.pkuhelper.ui.BaseActivity;
+import com.pkuhelper.ui.CompatListView;
 import com.pkuhelper.ui.hole.HoleCommentListAdapter;
 import com.pkuhelper.ui.hole.HoleListAdapter;
 import com.pkuhelper.ui.hole.IHoleCommentUI;
@@ -39,7 +40,7 @@ public class HoleCommentActivity extends BaseActivity implements IHoleCommentUI 
 
     private HoleCommentPresenter holeCommentPresenter;
     private HoleCommentListAdapter holeCommentListAdapter;
-    private ListView lvComment;
+    private CompatListView lvComment;
     private CardView card;
     private ContentLoadingProgressBar pbLoading;
     private int pid;
@@ -77,7 +78,7 @@ public class HoleCommentActivity extends BaseActivity implements IHoleCommentUI 
 
         if (pid>0) {
 
-            lvComment = (ListView) findViewById(R.id.lv_hole_comment);
+            lvComment = (CompatListView) findViewById(R.id.lv_hole_comment);
             card = (CardView) findViewById(R.id.cv_hole_comment_card);
             holeCommentPresenter.load(pid);
         }

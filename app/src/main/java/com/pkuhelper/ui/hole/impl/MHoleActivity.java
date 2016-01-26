@@ -5,9 +5,14 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
 
@@ -17,6 +22,7 @@ import com.pkuhelper.entity.HoleListItemEntity;
 import com.pkuhelper.ui.BaseActivity;
 import com.pkuhelper.ui.CompatListView;
 import com.pkuhelper.ui.hole.HoleListAdapter;
+import com.pkuhelper.ui.hole.HoleViewPagerAdapter;
 import com.pkuhelper.ui.hole.IHoleUI;
 
 import java.util.ArrayList;
@@ -25,7 +31,9 @@ public class MHoleActivity extends BaseActivity implements IHoleUI {
 
     private HolePresenter holePresenter;
     private HoleListAdapter holeListAdapter;
-    private CompatListView listView;
+    private CompatListView listViewMain;
+    private CompatListView listViewAttention;
+    private ViewPager viewPager;
     private ContentLoadingProgressBar pbMore, pbRefresh;
     private FloatingActionButton fab;
 
@@ -35,11 +43,23 @@ public class MHoleActivity extends BaseActivity implements IHoleUI {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mhole);
 
+        LayoutInflater inflater = getLayoutInflater();
+        View view1 = inflater.inflate(R.layout.listview_hole_content, null);
+        View view2 = inflater.inflate(R.layout.listview_hole_content, null);
+        listViewMain = (CompatListView) view1.findViewById(R.id.MHole_listview);
+        listViewAttention = (CompatListView) view2.findViewById(R.id.MHole_listview);
+
+        ArrayList<View> viewList = new ArrayList<>();
+        viewList.add(listViewMain);
+        viewList.add(listViewAttention);
+        viewPager = (ViewPager) findViewById(R.id.vp_hole_content);
+        viewPager.setAdapter(new HoleViewPagerAdapter(viewList));
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.action_hole_search:
                         break;
                     case R.id.action_hole_settings:
@@ -51,6 +71,13 @@ public class MHoleActivity extends BaseActivity implements IHoleUI {
         });
         setSupportActionBar(toolbar);
 
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+        tabLayout.setupWithViewPager(viewPager);
+        TabLayout.Tab tabMain =tabLayout.newTab().setText("树洞主页");
+        TabLayout.Tab tabAttention = tabLayout.newTab().setText("我的收藏");
+        tabLayout.addTab(tabMain);
+        tabLayout.addTab(tabAttention);
+        tabMain.select();
 
 
         fab = (FloatingActionButton) findViewById(R.id.fab_hole_post);
@@ -73,8 +100,8 @@ public class MHoleActivity extends BaseActivity implements IHoleUI {
         holePresenter = new HolePresenter(this);
         holePresenter.firstLoad();
 
-        listView = (CompatListView) findViewById(R.id.MHole_listview);
-        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+
+        listViewMain.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
             }
@@ -100,14 +127,14 @@ public class MHoleActivity extends BaseActivity implements IHoleUI {
 
         Log.d("List Num:", "" + list.size());
         holeListAdapter = new HoleListAdapter(this,list);
-        listView.setAdapter(holeListAdapter);
+        listViewMain.setAdapter(holeListAdapter);
     }
 
     @Override
     public void moreLoad(final ArrayList<HoleListItemEntity> list){
         pbMore.setVisibility(View.GONE);
 
-        if (listView != null) {
+        if (listViewMain != null) {
             Log.d("listview","should in");
             holeListAdapter.addItems(list);
             holeListAdapter.notifyDataSetChanged();
@@ -125,7 +152,7 @@ public class MHoleActivity extends BaseActivity implements IHoleUI {
         pbMore.setVisibility(View.GONE);
         pbRefresh.setVisibility(View.GONE);
 
-        Snackbar.make(listView, "加载失败", Snackbar.LENGTH_LONG).setAction("重试", new View.OnClickListener() {
+        Snackbar.make(listViewMain, "加载失败", Snackbar.LENGTH_LONG).setAction("重试", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 holePresenter.firstLoad();
@@ -146,7 +173,7 @@ public class MHoleActivity extends BaseActivity implements IHoleUI {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_hole,menu);
+        getMenuInflater().inflate(R.menu.menu_hole, menu);
         return super.onCreateOptionsMenu(menu);
     }
 }

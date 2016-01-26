@@ -152,15 +152,14 @@
         android:textStyle="bold"
         android:text="评论"/>
 
-        <ListView
+        <com.pkuhelper.ui.CompatListView
             android:layout_below="@id/tv_hole_comment_num"
-        android:divider="@null"
-        android:paddingTop="10dp"
-        android:id="@+id/lv_hole_comment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
-
+            android:divider="@null"
+            android:paddingTop="10dp"
+            android:id="@+id/lv_hole_comment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
 
             <android.support.design.widget.FloatingActionButton
