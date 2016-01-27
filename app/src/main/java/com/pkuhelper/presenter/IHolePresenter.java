@@ -12,4 +12,5 @@ public interface IHolePresenter {
     void attentionLoad();
     void post(Bundle bundle);
     void reply(int pid, String text);
+    void search(String text);
 }

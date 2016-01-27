@@ -118,6 +118,7 @@ public class HolePresenter {
     public void attentionLoad(){
         pkuHoleMod.getAttentionList(callbackAttention);
     }
+
     public void post(Bundle bundle) throws IOException {
         String type = bundle.getString("type");
         String text="";
@@ -171,4 +172,12 @@ public class HolePresenter {
 
         pkuHoleMod.reply(pid,text,simpleCallback);
     }
+
+    public void search(String keyword){
+        /*
+        * @todo 找到keyword并显示
+        *
+        * */
+    }
+
 }

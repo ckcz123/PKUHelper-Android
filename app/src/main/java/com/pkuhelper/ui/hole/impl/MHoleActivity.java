@@ -38,7 +38,6 @@ public class MHoleActivity extends BaseActivity implements IHoleUI {
     private ContentLoadingProgressBar pbMore, pbRefresh;
     private FloatingActionButton fab;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -177,6 +176,15 @@ public class MHoleActivity extends BaseActivity implements IHoleUI {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_hole, menu);
+        menu.findItem(R.id.action_hole_search).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+               /*
+               * @todo 实现搜索
+               * */
+                return false;
+            }
+        });
         return super.onCreateOptionsMenu(menu);
     }
 }

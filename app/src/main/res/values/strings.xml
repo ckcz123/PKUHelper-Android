@@ -244,4 +244,6 @@
     <string name="helper_nav_menu_bbs">未名BBS</string>
     <string name="action_searching">Search</string>
     <string name="action_attention">MyAttention</string>
+    <string name="action_hole_set_attention">Set Attention</string>
+    <string name="action_hole_report">report</string>
 </resources>

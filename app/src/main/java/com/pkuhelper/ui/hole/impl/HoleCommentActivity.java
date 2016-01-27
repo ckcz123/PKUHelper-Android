@@ -10,6 +10,8 @@ import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -58,6 +60,8 @@ public class HoleCommentActivity extends BaseActivity implements IHoleCommentUI 
         Intent intent = getIntent();
         bundle = intent.getBundleExtra("bundle");
         pid = bundle.getInt("pid");
+
+        setTitle("树洞评论");
 
         pbLoading = (ContentLoadingProgressBar) findViewById(R.id.pb_hole_comment_load);
 
@@ -196,5 +200,25 @@ public class HoleCommentActivity extends BaseActivity implements IHoleCommentUI 
             pidTextView.setText("#" + item.getPid());
             timeTextView.setText(CalendarManager.getDeltaTime(item.getTimestamp() * 1000));
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_hole_comment, menu);
+        menu.findItem(R.id.action_hole_report).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                Bundle bundle = new Bundle();
+                bundle.putString("start-type","report");
+                bundle.putInt("pid",pid);
+                HolePostFragment holePostFragment=new HolePostFragment();
+                holePostFragment.setArguments(bundle);
+                holePostFragment.show(getSupportFragmentManager(), holePostFragment.getTag());
+                return false;
+            }
+        });
+
+
+        return super.onCreateOptionsMenu(menu);
     }
 }

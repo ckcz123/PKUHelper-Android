@@ -30,130 +30,128 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <TextView
-        android:id="@+id/tv_hole_comment_yuanwen"
-        android:layout_below="@id/appBarLayout_hole_comment"
-        android:layout_margin="10dp"
-        android:paddingTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="#4A4A4A"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        android:text="原文"/>
-        <android.support.v7.widget.CardView
-            android:layout_below="@id/tv_hole_comment_yuanwen"
-            android:id="@+id/cv_hole_comment_card"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/card_vertical_margin"
-            android:layout_marginBottom="@dimen/card_vertical_margin"
-            android:layout_marginLeft="@dimen/card_horizontal_margin"
-            android:layout_marginRight="@dimen/card_horizontal_margin"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:clickable="true"
-            app:cardCornerRadius="@dimen/card_corner_radius"
-            app:cardElevation="2dp">
+    <!--<TextView-->
+        <!--android:id="@+id/tv_hole_comment_yuanwen"-->
+        <!--android:layout_below="@id/appBarLayout_hole_comment"-->
+        <!--android:layout_margin="10dp"-->
+        <!--android:paddingTop="10dp"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textColor="#4A4A4A"-->
+        <!--android:textSize="14sp"-->
+        <!--android:textStyle="bold"-->
+        <!--android:text="原文"/>-->
+        <!--<android.support.v7.widget.CardView-->
+            <!--android:layout_below="@id/tv_hole_comment_yuanwen"-->
+            <!--android:id="@+id/cv_hole_comment_card"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="@dimen/card_vertical_margin"-->
+            <!--android:layout_marginBottom="@dimen/card_vertical_margin"-->
+            <!--android:layout_marginLeft="@dimen/card_horizontal_margin"-->
+            <!--android:layout_marginRight="@dimen/card_horizontal_margin"-->
+            <!--android:foreground="?android:attr/selectableItemBackground"-->
+            <!--android:clickable="true"-->
+            <!--app:cardCornerRadius="@dimen/card_corner_radius"-->
+            <!--app:cardElevation="2dp">-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" >
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="vertical" >-->
 
-                <TextView
-                    android:id="@+id/tv_hole_comment_card_pid"
-                    android:text="#00000"
-                    android:textColor="#4A4A4A"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:maxLines="1"
-                    android:layout_marginLeft="16sp"
-                    android:layout_marginRight="16sp"
-                    android:layout_marginTop="8sp"
-                    android:layout_marginBottom="8sp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                <!--<TextView-->
+                    <!--android:id="@+id/tv_hole_comment_card_pid"-->
+                    <!--android:text="#00000"-->
+                    <!--android:textColor="#4A4A4A"-->
+                    <!--android:textSize="18sp"-->
+                    <!--android:textStyle="bold"-->
+                    <!--android:maxLines="1"-->
+                    <!--android:layout_marginLeft="16sp"-->
+                    <!--android:layout_marginRight="16sp"-->
+                    <!--android:layout_marginTop="8sp"-->
+                    <!--android:layout_marginBottom="8sp"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"/>-->
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_marginLeft="16sp"
-                    android:layout_marginRight="16sp"
-                    android:layout_height="1px"
-                    android:background="#E5E5E5"/>
+                <!--<View-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_marginLeft="16sp"-->
+                    <!--android:layout_marginRight="16sp"-->
+                    <!--android:layout_height="1px"-->
+                    <!--android:background="#E5E5E5"/>-->
 
-                <RelativeLayout
-                    android:id="@+id/layout_hole_pic"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                <!--<RelativeLayout-->
+                    <!--android:id="@+id/layout_hole_pic"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content">-->
 
-                    <ImageView
-                        android:id="@+id/img_hole_comment_card_content"
-                        android:scaleType="centerCrop"
-                        android:layout_alignParentTop="true"
-                        android:layout_width="match_parent"
-                        android:layout_height="150sp"/>
+                    <!--<ImageView-->
+                        <!--android:id="@+id/img_hole_comment_card_content"-->
+                        <!--android:scaleType="centerCrop"-->
+                        <!--android:layout_alignParentTop="true"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="150sp"/>-->
 
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/btn_hole_comment_card_content"
-                        android:layout_centerInParent="true"/>
+                    <!--<Button-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:id="@+id/btn_hole_comment_card_content"-->
+                        <!--android:layout_centerInParent="true"/>-->
 
-                </RelativeLayout>
+                <!--</RelativeLayout>-->
 
-                <TextView
-                    android:id="@+id/tv_hole_comment_card_content"
-                    android:textColor="#212121"
-                    android:textSize="14sp"
-                    android:layout_marginLeft="16sp"
-                    android:layout_marginRight="16sp"
-                    android:layout_marginTop="8sp"
-                    android:layout_marginBottom="8sp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                <!--<TextView-->
+                    <!--android:id="@+id/tv_hole_comment_card_content"-->
+                    <!--android:textColor="#212121"-->
+                    <!--android:textSize="14sp"-->
+                    <!--android:layout_marginLeft="16sp"-->
+                    <!--android:layout_marginRight="16sp"-->
+                    <!--android:layout_marginTop="8sp"-->
+                    <!--android:layout_marginBottom="8sp"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"/>-->
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_height="1px"
-                    android:background="#E5E5E5"/>
-
-
-                <TextView
-                    android:id="@+id/tv_hole_comment_card_time"
-                    android:text="1分钟前"
-                    android:textColor="#808080"
-                    android:textSize="12sp"
-                    android:layout_marginLeft="16sp"
-                    android:layout_marginRight="16sp"
-                    android:layout_marginTop="8sp"
-                    android:layout_marginBottom="8sp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentLeft="true" />
+                <!--<View-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_marginLeft="16dp"-->
+                    <!--android:layout_marginRight="16dp"-->
+                    <!--android:layout_height="1px"-->
+                    <!--android:background="#E5E5E5"/>-->
 
 
-            </LinearLayout>
+                <!--<TextView-->
+                    <!--android:id="@+id/tv_hole_comment_card_time"-->
+                    <!--android:text="1分钟前"-->
+                    <!--android:textColor="#808080"-->
+                    <!--android:textSize="12sp"-->
+                    <!--android:layout_marginLeft="16sp"-->
+                    <!--android:layout_marginRight="16sp"-->
+                    <!--android:layout_marginTop="8sp"-->
+                    <!--android:layout_marginBottom="8sp"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_alignParentLeft="true" />-->
 
-        </android.support.v7.widget.CardView>
 
-    <TextView
-        android:layout_below="@id/cv_hole_comment_card"
-        android:id="@+id/tv_hole_comment_num"
-        android:paddingTop="10dp"
-        android:paddingLeft="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="#4A4A4A"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        android:text="评论"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+            <!--</LinearLayout>-->
+
+        <!--</android.support.v7.widget.CardView>-->
+
+    <!--<TextView-->
+        <!--android:layout_below="@id/cv_hole_comment_card"-->
+        <!--android:id="@+id/tv_hole_comment_num"-->
+        <!--android:paddingTop="10dp"-->
+        <!--android:paddingLeft="10dp"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textColor="#4A4A4A"-->
+        <!--android:textSize="14sp"-->
+        <!--android:textStyle="bold"-->
+        <!--android:text="评论" />-->
 
         <com.pkuhelper.ui.CompatListView
-            android:layout_below="@id/tv_hole_comment_num"
             android:divider="@null"
             android:paddingTop="10dp"
             android:id="@+id/lv_hole_comment"
