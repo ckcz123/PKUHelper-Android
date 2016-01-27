@@ -62,6 +62,7 @@ public class AppContext extends Application {
         mHoleAttentionSet = new HashSet<>();
         ArrayList<Integer> attentionPids;
         attentionPids = gson.fromJson(Editor.getString(this, "attentionPids"), new TypeToken<ArrayList<Integer>>() {}.getType());
+        if (attentionPids == null) attentionPids = new ArrayList<>();
         for (Integer pid : attentionPids) mHoleAttentionSet.add(pid);
     }
 
