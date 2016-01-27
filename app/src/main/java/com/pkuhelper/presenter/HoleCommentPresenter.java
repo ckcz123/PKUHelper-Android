@@ -55,13 +55,11 @@ public class HoleCommentPresenter implements IHoleCommentPresenter {
     }
 
     @Override
-    public void load(int pid, Bundle bundle) {
+    public void load(HoleListItemEntity item) {
         iHoleCommentUI.loading();
 
-        cardEntity = new HoleListItemEntity(bundle);
-
-        iHoleCommentUI.loadCard(cardEntity);
-        pkuHoleMod.getCommentList(pid,callback);
+        iHoleCommentUI.loadCard(item);
+        pkuHoleMod.getCommentList(item.getPid(),callback);
 
     }
 

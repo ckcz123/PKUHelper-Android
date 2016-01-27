@@ -119,7 +119,7 @@ public class HolePresenter {
         pkuHoleMod.getAttentionList(callbackAttention);
     }
 
-    public void post(Bundle bundle) throws IOException {
+    public void post(Bundle bundle, Callback callback) throws IOException {
         String type = bundle.getString("type");
         String text="";
         String uri;
@@ -129,27 +129,15 @@ public class HolePresenter {
             return;
         }
 
-        Callback simpleCallback = new Callback<Void>() {
-            @Override
-            public void onFinished(int code, Void data) {
-                Log.d("success code:",""+code);
-            }
-
-            @Override
-            public void onError(String msg) {
-                Log.d("error",msg);
-            }
-        };
-
         if (type.equals("text")){
             text = bundle.getString("text");
-            pkuHoleMod.post(type, text, "", 0, simpleCallback);
+            pkuHoleMod.post(type, text, "", 0, callback);
         }
         else if(type.equals("image")){
 
             text = bundle.getString("text");
             data = bundle.getString("data");
-            pkuHoleMod.post(type, text, data, 0, simpleCallback);
+            pkuHoleMod.post(type, text, data, 0, callback);
         }
         else if(type.equals("audio")){
             uri = bundle.getString("uri");

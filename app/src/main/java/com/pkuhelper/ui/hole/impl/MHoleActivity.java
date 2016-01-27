@@ -2,12 +2,16 @@ package com.pkuhelper.ui.hole.impl;
 
 
 import android.os.Bundle;
-import android.app.Activity;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.ContentLoadingProgressBar;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,7 +31,7 @@ import com.pkuhelper.ui.hole.IHoleUI;
 
 import java.util.ArrayList;
 
-public class MHoleActivity extends BaseActivity implements IHoleUI {
+public class MHoleActivity extends BaseActivity implements IHoleUI, NavigationView.OnNavigationItemSelectedListener {
 
     private HolePresenter holePresenter;
     private HoleListAdapter holeListAdapter;
@@ -37,11 +41,15 @@ public class MHoleActivity extends BaseActivity implements IHoleUI {
     private ViewPager viewPager;
     private ContentLoadingProgressBar pbMore, pbRefresh;
     private FloatingActionButton fab;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private DrawerLayout drawer;
+    private Toolbar toolbar;
+    private TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mhole);
+        setContentView(R.layout.activity_hole);
 
         LayoutInflater inflater = getLayoutInflater();
         View view1 = inflater.inflate(R.layout.listview_hole_content, null);
@@ -55,7 +63,7 @@ public class MHoleActivity extends BaseActivity implements IHoleUI {
         viewPager = (ViewPager) findViewById(R.id.vp_hole_content);
         viewPager.setAdapter(new HoleViewPagerAdapter(viewList));
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -69,9 +77,19 @@ public class MHoleActivity extends BaseActivity implements IHoleUI {
                 return false;
             }
         });
+
+        toolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tabLayout.getTabAt(0).isSelected())
+                    listViewMain.smoothScrollToPosition(0);
+                else
+                    listViewAttention.smoothScrollToPosition(0);
+            }
+        });
         setSupportActionBar(toolbar);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.getTabAt(0).setText("树洞主页").select();
         tabLayout.getTabAt(1).setText("我的收藏");
@@ -112,6 +130,8 @@ public class MHoleActivity extends BaseActivity implements IHoleUI {
                 }
             }
         });
+
+        setupView();
     }
 
 
@@ -187,4 +207,47 @@ public class MHoleActivity extends BaseActivity implements IHoleUI {
         });
         return super.onCreateOptionsMenu(menu);
     }
+
+    private void setupView() {
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.nav_ip_gateway) {
+
+        } else if (id == R.id.nav_course_table) {
+
+        } else if (id == R.id.nav_school_life) {
+
+        } else if (id == R.id.nav_my_pku) {
+
+        } else if (id == R.id.nav_hole) {
+            //mPkuHelperPresenter.startHoleUI();
+        } else if (id == R.id.nav_bbs) {
+
+        }
+
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
 }

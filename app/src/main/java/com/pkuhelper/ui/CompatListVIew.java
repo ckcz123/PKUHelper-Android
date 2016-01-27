@@ -117,9 +117,6 @@ public class CompatListView extends ListView implements NestedScrollingChild {
                 int dy = mLastY - y;
 
                 int oldY = getScrollY();
-                Log.d("dy1", dy + "");
-                Log.d("oldy2", oldY+"");
-                Log.d("mlasty3", mLastY + "");
                 startNestedScroll(ViewCompat.SCROLL_AXIS_VERTICAL);
 
                 if (dispatchNestedPreScroll(0, dy, mScrollConsumed, mScrollOffset)) {
@@ -138,9 +135,9 @@ public class CompatListView extends ListView implements NestedScrollingChild {
                         mLastY -= mScrollOffset[1];
                     }
                 }
-                Log.d("dy", dy + "");
-                Log.d("oldy", oldY+"");
-                Log.d("mlasty", mLastY + "");
+//                Log.d("dy", dy + "");
+//                Log.d("oldy", oldY+"");
+//                Log.d("mlasty", mLastY + "");
                 stopNestedScroll();
                 break;
             case MotionEvent.ACTION_UP:

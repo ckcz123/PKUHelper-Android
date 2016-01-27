@@ -170,8 +170,8 @@ public class HoleListAdapter extends BaseAdapter {
                     TextView tv = (TextView) v.findViewById(R.id.tv_pid);
                     Intent intent;
                     intent = new Intent(mContext, HoleCommentActivity.class);
-                    Bundle bundle=item.wrapUpAsBundle();
-                    intent.putExtra("bundle",bundle);
+                    String json = mPkuHoleMod.getJson(item);
+                    intent.putExtra("json",json);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     mContext.startActivity(intent);
                 }

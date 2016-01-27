@@ -39,6 +39,7 @@ import com.pkuhelper.manager.ImageManager;
 import com.pkuhelper.manager.MediaPathManager;
 import com.pkuhelper.model.Callback;
 import com.pkuhelper.model.impl.PkuHoleMod;
+import com.pkuhelper.pkuhole.HoleActivity;
 import com.pkuhelper.presenter.HoleCommentPresenter;
 import com.pkuhelper.presenter.HolePresenter;
 import com.pkuhelper.presenter.IHoleCommentPresenter;
@@ -72,7 +73,7 @@ public class HolePostFragment extends DialogFragment implements IHolePostUI {
     private int replyCid;
     Bitmap bitmap;
     private Context context;
-
+    private View rootView;
 
     public HolePostFragment() {
         // Required empty public constructor
@@ -161,20 +162,34 @@ public class HolePostFragment extends DialogFragment implements IHolePostUI {
                 String text = etContent.getText().toString();
 
                 if (startType.equals("comment")){
-                    Callback simpleCallback = new Callback<Void>() {
+
+                    context = getActivity();
+                    rootView = ((HoleCommentActivity)context).findViewById(R.id.cv_hole_comment_card);
+
+                    Log.d("view",rootView.toString());
+
+                    Callback callback = new Callback() {
                         @Override
-                        public void onFinished(int code, Void data) {
-                            Log.d("code:",""+code);
+                        public void onFinished(int code, Object data) {
+                            Log.d("code:", code + "");
+                            if (code == 0)
+                                Snackbar.make(rootView,"发送成功",Snackbar.LENGTH_LONG).show();
+                            else
+                                Snackbar.make(rootView, "发送失败", Snackbar.LENGTH_LONG).show();
                         }
 
                         @Override
                         public void onError(String msg) {
+                            Snackbar.make(rootView, "发送失败", Snackbar.LENGTH_LONG).show();
                         }
                     };
 
-                    new PkuHoleMod(getContext()).reply(pid, text, simpleCallback);
+                    new PkuHoleMod(getContext()).reply(pid, text, callback);
                 }
                 else if (startType.equals("hole")){
+
+                    context = getActivity();
+                    rootView = ((MHoleActivity)context).findViewById(R.id.nav_view);
                     Bundle bundle=new Bundle();
                     switch (type) {
                         case TYPE_TEXT:
@@ -196,7 +211,22 @@ public class HolePostFragment extends DialogFragment implements IHolePostUI {
                             bundle.putString("text",text);
                     }
                     try {
-                        mHolePresenter.post(bundle);
+                        Callback callback = new Callback() {
+                            @Override
+                            public void onFinished(int code, Object data) {
+                                Log.d("code:", code + "");
+                                if (code == 0)
+                                    Snackbar.make(rootView,"发送成功",Snackbar.LENGTH_LONG).show();
+                                else
+                                    Snackbar.make(rootView, "发送失败", Snackbar.LENGTH_LONG).show();
+                            }
+
+                            @Override
+                            public void onError(String msg) {
+                                Snackbar.make(rootView, "发送失败", Snackbar.LENGTH_LONG).show();
+                            }
+                        };
+                        mHolePresenter.post(bundle,callback);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
