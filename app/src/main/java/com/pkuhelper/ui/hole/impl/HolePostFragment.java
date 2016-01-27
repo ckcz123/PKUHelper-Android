@@ -54,6 +54,10 @@ public class HolePostFragment extends DialogFragment implements IHolePostUI {
     final int TYPE_TEXT=0;
     final int TYPE_IMAGE=1;
     final int TYPE_AUDIO=2;
+    final int START_TYPE_HOLE=0;
+    final int START_TYPE_COMMENT=1;
+    final int START_TYPE_REPORT=2;
+    final int START_TYPE_SEARCH=3;
 
     private HolePresenter mHolePresenter;
 
@@ -67,7 +71,7 @@ public class HolePostFragment extends DialogFragment implements IHolePostUI {
     private View buttons;
     private String uri;
     private int type=TYPE_TEXT;
-    private String startType;
+    private int startType = -1;
     private int pid = 0;
     private boolean isReply;
     private int replyCid;
@@ -85,175 +89,111 @@ public class HolePostFragment extends DialogFragment implements IHolePostUI {
 
 
         Bundle bundle = getArguments();
-        startType = bundle.getString("start-type");
-        Log.d("startType:", startType);
-        if (startType.equals("comment")){
-            pid = bundle.getInt("pid");
+        String startTypeString = bundle.getString("start-type");
+        Log.d("startType:", startTypeString);
+
+        if (startTypeString == null){
+            Log.e("HolePostFragment:","start type equals to null");
         }
-        else if (startType.equals("hole")){
-            mHolePresenter =  new HolePresenter(getContext());
+        else if (startTypeString.equals("comment")){
+            startType = START_TYPE_COMMENT;
         }
-        else if (startType.equals("report")){
-            pid = bundle.getInt("pid");
+        else if (startTypeString.equals("hole")){
+            startType = START_TYPE_HOLE;
         }
-        else if (startType.equals("search")){
-            mHolePresenter =  new HolePresenter(getContext());
+        else if (startTypeString.equals("report")){
+            startType = START_TYPE_REPORT;
         }
-        if (isReply = bundle.getBoolean("isReply",false)){
-            replyCid = bundle.getInt("cid");
+        else if (startTypeString.equals("search")){
+            startType = START_TYPE_SEARCH;
         }
+        else{
+        }
+
+
+        switch (startType){
+            case START_TYPE_COMMENT:
+                pid = bundle.getInt("pid");
+                if (isReply = bundle.getBoolean("isReply",false)){
+                    replyCid = bundle.getInt("cid");
+                }
+                break;
+            case START_TYPE_HOLE:
+                mHolePresenter =  new HolePresenter(getContext());
+                break;
+            case START_TYPE_REPORT:
+                pid = bundle.getInt("pid");
+                break;
+            case START_TYPE_SEARCH:
+                mHolePresenter =  new HolePresenter(getContext());
+                default:
+        }
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
+
+
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_hole_post, container, false);
 
-        tvHolePost = (TextView) view.findViewById(R.id.tv_hole_post);
-        btnPost = (ImageButton) view.findViewById(R.id.btn_hole_post);
-        btnImg = (ImageButton) view.findViewById(R.id.btn_hole_post_image);
-        btnAudio =(ImageButton) view.findViewById(R.id.btn_hole_post_audio);
-        imgPreview = (ImageView) view.findViewById(R.id.img_hole_post_preview);
-        etContent = (EditText) view.findViewById(R.id.et_hole_post);
-        buttons = view.findViewById(R.id.linearLayout_hole_post_button);
-        view.findViewById(R.id.linearLayout_hole_post_button).setVisibility(View.GONE);
-        if (startType.equals("comment")){
-            tvHolePost.setText("发布评论");
-        }
-        else if (startType.equals("hole")){
-            tvHolePost.setText("发布新树洞");
-            view.findViewById(R.id.linearLayout_hole_post_button).setVisibility(View.VISIBLE);
-        }
-        else if (startType.equals("report")){
-            tvHolePost.setText("举报树洞");
-        }
-        else if (startType.equals("search")){
-            tvHolePost.setText("搜索树洞");
-        }
-        //设置回复字符串
-        if (isReply){
-            tvHolePost.setText("回复评论");
-            String text = "Re #"+replyCid+": ";
-            etContent.setText(text);
-            etContent.setSelection(text.length());
-        }
-
-        btnImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);//ACTION_OPEN_DOCUMENT
-                intent.addCategory(Intent.CATEGORY_OPENABLE);
-                intent.setType("image/jpeg");
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
-                    startActivityForResult(intent, 0);
-                } else {
-                    startActivityForResult(intent, 0);
+        findWidgets(view);
+        /*
+        * 设置title等
+        * */
+        switch (startType){
+            case START_TYPE_COMMENT:
+                tvHolePost.setText("发布评论");
+                view.findViewById(R.id.linearLayout_hole_post_button).setVisibility(View.GONE);
+                //设置回复字符串
+                if (isReply){
+                    tvHolePost.setText("回复评论");
+                    String text = "Re #"+replyCid+": ";
+                    etContent.setText(text);
+                    etContent.setSelection(text.length());
                 }
-                type=TYPE_IMAGE;
-            }
-        });
+                break;
+            case START_TYPE_HOLE:
+                tvHolePost.setText("发布新树洞");
+                view.findViewById(R.id.linearLayout_hole_post_button).setVisibility(View.VISIBLE);
+                setupUploadMedia();
+                break;
+            case START_TYPE_REPORT:
+                tvHolePost.setText("举报树洞");
+                view.findViewById(R.id.linearLayout_hole_post_button).setVisibility(View.GONE);
+                break;
+            case START_TYPE_SEARCH:
+                tvHolePost.setText("搜索树洞");
+                view.findViewById(R.id.linearLayout_hole_post_button).setVisibility(View.GONE);
+            default:
+        }
 
-
-
+        /*
+        * 点击发送图标的反应
+        * */
         btnPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String text = etContent.getText().toString();
 
-                if (startType.equals("comment")){
-
-                    context = getActivity();
-                    rootView = ((HoleCommentActivity)context).findViewById(R.id.cv_hole_comment_card);
-
-                    Log.d("view",rootView.toString());
-
-                    Callback callback = new Callback() {
-                        @Override
-                        public void onFinished(int code, Object data) {
-                            Log.d("code:", code + "");
-                            if (code == 0)
-                                Snackbar.make(rootView,"发送成功",Snackbar.LENGTH_LONG).show();
-                            else
-                                Snackbar.make(rootView, "发送失败", Snackbar.LENGTH_LONG).show();
-                        }
-
-                        @Override
-                        public void onError(String msg) {
-                            Snackbar.make(rootView, "发送失败", Snackbar.LENGTH_LONG).show();
-                        }
-                    };
-
-                    new PkuHoleMod(getContext()).reply(pid, text, callback);
-                }
-                else if (startType.equals("hole")){
-
-                    context = getActivity();
-                    rootView = ((MHoleActivity)context).findViewById(R.id.nav_view);
-                    Bundle bundle=new Bundle();
-                    switch (type) {
-                        case TYPE_TEXT:
-                            bundle.putString("type","text");
-                            bundle.putString("text", text);
-                            break;
-                        case TYPE_AUDIO:
-                            bundle.putString("type","audio");
-                            bundle.putString("uri",uri);
-                            break;
-                        case TYPE_IMAGE:
-
-                            Log.d("bitmap size:",""+bitmap.getByteCount());
-                            byte[] bts = MyBitmapFactory.bitmapToArray(bitmap);
-                            String data = Base64.encodeToString(bts, Base64.DEFAULT);
-                            bundle.putString("data",data);
-                            bundle.putString("type","image");
-                            bundle.putString("uri",uri);
-                            bundle.putString("text",text);
-                    }
-                    try {
-                        Callback callback = new Callback() {
-                            @Override
-                            public void onFinished(int code, Object data) {
-                                Log.d("code:", code + "");
-                                if (code == 0)
-                                    Snackbar.make(rootView,"发送成功",Snackbar.LENGTH_LONG).show();
-                                else
-                                    Snackbar.make(rootView, "发送失败", Snackbar.LENGTH_LONG).show();
-                            }
-
-                            @Override
-                            public void onError(String msg) {
-                                Snackbar.make(rootView, "发送失败", Snackbar.LENGTH_LONG).show();
-                            }
-                        };
-                        mHolePresenter.post(bundle,callback);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-                else if (startType.equals("report")){
-                    context = getActivity();
-                    Callback simpleCallback = new Callback<Void>() {
-                        @Override
-                        public void onFinished(int code, Void data) {
-                            Log.d("code:",code+"");
-                                if (code == 0)
-                                    Toast.makeText(context,"举报成功",Toast.LENGTH_SHORT).show();
-                                else
-                                    Toast.makeText(context,"举报失败",Toast.LENGTH_SHORT).show();
-                        }
-
-                        @Override
-                        public void onError(String msg) {
-                            Log.d("error",msg);
-                            Toast.makeText(getActivity(),"举报失败",Toast.LENGTH_SHORT).show();
-                        }
-                    };
-
-                    new HoleCommentPresenter(getContext()).report(pid,text,simpleCallback);
-                }
-                else if (startType.equals("search")){
-                    mHolePresenter.search(text);
+                switch (startType){
+                    case START_TYPE_COMMENT:
+                        postComment(text);
+                        break;
+                    case START_TYPE_HOLE:
+                        postHole(text);
+                        break;
+                    case START_TYPE_REPORT:
+                        postReport(text);
+                        break;
+                    case START_TYPE_SEARCH:
+                        postSearch(text);
+                        break;
+                    default:
+                        break;
                 }
 
                 dismiss();
@@ -294,10 +234,16 @@ public class HolePostFragment extends DialogFragment implements IHolePostUI {
     public void onStart()
     {
         super.onStart();
+
+        /*
+        * 调整dialog大小
+        * */
         DisplayMetrics dm = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
         getDialog().getWindow().setLayout( dm.widthPixels, getDialog().getWindow().getAttributes().height );
     }
+
+
     @Override
     public void onDetach() {
         super.onDetach();
@@ -334,5 +280,127 @@ public class HolePostFragment extends DialogFragment implements IHolePostUI {
         public void onFragmentInteraction(Uri uri);
     }
 
+    private void findWidgets(View view){
+        tvHolePost = (TextView) view.findViewById(R.id.tv_hole_post);
+        btnPost = (ImageButton) view.findViewById(R.id.btn_hole_post);
+        btnImg = (ImageButton) view.findViewById(R.id.btn_hole_post_image);
+        btnAudio =(ImageButton) view.findViewById(R.id.btn_hole_post_audio);
+        imgPreview = (ImageView) view.findViewById(R.id.img_hole_post_preview);
+        etContent = (EditText) view.findViewById(R.id.et_hole_post);
+        buttons = view.findViewById(R.id.linearLayout_hole_post_button);
+    }
 
+    private void setupUploadMedia(){
+        btnImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);//ACTION_OPEN_DOCUMENT
+                intent.addCategory(Intent.CATEGORY_OPENABLE);
+                intent.setType("image/jpeg");
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
+                    startActivityForResult(intent, 0);
+                } else {
+                    startActivityForResult(intent, 0);
+                }
+                type=TYPE_IMAGE;
+            }
+        });
+    }
+
+    private void postComment(String text){
+        context = getActivity();
+        rootView = ((HoleCommentActivity)context).findViewById(R.id.cv_hole_comment_card);
+
+        Log.d("view",rootView.toString());
+
+        Callback callback = new Callback() {
+            @Override
+            public void onFinished(int code, Object data) {
+                Log.d("code:", code + "");
+                if (code == 0)
+                    Snackbar.make(rootView,"发送成功",Snackbar.LENGTH_LONG).show();
+                else
+                    Snackbar.make(rootView, "发送失败", Snackbar.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onError(String msg) {
+                Snackbar.make(rootView, "发送失败", Snackbar.LENGTH_LONG).show();
+            }
+        };
+
+        new PkuHoleMod(getContext()).reply(pid, text, callback);
+    }
+
+    private void postHole(String text){
+
+        context = getActivity();
+        rootView = ((MHoleActivity)context).findViewById(R.id.nav_view);
+        Bundle bundle=new Bundle();
+        switch (type) {
+            case TYPE_TEXT:
+                bundle.putString("type","text");
+                bundle.putString("text", text);
+                break;
+            case TYPE_AUDIO:
+                bundle.putString("type","audio");
+                bundle.putString("uri",uri);
+                break;
+            case TYPE_IMAGE:
+
+                Log.d("bitmap size:",""+bitmap.getByteCount());
+                byte[] bts = MyBitmapFactory.bitmapToArray(bitmap);
+                String data = Base64.encodeToString(bts, Base64.DEFAULT);
+                bundle.putString("data",data);
+                bundle.putString("type","image");
+                bundle.putString("uri",uri);
+                bundle.putString("text",text);
+        }
+        try {
+            Callback callback = new Callback() {
+                @Override
+                public void onFinished(int code, Object data) {
+                    Log.d("code:", code + "");
+                    if (code == 0)
+                        Snackbar.make(rootView,"发送成功",Snackbar.LENGTH_LONG).show();
+                    else
+                        Snackbar.make(rootView, "发送失败", Snackbar.LENGTH_LONG).show();
+                }
+
+                @Override
+                public void onError(String msg) {
+                    Snackbar.make(rootView, "发送失败", Snackbar.LENGTH_LONG).show();
+                }
+            };
+            mHolePresenter.post(bundle,callback);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void postReport(String text){
+        context = getActivity();
+        Callback simpleCallback = new Callback<Void>() {
+            @Override
+            public void onFinished(int code, Void data) {
+                Log.d("code:",code+"");
+                if (code == 0)
+                    Toast.makeText(context,"举报成功",Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(context,"举报失败",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError(String msg) {
+                Log.d("error",msg);
+                Toast.makeText(getActivity(),"举报失败",Toast.LENGTH_SHORT).show();
+            }
+        };
+
+        new HoleCommentPresenter(getContext()).report(pid,text,simpleCallback);
+    }
+
+    private void postSearch(String text){
+        mHolePresenter.search(text);
+    }
 }
