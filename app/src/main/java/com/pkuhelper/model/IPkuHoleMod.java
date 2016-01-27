@@ -153,4 +153,17 @@ public interface IPkuHoleMod {
     String getResourceUrl(String type, String url);
 
     <Entity> String getJson(Entity entity);
+
+    /**
+     * 配置关注树洞的PID的集合
+     * @param entities 关注的树洞的Entity实体的List
+     */
+    void setupAttentionSet(ArrayList<HoleListItemEntity> entities);
+
+    /**
+     * 判断某个树洞是否被当前用户关注
+     * @param pid 树洞PID
+     * @return true：用户关注；false：用户未关注
+     */
+    boolean isOnAttention(int pid);
 }

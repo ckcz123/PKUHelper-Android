@@ -385,4 +385,14 @@ public class PkuHoleMod implements IPkuHoleMod {
     public <Entity> String getJson(Entity entity) {
         return gson.toJson(entity);
     }
+
+    @Override
+    public void setupAttentionSet(ArrayList<HoleListItemEntity> entities) {
+        mContext.setHoleAttentionSet(entities);
+    }
+
+    @Override
+    public boolean isOnAttention(int pid) {
+        return mContext.getHoleAttentionSet().contains(Integer.valueOf(pid));
+    }
 }
