@@ -123,7 +123,7 @@ public class MHoleActivity extends BaseActivity implements IHoleUI {
         fab.setVisibility(View.VISIBLE);
 
         Log.d("List Num:", "" + list.size());
-        holeListAdapter = new 修复bHoleListAdapter(this,list);
+        holeListAdapter = new HoleListAdapter(this,list);
         listViewMain.setAdapter(holeListAdapter);
     }
 
