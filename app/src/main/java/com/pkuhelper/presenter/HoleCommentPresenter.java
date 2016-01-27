@@ -1,6 +1,7 @@
 package com.pkuhelper.presenter;
 
 import android.content.Context;
+import android.os.Bundle;
 
 import com.pkuhelper.AppContext;
 import com.pkuhelper.entity.HoleCommentListItemEntity;
@@ -51,15 +52,10 @@ public class HoleCommentPresenter implements IHoleCommentPresenter {
     }
 
     @Override
-    public void load(int pid) {
+    public void load(int pid, Bundle bundle) {
         iHoleCommentUI.loading();
 
-        int num=HoleListAdapter.allItems.size();
-        for (int i=0;i<num;i++)
-            if (HoleListAdapter.allItems.get(i).getPid()==pid) {
-                cardEntity = HoleListAdapter.allItems.get(i);
-                break;
-            }
+        cardEntity = new HoleListItemEntity(bundle);
 
         iHoleCommentUI.loadCard(cardEntity);
         pkuHoleMod.getCommentList(pid,callback);

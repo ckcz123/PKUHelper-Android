@@ -45,6 +45,7 @@ public class HoleCommentActivity extends BaseActivity implements IHoleCommentUI 
     private ContentLoadingProgressBar pbLoading;
     private int pid;
     private FloatingActionButton fab;
+    private Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +56,8 @@ public class HoleCommentActivity extends BaseActivity implements IHoleCommentUI 
         setSupportActionBar(toolbar);
 
         Intent intent = getIntent();
-        pid = intent.getIntExtra("pid",0);
+        bundle = intent.getBundleExtra("bundle");
+        pid = bundle.getInt("pid");
 
         pbLoading = (ContentLoadingProgressBar) findViewById(R.id.pb_hole_comment_load);
 
@@ -80,7 +82,7 @@ public class HoleCommentActivity extends BaseActivity implements IHoleCommentUI 
 
             lvComment = (CompatListView) findViewById(R.id.lv_hole_comment);
             card = (CardView) findViewById(R.id.cv_hole_comment_card);
-            holeCommentPresenter.load(pid);
+            holeCommentPresenter.load(pid, bundle);
         }
 
     }
@@ -132,7 +134,7 @@ public class HoleCommentActivity extends BaseActivity implements IHoleCommentUI 
         Snackbar.make(lvComment,"评论加载失败",Snackbar.LENGTH_LONG).setAction("重试", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                holeCommentPresenter.load(pid);
+                holeCommentPresenter.load(pid, bundle);
             }
         }).show();
         Log.e("ERROR:","树洞评论加载失败");

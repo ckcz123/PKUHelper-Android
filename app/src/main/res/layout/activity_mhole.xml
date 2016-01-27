@@ -30,14 +30,15 @@
             app:tabGravity="fill"
             app:tabMode="fixed"
             app:tabSelectedTextColor="#ffffff"
-            app:tabTextColor="#aaaaaa" />
+            app:tabTextColor="#dddddd" />
 
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_hole_content"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
 
     <android.support.design.widget.FloatingActionButton

@@ -31,6 +31,7 @@ public class MHoleActivity extends BaseActivity implements IHoleUI {
 
     private HolePresenter holePresenter;
     private HoleListAdapter holeListAdapter;
+    private HoleListAdapter attentionListAdapter;
     private CompatListView listViewMain;
     private CompatListView listViewAttention;
     private ViewPager viewPager;
@@ -73,12 +74,8 @@ public class MHoleActivity extends BaseActivity implements IHoleUI {
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(viewPager);
-        TabLayout.Tab tabMain =tabLayout.newTab().setText("树洞主页");
-        TabLayout.Tab tabAttention = tabLayout.newTab().setText("我的收藏");
-        tabLayout.addTab(tabMain);
-        tabLayout.addTab(tabAttention);
-        tabMain.select();
-
+        tabLayout.getTabAt(0).setText("树洞主页").select();
+        tabLayout.getTabAt(1).setText("我的收藏");
 
         fab = (FloatingActionButton) findViewById(R.id.fab_hole_post);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -99,7 +96,7 @@ public class MHoleActivity extends BaseActivity implements IHoleUI {
 
         holePresenter = new HolePresenter(this);
         holePresenter.firstLoad();
-
+        holePresenter.attentionLoad();
 
         listViewMain.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
@@ -126,7 +123,7 @@ public class MHoleActivity extends BaseActivity implements IHoleUI {
         fab.setVisibility(View.VISIBLE);
 
         Log.d("List Num:", "" + list.size());
-        holeListAdapter = new HoleListAdapter(this,list);
+        holeListAdapter = new 修复bHoleListAdapter(this,list);
         listViewMain.setAdapter(holeListAdapter);
     }
 
@@ -145,6 +142,12 @@ public class MHoleActivity extends BaseActivity implements IHoleUI {
     @Override
     public void refreshLoad(final ArrayList<HoleListItemEntity> list) {
         //TO-DO 加入
+    }
+
+    @Override
+    public void loadAttention(ArrayList<HoleListItemEntity> list) {
+        attentionListAdapter = new HoleListAdapter(this,list);
+        listViewAttention.setAdapter(attentionListAdapter);
     }
 
     @Override

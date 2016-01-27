@@ -37,7 +37,7 @@ public class HoleListAdapter extends BaseAdapter {
     private AppContext mContext;
     private IPkuHoleMod mPkuHoleMod;
     private ImageManager mImageManager;
-    public static ArrayList<HoleListItemEntity> allItems;//这里这种做法有问题！不应该设置static
+    public ArrayList<HoleListItemEntity> allItems;//这里这种做法有问题！不应该设置static
 
     public HoleListAdapter(Context context, ArrayList<HoleListItemEntity> items){
         mContext = (AppContext) context.getApplicationContext();
@@ -168,12 +168,10 @@ public class HoleListAdapter extends BaseAdapter {
                 @Override
                 public void onClick(View v) {
                     TextView tv = (TextView) v.findViewById(R.id.tv_pid);
-                    int pid = Integer.parseInt(tv.getText().toString().substring(1));
                     Intent intent;
                     intent = new Intent(mContext, HoleCommentActivity.class);
-
-                    intent.putExtra("pid", pid);
-
+                    Bundle bundle=item.wrapUpAsBundle();
+                    intent.putExtra("bundle",bundle);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     mContext.startActivity(intent);
                 }
