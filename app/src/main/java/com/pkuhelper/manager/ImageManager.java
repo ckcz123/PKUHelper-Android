@@ -21,7 +21,7 @@ public class ImageManager {
         Picasso.with(mContext).load(imgUrl).into(imageView);
     }
 
-    public void displayImage(String imgUrl, ImageView imageView, int width, int height){
-        Picasso.with(mContext).load(imgUrl).resize(width,height).into(imageView);
+    public void displayPreviewImage(String imgUrl, ImageView imageView){
+        Picasso.with(mContext).load(imgUrl).into(imageView);
     }
 }

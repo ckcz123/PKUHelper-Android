@@ -40,14 +40,15 @@ public class HolePresenter {
     private ArrayList<HoleListItemEntity> mods;
     private boolean isLoading = false;
 
-    private Callback callback = null;
+    private Callback callbackMain = null;
+    private Callback callbackAttention =null;
 
     public HolePresenter(Context context) {
         this.context = context;
         mContext = (AppContext) context.getApplicationContext();
         mHoleUI = (IHoleUI) context;
         pkuHoleMod = new PkuHoleMod(context);
-        callback = new Callback() {
+        callbackMain = new Callback() {
             @Override
             public void onFinished(int code, Object data) {
 
@@ -71,6 +72,24 @@ public class HolePresenter {
                 mHoleUI.error();
             }
         };
+
+        callbackAttention = new Callback() {
+            @Override
+            public void onFinished(int code, Object data) {
+                if (code == 0) {
+                    mHoleUI.loadAttention((ArrayList<HoleListItemEntity>) data);
+                } else {
+                    mHoleUI.error();
+                }
+                isLoading = false;
+            }
+
+            @Override
+            public void onError(String msg) {
+                isLoading = false;
+                mHoleUI.error();
+            }
+        };
     }
 
     public void firstLoad() {
@@ -80,7 +99,7 @@ public class HolePresenter {
 
         mHoleUI.loading();
         //request from manager
-        pkuHoleMod.getHoleList(requestPage+1, callback);
+        pkuHoleMod.getHoleList(requestPage+1, callbackMain);
     }
 
     public void moreLoad() {
@@ -89,14 +108,18 @@ public class HolePresenter {
             return;
         isLoading = true;
         mHoleUI.loadingMore();
-        pkuHoleMod.getHoleList(requestPage+1, callback);
+        pkuHoleMod.getHoleList(requestPage+1, callbackMain);
     }
 
     public void refreshLoad() {
         //TO-DO refresh list
     }
 
-    public void post(Bundle bundle) throws IOException {
+    public void attentionLoad(){
+        pkuHoleMod.getAttentionList(callbackAttention);
+    }
+
+    public void post(Bundle bundle, Callback callback) throws IOException {
         String type = bundle.getString("type");
         String text="";
         String uri;
@@ -106,27 +129,15 @@ public class HolePresenter {
             return;
         }
 
-        Callback simpleCallback = new Callback<Void>() {
-            @Override
-            public void onFinished(int code, Void data) {
-                Log.d("success code:",""+code);
-            }
-
-            @Override
-            public void onError(String msg) {
-                Log.d("error",msg);
-            }
-        };
-
         if (type.equals("text")){
             text = bundle.getString("text");
-            pkuHoleMod.post(type, text, "", 0, simpleCallback);
+            pkuHoleMod.post(type, text, "", 0, callback);
         }
         else if(type.equals("image")){
 
             text = bundle.getString("text");
             data = bundle.getString("data");
-            pkuHoleMod.post(type, text, data, 0, simpleCallback);
+            pkuHoleMod.post(type, text, data, 0, callback);
         }
         else if(type.equals("audio")){
             uri = bundle.getString("uri");
@@ -149,4 +160,12 @@ public class HolePresenter {
 
         pkuHoleMod.reply(pid,text,simpleCallback);
     }
+
+    public void search(String keyword){
+        /*
+        * @todo 找到keyword并显示
+        *
+        * */
+    }
+
 }

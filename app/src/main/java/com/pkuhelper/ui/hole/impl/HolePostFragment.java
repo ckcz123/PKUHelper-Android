@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.text.Layout;
 import android.util.Base64;
@@ -30,6 +31,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.pkuhelper.R;
 import com.pkuhelper.lib.MyBitmapFactory;
@@ -37,7 +39,10 @@ import com.pkuhelper.manager.ImageManager;
 import com.pkuhelper.manager.MediaPathManager;
 import com.pkuhelper.model.Callback;
 import com.pkuhelper.model.impl.PkuHoleMod;
+import com.pkuhelper.pkuhole.HoleActivity;
+import com.pkuhelper.presenter.HoleCommentPresenter;
 import com.pkuhelper.presenter.HolePresenter;
+import com.pkuhelper.presenter.IHoleCommentPresenter;
 import com.pkuhelper.presenter.IHolePresenter;
 import com.pkuhelper.ui.hole.IHolePostUI;
 import com.squareup.picasso.Picasso;
@@ -67,7 +72,8 @@ public class HolePostFragment extends DialogFragment implements IHolePostUI {
     private boolean isReply;
     private int replyCid;
     Bitmap bitmap;
-
+    private Context context;
+    private View rootView;
 
     public HolePostFragment() {
         // Required empty public constructor
@@ -87,13 +93,19 @@ public class HolePostFragment extends DialogFragment implements IHolePostUI {
         else if (startType.equals("hole")){
             mHolePresenter =  new HolePresenter(getContext());
         }
+        else if (startType.equals("report")){
+            pid = bundle.getInt("pid");
+        }
+        else if (startType.equals("search")){
+            mHolePresenter =  new HolePresenter(getContext());
+        }
         if (isReply = bundle.getBoolean("isReply",false)){
             replyCid = bundle.getInt("cid");
         }
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_hole_post, container, false);
@@ -105,13 +117,19 @@ public class HolePostFragment extends DialogFragment implements IHolePostUI {
         imgPreview = (ImageView) view.findViewById(R.id.img_hole_post_preview);
         etContent = (EditText) view.findViewById(R.id.et_hole_post);
         buttons = view.findViewById(R.id.linearLayout_hole_post_button);
-
+        view.findViewById(R.id.linearLayout_hole_post_button).setVisibility(View.GONE);
         if (startType.equals("comment")){
             tvHolePost.setText("发布评论");
-            view.findViewById(R.id.linearLayout_hole_post_button).setVisibility(View.GONE);
         }
         else if (startType.equals("hole")){
             tvHolePost.setText("发布新树洞");
+            view.findViewById(R.id.linearLayout_hole_post_button).setVisibility(View.VISIBLE);
+        }
+        else if (startType.equals("report")){
+            tvHolePost.setText("举报树洞");
+        }
+        else if (startType.equals("search")){
+            tvHolePost.setText("搜索树洞");
         }
         //设置回复字符串
         if (isReply){
@@ -144,21 +162,34 @@ public class HolePostFragment extends DialogFragment implements IHolePostUI {
                 String text = etContent.getText().toString();
 
                 if (startType.equals("comment")){
-                    Callback simpleCallback = new Callback<Void>() {
+
+                    context = getActivity();
+                    rootView = ((HoleCommentActivity)context).findViewById(R.id.cv_hole_comment_card);
+
+                    Log.d("view",rootView.toString());
+
+                    Callback callback = new Callback() {
                         @Override
-                        public void onFinished(int code, Void data) {
-                            Log.d("success code:",""+code);
+                        public void onFinished(int code, Object data) {
+                            Log.d("code:", code + "");
+                            if (code == 0)
+                                Snackbar.make(rootView,"发送成功",Snackbar.LENGTH_LONG).show();
+                            else
+                                Snackbar.make(rootView, "发送失败", Snackbar.LENGTH_LONG).show();
                         }
 
                         @Override
                         public void onError(String msg) {
-                            Log.d("error",msg);
+                            Snackbar.make(rootView, "发送失败", Snackbar.LENGTH_LONG).show();
                         }
                     };
 
-                    new PkuHoleMod(getContext()).reply(pid, text, simpleCallback);
+                    new PkuHoleMod(getContext()).reply(pid, text, callback);
                 }
-                else{
+                else if (startType.equals("hole")){
+
+                    context = getActivity();
+                    rootView = ((MHoleActivity)context).findViewById(R.id.nav_view);
                     Bundle bundle=new Bundle();
                     switch (type) {
                         case TYPE_TEXT:
@@ -180,10 +211,49 @@ public class HolePostFragment extends DialogFragment implements IHolePostUI {
                             bundle.putString("text",text);
                     }
                     try {
-                        mHolePresenter.post(bundle);
+                        Callback callback = new Callback() {
+                            @Override
+                            public void onFinished(int code, Object data) {
+                                Log.d("code:", code + "");
+                                if (code == 0)
+                                    Snackbar.make(rootView,"发送成功",Snackbar.LENGTH_LONG).show();
+                                else
+                                    Snackbar.make(rootView, "发送失败", Snackbar.LENGTH_LONG).show();
+                            }
+
+                            @Override
+                            public void onError(String msg) {
+                                Snackbar.make(rootView, "发送失败", Snackbar.LENGTH_LONG).show();
+                            }
+                        };
+                        mHolePresenter.post(bundle,callback);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+                }
+                else if (startType.equals("report")){
+                    context = getActivity();
+                    Callback simpleCallback = new Callback<Void>() {
+                        @Override
+                        public void onFinished(int code, Void data) {
+                            Log.d("code:",code+"");
+                                if (code == 0)
+                                    Toast.makeText(context,"举报成功",Toast.LENGTH_SHORT).show();
+                                else
+                                    Toast.makeText(context,"举报失败",Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onError(String msg) {
+                            Log.d("error",msg);
+                            Toast.makeText(getActivity(),"举报失败",Toast.LENGTH_SHORT).show();
+                        }
+                    };
+
+                    new HoleCommentPresenter(getContext()).report(pid,text,simpleCallback);
+                }
+                else if (startType.equals("search")){
+                    mHolePresenter.search(text);
                 }
 
                 dismiss();
@@ -216,8 +286,6 @@ public class HolePostFragment extends DialogFragment implements IHolePostUI {
 
 
                     bitmap = MyBitmapFactory.getCompressedBitmap(MediaPathManager.getPath(getContext(), Uri.parse(uri)),5);
-
-
             }
         super.onActivityResult(requestCode, resultCode, data);
     }}

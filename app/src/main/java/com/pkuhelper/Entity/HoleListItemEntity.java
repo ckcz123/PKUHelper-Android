@@ -2,6 +2,7 @@ package com.pkuhelper.entity;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.os.Bundle;
 import android.util.Log;
 
 import com.pkuhelper.lib.MyBitmapFactory;
@@ -93,5 +94,4 @@ public class HoleListItemEntity {
     public void setHot(long hot) {
         this.hot = hot;
     }
-
 }

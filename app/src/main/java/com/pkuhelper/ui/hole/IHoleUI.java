@@ -14,5 +14,6 @@ public interface IHoleUI {
     void firstLoad(final ArrayList<HoleListItemEntity> list);
     void moreLoad(final ArrayList<HoleListItemEntity> list);
     void refreshLoad(final ArrayList<HoleListItemEntity> list);
+    void loadAttention(final ArrayList<HoleListItemEntity> list);
     void error();
 }

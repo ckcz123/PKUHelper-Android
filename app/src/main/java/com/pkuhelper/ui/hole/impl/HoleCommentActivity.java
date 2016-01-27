@@ -3,29 +3,44 @@ package com.pkuhelper.ui.hole.impl;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.ContentLoadingProgressBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.pkuhelper.R;
 import com.pkuhelper.entity.HoleCommentListItemEntity;
 import com.pkuhelper.entity.HoleListItemEntity;
+import com.pkuhelper.lib.Constants;
 import com.pkuhelper.lib.MyCalendar;
 import com.pkuhelper.manager.CalendarManager;
 import com.pkuhelper.manager.ImageManager;
 import com.pkuhelper.model.IPkuHoleMod;
 import com.pkuhelper.model.impl.PkuHoleMod;
 import com.pkuhelper.presenter.HoleCommentPresenter;
+import com.pkuhelper.subactivity.SubActivity;
 import com.pkuhelper.ui.BaseActivity;
+import com.pkuhelper.ui.CompatListView;
 import com.pkuhelper.ui.hole.HoleCommentListAdapter;
 import com.pkuhelper.ui.hole.HoleListAdapter;
 import com.pkuhelper.ui.hole.IHoleCommentUI;
@@ -39,11 +54,12 @@ public class HoleCommentActivity extends BaseActivity implements IHoleCommentUI 
 
     private HoleCommentPresenter holeCommentPresenter;
     private HoleCommentListAdapter holeCommentListAdapter;
-    private ListView lvComment;
+    private CompatListView lvComment;
     private CardView card;
     private ContentLoadingProgressBar pbLoading;
     private int pid;
     private FloatingActionButton fab;
+    private HoleListItemEntity cardEntity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,10 +67,23 @@ public class HoleCommentActivity extends BaseActivity implements IHoleCommentUI 
         setContentView(R.layout.activity_hole_comment);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
         setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
 
         Intent intent = getIntent();
-        pid = intent.getIntExtra("pid",0);
+        String json = intent.getStringExtra("json");
+        cardEntity = new Gson().fromJson(json, new TypeToken<HoleListItemEntity>() {
+        }.getType());
+        pid = cardEntity.getPid();
+
+        setTitle("树洞评论");
 
         pbLoading = (ContentLoadingProgressBar) findViewById(R.id.pb_hole_comment_load);
 
@@ -77,9 +106,9 @@ public class HoleCommentActivity extends BaseActivity implements IHoleCommentUI 
 
         if (pid>0) {
 
-            lvComment = (ListView) findViewById(R.id.lv_hole_comment);
+            lvComment = (CompatListView) findViewById(R.id.lv_hole_comment);
             card = (CardView) findViewById(R.id.cv_hole_comment_card);
-            holeCommentPresenter.load(pid);
+            holeCommentPresenter.load(cardEntity);
         }
 
     }
@@ -131,7 +160,7 @@ public class HoleCommentActivity extends BaseActivity implements IHoleCommentUI 
         Snackbar.make(lvComment,"评论加载失败",Snackbar.LENGTH_LONG).setAction("重试", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                holeCommentPresenter.load(pid);
+                holeCommentPresenter.load(cardEntity);
             }
         }).show();
         Log.e("ERROR:","树洞评论加载失败");
@@ -157,9 +186,44 @@ public class HoleCommentActivity extends BaseActivity implements IHoleCommentUI 
             timeTextView = (TextView) view.findViewById(R.id.tv_hole_comment_card_time);
         }
 
-        public void setImage(HoleListItemEntity item) {
+        public void setImage(final HoleListItemEntity item) {
             contentImageView.setVisibility(View.VISIBLE);
             button.setVisibility(View.GONE);
+
+            contentImageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    LayoutInflater inflater = LayoutInflater.from(HoleCommentActivity.this);
+                    final View imgEntryView = inflater.inflate(R.layout.dialog_photo_entry, null); // 加载自定义的布局文件
+
+                    final AlertDialog dialog = new AlertDialog.Builder(HoleCommentActivity.this).create();
+                    final ImageView imgLargePhoto = (ImageView) imgEntryView.findViewById(R.id.img_large_photo);
+
+                    String url = mPkuHoleMod.getResourceUrl(IPkuHoleMod.TYPE_IMAGE, item.getUrl());
+                    mImageManager.displayBigImage(url, imgLargePhoto);
+
+
+                    dialog.setView(imgEntryView); // 自定义dialog
+                    dialog.show();
+
+                    imgEntryView.setOnClickListener(new View.OnClickListener() {
+                        public void onClick(View paramView) {
+                            dialog.cancel();
+                        }
+                    });
+
+                    imgEntryView.setOnLongClickListener(new View.OnLongClickListener() {
+                        @Override
+                        public boolean onLongClick(View v) {
+                            Bitmap bitmap = ((BitmapDrawable)imgLargePhoto.getDrawable()).getBitmap();
+                            MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, "img", "来自树洞");
+                            Toast.makeText(HoleCommentActivity.this,"图片保存至系统图库",Toast.LENGTH_SHORT).show();
+                            return false;
+                        }
+                    });
+                }
+                });
+
             setOther(item);
 
             String url = mPkuHoleMod.getResourceUrl(IPkuHoleMod.TYPE_IMAGE, item.getUrl());
@@ -193,5 +257,25 @@ public class HoleCommentActivity extends BaseActivity implements IHoleCommentUI 
             pidTextView.setText("#" + item.getPid());
             timeTextView.setText(CalendarManager.getDeltaTime(item.getTimestamp() * 1000));
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_hole_comment, menu);
+        menu.findItem(R.id.action_hole_report).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                Bundle bundle = new Bundle();
+                bundle.putString("start-type","report");
+                bundle.putInt("pid",pid);
+                HolePostFragment holePostFragment=new HolePostFragment();
+                holePostFragment.setArguments(bundle);
+                holePostFragment.show(getSupportFragmentManager(), holePostFragment.getTag());
+                return false;
+            }
+        });
+
+
+        return super.onCreateOptionsMenu(menu);
     }
 }

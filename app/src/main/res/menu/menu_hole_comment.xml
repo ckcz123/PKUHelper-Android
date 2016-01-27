@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.hole.impl.HoleCommentActivity">
+
+    <item
+        android:id="@+id/action_hole_report"
+        android:title="@string/action_hole_report"
+        android:orderInCategory="90"
+        android:icon="@drawable/ic_report_problem_white_48dp"
+        app:showAsAction="ifRoom"/>
+
+
+    <item
+        android:id="@+id/action_hole_set_attention"
+        android:title="@string/action_hole_set_attention"
+        android:orderInCategory="80"
+        android:icon="@drawable/ic_star_border_white_48dp"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_hole_comment_settings"
+        android:title="@string/action_settings"
+        android:orderInCategory="100"/>
+
+</menu>
