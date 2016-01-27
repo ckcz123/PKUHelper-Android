@@ -25,7 +25,6 @@ public class HoleCommentPresenter implements IHoleCommentPresenter {
 
     private IPkuHoleMod pkuHoleMod;
     private IHoleCommentUI iHoleCommentUI;
-    private Callback callback = null;
     private ArrayList<HoleCommentListItemEntity> commentEntities;
     private HoleListItemEntity cardEntity;
     private AppContext mContext;
@@ -34,13 +33,20 @@ public class HoleCommentPresenter implements IHoleCommentPresenter {
         mContext = (AppContext) context.getApplicationContext();
         iHoleCommentUI = (IHoleCommentUI) context;
         pkuHoleMod = new PkuHoleMod(context);
-        callback = new Callback() {
+    }
+
+    @Override
+    public void load(HoleListItemEntity item) {
+
+        iHoleCommentUI.loading();
+        iHoleCommentUI.loadCard(item);
+
+        Callback callback = new Callback() {
             @Override
             public void onFinished(int code, Object data) {
 
                 if (code == 0) {
                     commentEntities = (ArrayList<HoleCommentListItemEntity>) data;
-                    //TO-DO load data
                     iHoleCommentUI.loadList(commentEntities);
                 } else {
                     iHoleCommentUI.error();
@@ -52,15 +58,8 @@ public class HoleCommentPresenter implements IHoleCommentPresenter {
                 iHoleCommentUI.error();
             }
         };
-    }
 
-    @Override
-    public void load(HoleListItemEntity item) {
-        iHoleCommentUI.loading();
-
-        iHoleCommentUI.loadCard(item);
         pkuHoleMod.getCommentList(item.getPid(),callback);
-
     }
 
     @Override

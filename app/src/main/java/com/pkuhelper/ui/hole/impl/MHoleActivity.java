@@ -41,7 +41,6 @@ public class MHoleActivity extends BaseActivity implements IHoleUI, NavigationVi
     private ViewPager viewPager;
     private ContentLoadingProgressBar pbMore, pbRefresh;
     private FloatingActionButton fab;
-    private SwipeRefreshLayout swipeRefreshLayout;
     private DrawerLayout drawer;
     private Toolbar toolbar;
     private TabLayout tabLayout;
@@ -51,70 +50,24 @@ public class MHoleActivity extends BaseActivity implements IHoleUI, NavigationVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hole);
 
-        LayoutInflater inflater = getLayoutInflater();
-        View view1 = inflater.inflate(R.layout.listview_hole_content, null);
-        View view2 = inflater.inflate(R.layout.listview_hole_content, null);
-        listViewMain = (CompatListView) view1.findViewById(R.id.MHole_listview);
-        listViewAttention = (CompatListView) view2.findViewById(R.id.MHole_listview);
+        setupViewPager();
+        setupToolbar();
+        setupTabLayout();
+        setupFab();
+        setupDrawer();
+        setupProcessBar();
 
-        ArrayList<View> viewList = new ArrayList<>();
-        viewList.add(listViewMain);
-        viewList.add(listViewAttention);
-        viewPager = (ViewPager) findViewById(R.id.vp_hole_content);
-        viewPager.setAdapter(new HoleViewPagerAdapter(viewList));
-
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.action_hole_search:
-                        break;
-                    case R.id.action_hole_settings:
-                        break;
-                }
-
-                return false;
-            }
-        });
-
-        toolbar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (tabLayout.getTabAt(0).isSelected())
-                    listViewMain.smoothScrollToPosition(0);
-                else
-                    listViewAttention.smoothScrollToPosition(0);
-            }
-        });
-        setSupportActionBar(toolbar);
-
-        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
-        tabLayout.setupWithViewPager(viewPager);
-        tabLayout.getTabAt(0).setText("树洞主页").select();
-        tabLayout.getTabAt(1).setText("我的收藏");
-
-        fab = (FloatingActionButton) findViewById(R.id.fab_hole_post);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                HolePostFragment holePostFragment=new HolePostFragment();
-                Bundle bundle = new Bundle();
-                bundle.putString("start-type","hole");
-                holePostFragment.setArguments(bundle);
-                holePostFragment.show(getSupportFragmentManager(), holePostFragment.getTag());
-            }
-        });
-
-        pbMore = (ContentLoadingProgressBar) findViewById(R.id.pb_hole_more);
-        pbRefresh = (ContentLoadingProgressBar) findViewById(R.id.pb_hole_refresh);
-        pbMore.setVisibility(View.GONE);
-        pbRefresh.setVisibility(View.VISIBLE);
+        /*
+        * bind presenter 并且加载评论和关注列表
+        * */
 
         holePresenter = new HolePresenter(this);
         holePresenter.firstLoad();
         holePresenter.attentionLoad();
 
+        /*
+        * 设置上滑加载功能
+        * */
         listViewMain.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
@@ -131,7 +84,6 @@ public class MHoleActivity extends BaseActivity implements IHoleUI, NavigationVi
             }
         });
 
-        setupView();
     }
 
 
@@ -151,7 +103,7 @@ public class MHoleActivity extends BaseActivity implements IHoleUI, NavigationVi
         pbMore.setVisibility(View.GONE);
 
         if (listViewMain != null) {
-            Log.d("listview","should in");
+            //Log.d("listview","should in");
             holeListAdapter.addItems(list);
             holeListAdapter.notifyDataSetChanged();
         }
@@ -208,7 +160,7 @@ public class MHoleActivity extends BaseActivity implements IHoleUI, NavigationVi
         return super.onCreateOptionsMenu(menu);
     }
 
-    private void setupView() {
+    private void setupDrawer() {
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -250,4 +202,100 @@ public class MHoleActivity extends BaseActivity implements IHoleUI, NavigationVi
         }
     }
 
+    private void setupToolbar(){
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.action_hole_search:
+                        /*
+                        * @todo 设置搜索活动
+                        * */
+                        break;
+                    case R.id.action_hole_settings:
+                        break;
+                }
+
+                return false;
+            }
+        });
+
+        /*
+        * 点按toolBar返回最上方
+        * */
+
+        toolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                /*
+                * @todo 这里不应该设置getTabAt(0)
+                * */
+
+                if (tabLayout.getTabAt(0).isSelected())
+                    listViewMain.smoothScrollToPosition(0);
+                else
+                    listViewAttention.smoothScrollToPosition(0);
+            }
+        });
+        setSupportActionBar(toolbar);
+    }
+
+    private void setupTabLayout(){
+        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+        tabLayout.setupWithViewPager(viewPager);
+
+        /*
+        * @todo 这里不应该用0，1直接表示
+        * */
+        tabLayout.getTabAt(0).setText("树洞主页").select();
+        tabLayout.getTabAt(1).setText("我的收藏");
+    }
+
+    private void setupFab(){
+        fab = (FloatingActionButton) findViewById(R.id.fab_hole_post);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                /*
+                * 打开发布新树洞的dialog
+                * */
+                HolePostFragment holePostFragment = new HolePostFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("start-type", "hole");
+                holePostFragment.setArguments(bundle);
+                holePostFragment.show(getSupportFragmentManager(), holePostFragment.getTag());
+            }
+        });
+    }
+
+    private void setupViewPager(){
+
+        /*
+        * 将树洞主页和关注的树洞分别加载在两个layout中
+        * */
+        LayoutInflater inflater = getLayoutInflater();
+        View view1 = inflater.inflate(R.layout.listview_hole_content, null);
+        View view2 = inflater.inflate(R.layout.listview_hole_content, null);
+        listViewMain = (CompatListView) view1.findViewById(R.id.MHole_listview);
+        listViewAttention = (CompatListView) view2.findViewById(R.id.MHole_listview);
+
+        /*
+        * 将两个listView加入viewPager
+        * */
+        ArrayList<View> viewList = new ArrayList<>();
+        viewList.add(listViewMain);
+        viewList.add(listViewAttention);
+        viewPager = (ViewPager) findViewById(R.id.vp_hole_content);
+        viewPager.setAdapter(new HoleViewPagerAdapter(viewList));
+    }
+
+    private void setupProcessBar(){
+        pbMore = (ContentLoadingProgressBar) findViewById(R.id.pb_hole_more);
+        pbRefresh = (ContentLoadingProgressBar) findViewById(R.id.pb_hole_refresh);
+        pbMore.setVisibility(View.GONE);
+        pbRefresh.setVisibility(View.VISIBLE);
+    }
 }

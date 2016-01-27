@@ -60,56 +60,36 @@ public class HoleCommentActivity extends BaseActivity implements IHoleCommentUI 
     private int pid;
     private FloatingActionButton fab;
     private HoleListItemEntity cardEntity;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hole_comment);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setTitle("树洞评论");
 
-        setSupportActionBar(toolbar);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
-
+        /*
+        * 从intent中获取原文的entity
+        * */
         Intent intent = getIntent();
         String json = intent.getStringExtra("json");
         cardEntity = new Gson().fromJson(json, new TypeToken<HoleListItemEntity>() {
         }.getType());
         pid = cardEntity.getPid();
 
-        setTitle("树洞评论");
-
+        setupToolbar();
+        setupFab();
         pbLoading = (ContentLoadingProgressBar) findViewById(R.id.pb_hole_comment_load);
+        lvComment = (CompatListView) findViewById(R.id.lv_hole_comment);
+        card = (CardView) findViewById(R.id.cv_hole_comment_card);
 
-        fab = (FloatingActionButton) findViewById(R.id.fab_hole_comment);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putString("start-type","comment");
-                bundle.putBoolean("isReply", false);
-                bundle.putInt("pid",pid);
-                HolePostFragment holePostFragment=new HolePostFragment();
-                holePostFragment.setArguments(bundle);
-                holePostFragment.show(getSupportFragmentManager(), holePostFragment.getTag());
-            }
-        });
-
+        /*
+        * bind presenter加载card
+        * */
         holeCommentPresenter = new HoleCommentPresenter(this);
-
-
-        if (pid>0) {
-
-            lvComment = (CompatListView) findViewById(R.id.lv_hole_comment);
-            card = (CardView) findViewById(R.id.cv_hole_comment_card);
+        if (pid>0)
             holeCommentPresenter.load(cardEntity);
-        }
 
     }
 
@@ -163,7 +143,59 @@ public class HoleCommentActivity extends BaseActivity implements IHoleCommentUI 
                 holeCommentPresenter.load(cardEntity);
             }
         }).show();
-        Log.e("ERROR:","树洞评论加载失败");
+        Log.e("ERROR:", "树洞评论加载失败");
+    }
+
+    private void setupToolbar(){
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
+    private void setupFab(){
+        fab = (FloatingActionButton) findViewById(R.id.fab_hole_comment);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                /*
+                * 打开评论的dialog
+                * */
+                Bundle bundle = new Bundle();
+                bundle.putString("start-type", "comment");
+                bundle.putBoolean("isReply", false);
+                bundle.putInt("pid", pid);
+                HolePostFragment holePostFragment = new HolePostFragment();
+                holePostFragment.setArguments(bundle);
+                holePostFragment.show(getSupportFragmentManager(), holePostFragment.getTag());
+            }
+        });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_hole_comment, menu);
+        menu.findItem(R.id.action_hole_report).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                Bundle bundle = new Bundle();
+                bundle.putString("start-type", "report");
+                bundle.putInt("pid", pid);
+                HolePostFragment holePostFragment = new HolePostFragment();
+                holePostFragment.setArguments(bundle);
+                holePostFragment.show(getSupportFragmentManager(), holePostFragment.getTag());
+                return false;
+            }
+        });
+
+
+        return super.onCreateOptionsMenu(menu);
     }
 
     //这段代码在adapter里有，但如何复用?
@@ -259,23 +291,5 @@ public class HoleCommentActivity extends BaseActivity implements IHoleCommentUI 
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_hole_comment, menu);
-        menu.findItem(R.id.action_hole_report).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                Bundle bundle = new Bundle();
-                bundle.putString("start-type","report");
-                bundle.putInt("pid",pid);
-                HolePostFragment holePostFragment=new HolePostFragment();
-                holePostFragment.setArguments(bundle);
-                holePostFragment.show(getSupportFragmentManager(), holePostFragment.getTag());
-                return false;
-            }
-        });
 
-
-        return super.onCreateOptionsMenu(menu);
-    }
 }
