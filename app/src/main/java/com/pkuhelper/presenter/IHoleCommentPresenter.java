@@ -10,7 +10,8 @@ import com.pkuhelper.model.Callback;
  */
 public interface IHoleCommentPresenter {
     void load(HoleListItemEntity item);
-    void reply();
-    void setAttention();
+    void reply(int pid, String text,Callback callback);
+    void setAttention(int pid);
     void report(int pid, String reason, Callback callback);
+    boolean isOnAttention(int pid);
 }

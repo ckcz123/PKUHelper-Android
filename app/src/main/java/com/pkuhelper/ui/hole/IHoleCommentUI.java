@@ -12,5 +12,5 @@ public interface IHoleCommentUI {
     void loading();
     void loadCard(HoleListItemEntity data);
     void loadList(ArrayList<HoleCommentListItemEntity> data);
-    void error();
+    void error(String text);
 }

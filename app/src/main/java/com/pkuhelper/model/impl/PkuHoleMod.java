@@ -395,4 +395,12 @@ public class PkuHoleMod implements IPkuHoleMod {
     public boolean isOnAttention(int pid) {
         return mContext.getHoleAttentionSet().contains(Integer.valueOf(pid));
     }
+
+    @Override
+    public void setOnAttention(int pid, int what){
+        if (what == ATTENTION_ON)
+            mContext.getHoleAttentionSet().add(pid);
+        else
+            mContext.getHoleAttentionSet().remove(pid);
+    }
 }

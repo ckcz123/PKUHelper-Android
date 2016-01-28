@@ -135,14 +135,9 @@ public class HoleCommentActivity extends BaseActivity implements IHoleCommentUI 
 
 
     @Override
-    public void error() {
+    public void error(String text) {
         pbLoading.setVisibility(View.GONE);
-        Snackbar.make(lvComment,"评论加载失败",Snackbar.LENGTH_LONG).setAction("重试", new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                holeCommentPresenter.load(cardEntity);
-            }
-        }).show();
+        Snackbar.make(lvComment,text+"失败",Snackbar.LENGTH_LONG).show();
         Log.e("ERROR:", "树洞评论加载失败");
     }
 
@@ -181,7 +176,29 @@ public class HoleCommentActivity extends BaseActivity implements IHoleCommentUI 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_hole_comment, menu);
-        menu.findItem(R.id.action_hole_report).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+
+        final MenuItem setAttention;
+        MenuItem report;
+
+        /**
+         * 发送更新关注事件，并更新关注图标
+         * */
+
+        setAttention=menu.findItem(R.id.action_hole_set_attention);
+        updateAttentionIcon(setAttention);
+        setAttention.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                holeCommentPresenter.setAttention(pid);
+
+                updateAttentionIcon(setAttention);
+                return false;
+            }
+        });
+
+        report =menu.findItem(R.id.action_hole_report);
+
+        report.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 Bundle bundle = new Bundle();
@@ -196,6 +213,22 @@ public class HoleCommentActivity extends BaseActivity implements IHoleCommentUI 
 
 
         return super.onCreateOptionsMenu(menu);
+    }
+
+    /**
+     * 动态改变attention icon
+     * @param menuItem
+     */
+    void updateAttentionIcon(MenuItem menuItem){
+
+        if (holeCommentPresenter.isOnAttention(pid)) {
+            menuItem.setIcon(R.drawable.ic_star_white_24dp);
+        }
+        else{
+            menuItem.setIcon(R.drawable.ic_star_border_white_24dp);
+        }
+
+        invalidateOptionsMenu();
     }
 
     //这段代码在adapter里有，但如何复用?

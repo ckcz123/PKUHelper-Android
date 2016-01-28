@@ -60,8 +60,10 @@ public class HolePostFragment extends DialogFragment implements IHolePostUI {
     final int START_TYPE_SEARCH=3;
 
     private HolePresenter mHolePresenter;
+    private HoleCommentPresenter mHoleCommentPresenter;
 
     private OnFragmentInteractionListener mListener;
+
     private ImageButton btnPost;
     private ImageButton btnImg;
     private ImageButton btnAudio;
@@ -117,12 +119,14 @@ public class HolePostFragment extends DialogFragment implements IHolePostUI {
                 if (isReply = bundle.getBoolean("isReply",false)){
                     replyCid = bundle.getInt("cid");
                 }
+                mHoleCommentPresenter = new HoleCommentPresenter(getContext());
                 break;
             case START_TYPE_HOLE:
                 mHolePresenter =  new HolePresenter(getContext());
                 break;
             case START_TYPE_REPORT:
                 pid = bundle.getInt("pid");
+                mHoleCommentPresenter = new HoleCommentPresenter(getContext());
                 break;
             case START_TYPE_SEARCH:
                 mHolePresenter =  new HolePresenter(getContext());
@@ -329,7 +333,7 @@ public class HolePostFragment extends DialogFragment implements IHolePostUI {
             }
         };
 
-        new PkuHoleMod(getContext()).reply(pid, text, callback);
+        mHoleCommentPresenter.reply(pid, text, callback);
     }
 
     private void postHole(String text){
@@ -397,7 +401,7 @@ public class HolePostFragment extends DialogFragment implements IHolePostUI {
             }
         };
 
-        new HoleCommentPresenter(getContext()).report(pid,text,simpleCallback);
+        mHoleCommentPresenter.report(pid,text,simpleCallback);
     }
 
     private void postSearch(String text){
