@@ -72,24 +72,6 @@ public class HolePresenter {
                 mHoleUI.error();
             }
         };
-
-        callbackAttention = new Callback() {
-            @Override
-            public void onFinished(int code, Object data) {
-                if (code == 0) {
-                    mHoleUI.loadAttention((ArrayList<HoleListItemEntity>) data);
-                } else {
-                    mHoleUI.error();
-                }
-                isLoading = false;
-            }
-
-            @Override
-            public void onError(String msg) {
-                isLoading = false;
-                mHoleUI.error();
-            }
-        };
     }
 
     public void firstLoad() {
@@ -116,6 +98,26 @@ public class HolePresenter {
     }
 
     public void attentionLoad(){
+
+        callbackAttention = new Callback() {
+            @Override
+            public void onFinished(int code, Object data) {
+                if (code == 0) {
+                    mHoleUI.loadAttention((ArrayList<HoleListItemEntity>) data);
+                    pkuHoleMod.setupAttentionSet((ArrayList<HoleListItemEntity>) data);
+                } else {
+                    mHoleUI.error();
+                }
+                isLoading = false;
+            }
+
+            @Override
+            public void onError(String msg) {
+                isLoading = false;
+                mHoleUI.error();
+            }
+        };
+
         pkuHoleMod.getAttentionList(callbackAttention);
     }
 

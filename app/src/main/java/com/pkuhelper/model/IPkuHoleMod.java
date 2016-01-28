@@ -166,4 +166,11 @@ public interface IPkuHoleMod {
      * @return true：用户关注；false：用户未关注
      */
     boolean isOnAttention(int pid);
+
+    /**
+     * 判断某个树洞是否被当前用户关注
+     * @param pid 树洞PID
+     * @param what Attention ON or OFF
+     */
+    void setOnAttention(int pid, int what);
 }
