@@ -1,6 +1,5 @@
 package com.pkuhelper.ui.hole.impl;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -13,16 +12,13 @@ import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,18 +27,14 @@ import com.google.gson.reflect.TypeToken;
 import com.pkuhelper.R;
 import com.pkuhelper.entity.HoleCommentListItemEntity;
 import com.pkuhelper.entity.HoleListItemEntity;
-import com.pkuhelper.lib.Constants;
-import com.pkuhelper.lib.MyCalendar;
 import com.pkuhelper.manager.CalendarManager;
 import com.pkuhelper.manager.ImageManager;
 import com.pkuhelper.model.IPkuHoleMod;
 import com.pkuhelper.model.impl.PkuHoleMod;
 import com.pkuhelper.presenter.HoleCommentPresenter;
-import com.pkuhelper.subactivity.SubActivity;
 import com.pkuhelper.ui.BaseActivity;
 import com.pkuhelper.ui.CompatListView;
-import com.pkuhelper.ui.hole.HoleCommentListAdapter;
-import com.pkuhelper.ui.hole.HoleListAdapter;
+import com.pkuhelper.ui.hole.adapter.HoleCommentListAdapter;
 import com.pkuhelper.ui.hole.IHoleCommentUI;
 
 import java.util.ArrayList;

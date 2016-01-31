@@ -10,8 +10,4 @@
         android:icon="@drawable/ic_search_white_24dp"
         app:showAsAction="ifRoom" />
 
-    <item android:id="@+id/action_hole_settings"
-        android:title="@string/action_settings"
-        android:orderInCategory="100"
-        app:showAsAction="never"/>
 </menu>

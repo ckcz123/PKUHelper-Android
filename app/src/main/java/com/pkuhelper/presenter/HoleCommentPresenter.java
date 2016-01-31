@@ -1,10 +1,6 @@
 package com.pkuhelper.presenter;
 
 import android.content.Context;
-import android.os.Bundle;
-import android.support.design.widget.Snackbar;
-import android.telecom.Call;
-import android.widget.Toast;
 
 import com.pkuhelper.AppContext;
 import com.pkuhelper.entity.HoleCommentListItemEntity;
@@ -12,9 +8,7 @@ import com.pkuhelper.entity.HoleListItemEntity;
 import com.pkuhelper.model.Callback;
 import com.pkuhelper.model.IPkuHoleMod;
 import com.pkuhelper.model.impl.PkuHoleMod;
-import com.pkuhelper.ui.hole.HoleListAdapter;
 import com.pkuhelper.ui.hole.IHoleCommentUI;
-import com.pkuhelper.ui.hole.IHoleUI;
 
 import java.util.ArrayList;
 

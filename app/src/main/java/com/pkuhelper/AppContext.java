@@ -49,10 +49,19 @@ public class AppContext extends Application {
     private void initUserEntity() {
         mUserEntity = gson.fromJson(Editor.getString(this, "mUserEntity"), UserEntity.class);
         if (mUserEntity == null) mUserEntity = new UserEntity();
+
+        // dev
+        // 登陆网关炸了
+        mUserEntity.setToken("70951e84f8a0d48f256a159e1dfd8d56");
     }
 
     public UserEntity getUserEntity() {
         return mUserEntity;
+    }
+
+    public void saveUserEntity() {
+        String mUserEntityJson = gson.toJson(mUserEntity);
+        Editor.putString(this, "mUserEntity", mUserEntityJson);
     }
 
     /**

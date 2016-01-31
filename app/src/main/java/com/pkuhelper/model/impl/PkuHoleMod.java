@@ -100,6 +100,45 @@ public class PkuHoleMod implements IPkuHoleMod {
                         case 0:
                             ArrayList<HoleListItemEntity> mods;
                             mods = gson.fromJson(response.get("data"), new TypeToken<ArrayList<HoleListItemEntity>>() {}.getType());
+                            updateTimestamp(response.get("timestamp").getAsLong());
+                            callback.onFinished(code, mods);
+                            break;
+                        default:
+                            String msg = response.get("msg").getAsString();
+                            Log.v(TAG, ("error, code=" + code) + " " + msg);
+                            callback.onFinished(code, null);
+                    }
+                } catch (JsonSyntaxException e) {
+                    e.printStackTrace();
+                    callback.onError(e.getMessage());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                callback.onError(volleyError.getMessage());
+            }
+        });
+    }
+
+    @Override
+    public void refreshHoleList(long timestamp, final Callback<ArrayList<HoleListItemEntity>> callback) {
+        ArrayList<ApiManager.Parameter> params = new ArrayList<>();
+        params.add(mApiManager.makeParam("action", "refreshlist"));
+        if (timestamp == TIMESTAMP_NOW) timestamp = getTimestamp();
+        params.add(mApiManager.makeParam("timestamp", "" + timestamp));
+
+        sendRequest(params, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String jsonStr) {
+                try {
+                    JsonObject response = gson.fromJson(jsonStr, JsonObject.class);
+                    int code = response.get("code").getAsInt();
+                    switch (code) {
+                        case 0:
+                            ArrayList<HoleListItemEntity> mods;
+                            mods = gson.fromJson(response.get("data"), new TypeToken<ArrayList<HoleListItemEntity>>() {}.getType());
+                            updateTimestamp(response.get("timestamp").getAsLong());
                             callback.onFinished(code, mods);
                             break;
                         default:
@@ -214,7 +253,7 @@ public class PkuHoleMod implements IPkuHoleMod {
                             Log.v(TAG, ("error, code=" + code) + " " + msg);
                             callback.onFinished(code, null);
                     }
-                    updateTimestamp(response.get("data").getAsLong());
+//                    updateTimestamp(response.get("data").getAsLong());
                 } catch (JsonSyntaxException e) {
                     e.printStackTrace();
                     callback.onError(e.getMessage());

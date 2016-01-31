@@ -1,35 +1,22 @@
 package com.pkuhelper.ui.hole.impl;
 
-import android.annotation.TargetApi;
-import android.app.ActionBar;
 import android.app.Activity;
-import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.DocumentsContract;
-import android.provider.MediaStore;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
-import android.text.Layout;
 import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,14 +25,9 @@ import com.pkuhelper.lib.MyBitmapFactory;
 import com.pkuhelper.manager.ImageManager;
 import com.pkuhelper.manager.MediaPathManager;
 import com.pkuhelper.model.Callback;
-import com.pkuhelper.model.impl.PkuHoleMod;
-import com.pkuhelper.pkuhole.HoleActivity;
 import com.pkuhelper.presenter.HoleCommentPresenter;
 import com.pkuhelper.presenter.HolePresenter;
-import com.pkuhelper.presenter.IHoleCommentPresenter;
-import com.pkuhelper.presenter.IHolePresenter;
 import com.pkuhelper.ui.hole.IHolePostUI;
-import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 
@@ -306,7 +288,7 @@ public class HolePostFragment extends DialogFragment implements IHolePostUI {
                 } else {
                     startActivityForResult(intent, 0);
                 }
-                type=TYPE_IMAGE;
+                type = TYPE_IMAGE;
             }
         });
     }
@@ -315,7 +297,7 @@ public class HolePostFragment extends DialogFragment implements IHolePostUI {
         context = getActivity();
         rootView = ((HoleCommentActivity)context).findViewById(R.id.cv_hole_comment_card);
 
-        Log.d("view",rootView.toString());
+        Log.d("view", rootView.toString());
 
         Callback callback = new Callback() {
             @Override
@@ -339,7 +321,7 @@ public class HolePostFragment extends DialogFragment implements IHolePostUI {
     private void postHole(String text){
 
         context = getActivity();
-        rootView = ((MHoleActivity)context).findViewById(R.id.nav_view);
+        rootView = ((HoleActivity)context).findViewById(R.id.nav_view);
         Bundle bundle=new Bundle();
         switch (type) {
             case TYPE_TEXT:
@@ -401,7 +383,7 @@ public class HolePostFragment extends DialogFragment implements IHolePostUI {
             }
         };
 
-        mHoleCommentPresenter.report(pid,text,simpleCallback);
+        mHoleCommentPresenter.report(pid, text, simpleCallback);
     }
 
     private void postSearch(String text){

@@ -98,7 +98,7 @@
 
         <!-- New -->
         <activity
-            android:name=".ui.hole.impl.MHoleActivity"
+            android:name=".ui.hole.impl.HoleActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoActionBar"

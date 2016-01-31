@@ -62,11 +62,23 @@ public interface IPkuHoleMod {
     int PUSH_SHOW_CONTENT = 0x01;
 
     /**
+     * 时间戳
+     */
+    int TIMESTAMP_NOW = -1;
+
+    /**
      * 获取第page页的树洞列表
      * @param page 页
      * @param callback 回调
      */
     void getHoleList(int page, final Callback<ArrayList<HoleListItemEntity>> callback);
+
+    /**
+     * 获取指定timestamp之后的树洞的列表（即只有新的树洞的那一部分）
+     * @param timestamp 时间戳
+     * @param callback 回调
+     */
+    void refreshHoleList(long timestamp, final Callback<ArrayList<HoleListItemEntity>> callback);
 
     /**
      * 获取指定pid的树洞评论列表

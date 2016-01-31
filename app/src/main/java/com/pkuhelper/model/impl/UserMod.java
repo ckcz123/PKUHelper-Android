@@ -1,6 +1,7 @@
 package com.pkuhelper.model.impl;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.pkuhelper.AppContext;
@@ -24,6 +25,7 @@ public class UserMod implements IUserMod{
 
     @Override
     public String getToken() {
+//        Log.v(TAG, mContext.getUserEntity().getToken());
         return mContext.getUserEntity().getToken();
     }
 }

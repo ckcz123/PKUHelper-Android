@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.pkuhelper.presenter.IPkuHelperPresenter;
-import com.pkuhelper.ui.hole.impl.MHoleActivity;
+import com.pkuhelper.ui.hole.impl.HoleActivity;
 import com.pkuhelper.ui.main.IPkuHelperUI;
 
 /**
@@ -21,7 +21,7 @@ public class PkuHelperPresenter implements IPkuHelperPresenter {
 
     @Override
     public void startHoleUI() {
-        Intent intent = new Intent(mContext, MHoleActivity.class);
+        Intent intent = new Intent(mContext, HoleActivity.class);
         mContext.startActivity(intent);
     }
 }

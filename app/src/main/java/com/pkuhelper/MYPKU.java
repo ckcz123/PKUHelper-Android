@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 
-import com.pkuhelper.ui.hole.impl.MHoleActivity;
+import com.pkuhelper.ui.hole.impl.HoleActivity;
 import com.pkuhelper.bbs.BBSActivity;
 import com.pkuhelper.chat.ChatActivity;
 import com.pkuhelper.classroom.ClassActivity;
@@ -263,7 +263,7 @@ public class MYPKU extends Fragment {
 			PKUHelper.pkuhelper.startActivity(
 
 					//TEST
-					new Intent(PKUHelper.pkuhelper, MHoleActivity.class));
+					new Intent(PKUHelper.pkuhelper, HoleActivity.class));
 					//new Intent(PKUHelper.pkuhelper, HoleActivity.class));
 		else if (("pdsd").equals(string))
 			PKUHelper.pkuhelper.startActivity(

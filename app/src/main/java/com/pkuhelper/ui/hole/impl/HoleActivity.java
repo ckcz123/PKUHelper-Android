@@ -43,6 +43,8 @@ public class HoleActivity extends BaseActivity implements IHoleUI, NavigationVie
 //    private CompatListView listViewMain;
 //    private CompatListView listViewAttention;
 //    private HolePresenter holePresenter;
+//    private ContentLoadingProgressBar pbMore;
+
 
     private IHolePresenter mHolePresenter;
     private HolePagerAdapter mHolePagerAdapter;
@@ -50,11 +52,10 @@ public class HoleActivity extends BaseActivity implements IHoleUI, NavigationVie
     private ViewGroup layoutContent;
     private ViewPager viewPager;
     private ContentLoadingProgressBar pbInit;
-    private ContentLoadingProgressBar pbMore;
-    private FloatingActionButton fab;
     private DrawerLayout drawer;
     private Toolbar toolbar;
     private TabLayout tabLayout;
+    private FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +73,7 @@ public class HoleActivity extends BaseActivity implements IHoleUI, NavigationVie
         setupProgressBar();
 
         mHolePresenter.init();
+
 //        /*
 //        * bind presenter 并且加载评论和关注列表
 //        * */
@@ -98,7 +100,6 @@ public class HoleActivity extends BaseActivity implements IHoleUI, NavigationVie
 //                }
 //            }
 //        });
-
     }
 
 
@@ -246,10 +247,7 @@ public class HoleActivity extends BaseActivity implements IHoleUI, NavigationVie
                         * @todo 设置搜索活动
                         * */
                         break;
-                    case R.id.action_hole_settings:
-                        break;
                 }
-
                 return false;
             }
         });

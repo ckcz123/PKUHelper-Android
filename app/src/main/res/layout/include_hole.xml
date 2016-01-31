@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#EEEEEE"
@@ -30,8 +31,7 @@
             app:tabGravity="fill"
             app:tabMode="fixed"
             app:tabSelectedTextColor="#ffffff"
-            app:tabTextColor="#dddddd"
-            app:layout_scrollFlags="scroll|snap"/>
+            app:tabTextColor="#dddddd" />
 
     </android.support.design.widget.AppBarLayout>
 
@@ -67,12 +67,12 @@
         android:indeterminate="true" />
 
     <android.support.v4.widget.ContentLoadingProgressBar
-        android:id="@+id/pb_hole_refresh"
+        android:id="@+id/pb_init"
         style="?android:attr/progressBarStyle"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="top"
+        android:layout_gravity="center"
         android:indeterminate="true" />
 
 </android.support.design.widget.CoordinatorLayout>
