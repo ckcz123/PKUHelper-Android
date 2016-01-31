@@ -1,4 +1,4 @@
-package com.pkuhelper.ui.hole;
+package com.pkuhelper.ui.hole.adapter;
 
 import android.app.Activity;
 import android.content.Context;

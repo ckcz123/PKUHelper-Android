@@ -1,4 +1,4 @@
-package com.pkuhelper.ui.hole;
+package com.pkuhelper.ui.hole.adapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -49,6 +49,10 @@ public class HoleListAdapter extends BaseAdapter {
 
     public void addItems(ArrayList<HoleListItemEntity> items){
         allItems.addAll(items);
+    }
+
+    public void addItemsAtStart(ArrayList<HoleListItemEntity> items) {
+        allItems.addAll(0, items);
     }
 
     @Override
@@ -171,7 +175,7 @@ public class HoleListAdapter extends BaseAdapter {
                     Intent intent;
                     intent = new Intent(mContext, HoleCommentActivity.class);
                     String json = mPkuHoleMod.getJson(item);
-                    intent.putExtra("json",json);
+                    intent.putExtra("json", json);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     mContext.startActivity(intent);
                 }

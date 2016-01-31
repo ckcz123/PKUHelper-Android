@@ -1,4 +1,4 @@
-package com.pkuhelper.ui.hole;
+package com.pkuhelper.ui.hole.adapter;
 
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
