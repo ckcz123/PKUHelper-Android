@@ -8,6 +8,7 @@ import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 
 import com.pkuhelper.R;
 import com.pkuhelper.entity.HoleListItemEntity;
@@ -70,6 +71,23 @@ public class HoleListFragment extends Fragment implements IHoleListUI {
 
     private void setupListView(View view) {
         listView = (CompatListView) view.findViewById(R.id.lv_hole);
+
+        // TODO: 16/2/2 上拉加载
+        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {}
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                if (totalItemCount != 0) {
+                    int lastItem = firstVisibleItem + visibleItemCount;
+                    int itemLeft = 0;
+                    if (lastItem >= totalItemCount - itemLeft) {
+//                        mHolePresenter.loadMore();
+                    }
+                }
+            }
+        });
     }
 
     /**

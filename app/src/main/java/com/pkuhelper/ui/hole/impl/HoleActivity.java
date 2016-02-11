@@ -36,7 +36,8 @@ import com.pkuhelper.ui.hole.IHoleUI;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HoleActivity extends BaseActivity implements IHoleUI, NavigationView.OnNavigationItemSelectedListener {
+public class HoleActivity extends BaseActivity implements IHoleUI {
+    private static final String TAG = "HoleActivity";
 
 //    private HoleListAdapter holeListAdapter;
 //    private HoleListAdapter attentionListAdapter;
@@ -44,7 +45,7 @@ public class HoleActivity extends BaseActivity implements IHoleUI, NavigationVie
 //    private CompatListView listViewAttention;
 //    private HolePresenter holePresenter;
 //    private ContentLoadingProgressBar pbMore;
-
+//    private DrawerLayout drawer;
 
     private IHolePresenter mHolePresenter;
     private HolePagerAdapter mHolePagerAdapter;
@@ -52,7 +53,6 @@ public class HoleActivity extends BaseActivity implements IHoleUI, NavigationVie
     private ViewGroup layoutContent;
     private ViewPager viewPager;
     private ContentLoadingProgressBar pbInit;
-    private DrawerLayout drawer;
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private FloatingActionButton fab;
@@ -63,13 +63,14 @@ public class HoleActivity extends BaseActivity implements IHoleUI, NavigationVie
         setContentView(R.layout.activity_hole);
 
         mHolePresenter = new HolePresenter(this);
+        mHolePresenter.setHoleUI(this);
 
         setupContentView();
         setupViewPager();
         setupToolbar();
         setupTabLayout();
         setupFab();
-        setupDrawer();
+//        setupDrawer();
         setupProgressBar();
 
         mHolePresenter.init();
@@ -153,7 +154,6 @@ public class HoleActivity extends BaseActivity implements IHoleUI, NavigationVie
 
     @Override
     public void showErrorToast(String msg) {
-        // TODO: 16/1/30
         Snackbar.make(layoutContent, msg, Snackbar.LENGTH_LONG).show();
     }
 
@@ -187,90 +187,92 @@ public class HoleActivity extends BaseActivity implements IHoleUI, NavigationVie
         return super.onCreateOptionsMenu(menu);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_hole_search) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     private void setupContentView() {
         layoutContent = (ViewGroup) findViewById(R.id.layout_content);
     }
 
-    // TODO: 16/1/31 不要用drawer，删掉
-    private void setupDrawer() {
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-    }
-
-    // TODO: 16/1/31 不要用drawer，删掉
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.nav_ip_gateway) {
-
-        } else if (id == R.id.nav_course_table) {
-
-        } else if (id == R.id.nav_school_life) {
-
-        } else if (id == R.id.nav_my_pku) {
-
-        } else if (id == R.id.nav_hole) {
-            //mPkuHelperPresenter.startHoleUI();
-        } else if (id == R.id.nav_bbs) {
-
-        }
-
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
-
-    // TODO: 16/1/31 不要用drawer
-    @Override
-    public void onBackPressed() {
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
+//    // TODO: 16/1/31 不要用drawer，删掉
+//    private void setupDrawer() {
+//        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+//                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+//        drawer.setDrawerListener(toggle);
+//        toggle.syncState();
+//
+//        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+//        navigationView.setNavigationItemSelectedListener(this);
+//    }
+//
+//    // TODO: 16/1/31 不要用drawer，删掉
+//    @Override
+//    public boolean onNavigationItemSelected(MenuItem item) {
+//        int id = item.getItemId();
+//
+//        if (id == R.id.nav_ip_gateway) {
+//
+//        } else if (id == R.id.nav_course_table) {
+//
+//        } else if (id == R.id.nav_school_life) {
+//
+//        } else if (id == R.id.nav_my_pku) {
+//
+//        } else if (id == R.id.nav_hole) {
+//            //mPkuHelperPresenter.startHoleUI();
+//        } else if (id == R.id.nav_bbs) {
+//
+//        }
+//
+//        drawer.closeDrawer(GravityCompat.START);
+//        return true;
+//    }
+//
+//    // TODO: 16/1/31 不要用drawer
+//    @Override
+//    public void onBackPressed() {
+//        if (drawer.isDrawerOpen(GravityCompat.START)) {
+//            drawer.closeDrawer(GravityCompat.START);
+//        } else {
+//            super.onBackPressed();
+//        }
+//    }
 
     private void setupToolbar(){
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.action_hole_search:
-                        /*
-                        * @todo 设置搜索活动
-                        * */
-                        break;
-                }
-                return false;
-            }
-        });
 
         /*
         * 点按toolBar返回最上方
         * */
 
-        toolbar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                /*
-                * @todo 这里不应该设置getTabAt(0)
-                * */
-
+//        toolbar.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//            Log.v(TAG, "onClick toolbar");
+//                /*
+//                * @todo 这里不应该设置getTabAt(0)
+//                * */
+//
 //                if (tabLayout.getTabAt(0).isSelected())
 //                    listViewMain.smoothScrollToPosition(0);
 //                else
 //                    listViewAttention.smoothScrollToPosition(0);
+//            }
+//        });
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
-        setSupportActionBar(toolbar);
     }
 
     private void setupTabLayout(){
@@ -306,7 +308,7 @@ public class HoleActivity extends BaseActivity implements IHoleUI, NavigationVie
         List<HoleListFragment> fragments = new ArrayList<>();
         fragments.add(HoleListFragment.newInstance(IHoleListUI.POSITION_MAIN).setPresenter(mHolePresenter));
         fragments.add(HoleListFragment.newInstance(IHoleListUI.POSITION_ATTENTION).setPresenter(mHolePresenter));
-        mHolePresenter.setListUI(fragments);
+        mHolePresenter.setListUI(fragments.get(IHoleListUI.POSITION_MAIN), fragments.get(IHoleListUI.POSITION_ATTENTION));
         mHolePagerAdapter = new HolePagerAdapter(getSupportFragmentManager(), fragments);
         viewPager = (ViewPager) findViewById(R.id.vp_hole_content);
         viewPager.setAdapter(mHolePagerAdapter);

@@ -52,7 +52,7 @@ public class AppContext extends Application {
 
         // dev
         // 登陆网关炸了
-        mUserEntity.setToken("70951e84f8a0d48f256a159e1dfd8d56");
+//        mUserEntity.setToken("");
     }
 
     public UserEntity getUserEntity() {

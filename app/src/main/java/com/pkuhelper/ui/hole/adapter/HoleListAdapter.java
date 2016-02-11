@@ -23,6 +23,7 @@ import com.pkuhelper.manager.CalendarManager;
 import com.pkuhelper.manager.ImageManager;
 import com.pkuhelper.model.IPkuHoleMod;
 import com.pkuhelper.model.impl.PkuHoleMod;
+import com.pkuhelper.ui.BaseListAdapter;
 import com.pkuhelper.ui.hole.impl.HoleCommentActivity;
 import com.squareup.picasso.Picasso;
 
@@ -31,20 +32,16 @@ import java.util.ArrayList;
 /**
  * Created by zyxu on 16/1/13.
  */
-public class HoleListAdapter extends BaseAdapter {
+public class HoleListAdapter extends BaseListAdapter<HoleListItemEntity> {
     private static final String TAG = "HoleListAdapter";
 
-    private AppContext mContext;
     private IPkuHoleMod mPkuHoleMod;
     private ImageManager mImageManager;
-    public ArrayList<HoleListItemEntity> allItems;//这里这种做法有问题！不应该设置static
 
     public HoleListAdapter(Context context, ArrayList<HoleListItemEntity> items){
-        mContext = (AppContext) context.getApplicationContext();
+        super(context, items);
         mPkuHoleMod = new PkuHoleMod(mContext);
         mImageManager = new ImageManager(mContext);
-        allItems = new ArrayList<>();
-        allItems.addAll(items);
     }
 
     public void addItems(ArrayList<HoleListItemEntity> items){
@@ -53,21 +50,6 @@ public class HoleListAdapter extends BaseAdapter {
 
     public void addItemsAtStart(ArrayList<HoleListItemEntity> items) {
         allItems.addAll(0, items);
-    }
-
-    @Override
-    public int getCount() {
-        return (allItems.size());
-    }
-
-    @Override
-    public Object getItem(int position) {
-        return allItems.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
     }
 
     @Override

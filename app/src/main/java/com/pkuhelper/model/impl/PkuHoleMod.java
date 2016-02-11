@@ -19,7 +19,8 @@ import com.pkuhelper.model.IPkuHoleMod;
 import java.util.ArrayList;
 
 /**
- * Created by LuoLiangchen on 16/1/9.
+ * Created by Liangchen Luo on 16/1/9.
+ * @author Liangchen Luo
  */
 public class PkuHoleMod implements IPkuHoleMod {
     private static final String TAG = "PkuHoleMod";
@@ -35,11 +36,11 @@ public class PkuHoleMod implements IPkuHoleMod {
         mUserMod = new UserMod(mContext);
     }
 
-    public void updateTimestamp(long timestamp) {
+    private void updateTimestamp(long timestamp) {
         mContext.updateHoleTimestamp(timestamp);
     }
 
-    public long getTimestamp() {
+    private long getTimestamp() {
         return mContext.getHoleTimestamp();
     }
 

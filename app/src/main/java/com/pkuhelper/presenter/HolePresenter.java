@@ -5,10 +5,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.pkuhelper.entity.HoleCommentListItemEntity;
 import com.pkuhelper.model.Callback;
 import com.pkuhelper.model.IPkuHoleMod;
 import com.pkuhelper.model.impl.PkuHoleMod;
 import com.pkuhelper.entity.HoleListItemEntity;
+import com.pkuhelper.ui.BaseListAdapter;
+import com.pkuhelper.ui.hole.IHoleCommentUI;
 import com.pkuhelper.ui.hole.adapter.HoleListAdapter;
 import com.pkuhelper.ui.hole.IHoleListUI;
 import com.pkuhelper.ui.hole.IHolePostUI;
@@ -21,6 +24,7 @@ import java.util.List;
 
 /**
  * Created by zyxu on 16/1/11.
+ * @author Ziyang Xu
  */
 public class HolePresenter implements IHolePresenter {
     private static final String TAG = "HolePresenter";
@@ -29,20 +33,13 @@ public class HolePresenter implements IHolePresenter {
     private IHolePostUI mHolePostUI;
     private IHoleListUI mHoleListMainUI;
     private IHoleListUI mHoleListAttentionUI;
-    private PkuHoleMod mPkuHoleMod;
+    private IHoleCommentUI mHoleCommentUI;
+    private IPkuHoleMod mPkuHoleMod;
     private Context mContext;
-    private int requestPage;
     private int mCurrentPage;
-    private ArrayList<HoleListItemEntity> mods;
-    private ArrayList<HoleListItemEntity> mHoleListItemEntities;
-    private boolean isLoading = false;
-
-    private Callback callbackMain = null;
-    private Callback callbackAttention =null;
 
     public HolePresenter(Context context) {
         mContext = context;
-        mHoleUI = (IHoleUI) context;
         mPkuHoleMod = new PkuHoleMod(context);
 //        callbackMain = new Callback() {
 //            @Override
@@ -73,9 +70,19 @@ public class HolePresenter implements IHolePresenter {
     }
 
     @Override
-    public void setListUI(List<HoleListFragment> uis) {
-        mHoleListMainUI = uis.get(IHoleListUI.POSITION_MAIN);
-        mHoleListAttentionUI = uis.get(IHoleListUI.POSITION_ATTENTION);
+    public void setHoleUI(IHoleUI ui) {
+        mHoleUI = ui;
+    }
+
+    @Override
+    public void setListUI(IHoleListUI mainUI, IHoleListUI attentionUI) {
+        mHoleListMainUI = mainUI;
+        mHoleListAttentionUI = attentionUI;
+    }
+
+    @Override
+    public void setCommentUI(IHoleCommentUI ui) {
+        mHoleCommentUI = ui;
     }
 
     @Override
@@ -89,7 +96,6 @@ public class HolePresenter implements IHolePresenter {
                     Log.v(TAG, "init successful");
                     mHoleUI.hideProgressBarMiddle();
                     mHoleUI.showFloatingActionButton();
-                    mHoleListItemEntities = data;
                     mHoleListMainUI.setupAdapter(data);
                 } else {
                     Log.v(TAG, "init failed with code=" + code);
@@ -184,7 +190,7 @@ public class HolePresenter implements IHolePresenter {
      * 在Entities列表前方加入数据，并更新Adapter
      * @param entities 加入List前方的Item Entities
      */
-    private void addEntitiesToAdapterAtStart(ArrayList<HoleListItemEntity> entities, HoleListAdapter adapter) {
+    private <Entity> void addEntitiesToAdapterAtStart(ArrayList<Entity> entities, BaseListAdapter<Entity> adapter) {
         adapter.addItemsAtStart(entities);
         adapter.notifyDataSetChanged();
     }
@@ -193,7 +199,7 @@ public class HolePresenter implements IHolePresenter {
      * 在Entities列表后方加入数据，并更新Adapter
      * @param entities 加入List后方的Item Entities
      */
-    private void addEntitiesToAdapterAtEnd(ArrayList<HoleListItemEntity> entities, HoleListAdapter adapter) {
+    private <Entity> void addEntitiesToAdapterAtEnd(ArrayList<Entity> entities, BaseListAdapter<Entity> adapter) {
         adapter.addItems(entities);
         adapter.notifyDataSetChanged();
     }
@@ -273,20 +279,24 @@ public class HolePresenter implements IHolePresenter {
     }
 
     public void reply(int pid, String text){
-
-        Callback simpleCallback = new Callback<Void>() {
+        mPkuHoleMod.reply(pid, text, new Callback<Void>() {
             @Override
             public void onFinished(int code, Void data) {
-                Log.d("success code:",""+code);
+                if (code == 0) {
+                    Log.v(TAG, "reply successful");
+                    // TODO: 16/2/2 更新UI
+                } else {
+                    Log.v(TAG, "reply failed with code=" + code);
+//                    mHoleCommentUI.showErrorToast("");
+                }
             }
 
             @Override
             public void onError(String msg) {
-                Log.d("error",msg);
+                Log.v(TAG, "reply failed with Volley error msg=" + msg);
+//                mHoleCommentUI.showErrorToast("");
             }
-        };
-
-        mPkuHoleMod.reply(pid,text,simpleCallback);
+        });
     }
 
     public void search(String keyword){

@@ -8,6 +8,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.pkuhelper.R;
 import com.pkuhelper.presenter.IPkuHelperPresenter;
@@ -15,24 +17,33 @@ import com.pkuhelper.presenter.impl.PkuHelperPresenter;
 import com.pkuhelper.ui.BaseActivity;
 import com.pkuhelper.ui.main.IPkuHelperUI;
 
+import org.w3c.dom.Text;
+
 /**
- * Created by LuoLiangchen on 16/1/14.
+ * Created by Liangchen Luo on 16/1/14, who is enjoying the delicious
+ * dessert made of fruit and yogurt.
+ * @author Liangchen Luo
  */
 public class PkuHelperActivity extends BaseActivity implements IPkuHelperUI, NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = "PkuHelperActivity";
 
     private IPkuHelperPresenter mPkuHelperPresenter;
+
     private Toolbar toolbar;
     private DrawerLayout drawer;
+    private TextView tvUserName;
+    private TextView tvUserDepartment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pkuhelper);
 
-        mPkuHelperPresenter = new PkuHelperPresenter(this);
         setupToolbar();
-        setupView();
+        setupDrawer();
+        mPkuHelperPresenter = new PkuHelperPresenter(this);
+        mPkuHelperPresenter.setPkuHelperUI(this);
+        mPkuHelperPresenter.setupUserInfoInDrawer();
     }
 
     private void setupToolbar() {
@@ -40,7 +51,7 @@ public class PkuHelperActivity extends BaseActivity implements IPkuHelperUI, Nav
         setSupportActionBar(toolbar);
     }
 
-    private void setupView() {
+    private void setupDrawer() {
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -48,7 +59,14 @@ public class PkuHelperActivity extends BaseActivity implements IPkuHelperUI, Nav
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        // 禁用默认的ColorTint，使得icon可以显示出原本的颜色而非被强制转换成灰色
+        // 在XML中给app:itemIconTint设定为@null并没有效果，疑似NavigationView的坑
+        navigationView.setItemIconTintList(null);
         navigationView.setNavigationItemSelectedListener(this);
+
+        View headerLayout = navigationView.getHeaderView(0);
+        tvUserName = (TextView) headerLayout.findViewById(R.id.tv_user_name);
+        tvUserDepartment = (TextView) headerLayout.findViewById(R.id.tv_user_department);
     }
 
     @Override
@@ -90,7 +108,7 @@ public class PkuHelperActivity extends BaseActivity implements IPkuHelperUI, Nav
 
         if (id == R.id.nav_ip_gateway) {
 
-        } else if (id == R.id.nav_course_table) {
+        } else if (id == R.id.nav_syllabus) {
 
         } else if (id == R.id.nav_school_life) {
 
@@ -104,5 +122,15 @@ public class PkuHelperActivity extends BaseActivity implements IPkuHelperUI, Nav
 
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void setUserNameInDrawer(String name) {
+        tvUserName.setText(name);
+    }
+
+    @Override
+    public void setUserDepartmentInDrawer(String department) {
+        tvUserDepartment.setText(department);
     }
 }

@@ -4,7 +4,9 @@ import android.os.Bundle;
 
 import com.pkuhelper.entity.HoleListItemEntity;
 import com.pkuhelper.model.Callback;
+import com.pkuhelper.ui.hole.IHoleCommentUI;
 import com.pkuhelper.ui.hole.IHoleListUI;
+import com.pkuhelper.ui.hole.IHoleUI;
 import com.pkuhelper.ui.hole.impl.HoleListFragment;
 
 import java.io.IOException;
@@ -17,10 +19,23 @@ import java.util.List;
 public interface IHolePresenter {
 
     /**
-     * 配置两个ListView的UI接口
-     * @param uis 一个List，含有树洞主页和关注页的Fragment实例
+     * 配置树洞主Activity的UI接口
+     * @param ui 树洞主页UI
      */
-    void setListUI(List<HoleListFragment> uis);
+    void setHoleUI(IHoleUI ui);
+
+    /**
+     * 配置两个ListView的UI接口
+     * @param mainUI 树洞主页List UI
+     * @param attentionUI 树洞关注页List UI
+     */
+    void setListUI(IHoleListUI mainUI, IHoleListUI attentionUI);
+
+    /**
+     * 配置树洞详情页的UI接口
+     * @param ui 树洞详情页UI
+     */
+    void setCommentUI(IHoleCommentUI ui);
 
     /**
      * 进入树洞时初始化

@@ -19,14 +19,21 @@ import java.util.ArrayList;
 public abstract class BaseListAdapter<Entity> extends BaseAdapter {
     private static final String TAG = "BaseListAdapter";
 
-    protected AppContext mContext;
+    protected Context mContext;
 
     protected ArrayList<Entity> allItems;
 
     public BaseListAdapter(Context context, ArrayList<Entity> items) {
-        mContext = (AppContext) context.getApplicationContext();
+        mContext = context;
         allItems = new ArrayList<>();
         allItems.addAll(items);
+    }
+    public void addItems(ArrayList<Entity> items){
+        allItems.addAll(items);
+    }
+
+    public void addItemsAtStart(ArrayList<Entity> items) {
+        allItems.addAll(0, items);
     }
 
     @Override

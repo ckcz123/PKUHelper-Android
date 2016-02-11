@@ -1,34 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group android:checkableBehavior="single">
+    <group
+        android:id="@+id/group_basic"
+        android:checkableBehavior="single">
         <item
             android:id="@+id/nav_ip_gateway"
-            android:icon="@android:drawable/ic_menu_camera"
+            android:icon="@drawable/ic_drawer_ip_gateway"
             android:title="@string/helper_nav_menu_ip_gateway" />
         <item
-            android:id="@+id/nav_course_table"
-            android:icon="@android:drawable/ic_menu_gallery"
+            android:id="@+id/nav_syllabus"
+            android:icon="@drawable/ic_drawer_syllabus"
             android:title="@string/helper_nav_menu_course_table" />
         <item
             android:id="@+id/nav_school_life"
-            android:icon="@android:drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_drawer_school_life"
             android:title="@string/helper_nav_menu_school_life" />
         <item
             android:id="@+id/nav_my_pku"
-            android:icon="@android:drawable/ic_menu_manage"
+            android:icon="@drawable/ic_drawer_my_pku"
             android:title="@string/helper_nav_menu_my_pku" />
     </group>
 
-    <item android:title="@string/helper_nav_menu_community">
-        <menu>
-            <item
-                android:id="@+id/nav_hole"
-                android:icon="@android:drawable/ic_menu_share"
-                android:title="@string/helper_nav_menu_hole" />
-            <item
-                android:id="@+id/nav_bbs"
-                android:icon="@android:drawable/ic_menu_send"
-                android:title="@string/helper_nav_menu_bbs" />
-        </menu>
-    </item>
+    <group android:id="@+id/group_community">
+        <item
+            android:id="@+id/nav_hole"
+            android:icon="@drawable/ic_drawer_hole"
+            android:title="@string/helper_nav_menu_hole" />
+        <item
+            android:id="@+id/nav_bbs"
+            android:icon="@drawable/ic_drawer_bbs"
+            android:title="@string/helper_nav_menu_bbs" />
+    </group>
+
+    <group android:id="@+id/group_settings">
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_drawer_settings"
+            android:title="@string/helper_nav_menu_settings" />
+    </group>
 </menu>

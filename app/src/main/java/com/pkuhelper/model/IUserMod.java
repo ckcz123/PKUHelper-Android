@@ -6,4 +6,8 @@ package com.pkuhelper.model;
 public interface IUserMod {
 
     String getToken();
+
+    String getUserName();
+
+    String getUserDepartment();
 }

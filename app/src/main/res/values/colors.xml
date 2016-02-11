@@ -4,8 +4,15 @@
     <color name="color_text_default">#442000</color>
     <color name="color_text_record">#482800</color>
 
+    <!-- common -->
     <color name="colorPrimary">#00B9E6</color>
     <color name="colorPrimaryDark">#0094B8</color>
     <color name="colorAccent">#50E3C2</color>
     <color name="colorAccentDark">#20A392</color>
+    <color name="textWhite">#FFFFFF</color>
+    <color name="textPrimary">#212121</color>
+    <color name="textSecondary">#727272</color>
+
+    <!-- pkuhelper -->
+    <color name="bgPkuHelperDrawerUser">#5A000000</color>
 </resources>

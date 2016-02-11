@@ -9,9 +9,10 @@ import com.pkuhelper.manager.ApiManager;
 import com.pkuhelper.model.IUserMod;
 
 /**
- * Created by LuoLiangchen on 16/1/9.
+ * Created by Liangchen Luo on 16/1/9.
+ * @author Liangchen Luo
  */
-public class UserMod implements IUserMod{
+public class UserMod implements IUserMod {
     private static final String TAG = "UserMod";
 
     private AppContext mContext;
@@ -25,7 +26,16 @@ public class UserMod implements IUserMod{
 
     @Override
     public String getToken() {
-//        Log.v(TAG, mContext.getUserEntity().getToken());
         return mContext.getUserEntity().getToken();
+    }
+
+    @Override
+    public String getUserName() {
+        return mContext.getUserEntity().getName();
+    }
+
+    @Override
+    public String getUserDepartment() {
+        return mContext.getUserEntity().getDepartment();
     }
 }
