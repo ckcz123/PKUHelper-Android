@@ -1,31 +1,23 @@
 package com.pkuhelper.ui.hole.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.pkuhelper.AppContext;
 import com.pkuhelper.R;
 import com.pkuhelper.entity.HoleListItemEntity;
-import com.pkuhelper.lib.Constants;
-import com.pkuhelper.lib.MyCalendar;
 import com.pkuhelper.manager.CalendarManager;
 import com.pkuhelper.manager.ImageManager;
 import com.pkuhelper.model.IPkuHoleMod;
 import com.pkuhelper.model.impl.PkuHoleMod;
 import com.pkuhelper.ui.BaseListAdapter;
 import com.pkuhelper.ui.hole.impl.HoleCommentActivity;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -60,7 +52,7 @@ public class HoleListAdapter extends BaseListAdapter<HoleListItemEntity> {
         if (convertView == null) {
             holder = new ViewHolder(position);
 
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.mhole_list_item, parent, false);
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.listitem_hole, parent, false);
             holder.findWidgets(convertView);
 
             //set tag

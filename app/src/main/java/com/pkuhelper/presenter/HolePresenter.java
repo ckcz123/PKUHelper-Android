@@ -37,36 +37,11 @@ public class HolePresenter implements IHolePresenter {
     private IPkuHoleMod mPkuHoleMod;
     private Context mContext;
     private int mCurrentPage;
+    private boolean mIsOnloadingMore;
 
     public HolePresenter(Context context) {
         mContext = context;
         mPkuHoleMod = new PkuHoleMod(context);
-//        callbackMain = new Callback() {
-//            @Override
-//            public void onFinished(int code, Object data) {
-//
-//                if (code == 0) {
-//                    mods = (ArrayList<HoleListItemEntity>) data;
-//                    requestPage++;
-//                    //TO-DO load data
-//                    if (requestPage == 1)
-//                        mHoleUI.firstLoad(mods);
-//                    else
-//                        mHoleUI.moreLoad(mods);
-//                } else {
-//                    Log.v(TAG, "Volley error on callbackMain: code=" + code);
-//                    mHoleUI.error();
-//                }
-//                isLoading = false;
-//            }
-//
-//            @Override
-//            public void onError(String msg) {
-//                isLoading = false;
-//                Log.v(TAG, "Volley error on callbackMain: volley error msg=" + msg);
-//                mHoleUI.error();
-//            }
-//        };
     }
 
     @Override
@@ -89,17 +64,17 @@ public class HolePresenter implements IHolePresenter {
     public void init() {
         mHoleUI.showProgressBarMiddle();
         mCurrentPage = 1;
+        mIsOnloadingMore = false;
         mPkuHoleMod.getHoleList(mCurrentPage, new Callback<ArrayList<HoleListItemEntity>>() {
             @Override
             public void onFinished(int code, ArrayList<HoleListItemEntity> data) {
+                mHoleUI.hideProgressBarMiddle();
                 if (code == 0) {
                     Log.v(TAG, "init successful");
-                    mHoleUI.hideProgressBarMiddle();
                     mHoleUI.showFloatingActionButton();
                     mHoleListMainUI.setupAdapter(data);
                 } else {
                     Log.v(TAG, "init failed with code=" + code);
-                    mHoleUI.hideProgressBarMiddle();
                     mHoleUI.showErrorToast("加载失败", "重试", new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -165,10 +140,13 @@ public class HolePresenter implements IHolePresenter {
 
     @Override
     public void loadMore() {
+        if (mIsOnloadingMore) return;
+        mIsOnloadingMore = true;
         ++mCurrentPage;
         mPkuHoleMod.getHoleList(mCurrentPage, new Callback<ArrayList<HoleListItemEntity>>() {
             @Override
             public void onFinished(int code, ArrayList<HoleListItemEntity> data) {
+                mIsOnloadingMore = false;
                 if (code == 0) {
                     Log.v(TAG, "loadMore successful");
                     addEntitiesToAdapterAtEnd(data, mHoleListMainUI.getAdapter());
@@ -182,6 +160,7 @@ public class HolePresenter implements IHolePresenter {
             public void onError(String msg) {
                 Log.v(TAG, "loadMore failed with Volley error msg=" + msg);
 //                mHoleUI.showErrorToast("");
+                mIsOnloadingMore = false;
             }
         });
     }
@@ -204,54 +183,6 @@ public class HolePresenter implements IHolePresenter {
         adapter.notifyDataSetChanged();
     }
 
-//    public void firstLoad() {
-//
-//        isLoading = true;
-//        requestPage = 0;
-//
-//        mHoleUI.loading();
-//        //request from manager
-//        mPkuHoleMod.getHoleList(requestPage + 1, callbackMain);
-//    }
-//
-//    public void moreLoad() {
-//        Log.d("Presenter Status:",String.valueOf(isLoading));
-//        if (isLoading)
-//            return;
-//        isLoading = true;
-//        mHoleUI.loadingMore();
-//        mPkuHoleMod.getHoleList(requestPage + 1, callbackMain);
-//    }
-//
-//    public void refreshLoad() {
-//        //TO-DO refresh list
-//    }
-//
-//    public void attentionLoad(){
-//
-//        callbackAttention = new Callback() {
-//            @Override
-//            public void onFinished(int code, Object data) {
-//                if (code == 0) {
-//                    mHoleUI.loadAttention((ArrayList<HoleListItemEntity>) data);
-//                    mPkuHoleMod.setupAttentionSet((ArrayList<HoleListItemEntity>) data);
-//                } else {
-//                    Log.v(TAG, "Volley error on callbackAttention: code=" + code);
-//                    mHoleUI.error();
-//                }
-//                isLoading = false;
-//            }
-//
-//            @Override
-//            public void onError(String msg) {
-//                isLoading = false;
-//                Log.v(TAG, "Volley error on callbackAttention: volley error msg=" + msg);
-//                mHoleUI.error();
-//            }
-//        };
-//
-//        mPkuHoleMod.getAttentionList(callbackAttention);
-//    }
 
     public void post(Bundle bundle, Callback callback) throws IOException {
         String type = bundle.getString("type");

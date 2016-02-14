@@ -83,7 +83,7 @@ public class HoleListFragment extends Fragment implements IHoleListUI {
                     int lastItem = firstVisibleItem + visibleItemCount;
                     int itemLeft = 0;
                     if (lastItem >= totalItemCount - itemLeft) {
-//                        mHolePresenter.loadMore();
+                        mHolePresenter.loadMore();
                     }
                 }
             }
