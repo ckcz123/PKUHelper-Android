@@ -28,6 +28,9 @@ public class ApiManager {
     public static String SERVICES = "services";
     public static String APP_NAME = "pkuhelper";
 
+
+
+
     private static RequestQueue mReqQueue;
     private static ApiManager apiManager;
     private AppContext mContext;
@@ -36,6 +39,28 @@ public class ApiManager {
         mContext = (AppContext) context.getApplicationContext();
         mReqQueue = Volley.newRequestQueue(mContext);
     }
+
+    //DEV
+    //MAR 8 ZY
+
+    public static String IPGW_API = "https://its.pku.edu.cn:5428/ipgatewayofpku";
+
+    public void ipgwPost(final ArrayList<Parameter> params, Response.Listener<String> listener, Response.ErrorListener errorListener){
+        String url = IPGW_API;
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, listener, errorListener) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> map = new HashMap<>();
+                for (int i = 0; i < params.size(); ++i) {
+                    map.put(params.get(i).name, params.get(i).value);
+                }
+                return map;
+            }
+        };
+
+        mReqQueue.add(stringRequest);
+    }
+    //END DEV
 
     public synchronized static void newInstance(Context context) {
         if (apiManager == null) {

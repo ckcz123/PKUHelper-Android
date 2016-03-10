@@ -31,7 +31,7 @@ dependencies {
     compile 'com.android.support:design:23.1.1'
     compile 'com.android.support:support-v13:23.1.1'
 
-    compile 'com.umeng.analytics:analytics:latest.integration'
+//    compile 'com.umeng.analytics:analytics:latest.integration'
     compile 'in.srain.cube:ultra-ptr:1.0.11'
 
     compile files('libs/core-3.2.0.jar')
@@ -39,4 +39,6 @@ dependencies {
     compile files('libs/libammsdk.jar')
     compile files('libs/volley.jar')
     compile files('libs/picasso-2.5.2.jar')
+    compile files('libs/umeng-analytics-v5.6.4.jar')
+
 }

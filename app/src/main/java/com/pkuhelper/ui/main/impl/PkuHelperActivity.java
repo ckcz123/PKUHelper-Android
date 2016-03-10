@@ -2,10 +2,12 @@ package com.pkuhelper.ui.main.impl;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +17,7 @@ import com.pkuhelper.R;
 import com.pkuhelper.presenter.IPkuHelperPresenter;
 import com.pkuhelper.presenter.impl.PkuHelperPresenter;
 import com.pkuhelper.ui.BaseActivity;
+import com.pkuhelper.ui.ipgw.impl.IPGWFragment;
 import com.pkuhelper.ui.main.IPkuHelperUI;
 
 import org.w3c.dom.Text;
@@ -44,6 +47,7 @@ public class PkuHelperActivity extends BaseActivity implements IPkuHelperUI, Nav
         mPkuHelperPresenter = new PkuHelperPresenter(this);
         mPkuHelperPresenter.setPkuHelperUI(this);
         mPkuHelperPresenter.setupUserInfoInDrawer();
+
     }
 
     private void setupToolbar() {
@@ -107,6 +111,14 @@ public class PkuHelperActivity extends BaseActivity implements IPkuHelperUI, Nav
         int id = item.getItemId();
 
         if (id == R.id.nav_ip_gateway) {
+
+            //DEV
+            //ZY MAR 9
+            Log.d("fragment","ipgw start");
+            Fragment ipgwFragment = new IPGWFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_main,ipgwFragment).commit();
+
+            //END DEV
 
         } else if (id == R.id.nav_syllabus) {
 
