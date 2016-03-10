@@ -5,7 +5,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.ComposePathEffect;
+import android.graphics.CornerPathEffect;
+import android.graphics.DashPathEffect;
 import android.graphics.Paint;
+import android.graphics.PathEffect;
+import android.graphics.PorterDuff;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -32,14 +37,20 @@ public class DrawView extends View {
         mBitmapCanvas = new Canvas(mBitmap);
         mBitmapCanvas.drawColor(Color.TRANSPARENT);
         mPaint = new Paint();
-        mPaint.setColor(Color.GRAY);
-        mPaint.setStrokeWidth(6);
+        mPaint.setColor(Color.BLACK);
+        mPaint.setStrokeWidth(10);
+
+        PathEffect effect[] = new PathEffect[2];
+        effect[0] = new CornerPathEffect(10);
+        effect[1] = new DashPathEffect(new float[] { 40, 20}, 0);
+
+        mPaint.setPathEffect(new ComposePathEffect(effect[0],effect[1]));
     }
 
 
     private float startX;
     private float startY;
-
+    private boolean hasDrawn = true;
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
@@ -47,19 +58,25 @@ public class DrawView extends View {
         if (canDraw) {
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
-                    startX = event.getX();
-                    startY = event.getY();
+                        startX = event.getX();
+                        startY = event.getY();
+                        hasDrawn = false;
                     break;
                 case MotionEvent.ACTION_MOVE:
                     float stopX = event.getX();
                     float stopY = event.getY();
                     Log.e("DrawView", "onTouchEvent-ACTION_MOVE\nstartX is " + startX +
                             " startY is " + startY + " stopX is " + stopX + " stopY is " + stopY);
-                    mBitmapCanvas.drawLine(startX, startY, stopX, stopY, mPaint);
-                    startX = event.getX();
-                    startY = event.getY();
+                    if (Math.abs(startX-stopX)+Math.abs(startY-stopY)>40) {
+
+                        mBitmapCanvas.drawLine(startX, startY, stopX, stopY, mPaint);
+                        startX = event.getX();
+                        startY = event.getY();
+                        hasDrawn = true;
+                    }
+
                     invalidate();//call onDraw()
-                    break;
+                    //break;
             }
             return true;
         }
@@ -67,12 +84,15 @@ public class DrawView extends View {
             return true;
     }
 
+
+
     @Override
     protected void onDraw(Canvas canvas) {
         if (mBitmap != null) {
             canvas.drawBitmap(mBitmap, 0, 0, mPaint);
         }
     }
+
 
     public void saveBitmap(OutputStream stream) {
         if (mBitmap != null) {
@@ -86,5 +106,10 @@ public class DrawView extends View {
 
     public void changeDrawState(){
         canDraw = !canDraw;
+    }
+
+    public void refreshBitmap(){
+        mBitmapCanvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
+        invalidate();
     }
 }

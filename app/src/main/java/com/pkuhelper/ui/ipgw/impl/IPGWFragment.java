@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
@@ -49,10 +51,22 @@ public class IPGWFragment extends Fragment implements IIPGWUI {
     DrawView drawView;
     ImageButton btnPhone;
     ImageButton btnEarth;
+    Resources r;
 
+    int earthLocation[] = new int[2];
+    int earthHeight;
+    int earthWidth;
+
+    private Bitmap mBitmap = null;
+    private Canvas mBitmapCanvas = null;
 
     IIPGWPresenter mIPGWPresenter;
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        r = getResources();
+    }
 
     @Nullable
     @Override
@@ -114,20 +128,41 @@ public class IPGWFragment extends Fragment implements IIPGWUI {
         btnPhone.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()){
+                Log.d("drawing","On Phone");
+                switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         Log.d("drawing","On Phone action down");
                         drawView.setCanDraw(true);
-                        return false;
-//                    case MotionEvent.ACTION_MOVE:
-//                        Log.d("drawing","On Phone action move");
-//                        drawView.setCanDraw(true);
-//                        return true;
-//                    case MotionEvent.ACTION_UP:
-//                        drawView.setCanDraw(false);
+                        drawView.onTouchEvent(event);
+                        break;
+                    case MotionEvent.ACTION_MOVE:
+                        Log.d("drawing","On Phone action move");
+                        drawView.onTouchEvent(event);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        drawView.setCanDraw(false);
+
+                        float x = event.getX();
+                        float y = event.getY();
+
+
+                        btnEarth.getLocationOnScreen(earthLocation);
+
+                        earthHeight = btnEarth.getHeight();
+                        earthWidth = btnEarth.getWidth();
+
+                        Log.d("earth location", earthLocation[0] + " " + earthLocation[1] + " " + earthHeight + " " + earthWidth);
+                        if (earthLocation[0]<=x
+                                && x< earthLocation[0] +earthHeight
+                                && earthLocation[1]<=y
+                                && y < earthLocation[1]+earthWidth)
+                            mIPGWPresenter.doConnectFree();
+                        else
+                            drawView.refreshBitmap();
+                        break;
                 }
 
-                return false;
+                return true;
             }
         });
 
@@ -154,7 +189,7 @@ public class IPGWFragment extends Fragment implements IIPGWUI {
         btnEarth.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-
+                Log.d("click","On Earth");
                 int aqi = mIPGWPresenter.getAQI();
                 AlertDialog dialog = new AlertDialog.Builder(getContext())
                         .setTitle("空气质量")
@@ -198,7 +233,6 @@ public class IPGWFragment extends Fragment implements IIPGWUI {
     @Override
     public void updateEarthUI(int stage) {
 
-        Resources r = getResources();
         Drawable[] layers = new Drawable[2];
 
         switch (stage){
@@ -227,6 +261,8 @@ public class IPGWFragment extends Fragment implements IIPGWUI {
                 layers[1] = r.getDrawable(R.drawable.earth_dead);
                 break;
         }
+
+
         LayerDrawable layerDrawable = new LayerDrawable(layers);
         btnEarth.setImageDrawable(layerDrawable);
     }
