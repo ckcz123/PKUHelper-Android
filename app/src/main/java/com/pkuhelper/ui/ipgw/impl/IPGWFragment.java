@@ -45,7 +45,7 @@ public class IPGWFragment extends Fragment implements IIPGWUI {
     Button btnFree;
     Button btnPaid;
     Button btnDisconnect;
-    Button btnDisconnectAll;
+    ImageButton btnDisconnectAll;
     TextView tvDebug;
 
     DrawView drawView;
@@ -74,9 +74,9 @@ public class IPGWFragment extends Fragment implements IIPGWUI {
 
 
         Log.d("fragment", "oncreateView");
-        final View view = inflater.inflate(R.layout.fragment_ipgw,container,false);
+        final View view = inflater.inflate(R.layout.fragment_ipgw, container, false);
 
-        mIPGWPresenter = new IPGWPresenter(getContext(),this);
+        mIPGWPresenter = new IPGWPresenter(getContext(), this);
 
         findWidgets(view);
 
@@ -88,55 +88,56 @@ public class IPGWFragment extends Fragment implements IIPGWUI {
     private void findWidgets(View view) {
 
         //BEGIN-DEV
-        btnFree = (Button) view.findViewById(R.id.btn_connect_free);
-        btnPaid = (Button) view.findViewById(R.id.btn_connect_paid);
-        btnDisconnect = (Button) view.findViewById(R.id.btn_disconnect);
-        btnDisconnectAll = (Button) view.findViewById(R.id.btn_disconnect_all);
-        tvDebug = (TextView) view.findViewById(R.id.tv_ipgw_debug);
-
-        btnFree.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                connectFree();
-            }
-        });
-        btnPaid.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                connectPaid();
-            }
-        });
-        btnDisconnect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                disconnect();
-            }
-        });
-        btnDisconnectAll.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                disconnectAll();
-            }
-        });
+//        btnFree = (Button) view.findViewById(R.id.btn_connect_free_dev);
+//        btnPaid = (Button) view.findViewById(R.id.btn_connect_paid_dev);
+//        btnDisconnect = (Button) view.findViewById(R.id.btn_disconnect_dev);
+//        btnDisconnectAll = (Button) view.findViewById(R.id.btn_disconnect_all_dev);
+//        tvDebug = (TextView) view.findViewById(R.id.tv_ipgw_debug_dev);
+//
+//        btnFree.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                connectFree();
+//            }
+//        });
+//        btnPaid.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                connectPaid();
+//            }
+//        });
+//        btnDisconnect.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                disconnect();
+//            }
+//        });
+//        btnDisconnectAll.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                disconnectAll();
+//            }
+//        });
         //END-DEV
 
         drawView = (DrawView) view.findViewById(R.id.drawview_ipgw);
         btnPhone = (ImageButton) view.findViewById(R.id.btn_ipgw_start);
         btnEarth = (ImageButton) view.findViewById(R.id.btn_ipgw_end);
+        btnDisconnectAll = (ImageButton) view.findViewById(R.id.btn_disconnect_all);
 
 
         btnPhone.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                Log.d("drawing","On Phone");
+                Log.d("drawing", "On Phone");
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
-                        Log.d("drawing","On Phone action down");
+                        Log.d("drawing", "On Phone action down");
                         drawView.setCanDraw(true);
                         drawView.onTouchEvent(event);
                         break;
                     case MotionEvent.ACTION_MOVE:
-                        Log.d("drawing","On Phone action move");
+                        Log.d("drawing", "On Phone action move");
                         drawView.onTouchEvent(event);
                         break;
                     case MotionEvent.ACTION_UP:
@@ -152,13 +153,13 @@ public class IPGWFragment extends Fragment implements IIPGWUI {
                         earthWidth = btnEarth.getWidth();
 
                         Log.d("earth location", earthLocation[0] + " " + earthLocation[1] + " " + earthHeight + " " + earthWidth);
-                        if (earthLocation[0]<=x
-                                && x< earthLocation[0] +earthHeight
-                                && earthLocation[1]<=y
-                                && y < earthLocation[1]+earthWidth)
+                        if (earthLocation[0] <= x
+                                && x < earthLocation[0] + earthHeight
+                                && earthLocation[1] <= y
+                                && y < earthLocation[1] + earthWidth)
                             mIPGWPresenter.doConnectFree();
-                        else
-                            drawView.refreshBitmap();
+                        else if (!drawView.isLockded())
+                            clearUpCanvas();
                         break;
                 }
 
@@ -170,8 +171,8 @@ public class IPGWFragment extends Fragment implements IIPGWUI {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
-                Log.d("drawing","On Earth");
-                switch (event.getAction()){
+                Log.d("drawing", "On Earth");
+                switch (event.getAction()) {
                     case MotionEvent.ACTION_UP:
                         drawView.setCanDraw(false);
                         Log.d("drawing", "on earth action up");
@@ -189,15 +190,16 @@ public class IPGWFragment extends Fragment implements IIPGWUI {
         btnEarth.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                Log.d("click","On Earth");
+                Log.d("click", "On Earth");
                 int aqi = mIPGWPresenter.getAQI();
                 AlertDialog dialog = new AlertDialog.Builder(getContext())
                         .setTitle("空气质量")
-                        .setMessage("P大附近的空气质量指数(AQI)为"+aqi +"\n数据来自PM25.in")
+                        .setMessage("P大附近的空气质量指数(AQI)为" + aqi + "\n数据来自PM25.in")
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();}
+                                dialog.dismiss();
+                            }
                         })
                         .create();
                 dialog.show();
@@ -205,29 +207,36 @@ public class IPGWFragment extends Fragment implements IIPGWUI {
                 return true;
             }
         });
+
+        btnDisconnectAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mIPGWPresenter.doDisconnectAll();
+            }
+        });
     }
 
 
-    private void connectFree(){
+    private void connectFree() {
         mIPGWPresenter.doConnectFree();
 
     }
 
-    private void connectPaid(){
+    private void connectPaid() {
         mIPGWPresenter.doConnectPaid();
     }
 
-    private void disconnect(){
+    private void disconnect() {
         mIPGWPresenter.doDisconnect();
     }
 
-    private void disconnectAll(){
+    private void disconnectAll() {
         mIPGWPresenter.doDisconnectAll();
     }
 
     @Override
     public void popSnack(String str) {
-        Snackbar.make(tvDebug,str,Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(btnPhone, str, Snackbar.LENGTH_SHORT).show();
     }
 
     @Override
@@ -235,7 +244,7 @@ public class IPGWFragment extends Fragment implements IIPGWUI {
 
         Drawable[] layers = new Drawable[2];
 
-        switch (stage){
+        switch (stage) {
             case AQIEntity.AQI_0_100:
                 layers[0] = r.getDrawable(R.drawable.earth_healthy);
                 layers[1] = r.getDrawable(R.drawable.aqi_100);
@@ -265,5 +274,20 @@ public class IPGWFragment extends Fragment implements IIPGWUI {
 
         LayerDrawable layerDrawable = new LayerDrawable(layers);
         btnEarth.setImageDrawable(layerDrawable);
+    }
+
+    @Override
+    public void clearUpCanvas() {
+        drawView.refreshBitmap();
+    }
+
+    @Override
+    public void lockCanvas() {
+        drawView.lock();
+    }
+
+    @Override
+    public void unlockCanvas() {
+        drawView.unlock();
     }
 }

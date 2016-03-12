@@ -32,11 +32,20 @@ public class IPGWPresenter implements IIPGWPresenter {
         Callback<String> callback = new Callback<String>() {
             @Override
             public void onFinished(int code, String data) {
-                mIPGWUI.popSnack("免费连接成功");
+                if (code == 0) {
+                    mIPGWUI.lockCanvas();
+                    mIPGWUI.popSnack(data);
+                }
+                else{
+                    mIPGWUI.clearUpCanvas();
+                    mIPGWUI.popSnack("连接失败");
+                }
+
             }
 
             @Override
             public void onError(String msg) {
+                mIPGWUI.clearUpCanvas();
                 mIPGWUI.popSnack("error");
             }
         };
@@ -48,23 +57,37 @@ public class IPGWPresenter implements IIPGWPresenter {
         Callback<String> callback = new Callback<String>() {
             @Override
             public void onFinished(int code, String data) {
-                mIPGWUI.popSnack("收费连接成功");
+                if (code == 0) {
+                    mIPGWUI.lockCanvas();
+                    mIPGWUI.popSnack(data);
+                }
+                else{
+                    mIPGWUI.clearUpCanvas();
+                    mIPGWUI.popSnack("连接失败");
+                }
             }
 
             @Override
             public void onError(String msg) {
+                mIPGWUI.clearUpCanvas();
                 mIPGWUI.popSnack("error");
             }
         };
 
-        mIPGWMod.doConnect(false,callback);
+        mIPGWMod.doConnect(false, callback);
     }
 
     public void doDisconnect(){
         Callback<String> callback = new Callback<String>() {
             @Override
             public void onFinished(int code, String data) {
-                mIPGWUI.popSnack("断开成功");
+                if (code == 0){
+                    mIPGWUI.unlockCanvas();
+                    mIPGWUI.clearUpCanvas();
+                    mIPGWUI.popSnack(data);
+                }
+                else
+                    mIPGWUI.popSnack("断开失败");
             }
 
             @Override
@@ -73,11 +96,29 @@ public class IPGWPresenter implements IIPGWPresenter {
             }
         };
 
-        mIPGWMod.disconnect(callback);
+        mIPGWMod.disconnect(callback,false);
     }
 
     public void doDisconnectAll(){
+        Callback<String> callback = new Callback<String>() {
+            @Override
+            public void onFinished(int code, String data) {
+                if (code == 0) {
+                    mIPGWUI.unlockCanvas();
+                    mIPGWUI.clearUpCanvas();
+                    mIPGWUI.popSnack(data);
+                }
+                else
+                    mIPGWUI.popSnack("断开失败");
+            }
 
+            @Override
+            public void onError(String msg) {
+                mIPGWUI.popSnack("error");
+            }
+        };
+
+        mIPGWMod.disconnect(callback,true);
     }
 
     public void updateAQI(){

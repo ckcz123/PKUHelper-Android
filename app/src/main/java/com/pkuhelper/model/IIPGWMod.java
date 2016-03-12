@@ -17,14 +17,10 @@ public interface IIPGWMod {
     /**
      * 断开连接
      * @param callback 返回
+     * @param isDisconnectAll 是否断开全部连接
      */
-    void disconnect(final Callback<String> callback);
+    void disconnect(final Callback<String> callback, boolean isDisconnectAll);
 
-
-    /**
-     * 断开所有连接
-     */
-    void disconnectAll();
 
     void getAQI(final Callback<AQIEntity> callback);
 }

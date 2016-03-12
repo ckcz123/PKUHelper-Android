@@ -28,6 +28,7 @@ public class DrawView extends View {
     private Bitmap mBitmap = null;
     private Canvas mBitmapCanvas = null;
     private boolean canDraw = false;
+    private boolean isLockded = false;
 
     public DrawView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -54,8 +55,7 @@ public class DrawView extends View {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
-        Log.d("drawing","on canvas");
-        if (canDraw) {
+        if (canDraw&&(!isLockded)) {
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
                         startX = event.getX();
@@ -85,7 +85,6 @@ public class DrawView extends View {
     }
 
 
-
     @Override
     protected void onDraw(Canvas canvas) {
         if (mBitmap != null) {
@@ -111,5 +110,17 @@ public class DrawView extends View {
     public void refreshBitmap(){
         mBitmapCanvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
         invalidate();
+    }
+
+    public void lock(){
+        isLockded = true;
+    }
+
+    public void unlock(){
+        isLockded = false;
+    }
+
+    public boolean isLockded() {
+        return isLockded;
     }
 }

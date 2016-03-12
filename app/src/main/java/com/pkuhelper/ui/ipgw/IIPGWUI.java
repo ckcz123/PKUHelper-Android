@@ -13,4 +13,10 @@ public interface IIPGWUI {
     void popSnack(String str);
 
     void updateEarthUI(int stage);
+
+    void clearUpCanvas();
+
+    void lockCanvas();
+
+    void unlockCanvas();
 }
