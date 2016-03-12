@@ -125,7 +125,6 @@ public class IPGWFragment extends Fragment implements IIPGWUI {
         btnEarth = (ImageButton) view.findViewById(R.id.btn_ipgw_end);
         btnDisconnectAll = (ImageButton) view.findViewById(R.id.btn_disconnect_all);
 
-
         btnPhone.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -283,11 +282,14 @@ public class IPGWFragment extends Fragment implements IIPGWUI {
 
     @Override
     public void lockCanvas() {
+        btnPhone.setImageResource(R.drawable.android_sketch_colored);
         drawView.lock();
+        mIPGWPresenter.updateAQI();
     }
 
     @Override
     public void unlockCanvas() {
+        btnPhone.setImageResource(R.drawable.android_sketch);
         drawView.unlock();
     }
 }

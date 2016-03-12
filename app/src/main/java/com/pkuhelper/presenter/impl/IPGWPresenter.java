@@ -138,7 +138,7 @@ public class IPGWPresenter implements IIPGWPresenter {
 
             @Override
             public void onError(String msg) {
-                mIPGWUI.popSnack("error");
+                mIPGWUI.popSnack("空气质量获取失败");
             }
         };
 
