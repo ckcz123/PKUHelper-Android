@@ -7,8 +7,6 @@
                 android:orientation="vertical"
                 tools:context=".ui.ipgw.impl.IPGWFragment">
 
-
-
     <ImageView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"

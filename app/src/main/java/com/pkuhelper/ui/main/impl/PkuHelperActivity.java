@@ -37,6 +37,13 @@ public class PkuHelperActivity extends BaseActivity implements IPkuHelperUI, Nav
     private TextView tvUserName;
     private TextView tvUserDepartment;
 
+    /*
+    * @todo
+    * DEV
+    * */
+    Fragment ipgwFragment = new IPGWFragment();
+    //END-DEV
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,6 +111,7 @@ public class PkuHelperActivity extends BaseActivity implements IPkuHelperUI, Nav
         return super.onOptionsItemSelected(item);
     }
 
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -112,10 +120,11 @@ public class PkuHelperActivity extends BaseActivity implements IPkuHelperUI, Nav
 
         if (id == R.id.nav_ip_gateway) {
 
-            //DEV
-            //ZY MAR 9
+            /*
+            * @todo
+            * DEV
+            * */
             Log.d("fragment","ipgw start");
-            Fragment ipgwFragment = new IPGWFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_main,ipgwFragment).commit();
 
             //END DEV

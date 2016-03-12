@@ -146,7 +146,10 @@ public class IPGWFragment extends Fragment implements IIPGWUI {
                         float y = event.getY();
 
 
-                        btnEarth.getLocationOnScreen(earthLocation);
+                        //btnEarth.getLocationInWindow(earthLocation);
+
+                        earthLocation[0] = (int)btnEarth.getX();
+                        earthLocation[1] = (int)btnEarth.getY();
 
                         earthHeight = btnEarth.getHeight();
                         earthWidth = btnEarth.getWidth();
