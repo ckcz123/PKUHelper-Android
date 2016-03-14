@@ -1,7 +1,6 @@
 package com.pkuhelper.ui.ipgw.impl;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -12,11 +11,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatDialog;
-import android.support.v7.app.AppCompatDialogFragment;
-import android.telecom.Call;
-import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -24,14 +18,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.pkuhelper.R;
 import com.pkuhelper.entity.AQIEntity;
-import com.pkuhelper.model.Callback;
-import com.pkuhelper.model.IIPGWMod;
-import com.pkuhelper.model.impl.IPGWMod;
 import com.pkuhelper.presenter.IIPGWPresenter;
 import com.pkuhelper.presenter.impl.IPGWPresenter;
 import com.pkuhelper.ui.DrawView;
@@ -44,8 +34,10 @@ public class IPGWFragment extends Fragment implements IIPGWUI {
 
     Button btnFree;
     Button btnPaid;
-    Button btnDisconnect;
+    Button btnDisconnect_dev;
     ImageButton btnDisconnectAll;
+    ImageButton btnDisconnect;
+    ImageButton btnChangeFree;
     TextView tvDebug;
 
     DrawView drawView;
@@ -56,9 +48,6 @@ public class IPGWFragment extends Fragment implements IIPGWUI {
     int earthLocation[] = new int[2];
     int earthHeight;
     int earthWidth;
-
-    private Bitmap mBitmap = null;
-    private Canvas mBitmapCanvas = null;
 
     IIPGWPresenter mIPGWPresenter;
 
@@ -124,6 +113,8 @@ public class IPGWFragment extends Fragment implements IIPGWUI {
         btnPhone = (ImageButton) view.findViewById(R.id.btn_ipgw_start);
         btnEarth = (ImageButton) view.findViewById(R.id.btn_ipgw_end);
         btnDisconnectAll = (ImageButton) view.findViewById(R.id.btn_disconnect_all);
+        btnDisconnect = (ImageButton) view.findViewById(R.id.btn_disconnect);
+        btnChangeFree = (ImageButton) view.findViewById(R.id.btn_change_free);
 
         btnPhone.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -159,8 +150,8 @@ public class IPGWFragment extends Fragment implements IIPGWUI {
                                 && x < earthLocation[0] + earthHeight
                                 && earthLocation[1] <= y
                                 && y < earthLocation[1] + earthWidth)
-                            mIPGWPresenter.doConnectFree();
-                        else if (!drawView.isLockded())
+                            mIPGWPresenter.doConnect();
+                        else if (!drawView.isLocked())
                             clearUpCanvas();
                         break;
                 }
@@ -216,25 +207,22 @@ public class IPGWFragment extends Fragment implements IIPGWUI {
                 mIPGWPresenter.doDisconnectAll();
             }
         });
+
+        btnDisconnect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mIPGWPresenter.doDisconnect();
+            }
+        });
+
+        btnChangeFree.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mIPGWPresenter.changeFreeStatus();
+            }
+        });
     }
 
-
-    private void connectFree() {
-        mIPGWPresenter.doConnectFree();
-
-    }
-
-    private void connectPaid() {
-        mIPGWPresenter.doConnectPaid();
-    }
-
-    private void disconnect() {
-        mIPGWPresenter.doDisconnect();
-    }
-
-    private void disconnectAll() {
-        mIPGWPresenter.doDisconnectAll();
-    }
 
     @Override
     public void popSnack(String str) {
@@ -294,5 +282,15 @@ public class IPGWFragment extends Fragment implements IIPGWUI {
     public void unlockCanvas() {
         btnPhone.setImageResource(R.drawable.android_sketch);
         drawView.unlock();
+    }
+
+    @Override
+    public void changeFreeUI(boolean isFree){
+        if (!isFree){
+            btnChangeFree.setImageResource(R.drawable.ipgw_button_1_colored);
+        }
+        else{
+            btnChangeFree.setImageResource(R.drawable.button_ipgw_change);
+        }
     }
 }

@@ -53,16 +53,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/button_ipgw_disconnectall"
-        android:layout_below="@+id/linearLayout"
+        android:layout_alignBottom="@+id/btn_ipgw_start"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="断开全部连接"
+        android:text="断开全部"
+        android:id="@+id/textView"
         android:layout_below="@+id/btn_disconnect_all"
-        android:layout_alignLeft="@+id/btn_disconnect_all"
-        android:layout_alignStart="@+id/btn_disconnect_all" />
+        android:layout_alignRight="@+id/btn_ipgw_end"
+        android:layout_alignEnd="@+id/btn_ipgw_end" />
 
     <LinearLayout
         android:visibility="gone"
@@ -100,6 +101,44 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/btn_disconnect"
+        android:background="@android:color/transparent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/button_ipgw_disconnectall"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="断开"
+        android:id="@+id/textView2"
+        android:layout_below="@+id/btn_disconnect"
+        android:layout_alignLeft="@+id/textView"
+        android:layout_alignStart="@+id/textView" />
+
+    <ImageButton
+        android:background="@android:color/transparent"
+        android:src="@drawable/button_ipgw_change"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_change_free"
+        android:layout_below="@+id/linearLayout"
+        android:layout_alignRight="@+id/textView"
+        android:layout_alignEnd="@+id/textView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="收费地址"
+        android:id="@+id/textView3"
+        android:layout_alignTop="@+id/btn_ipgw_start"
+        android:layout_alignRight="@+id/btn_change_free"
+        android:layout_alignEnd="@+id/btn_change_free" />
 
 
 </RelativeLayout>

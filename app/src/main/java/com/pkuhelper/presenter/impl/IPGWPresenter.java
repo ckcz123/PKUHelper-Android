@@ -19,7 +19,7 @@ public class IPGWPresenter implements IIPGWPresenter {
     IIPGWMod mIPGWMod;
     IIPGWUI mIPGWUI;
     AQIEntity aqiEntity;
-
+    boolean isFree=true;
 
     public IPGWPresenter(Context context, IIPGWUI ui){
         context = (AppContext) context.getApplicationContext();
@@ -28,7 +28,7 @@ public class IPGWPresenter implements IIPGWPresenter {
     }
 
 
-    public void doConnectFree(){
+    public void doConnect(){
         Callback<String> callback = new Callback<String>() {
             @Override
             public void onFinished(int code, String data) {
@@ -50,32 +50,9 @@ public class IPGWPresenter implements IIPGWPresenter {
             }
         };
 
-        mIPGWMod.doConnect(true, callback);
+        mIPGWMod.doConnect(isFree, callback);
     }
 
-    public void doConnectPaid(){
-        Callback<String> callback = new Callback<String>() {
-            @Override
-            public void onFinished(int code, String data) {
-                if (code == 0) {
-                    mIPGWUI.lockCanvas();
-                    mIPGWUI.popSnack(data);
-                }
-                else{
-                    mIPGWUI.clearUpCanvas();
-                    mIPGWUI.popSnack("连接失败");
-                }
-            }
-
-            @Override
-            public void onError(String msg) {
-                mIPGWUI.clearUpCanvas();
-                mIPGWUI.popSnack("error");
-            }
-        };
-
-        mIPGWMod.doConnect(false, callback);
-    }
 
     public void doDisconnect(){
         Callback<String> callback = new Callback<String>() {
@@ -150,5 +127,11 @@ public class IPGWPresenter implements IIPGWPresenter {
             return 0;
         else
             return aqiEntity.getAQI();
+    }
+
+    @Override
+    public void changeFreeStatus() {
+        isFree = !isFree;
+        mIPGWUI.changeFreeUI(isFree);
     }
 }

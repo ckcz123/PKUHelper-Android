@@ -120,7 +120,7 @@ public class DrawView extends View {
         isLockded = false;
     }
 
-    public boolean isLockded() {
+    public boolean isLocked() {
         return isLockded;
     }
 }

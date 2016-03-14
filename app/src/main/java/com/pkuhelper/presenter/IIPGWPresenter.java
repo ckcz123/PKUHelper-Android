@@ -5,10 +5,10 @@ package com.pkuhelper.presenter;
  */
 public interface IIPGWPresenter {
 
-    void doConnectFree();
-    void doConnectPaid();
+    void doConnect();
     void doDisconnect();
     void doDisconnectAll();
     void updateAQI();
     int getAQI();
+    void changeFreeStatus();
 }

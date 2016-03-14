@@ -19,4 +19,6 @@ public interface IIPGWUI {
     void lockCanvas();
 
     void unlockCanvas();
+
+    void changeFreeUI(boolean isFree);
 }
