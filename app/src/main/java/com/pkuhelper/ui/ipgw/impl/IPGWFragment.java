@@ -31,7 +31,7 @@ import com.pkuhelper.ui.ipgw.IIPGWUI;
  * Created by zyxu on 3/1/16.
  */
 public class IPGWFragment extends Fragment implements IIPGWUI {
-
+    private static final String TAG = "IPGWFragment";
     Button btnFree;
     Button btnPaid;
     Button btnDisconnect_dev;
@@ -282,6 +282,12 @@ public class IPGWFragment extends Fragment implements IIPGWUI {
     public void unlockCanvas() {
         btnPhone.setImageResource(R.drawable.android_sketch);
         drawView.unlock();
+    }
+
+    @Override
+    public boolean isLocked(){
+        Log.d("drawer state", ""+drawView.isLocked());
+        return drawView.isLocked();
     }
 
     @Override

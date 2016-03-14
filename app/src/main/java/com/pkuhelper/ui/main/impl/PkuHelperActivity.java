@@ -1,5 +1,6 @@
 package com.pkuhelper.ui.main.impl;
 
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -13,10 +14,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.pkuhelper.MYPKU;
 import com.pkuhelper.R;
 import com.pkuhelper.presenter.IPkuHelperPresenter;
 import com.pkuhelper.presenter.impl.PkuHelperPresenter;
 import com.pkuhelper.ui.BaseActivity;
+import com.pkuhelper.ui.ipgw.IIPGWUI;
 import com.pkuhelper.ui.ipgw.impl.IPGWFragment;
 import com.pkuhelper.ui.main.IPkuHelperUI;
 
@@ -37,12 +40,8 @@ public class PkuHelperActivity extends BaseActivity implements IPkuHelperUI, Nav
     private TextView tvUserName;
     private TextView tvUserDepartment;
 
-    /*
-    * @todo
-    * DEV
-    * */
-    Fragment ipgwFragment = new IPGWFragment();
-    //END-DEV
+    private Fragment ipgwFragment = new IPGWFragment();
+    private android.app.Fragment mypkuFragment = new MYPKU();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +54,10 @@ public class PkuHelperActivity extends BaseActivity implements IPkuHelperUI, Nav
         mPkuHelperPresenter.setPkuHelperUI(this);
         mPkuHelperPresenter.setupUserInfoInDrawer();
 
+        //DEV
+        getSupportFragmentManager().beginTransaction().add(R.id.fragment_main, ipgwFragment).commit();
+        getFragmentManager().beginTransaction().add(R.id.fragment_main,mypkuFragment).hide(mypkuFragment).commit();
+        //END-DEV
     }
 
     private void setupToolbar() {
@@ -120,20 +123,27 @@ public class PkuHelperActivity extends BaseActivity implements IPkuHelperUI, Nav
 
         if (id == R.id.nav_ip_gateway) {
 
-            /*
+             /*
             * @todo
             * DEV
             * */
-            Log.d("fragment","ipgw start");
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_main,ipgwFragment).commit();
+            Log.d("fragment", "ipgw start");
+            getFragmentManager().beginTransaction().hide(mypkuFragment).commit();
+            getSupportFragmentManager().beginTransaction().show(ipgwFragment).commit();
+
 
             //END DEV
+
 
         } else if (id == R.id.nav_syllabus) {
 
         } else if (id == R.id.nav_school_life) {
 
         } else if (id == R.id.nav_my_pku) {
+            Log.d("fragment", "ipgw start");
+
+            getSupportFragmentManager().beginTransaction().hide(ipgwFragment).commit();
+            getFragmentManager().beginTransaction().show(mypkuFragment).commit();
 
         } else if (id == R.id.nav_hole) {
             mPkuHelperPresenter.startHoleUI();

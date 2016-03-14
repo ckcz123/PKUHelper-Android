@@ -133,5 +133,7 @@ public class IPGWPresenter implements IIPGWPresenter {
     public void changeFreeStatus() {
         isFree = !isFree;
         mIPGWUI.changeFreeUI(isFree);
+        if (mIPGWUI.isLocked())
+            doConnect();
     }
 }

@@ -28,7 +28,7 @@ public class DrawView extends View {
     private Bitmap mBitmap = null;
     private Canvas mBitmapCanvas = null;
     private boolean canDraw = false;
-    private boolean isLockded = false;
+    private boolean isLocked = false;
 
     public DrawView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -55,7 +55,7 @@ public class DrawView extends View {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
-        if (canDraw&&(!isLockded)) {
+        if (canDraw&&(!isLocked)) {
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
                         startX = event.getX();
@@ -113,14 +113,14 @@ public class DrawView extends View {
     }
 
     public void lock(){
-        isLockded = true;
+        isLocked = true;
     }
 
     public void unlock(){
-        isLockded = false;
+        isLocked = false;
     }
 
     public boolean isLocked() {
-        return isLockded;
+        return isLocked;
     }
 }
