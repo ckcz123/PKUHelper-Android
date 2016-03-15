@@ -50,6 +50,8 @@ public class AppContext extends Application {
         mUserEntity = gson.fromJson(Editor.getString(this, "mUserEntity"), UserEntity.class);
         if (mUserEntity == null) mUserEntity = new UserEntity();
 
+
+        Log.d("mUserMod", mUserEntity.getDepartment());
         // dev
         // 登陆网关炸了
 //        mUserEntity.setToken("");

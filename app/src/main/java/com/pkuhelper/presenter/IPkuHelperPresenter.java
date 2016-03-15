@@ -23,4 +23,8 @@ public interface IPkuHelperPresenter {
      */
     void startHoleUI();
 
+    /**
+     * 启动BBS Activity
+     */
+    void startBBSUI();
 }

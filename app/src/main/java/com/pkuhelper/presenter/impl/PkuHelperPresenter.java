@@ -2,7 +2,9 @@ package com.pkuhelper.presenter.impl;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
+import com.pkuhelper.bbs.BBSActivity;
 import com.pkuhelper.model.IUserMod;
 import com.pkuhelper.model.impl.UserMod;
 import com.pkuhelper.presenter.IPkuHelperPresenter;
@@ -32,6 +34,10 @@ public class PkuHelperPresenter implements IPkuHelperPresenter {
 
     @Override
     public void setupUserInfoInDrawer() {
+
+
+        Log.d("mUserMod", mUserMod.getUserName());
+
         mPkuHelperUI.setUserNameInDrawer(mUserMod.getUserName());
         mPkuHelperUI.setUserDepartmentInDrawer(mUserMod.getUserDepartment());
     }
@@ -39,6 +45,12 @@ public class PkuHelperPresenter implements IPkuHelperPresenter {
     @Override
     public void startHoleUI() {
         Intent intent = new Intent(mContext, HoleActivity.class);
+        mContext.startActivity(intent);
+    }
+
+    @Override
+    public void startBBSUI(){
+        Intent intent = new Intent(mContext, BBSActivity.class);
         mContext.startActivity(intent);
     }
 }

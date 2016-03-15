@@ -1,6 +1,5 @@
 package com.pkuhelper.ui.main.impl;
 
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -22,6 +21,8 @@ import com.pkuhelper.ui.BaseActivity;
 import com.pkuhelper.ui.ipgw.IIPGWUI;
 import com.pkuhelper.ui.ipgw.impl.IPGWFragment;
 import com.pkuhelper.ui.main.IPkuHelperUI;
+import com.pkuhelper.ui.mypku.MyPkuFragment;
+import com.pkuhelper.ui.schoolLife.SchoolLifeFragment;
 
 import org.w3c.dom.Text;
 
@@ -41,7 +42,8 @@ public class PkuHelperActivity extends BaseActivity implements IPkuHelperUI, Nav
     private TextView tvUserDepartment;
 
     private Fragment ipgwFragment = new IPGWFragment();
-    private android.app.Fragment mypkuFragment = new MYPKU();
+    private Fragment mypkuFragment = new MyPkuFragment();
+    private Fragment schoolLifeFragment = new SchoolLifeFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +57,21 @@ public class PkuHelperActivity extends BaseActivity implements IPkuHelperUI, Nav
         mPkuHelperPresenter.setupUserInfoInDrawer();
 
         //DEV
-        getSupportFragmentManager().beginTransaction().add(R.id.fragment_main, ipgwFragment).commit();
-        getFragmentManager().beginTransaction().add(R.id.fragment_main,mypkuFragment).hide(mypkuFragment).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.fragment_main, ipgwFragment)
+                .add(R.id.fragment_main,mypkuFragment)
+                .add(R.id.fragment_main,schoolLifeFragment).commit();
+        hideAllFragments();
+
+        getSupportFragmentManager().beginTransaction().show(ipgwFragment).commit();
         //END-DEV
+    }
+
+    private void hideAllFragments() {
+        getSupportFragmentManager().beginTransaction()
+                .hide(ipgwFragment)
+                .hide(mypkuFragment)
+                .hide(schoolLifeFragment)
+                .commit();
     }
 
     private void setupToolbar() {
@@ -128,27 +142,27 @@ public class PkuHelperActivity extends BaseActivity implements IPkuHelperUI, Nav
             * DEV
             * */
             Log.d("fragment", "ipgw start");
-            getFragmentManager().beginTransaction().hide(mypkuFragment).commit();
+            hideAllFragments();
             getSupportFragmentManager().beginTransaction().show(ipgwFragment).commit();
-
 
             //END DEV
 
 
         } else if (id == R.id.nav_syllabus) {
-
+            hideAllFragments();
         } else if (id == R.id.nav_school_life) {
-
+            hideAllFragments();
+            getSupportFragmentManager().beginTransaction().show(schoolLifeFragment).commit();
         } else if (id == R.id.nav_my_pku) {
             Log.d("fragment", "ipgw start");
-
-            getSupportFragmentManager().beginTransaction().hide(ipgwFragment).commit();
-            getFragmentManager().beginTransaction().show(mypkuFragment).commit();
-
+            hideAllFragments();
+            getSupportFragmentManager().beginTransaction().show(mypkuFragment).commit();
         } else if (id == R.id.nav_hole) {
+            hideAllFragments();
             mPkuHelperPresenter.startHoleUI();
         } else if (id == R.id.nav_bbs) {
-
+            hideAllFragments();
+            mPkuHelperPresenter.startBBSUI();
         }
 
         drawer.closeDrawer(GravityCompat.START);

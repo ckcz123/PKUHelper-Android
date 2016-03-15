@@ -100,11 +100,14 @@ public class MYPKU extends Fragment {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		try {
+
+
+        try {
 			setView(getList(communities, string), R.id.mypku_community, "P大社区");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
 		setOthers(Constants.features);
 		Lib.setBadgeView();
 		return rootView;

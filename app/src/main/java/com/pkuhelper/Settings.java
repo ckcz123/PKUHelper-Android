@@ -32,6 +32,7 @@ import com.pkuhelper.lib.ViewSetting;
 import com.pkuhelper.lib.view.CustomToast;
 import com.pkuhelper.lib.webconnection.Parameters;
 import com.pkuhelper.subactivity.SubActivity;
+import com.pkuhelper.ui.main.impl.PkuHelperActivity;
 
 import org.json.JSONObject;
 
@@ -52,6 +53,25 @@ public class Settings extends Fragment {
 		setName();
 		setOthers();
 		Lib.setBadgeView();
+
+
+
+		/*
+		* @TODO
+		* @DEV
+		* */
+        settingView.findViewById(R.id.settings_table_name)
+                .setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        Intent intent = new Intent(getActivity(), PkuHelperActivity.class);
+                        startActivity(intent);
+                        return true;
+                    }
+                });
+        //END-DEV
+
+
 		return rootView;
 	}
 
@@ -69,32 +89,35 @@ public class Settings extends Fragment {
 	}
 
 	public static void setOthers() {
+
+
+
 		ViewSetting.setOnClickListener(settingView, R.id.settings_table_name, new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (!Constants.isLogin()) {
-					IAAA.showLoginView();
-					return;
-				}
-				String message = "";
-				message += "姓名：    " + Constants.name + "\n";
-				message += "学号：    " + Constants.username + "\n";
-				message += "性别：    " + Constants.sex + "\n";
-				message += "院系：    " + Constants.major + "\n";
-				//  message+="User-token: "+Constants.user_token+"\n";
-				new AlertDialog.Builder(PKUHelper.pkuhelper).setTitle("详细信息").setCancelable(true)
-						.setMessage(message).setPositiveButton("确定", null)
-						.setNegativeButton("注销", new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								Constants.reset(PKUHelper.pkuhelper);
-								CustomToast.showSuccessToast(PKUHelper.pkuhelper, "注销成功");
-								setName();
-								IAAA.showLoginView();
-							}
-						}).show();
-			}
-		});
+            @Override
+            public void onClick(View v) {
+                if (!Constants.isLogin()) {
+                    IAAA.showLoginView();
+                    return;
+                }
+                String message = "";
+                message += "姓名：    " + Constants.name + "\n";
+                message += "学号：    " + Constants.username + "\n";
+                message += "性别：    " + Constants.sex + "\n";
+                message += "院系：    " + Constants.major + "\n";
+                //  message+="User-token: "+Constants.user_token+"\n";
+                new AlertDialog.Builder(PKUHelper.pkuhelper).setTitle("详细信息").setCancelable(true)
+                        .setMessage(message).setPositiveButton("确定", null)
+                        .setNegativeButton("注销", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Constants.reset(PKUHelper.pkuhelper);
+                                CustomToast.showSuccessToast(PKUHelper.pkuhelper, "注销成功");
+                                setName();
+                                IAAA.showLoginView();
+                            }
+                        }).show();
+            }
+        });
 
 		ViewSetting.setOnClickListener(settingView, R.id.settings_gesture, new View.OnClickListener() {
 
