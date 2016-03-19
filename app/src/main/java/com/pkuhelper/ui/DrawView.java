@@ -12,6 +12,7 @@ import android.graphics.Paint;
 import android.graphics.PathEffect;
 import android.graphics.PorterDuff;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -24,17 +25,35 @@ import java.io.OutputStream;
  * Created by zyxu on 3/9/16.
  */
 public class DrawView extends View {
+    final int DELAY_PIXEL = 0;
     private Paint mPaint = null;
     private Bitmap mBitmap = null;
     private Canvas mBitmapCanvas = null;
     private boolean canDraw = false;
     private boolean isLocked = false;
+    private int offsetX;
+    private int offsetY;
 
     public DrawView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
+    }
 
-        mBitmap = Bitmap.createBitmap(2000, 2000, Bitmap.Config.ARGB_8888);
+
+    private float startX;
+    private float startY;
+    private boolean hasDrawn = true;
+
+    public void updateOffset(int offsetX, int offsetY){
+        Log.d("offset",offsetX+" "+offsetY);
+        this.offsetX = offsetX;
+        this.offsetY = offsetY;
+    }
+
+    public void setUpBitmap(int width, int height){
+
+        Log.d("width+height:",width+" "+height);
+        mBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ALPHA_8);
         mBitmapCanvas = new Canvas(mBitmap);
         mBitmapCanvas.drawColor(Color.TRANSPARENT);
         mPaint = new Paint();
@@ -48,30 +67,26 @@ public class DrawView extends View {
         mPaint.setPathEffect(new ComposePathEffect(effect[0],effect[1]));
     }
 
-
-    private float startX;
-    private float startY;
-    private boolean hasDrawn = true;
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
         if (canDraw&&(!isLocked)) {
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
-                        startX = event.getX();
-                        startY = event.getY();
+                        startX = event.getX()+offsetX;
+                        startY = event.getY()+offsetY;
                         hasDrawn = false;
                     break;
                 case MotionEvent.ACTION_MOVE:
-                    float stopX = event.getX();
-                    float stopY = event.getY();
+                    float stopX = event.getX()+offsetX;
+                    float stopY = event.getY()+offsetY;
                     Log.e("DrawView", "onTouchEvent-ACTION_MOVE\nstartX is " + startX +
                             " startY is " + startY + " stopX is " + stopX + " stopY is " + stopY);
-                    if (Math.abs(startX-stopX)+Math.abs(startY-stopY)>40) {
+                    if ((Math.abs(startX - stopX) + Math.abs(startY - stopY)) > DELAY_PIXEL) {
 
                         mBitmapCanvas.drawLine(startX, startY, stopX, stopY, mPaint);
-                        startX = event.getX();
-                        startY = event.getY();
+                        startX = event.getX()+offsetX;
+                        startY = event.getY()+offsetY;
                         hasDrawn = true;
                     }
 
@@ -123,4 +138,5 @@ public class DrawView extends View {
     public boolean isLocked() {
         return isLocked;
     }
+
 }

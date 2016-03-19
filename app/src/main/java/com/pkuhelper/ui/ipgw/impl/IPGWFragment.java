@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -68,11 +69,11 @@ public class IPGWFragment extends Fragment implements IIPGWUI {
         mIPGWPresenter = new IPGWPresenter(getContext(), this);
 
         findWidgets(view);
-
         mIPGWPresenter.updateAQI();
 
         return view;
     }
+
 
     private void findWidgets(View view) {
 
@@ -116,10 +117,14 @@ public class IPGWFragment extends Fragment implements IIPGWUI {
         btnDisconnect = (ImageButton) view.findViewById(R.id.btn_disconnect);
         btnChangeFree = (ImageButton) view.findViewById(R.id.btn_change_free);
 
+        setupDrawView(drawView);
+
+
         btnPhone.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 Log.d("drawing", "On Phone");
+                updateDrawViewOffset(drawView);
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         Log.d("drawing", "On Phone action down");
@@ -286,7 +291,7 @@ public class IPGWFragment extends Fragment implements IIPGWUI {
 
     @Override
     public boolean isLocked(){
-        Log.d("drawer state", ""+drawView.isLocked());
+        Log.d("drawer state", "" + drawView.isLocked());
         return drawView.isLocked();
     }
 
@@ -298,5 +303,21 @@ public class IPGWFragment extends Fragment implements IIPGWUI {
         else{
             btnChangeFree.setImageResource(R.drawable.button_ipgw_change);
         }
+    }
+
+    public void setupDrawView(DrawView drawView) {
+
+        DisplayMetrics dm = new DisplayMetrics();
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
+        int width = dm.widthPixels;
+        int height = dm.heightPixels;
+
+        drawView.setUpBitmap(width, height);
+    }
+
+    public  void updateDrawViewOffset(DrawView drawview){
+        int phoneX = (int) btnPhone.getX();
+        int phoneY = (int) btnPhone.getY();
+        drawView.updateOffset(phoneX, phoneY);
     }
 }

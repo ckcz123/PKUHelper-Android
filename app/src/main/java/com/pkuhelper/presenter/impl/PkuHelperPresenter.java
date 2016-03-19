@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import com.pkuhelper.AppContext;
 import com.pkuhelper.bbs.BBSActivity;
 import com.pkuhelper.model.IUserMod;
 import com.pkuhelper.model.impl.UserMod;
@@ -21,10 +22,14 @@ public class PkuHelperPresenter implements IPkuHelperPresenter {
     private IPkuHelperUI mPkuHelperUI;
     private IUserMod mUserMod;
     private Context mContext;
+    private AppContext mAppContext;
 
     public PkuHelperPresenter(Context context) {
         mContext = context;
         mUserMod = new UserMod(context);
+
+        mAppContext = (AppContext) context.getApplicationContext();
+        mAppContext.updateUserEntity();
     }
 
     @Override
