@@ -33,6 +33,8 @@ import org.w3c.dom.Text;
  * @author Liangchen Luo
  */
 public class PkuHelperActivity extends BaseActivity implements IPkuHelperUI, NavigationView.OnNavigationItemSelectedListener {
+
+    public static PkuHelperActivity pkuHelperActivity;
     private static final String TAG = "PkuHelperActivity";
 
     private IPkuHelperPresenter mPkuHelperPresenter;
@@ -52,6 +54,7 @@ public class PkuHelperActivity extends BaseActivity implements IPkuHelperUI, Nav
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pkuhelper);
 
+        pkuHelperActivity = this;
         setupToolbar();
         setupDrawer();
         mPkuHelperPresenter = new PkuHelperPresenter(this);
@@ -67,6 +70,7 @@ public class PkuHelperActivity extends BaseActivity implements IPkuHelperUI, Nav
         hideAllFragments();
 
         getSupportFragmentManager().beginTransaction().show(ipgwFragment).commit();
+
         //END-DEV
     }
 
@@ -168,7 +172,7 @@ public class PkuHelperActivity extends BaseActivity implements IPkuHelperUI, Nav
         } else if (id == R.id.nav_bbs) {
             hideAllFragments();
             mPkuHelperPresenter.startBBSUI();
-        } else if (id == R.id.group_settings){
+        } else if (id == R.id.nav_settings){
             hideAllFragments();
             getSupportFragmentManager().beginTransaction().show(settingFragment).commit();
         }

@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,7 +91,15 @@ public class Settings extends Fragment {
 
 	public static void setOthers() {
 
-
+		//TODO MAR 27
+		ViewSetting.setSwitchChecked(settingView, R.id.settings_switch_beta, Editor.getBoolean(PKUHelper.pkuhelper, "beta_version", false));
+		ViewSetting.setSwitchOnCheckChangeListener(settingView, R.id.settings_switch_beta, new CompoundButton.OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				Editor.putBoolean(PKUHelper.pkuhelper, "beta_version", isChecked);
+			}
+		});
+		//DEV
 
 		ViewSetting.setOnClickListener(settingView, R.id.settings_table_name, new View.OnClickListener() {
             @Override
@@ -148,6 +157,10 @@ public class Settings extends Fragment {
 
 			@Override
 			public void onClick(View v) {
+
+				//DEBUG
+				Log.d("setting:","onclick");
+
 				Intent intent = new Intent(PKUHelper.pkuhelper, SubActivity.class);
 				intent.putExtra("type", Constants.SUBACTIVITY_TYPE_IPGW_SET);
 				PKUHelper.pkuhelper.startActivity(intent);

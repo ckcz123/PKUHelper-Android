@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
@@ -28,6 +29,7 @@ import java.util.ArrayList;
 public class BBSActivity extends BaseActivity {
 	public static BBSActivity bbsActivity;
 	public CustomViewPager mViewPager;
+	private Toolbar toolbar;
 
 	Handler handler = new Handler(new Handler.Callback() {
 		public boolean handleMessage(Message msg) {
@@ -42,6 +44,10 @@ public class BBSActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.bbs_main);
+
+		//material design update Mar27
+		setupToolbar();
+
 		bbsActivity = this;
 		mViewPager = (CustomViewPager) findViewById(R.id.bbspager);
 		mViewPager.setAdapter(new FragmentPagerAdapter(getFragmentManager()) {
@@ -74,6 +80,17 @@ public class BBSActivity extends BaseActivity {
 		Userinfo.load();
 		TopFragment.tops = new ArrayList<ThreadInfo>();
 		clickTop(null);
+	}
+	private void setupToolbar(){
+		toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+		setSupportActionBar(toolbar);
+		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
 	}
 
 	private void resetAllTab() {

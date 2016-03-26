@@ -37,6 +37,7 @@ import com.pkuhelper.noticecenter.NCActivity;
 import com.pkuhelper.pkuhole.HoleActivity;
 import com.pkuhelper.qrcode.QRCodeActivity;
 import com.pkuhelper.subactivity.SubActivity;
+import com.pkuhelper.ui.main.impl.PkuHelperActivity;
 
 public class PKUHelper extends BaseActivity {
 
@@ -89,37 +90,46 @@ public class PKUHelper extends BaseActivity {
 		mViewPager = (CustomViewPager) findViewById(R.id.tabpager);
 		mViewPager.setAdapter(new FragmentPagerAdapter(getFragmentManager()) {
 
-			@Override
-			public int getCount() {
-				return 4;
-			}
+            @Override
+            public int getCount() {
+                return 4;
+            }
 
-			@Override
-			public Fragment getItem(int position) {
-				if (position == 0) {
-					if (Editor.getBoolean(PKUHelper.this, "use_shake"))
-						return Fragment.instantiate(PKUHelper.this, "com.pkuhelper.IPGW_shake", null);
-					return Fragment.instantiate(PKUHelper.this, "com.pkuhelper.IPGW", null);
-				} else if (position == 1)
-					return Fragment.instantiate(PKUHelper.this, "com.pkuhelper.Course", null);
-				else if (position == 2)
-					return Fragment.instantiate(PKUHelper.this, "com.pkuhelper.MYPKU", null);
-				else return Fragment.instantiate(PKUHelper.this, "com.pkuhelper.Settings", null);
-			}
-		});
+            @Override
+            public Fragment getItem(int position) {
+                if (position == 0) {
+                    if (Editor.getBoolean(PKUHelper.this, "use_shake"))
+                        return Fragment.instantiate(PKUHelper.this, "com.pkuhelper.IPGW_shake", null);
+                    return Fragment.instantiate(PKUHelper.this, "com.pkuhelper.IPGW", null);
+                } else if (position == 1)
+                    return Fragment.instantiate(PKUHelper.this, "com.pkuhelper.Course", null);
+                else if (position == 2)
+                    return Fragment.instantiate(PKUHelper.this, "com.pkuhelper.MYPKU", null);
+                else return Fragment.instantiate(PKUHelper.this, "com.pkuhelper.Settings", null);
+            }
+        });
 
 		mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-			@Override
-			public void onPageSelected(int position) {
-				if (position == 0)
-					clickIPGW(null);
-				else if (position == 1) clickCourse(null);
-				else if (position == 2) clickMYPKU(null);
-				else if (position == 3) clickSettings(null);
-			}
-		});
+            @Override
+            public void onPageSelected(int position) {
+                if (position == 0)
+                    clickIPGW(null);
+                else if (position == 1) clickCourse(null);
+                else if (position == 2) clickMYPKU(null);
+                else if (position == 3) clickSettings(null);
+            }
+        });
 		init();
+
+
+
+        //TODO MAR 27
+        //DEV
+        if (Editor.getBoolean(PKUHelper.pkuhelper, "beta_version", false))
+            startActivity(new Intent(this, PkuHelperActivity.class));
+        //dev
 	}
+
 
 	private void setupToolbar(){
 		toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -372,7 +382,13 @@ public class PKUHelper extends BaseActivity {
 		if (sensorManager != null) {// 注册监听器
 			sensorManager.registerListener(sensorEventListener, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
 		}
-	}
+
+        //TODO: 3/27/16
+        //@DEV
+        if (Editor.getBoolean(PKUHelper.pkuhelper, "beta_version", false))
+            finish();
+        //@DEV
+    }
 
 	@Override
 	protected void onPause() {
