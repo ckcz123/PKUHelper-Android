@@ -44,7 +44,7 @@ public class DeanCourseActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.customcourse_listview);
-		getActionBar().setTitle("修改教务课程地点");
+		setTitle("修改教务课程地点");
 		getList();
 	}
 

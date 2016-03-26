@@ -103,7 +103,7 @@ public class LostFoundActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		getActionBar().setTitle("失物招领");
+		setTitle("失物招领");
 		setContentView(R.layout.lf_listview);
 
 		swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.lostfound_swipeRefreshLayout);

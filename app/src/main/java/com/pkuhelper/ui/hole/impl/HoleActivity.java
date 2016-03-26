@@ -61,7 +61,7 @@ public class HoleActivity extends BaseActivity implements IHoleUI {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hole);
-
+        setTitle("P大树洞");
         mHolePresenter = new HolePresenter(this);
         mHolePresenter.setHoleUI(this);
 

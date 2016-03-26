@@ -1,4 +1,4 @@
-package com.pkuhelper;
+package com.pkuhelper.ui;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -9,7 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +20,10 @@ import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 
+import com.pkuhelper.IAAA;
+import com.pkuhelper.PE;
+import com.pkuhelper.PKUHelper;
+import com.pkuhelper.R;
 import com.pkuhelper.chat.ChatActivity;
 import com.pkuhelper.gesture.GestureActivity;
 import com.pkuhelper.lib.Constants;
@@ -187,13 +191,13 @@ public class Settings extends Fragment {
 					public void onClick(DialogInterface dialog, int which) {
 						Uri uri = Uri.parse(Constants.domain + "/applications/pkuhelper/getandroid.php");
 						try {
-							DownloadManager.Request request = new Request(uri);
+							Request request = new Request(uri);
 							request.setTitle("正在下载PKU Helper...");
 							File file = MyFile.getFile(PKUHelper.pkuhelper, null, "PKUHelper.apk");
 							if (file.exists()) file.delete();
 							request.setDestinationUri(Uri.fromFile(file));
 							request.setDescription("文件保存在" + file.getAbsolutePath());
-							request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+							request.setNotificationVisibility(Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
 							request.setMimeType("application/vnd.android.package-archive");
 							request.allowScanningByMediaScanner();
 							DownloadManager downloadManager = (DownloadManager) PKUHelper.pkuhelper.getSystemService(Context.DOWNLOAD_SERVICE);
@@ -269,13 +273,13 @@ public class Settings extends Fragment {
 					public void onClick(DialogInterface dialog, int which) {
 						Uri uri = Uri.parse(Constants.domain + "/applications/pkuhelper/getandroid.php");
 						try {
-							DownloadManager.Request request = new Request(uri);
+							Request request = new Request(uri);
 							request.setTitle("正在下载PKU Helper...");
 							File file = MyFile.getFile(PKUHelper.pkuhelper, null, "PKUHelper.apk");
 							if (file.exists()) file.delete();
 							request.setDestinationUri(Uri.fromFile(file));
 							request.setDescription("文件保存在" + file.getAbsolutePath());
-							request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+							request.setNotificationVisibility(Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
 							request.setMimeType("application/vnd.android.package-archive");
 							request.allowScanningByMediaScanner();
 							DownloadManager downloadManager = (DownloadManager) PKUHelper.pkuhelper.getSystemService(Context.DOWNLOAD_SERVICE);

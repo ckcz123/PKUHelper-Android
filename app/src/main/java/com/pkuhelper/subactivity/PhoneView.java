@@ -45,7 +45,7 @@ public class PhoneView {
 
 	public PhoneView showPhoneView() {
 		subActivity.setContentView(R.layout.subactivity_phone_view);
-		subActivity.getActionBar().setTitle("常用电话");
+		subActivity.setTitle("常用电话");
 		lists = new ArrayList<HashMap<String, String>>(phones);
 		final ListView listView = (ListView) subActivity.findViewById(R.id.subactivity_phone_list);
 		listView.setAdapter(new SimpleAdapter(subActivity, lists,

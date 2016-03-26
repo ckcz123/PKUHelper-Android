@@ -79,7 +79,7 @@ public class HoleActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		//holeActivity=this;
-		getActionBar().setTitle("P大树洞");
+		setTitle("P大树洞");
 
 		mediaPlayer = new MediaPlayer();
 

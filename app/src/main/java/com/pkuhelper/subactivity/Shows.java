@@ -55,7 +55,7 @@ public class Shows {
 	@SuppressWarnings("unchecked")
 	@SuppressLint("InflateParams")
 	public Shows getShows() {
-		subActivity.getActionBar().setTitle("百讲演出");
+		subActivity.setTitle("百讲演出");
 		subActivity.setContentView(R.layout.subactivity_listview);
 		subActivity.findViewById(R.id.subactivity_swipeRefreshLayout)
 				.setBackgroundColor(Color.parseColor("#feb772"));
@@ -228,7 +228,7 @@ public class Shows {
 	@SuppressWarnings("unchecked")
 	public Shows getHtml(String title, String url) {
 		subActivity.setContentView(R.layout.subactivity_webview);
-		subActivity.getActionBar().setTitle(title);
+		subActivity.setTitle(title);
 		subActivity.webView =
 				(WebView) subActivity.findViewById(R.id.subactivity_webview);
 		subActivity.webView.setVerticalScrollBarEnabled(false);
@@ -290,7 +290,7 @@ public class Shows {
 					+ "<br>此网页由PKU Helper经过了摘要提取，如需访问原网页请点击<a href='"
 					+ subActivity.url + "' target='_blank'>这里</a><br><br></body></html>";
 
-			subActivity.getActionBar().setTitle(tt.text());
+			subActivity.setTitle(tt.text());
 
 			return realHtml;
 

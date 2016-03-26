@@ -20,8 +20,8 @@
 
 
     <ImageButton
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:scaleType="fitCenter"
         android:id="@+id/btn_ipgw_start"
         android:src="@drawable/android_sketch"
@@ -34,8 +34,8 @@
         android:layout_marginTop="32dp" />
 
     <ImageButton
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:id="@+id/btn_ipgw_end"
         android:src="@drawable/earth_healthy"
         android:scaleType="fitCenter"
@@ -54,8 +54,8 @@
         android:layout_height="wrap_content"
         android:src="@drawable/button_ipgw_disconnectall"
         android:layout_alignBottom="@+id/btn_ipgw_start"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignLeft="@+id/btn_disconnect"
+        android:layout_alignStart="@+id/btn_disconnect" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -127,9 +127,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btn_change_free"
-        android:layout_below="@+id/linearLayout"
-        android:layout_alignRight="@+id/textView"
-        android:layout_alignEnd="@+id/textView" />
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/textView"
+        android:layout_toStartOf="@+id/textView" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -137,8 +137,8 @@
         android:text="收费地址"
         android:id="@+id/textView3"
         android:layout_alignTop="@+id/btn_ipgw_start"
-        android:layout_alignRight="@+id/btn_change_free"
-        android:layout_alignEnd="@+id/btn_change_free" />
+        android:layout_toLeftOf="@+id/textView"
+        android:layout_toStartOf="@+id/textView" />
 
 
 </RelativeLayout>

@@ -109,7 +109,7 @@ public class ChatDetail {
 		chatActivity.pageShowing = ChatActivity.PAGE_CHAT;
 		chatActivity.invalidateOptionsMenu();
 		chatActivity.setContentView(R.layout.chatdetail_view);
-		chatActivity.getActionBar().setTitle(ChatActivity.toName);
+		chatActivity.setTitle(ChatActivity.toName);
 
 		final ListView listView = (ListView) chatActivity.findViewById(R.id.chatdetail_list);
 		listView.setDividerHeight(0);

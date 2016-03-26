@@ -139,8 +139,11 @@ Mar 15
         }
         LinearLayout rootView = (LinearLayout) mypkuView.findViewById(resid);
         rootView.setVisibility(View.VISIBLE);
-        ViewSetting.setTextView(rootView, R.id.mypku_title, title);
 
+        //取消文字标题
+        rootView.findViewById(R.id.mypku_title).setVisibility(View.GONE);
+
+        ViewSetting.setTextView(rootView, R.id.mypku_title, title);
         ViewSetting.setTextViewBold(rootView, R.id.mypku_title);
         int len = s.length;
         int totalline = (len - 1) / COLS + 1;

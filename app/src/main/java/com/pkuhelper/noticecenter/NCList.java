@@ -117,7 +117,7 @@ public class NCList {
 		ncActivity.setContentView(R.layout.nc_setsource_listview);
 		ncActivity.nowShowing = NCActivity.PAGE_SOURCE;
 		ncActivity.invalidateOptionsMenu();
-		ncActivity.getActionBar().setTitle("设置订阅的源");
+		ncActivity.setTitle("设置订阅的源");
 		ncActivity.sourceListView = (ListView) ncActivity.findViewById(R.id.nc_setsource_listview);
 		ListView listView = ncActivity.sourceListView;
 		View headerView = ncActivity.getLayoutInflater().inflate(R.layout.nc_setsource_headerview, null);

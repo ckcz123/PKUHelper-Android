@@ -115,7 +115,7 @@ public class ViewPost {
 		viewActivity.setContentView(R.layout.bbs_post_listview);
 		viewActivity.showingPage = ViewActivity.PAGE_POST;
 		viewActivity.invalidateOptionsMenu();
-		viewActivity.getActionBar().setTitle("(" + page + "/" + ((totalNum - 1) / ViewActivity.PAGESIZE + 1) + ") " + title);
+		viewActivity.setTitle("(" + page + "/" + ((totalNum - 1) / ViewActivity.PAGESIZE + 1) + ") " + title);
 		final ListView listView = (ListView) viewActivity.findViewById(R.id.bbs_post_listview);
 		listView.setAdapter(new BaseAdapter() {
 

@@ -54,7 +54,7 @@ public class AddActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		getActionBar().setTitle("发布新的失物招领");
+		setTitle("发布新的失物招领");
 		setContentView(R.layout.lostfound_add);
 		setResult(RESULT_CANCELED);
 

@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -41,16 +42,20 @@ public class PKUHelper extends BaseActivity {
 
 	public static PKUHelper pkuhelper;
 	public CustomViewPager mViewPager;
-	ActionBar actionBar;
 	private SensorManager sensorManager;
 	private Vibrator vibrator;
 	private SensorEventListener sensorEventListener;
 	private long lastShakeTime = 0;
+	private Toolbar toolbar;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+
+		//material design update Mar27
+		setupToolbar();
+
 		MyFile.setUseSDCard(true, this);
 
 		pkuhelper = this;
@@ -80,7 +85,6 @@ public class PKUHelper extends BaseActivity {
 		};
 
 		// Set up the action bar.
-		actionBar = getActionBar();
 
 		mViewPager = (CustomViewPager) findViewById(R.id.tabpager);
 		mViewPager.setAdapter(new FragmentPagerAdapter(getFragmentManager()) {
@@ -117,6 +121,18 @@ public class PKUHelper extends BaseActivity {
 		init();
 	}
 
+	private void setupToolbar(){
+		toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+		setSupportActionBar(toolbar);
+		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
+	}
+
 	private void resetAllTab() {
 		((TextView) findViewById(R.id.title_ipgw)).setTextColor(Color.BLACK);
 		((TextView) findViewById(R.id.title_course)).setTextColor(Color.BLACK);
@@ -134,7 +150,7 @@ public class PKUHelper extends BaseActivity {
 		resetAllTab();
 		ViewSetting.setImageResource(this, R.id.img_ipgw, R.drawable.tab_ipgw_selected);
 		((TextView) findViewById(R.id.title_ipgw)).setTextColor(Color.parseColor("#319de1"));
-		actionBar.setTitle("欢迎进入PKU Helper");
+		setTitle("欢迎进入PKU Helper");
 	}
 
 	public void clickCourse(View view) {
@@ -146,9 +162,9 @@ public class PKUHelper extends BaseActivity {
 		int week = Editor.getInt(this, "week");
 		if (week < 0 || week >= 20) week = 0;
 		if (week == 0)
-			actionBar.setTitle("放假期间");
+			setTitle("放假期间");
 		else
-			actionBar.setTitle("第" + week + "周课表");
+			setTitle("第" + week + "周课表");
 	}
 
 	public void clickMYPKU(View view) {
@@ -157,7 +173,7 @@ public class PKUHelper extends BaseActivity {
 		resetAllTab();
 		ViewSetting.setImageResource(this, R.id.img_mypku, R.drawable.tab_mypku_selected);
 		((TextView) findViewById(R.id.title_mypku)).setTextColor(Color.parseColor("#319de1"));
-		actionBar.setTitle("我的PKU");
+		setTitle("我的PKU");
 	}
 
 	public void clickSettings(View view) {
@@ -166,7 +182,7 @@ public class PKUHelper extends BaseActivity {
 		resetAllTab();
 		ViewSetting.setImageResource(this, R.id.img_settings, R.drawable.tab_settings_selected);
 		((TextView) findViewById(R.id.title_settings)).setTextColor(Color.parseColor("#319de1"));
-		actionBar.setTitle("设置");
+		setTitle("设置");
 	}
 
 	@Override

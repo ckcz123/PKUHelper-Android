@@ -162,7 +162,7 @@ public class NCContent {
 		ViewSetting.setBackground(ncActivity, ncActivity.swipeRefreshLayout, R.drawable.chat_bg,
 				ncActivity.screenWidth, ncActivity.screenHeight);
 		ncActivity.contentListView = (ListView) ncActivity.findViewById(R.id.nc_viewcontent_listview);
-		ncActivity.getActionBar().setTitle("查看通知");
+		ncActivity.setTitle("查看通知");
 
 		ListView listView = ncActivity.contentListView;
 		/*
@@ -274,7 +274,7 @@ public class NCContent {
 				ncActivity.screenWidth, ncActivity.screenHeight);
 		ncActivity.oneListView = (ListView) ncActivity.findViewById(R.id.nc_viewcontent_listview);
 		Notice notice = ncActivity.sourceListMap.get(sid);
-		ncActivity.getActionBar().setTitle("查看" + notice.name + "的通知");
+		ncActivity.setTitle("查看" + notice.name + "的通知");
 
 		ListView listView = ncActivity.oneListView;
 		listView.setAdapter(new BaseAdapter() {

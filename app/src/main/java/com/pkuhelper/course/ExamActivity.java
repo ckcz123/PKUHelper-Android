@@ -54,7 +54,7 @@ public class ExamActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.exam_listview);
 		examActivity = this;
-		getActionBar().setTitle("我的考试");
+		setTitle("我的考试");
 		init();
 	}
 

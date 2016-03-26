@@ -48,7 +48,7 @@ public class GradeActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		gradeActivity = this;
 		setContentView(R.layout.grade_listview_layout);
-		getActionBar().setTitle("成绩查询");
+		setTitle("成绩查询");
 		Intent intent = getIntent();
 		String string = intent.getExtras().getString("phpsessid");
 		if (!(string == null || "".equals(string))) {

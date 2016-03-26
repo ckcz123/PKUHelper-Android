@@ -2,6 +2,7 @@ package com.pkuhelper.lib;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.ViewConfiguration;
@@ -9,7 +10,7 @@ import android.view.ViewConfiguration;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-public abstract class BaseActivity extends Activity {
+public abstract class BaseActivity extends AppCompatActivity {
 
 	private SystemBarTintManager tintManager;
 

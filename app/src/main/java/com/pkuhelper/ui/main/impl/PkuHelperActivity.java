@@ -18,6 +18,7 @@ import com.pkuhelper.R;
 import com.pkuhelper.presenter.IPkuHelperPresenter;
 import com.pkuhelper.presenter.impl.PkuHelperPresenter;
 import com.pkuhelper.ui.BaseActivity;
+import com.pkuhelper.ui.Settings;
 import com.pkuhelper.ui.ipgw.IIPGWUI;
 import com.pkuhelper.ui.ipgw.impl.IPGWFragment;
 import com.pkuhelper.ui.main.IPkuHelperUI;
@@ -44,6 +45,7 @@ public class PkuHelperActivity extends BaseActivity implements IPkuHelperUI, Nav
     private Fragment ipgwFragment = new IPGWFragment();
     private Fragment mypkuFragment = new MyPkuFragment();
     private Fragment schoolLifeFragment = new SchoolLifeFragment();
+    private Fragment settingFragment = new Settings();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +61,9 @@ public class PkuHelperActivity extends BaseActivity implements IPkuHelperUI, Nav
         //DEV
         getSupportFragmentManager().beginTransaction().add(R.id.fragment_main, ipgwFragment)
                 .add(R.id.fragment_main,mypkuFragment)
-                .add(R.id.fragment_main,schoolLifeFragment).commit();
+                .add(R.id.fragment_main,schoolLifeFragment)
+                .add(R.id.fragment_main, settingFragment)
+                .commit();
         hideAllFragments();
 
         getSupportFragmentManager().beginTransaction().show(ipgwFragment).commit();
@@ -71,6 +75,7 @@ public class PkuHelperActivity extends BaseActivity implements IPkuHelperUI, Nav
                 .hide(ipgwFragment)
                 .hide(mypkuFragment)
                 .hide(schoolLifeFragment)
+                .hide(settingFragment)
                 .commit();
     }
 
@@ -163,10 +168,19 @@ public class PkuHelperActivity extends BaseActivity implements IPkuHelperUI, Nav
         } else if (id == R.id.nav_bbs) {
             hideAllFragments();
             mPkuHelperPresenter.startBBSUI();
+        } else if (id == R.id.group_settings){
+            hideAllFragments();
+            getSupportFragmentManager().beginTransaction().show(settingFragment).commit();
         }
 
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getSupportFragmentManager().beginTransaction().show(ipgwFragment).commit();
     }
 
     @Override

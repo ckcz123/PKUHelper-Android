@@ -49,7 +49,7 @@ public class MyWebView {
 
 	@SuppressLint({"SetJavaScriptEnabled", "AddJavascriptInterface"})
 	public MyWebView showWebView(String title, String url) {
-		subActivity.getActionBar().setTitle("loading...");
+		subActivity.setTitle("loading...");
 		if (title == null) title = "";
 		title = title.trim();
 		this.title = title;
@@ -131,7 +131,7 @@ public class MyWebView {
 				view.loadUrl(url, headers);
 				loading = true;
 				swipeRefreshLayout.setRefreshing(loading);
-				subActivity.getActionBar().setTitle("Loading...");
+				subActivity.setTitle("Loading...");
 				subActivity.invalidateOptionsMenu();
 				return true;
 			}
@@ -144,11 +144,11 @@ public class MyWebView {
 				subActivity.setRefresh();
 				subActivity.invalidateOptionsMenu();
 				if (!"".equals(MyWebView.this.title))
-					subActivity.getActionBar().setTitle(MyWebView.this.title);
+					subActivity.setTitle(MyWebView.this.title);
 				else if (!"".equals(string))
-					subActivity.getActionBar().setTitle(string);
+					subActivity.setTitle(string);
 				else
-					subActivity.getActionBar().setTitle("查看网页");
+					subActivity.setTitle("查看网页");
 
 				view.loadUrl("javascript:(function(){"
 						+ "var objs=document.getElementsByTagName(\"img\");"
@@ -207,7 +207,7 @@ public class MyWebView {
 		});
 		loading = false;
 		if (title == null || "".equals(title.trim())) title = "查看网页";
-		subActivity.getActionBar().setTitle(title);
+		subActivity.setTitle(title);
 		subActivity.webView =
 				(WebView) subActivity.findViewById(R.id.subactivity_webview);
 		subActivity.webView.getSettings().setUseWideViewPort(false);
@@ -236,7 +236,7 @@ public class MyWebView {
 		swipeRefreshLayout.setRefreshing(loading);
 		subActivity.invalidateOptionsMenu();
 
-		subActivity.getActionBar().setTitle("北京大学邮件系统");
+		subActivity.setTitle("北京大学邮件系统");
 		subActivity.webView =
 				(WebView) subActivity.findViewById(R.id.subactivity_webview);
 		WebView webView = subActivity.webView;
@@ -308,7 +308,7 @@ public class MyWebView {
 									+ "document.getElementsByClassName('loginBtn')[0].click()})()");
 					}
 				}
-				subActivity.getActionBar().setTitle("北京大学邮件系统");
+				subActivity.setTitle("北京大学邮件系统");
 				subActivity.setRefresh();
 			}
 
@@ -317,7 +317,7 @@ public class MyWebView {
 				view.loadUrl(url);
 				if (!url.startsWith("javascript:")) {
 					swipeRefreshLayout.setRefreshing(true);
-					subActivity.getActionBar().setTitle("Loading...");
+					subActivity.setTitle("Loading...");
 					loading = true;
 					subActivity.invalidateOptionsMenu();
 				}

@@ -196,7 +196,7 @@ public class SubActivity extends BaseActivity {
 
 	public void viewAbout() {
 		setContentView(R.layout.about);
-		getActionBar().setTitle("关于本软件");
+		setTitle("关于本软件");
 		ViewSetting.setTextView(this, R.id.about_version, Constants.version);
 		ViewSetting.setTextView(this, R.id.about_time, Constants.update_time);
 	}
@@ -323,7 +323,7 @@ public class SubActivity extends BaseActivity {
 					if (url == null || "".equals(url))
 						return true;
 				}
-				String title = getActionBar().getTitle().toString();
+				String title = getTitle().toString();
 				String content = html;
 				if (content == null || "".equals(content))
 					content = getIntent().getStringExtra("content");

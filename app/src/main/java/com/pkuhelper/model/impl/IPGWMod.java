@@ -44,7 +44,7 @@ public class IPGWMod implements IIPGWMod {
     }
 
     @Override
-    public void doConnect(final boolean isFree, final Callback<String> callback) {
+    public void doConnect(final boolean isFree, final Callback<Map<String,String>> callback) {
         ArrayList<ApiManager.Parameter> params = new ArrayList<>();
 
         int free = isFree ? 2 : 1;
@@ -62,22 +62,9 @@ public class IPGWMod implements IIPGWMod {
                     Log.d("IPGW RETURN STR", str);
                     Map<String, String> map = parseFeedback(str);
 
-                    boolean isSuccess = map.get("SUCCESS").equals("YES");
-                    if (isSuccess) {
-                        double timeAll = 60;
-                        double timeUsed = 0;
-                        try {
-                            timeAll = Double.parseDouble(map.get("FR_DESC_EN").trim().split("[^\\d]")[0]);
-                            timeUsed = Double.parseDouble(map.get("FR_TIME"));
-                        }catch (Exception e){
-                            Log.d("ipgw time parse error:",e.getMessage());
-                        }
-                        callback.onFinished(0, timeUsed + "/" + timeAll);
-                    }
-                    else
-                        callback.onFinished(-1,null);
+                    callback.onFinished(0,map);
 
-                } catch (JsonSyntaxException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                     callback.onError(e.getMessage());
                 }
@@ -92,7 +79,7 @@ public class IPGWMod implements IIPGWMod {
     }
 
     @Override
-    public void disconnect(final Callback<String> callback, boolean isDisconnectAll) {
+    public void disconnect(final Callback<Map<String,String>> callback, boolean isDisconnectAll) {
         ArrayList<ApiManager.Parameter> params = new ArrayList<>();
 
         params.add(mApiManager.makeParam("uid", Constants.username));
@@ -109,16 +96,9 @@ public class IPGWMod implements IIPGWMod {
             @Override
             public void onResponse(String str) {
                 try {
-
                     Map<String, String> map = parseFeedback(str);
-                    boolean isSuccess = map.get("SUCCESS").equals("YES");
-                    Log.d("IPGW RETURN STR", str);
-                    if (isSuccess)
-                        callback.onFinished(0,"断开成功");
-                    else
-                        callback.onFinished(-1,null);
-
-                } catch (JsonSyntaxException e) {
+                    callback.onFinished(0, map);
+                } catch (Exception e) {
                     e.printStackTrace();
                     callback.onError(e.getMessage());
                 }
@@ -178,7 +158,7 @@ public class IPGWMod implements IIPGWMod {
         int pos1 = string.indexOf("<!--IPGWCLIENT_START");
         int pos2 = string.indexOf("IPGWCLIENT_END-->");
 
-        if (pos2>pos1){
+        if (pos1>0 && pos2 >0 && pos2>pos1){
             Log.d("ipgw string",string);
             Log.d("ipgw stat",pos1+" "+pos2);
             String msg = string.substring(pos1, pos2 - 1);
@@ -193,10 +173,12 @@ public class IPGWMod implements IIPGWMod {
                     map.put(strings2[0], strings2[1]);
                 else map.put(strings2[0], "");
             }
-
+            return map;
         }
+        else
+            return null;
 
-        return map;
+
     }
 
 }

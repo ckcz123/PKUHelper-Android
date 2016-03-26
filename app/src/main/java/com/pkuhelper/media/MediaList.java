@@ -102,7 +102,7 @@ public class MediaList {
 	public static void showContent() {
 		final MediaActivity mediaActivity = MediaActivity.mediaActivity;
 		mediaActivity.invalidateOptionsMenu();
-		mediaActivity.getActionBar().setTitle("新媒体联盟");
+		mediaActivity.setTitle("新媒体联盟");
 		mediaActivity.setContentView(R.layout.nc_viewcontent_listview);
 
 		ListView listView = (ListView) mediaActivity.findViewById(R.id.nc_viewcontent_listview);

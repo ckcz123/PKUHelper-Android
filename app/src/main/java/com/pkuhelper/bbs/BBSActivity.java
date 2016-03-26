@@ -94,7 +94,7 @@ public class BBSActivity extends BaseActivity {
 		((ImageView) findViewById(R.id.bbs_bottom_img_top)).getDrawable().
 				setColorFilter(Color.parseColor("#2d90dc"), PorterDuff.Mode.MULTIPLY);
 		((TextView) findViewById(R.id.bbs_bottom_top)).setTextColor(Color.parseColor("#2d90dc"));
-		getActionBar().setTitle("热门帖子");
+		setTitle("热门帖子");
 	}
 
 	public void clickAllBoards(View view) {
@@ -103,7 +103,7 @@ public class BBSActivity extends BaseActivity {
 		resetAllTab();
 		((ImageView) findViewById(R.id.bbs_bottom_img_allboards)).getDrawable().setColorFilter(Color.parseColor("#2d90dc"), PorterDuff.Mode.MULTIPLY);
 		((TextView) findViewById(R.id.bbs_bottom_allboards)).setTextColor(Color.parseColor("#2d90dc"));
-		getActionBar().setTitle("版面列表");
+		setTitle("版面列表");
 	}
 
 	public void clickSearch(View view) {
@@ -112,7 +112,7 @@ public class BBSActivity extends BaseActivity {
 		resetAllTab();
 		((ImageView) findViewById(R.id.bbs_bottom_img_search)).getDrawable().setColorFilter(Color.parseColor("#2d90dc"), PorterDuff.Mode.MULTIPLY);
 		((TextView) findViewById(R.id.bbs_bottom_search)).setTextColor(Color.parseColor("#2d90dc"));
-		getActionBar().setTitle("搜索帖子");
+		setTitle("搜索帖子");
 	}
 
 	public void clickMe(View view) {
@@ -121,7 +121,7 @@ public class BBSActivity extends BaseActivity {
 		resetAllTab();
 		((ImageView) findViewById(R.id.bbs_bottom_img_me)).getDrawable().setColorFilter(Color.parseColor("#2d90dc"), PorterDuff.Mode.MULTIPLY);
 		((TextView) findViewById(R.id.bbs_bottom_me)).setTextColor(Color.parseColor("#2d90dc"));
-		getActionBar().setTitle("个人信息");
+		setTitle("个人信息");
 	}
 
 	@Override
@@ -180,9 +180,9 @@ public class BBSActivity extends BaseActivity {
 			Editor.putBoolean(this, "bbs_viewall", AllBoardsFragment.allBoards);
 			AllBoardsFragment.resetList();
 			if (AllBoardsFragment.allBoards)
-				getActionBar().setTitle("所有版面");
+				setTitle("所有版面");
 			else
-				getActionBar().setTitle("收藏版面");
+				setTitle("收藏版面");
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

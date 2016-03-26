@@ -33,7 +33,7 @@ public class GestureActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.gesture_layout);
 		gestureActivity = this;
-		getActionBar().setTitle("手势设置");
+		setTitle("手势设置");
 		if (!Constants.isLogin()) {
 			wantToExit();
 			return;

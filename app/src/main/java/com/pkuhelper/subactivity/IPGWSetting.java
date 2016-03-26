@@ -16,7 +16,7 @@ public class IPGWSetting {
 
 	public void show() {
 		subActivity.setContentView(R.layout.settings_ipgw);
-		subActivity.getActionBar().setTitle("网关控制");
+		subActivity.setTitle("网关控制");
 
 		ViewSetting.setSwitchChecked(subActivity, R.id.settings_shake_switch, Editor.getBoolean(subActivity, "use_shake"));
 		ViewSetting.setSwitchOnCheckChangeListener(subActivity, R.id.settings_shake_switch, new CompoundButton.OnCheckedChangeListener() {

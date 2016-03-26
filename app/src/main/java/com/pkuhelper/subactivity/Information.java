@@ -23,7 +23,7 @@ public class Information {
 	}
 
 	public Information init() {
-		subActivity.getActionBar().setTitle("常用信息");
+		subActivity.setTitle("常用信息");
 		subActivity.setContentView(R.layout.subactivity_information_view);
 
 		ViewSetting.setOnClickListener(subActivity, R.id.settings_map, new View.OnClickListener() {

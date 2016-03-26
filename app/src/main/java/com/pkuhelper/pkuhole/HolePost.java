@@ -77,7 +77,7 @@ public class HolePost extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.hole_post_view);
-		getActionBar().setTitle("发布匿名树洞");
+		setTitle("发布匿名树洞");
 		mediaRecorder = new MediaRecorder();
 		mediaPlayer = new MediaPlayer();
 		ViewSetting.setOnClickListener(this, R.id.hole_post_image_button, new View.OnClickListener() {

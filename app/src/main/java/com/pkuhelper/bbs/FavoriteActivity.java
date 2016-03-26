@@ -39,7 +39,7 @@ public class FavoriteActivity extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		getActionBar().setTitle("收藏的主题帖");
+		setTitle("收藏的主题帖");
 		load(this);
 		setContentView(R.layout.bbs_thread_listview);
 		listView=(ListView)findViewById(R.id.bbs_thread_listview);

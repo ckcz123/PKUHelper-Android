@@ -28,6 +28,8 @@ import com.pkuhelper.presenter.impl.IPGWPresenter;
 import com.pkuhelper.ui.DrawView;
 import com.pkuhelper.ui.ipgw.IIPGWUI;
 
+import java.util.Map;
+
 /**
  * Created by zyxu on 3/1/16.
  */
@@ -128,8 +130,39 @@ public class IPGWFragment extends Fragment implements IIPGWUI {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         Log.d("drawing", "On Phone action down");
-                        drawView.setCanDraw(true);
-                        drawView.onTouchEvent(event);
+
+                        //如果是锁住的 显示账户信息
+                        if (drawView.isLocked()){
+
+                            Map<String,String> data = mIPGWPresenter.getIPGWEntity();
+
+                            Log.d("IPGW:","show status");
+                            if (data!=null) {
+                                String msg;
+                                msg = "IP:" + data.get("IP") + "\n";
+                                msg += "范围:" + (data.get("SCOPE").equals("international") ? "收费地址" : "免费地址") + "\n";
+                                msg += "时长:" + (Double.parseDouble(data.get("FR_TIME"))) + "/"
+                                        + (Double.parseDouble(data.get("FR_DESC_EN").trim().split("[^\\d]")[0]))
+                                        + "小时\n";
+                                msg += "余额:" + data.get("BALANCE");
+
+                                AlertDialog dialog = new AlertDialog.Builder(getContext())
+                                        .setTitle("网关账户")
+                                        .setMessage(msg)
+                                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                dialog.dismiss();
+                                            }
+                                        })
+                                        .create();
+                                dialog.show();
+                            }
+                        }
+                        else {
+                            drawView.setCanDraw(true);
+                            drawView.onTouchEvent(event);
+                        }
                         break;
                     case MotionEvent.ACTION_MOVE:
                         Log.d("drawing", "On Phone action move");
@@ -144,8 +177,8 @@ public class IPGWFragment extends Fragment implements IIPGWUI {
 
                         //btnEarth.getLocationInWindow(earthLocation);
 
-                        earthLocation[0] = (int)btnEarth.getX();
-                        earthLocation[1] = (int)btnEarth.getY();
+                        earthLocation[0] = (int) btnEarth.getX();
+                        earthLocation[1] = (int) btnEarth.getY();
 
                         earthHeight = btnEarth.getHeight();
                         earthWidth = btnEarth.getWidth();
@@ -231,7 +264,7 @@ public class IPGWFragment extends Fragment implements IIPGWUI {
 
     @Override
     public void popSnack(String str) {
-        Snackbar.make(btnPhone, str, Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(btnPhone, str, Snackbar.LENGTH_LONG).show();
     }
 
     @Override

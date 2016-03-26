@@ -31,7 +31,7 @@ public class ChatList {
 
 	@SuppressWarnings("unchecked")
 	static void showChatList() {
-		ChatActivity.chatActivity.getActionBar().setTitle("消息中心");
+		ChatActivity.chatActivity.setTitle("消息中心");
 		ArrayList<Parameters> arrayList = new ArrayList<Parameters>();
 		//arrayList.add(new Parameters("uid", Constants.username));
 		//String timestamp=System.currentTimeMillis()/1000+"";
@@ -107,7 +107,7 @@ public class ChatList {
 		}
 		chatActivity.chatThread.start();
 
-		chatActivity.getActionBar().setTitle("消息中心");
+		chatActivity.setTitle("消息中心");
 		Collections.sort(chatActivity.chatListInfos, new Comparator<ChatListInfo>() {
 			@Override
 			public int compare(ChatListInfo lhs, ChatListInfo rhs) {

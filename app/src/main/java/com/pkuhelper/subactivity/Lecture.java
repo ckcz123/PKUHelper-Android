@@ -39,7 +39,7 @@ public class Lecture {
 	@SuppressWarnings("unchecked")
 	public Lecture showLecture() {
 		subActivity.setContentView(R.layout.subactivity_listview);
-		subActivity.getActionBar().setTitle("讲座预告");
+		subActivity.setTitle("讲座预告");
 		subActivity.findViewById(R.id.subactivity_swipeRefreshLayout)
 				.setBackgroundColor(Color.parseColor("#34afd3"));
 		listView = (ListView) subActivity.findViewById(R.id.subactivity_listview);

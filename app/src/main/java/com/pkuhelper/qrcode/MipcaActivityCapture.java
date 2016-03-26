@@ -55,7 +55,7 @@ public class MipcaActivityCapture extends BaseActivity implements Callback {
 		//ViewUtil.addTopView(getApplicationContext(), this, R.string.scan_card);
 		CameraManager.init(getApplication());
 		viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
-		getActionBar().setTitle("二维码扫描");
+		setTitle("二维码扫描");
 		hasSurface = false;
 		inactivityTimer = new InactivityTimer(this);
 	}

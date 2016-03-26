@@ -169,6 +169,10 @@ public class SchoolLifeFragment extends Fragment {
         }
         LinearLayout rootView = (LinearLayout) mypkuView.findViewById(resid);
         rootView.setVisibility(View.VISIBLE);
+
+        //取消文字标题
+        rootView.findViewById(R.id.mypku_title).setVisibility(View.GONE);
+
         ViewSetting.setTextView(rootView, R.id.mypku_title, title);
         ViewSetting.setTextViewBold(rootView, R.id.mypku_title);
         int len = s.length;

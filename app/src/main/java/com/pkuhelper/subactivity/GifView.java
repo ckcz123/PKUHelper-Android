@@ -31,7 +31,7 @@ public class GifView {
 		title = title.trim();
 		if (title.endsWith(".gif")) title = title.substring(0, title.lastIndexOf("."));
 		if ("".equals(title)) title = "查看图片";
-		subActivity.getActionBar().setTitle(title);
+		subActivity.setTitle(title);
 		subActivity.setContentView(R.layout.subactivity_gifview);
 		gifImageView = (GifImageView) subActivity.findViewById(R.id.subactivity_gifview);
 		gifImageView.setScaleType(ScaleType.FIT_CENTER);

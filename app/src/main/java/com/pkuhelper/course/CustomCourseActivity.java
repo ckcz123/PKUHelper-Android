@@ -55,7 +55,7 @@ public class CustomCourseActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.customcourse_listview);
 		customCourseActivity = this;
-		getActionBar().setTitle("自选课程");
+		setTitle("自选课程");
 		setDefaultCourse();
 		getList();
 	}

@@ -29,7 +29,7 @@ public class MessagePostActivity extends BaseActivity {
 		String content = bundle.getString("content", "");
 
 		setContentView(R.layout.bbs_post_mail);
-		getActionBar().setTitle("发站内信");
+		setTitle("发站内信");
 		ViewSetting.setEditTextValue(this, R.id.bbs_post_mail_author, author);
 		ViewSetting.setEditTextValue(this, R.id.bbs_post_mail_title, title);
 		String text = "";

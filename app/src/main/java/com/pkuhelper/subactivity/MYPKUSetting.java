@@ -33,7 +33,7 @@ public class MYPKUSetting {
 		getList();
 		hasModified = false;
 		subActivity.setContentView(R.layout.settings_mypku_listview);
-		subActivity.getActionBar().setTitle("我的PKU设置");
+		subActivity.setTitle("我的PKU设置");
 		View headerView = subActivity.getLayoutInflater().inflate(R.layout.settings_mypku_headerview, null);
 		ListView listView = (ListView) subActivity.findViewById(R.id.settings_mypku_listview);
 		listView.addHeaderView(headerView);
