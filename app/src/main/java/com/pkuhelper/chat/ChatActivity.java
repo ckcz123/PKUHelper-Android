@@ -6,6 +6,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -117,7 +118,7 @@ public class ChatActivity extends BaseActivity {
 			Log.w("content-change", width + ":" + height);
 			if (width != 0 && height != 0) {
 				ViewSetting.setBackground(chatActivity,
-						findViewById(R.id.chat_bg), R.drawable.chat_bg,
+						findViewById(R.id.chat_bg), Color.WHITE,
 						width, height);
 			}
 		} catch (Exception e) {
@@ -286,9 +287,9 @@ public class ChatActivity extends BaseActivity {
 		menu.clear();
 		if (pageShowing == PAGE_LIST)
 			menu.add(Menu.NONE, Constants.MENU_CHAT_ADD, Constants.MENU_CHAT_ADD, "")
-					.setIcon(R.drawable.add).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+					.setIcon(R.drawable.ic_add_white_48dp).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		menu.add(Menu.NONE, Constants.MENU_CHAT_REFRESH, Constants.MENU_CHAT_REFRESH, "")
-				.setIcon(R.drawable.reload).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+				.setIcon(R.drawable.ic_refresh_white_48dp).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		String blHint = "我的黑名单";
 		if (pageShowing == PAGE_CHAT) {
 			if (BlackList.isInBlackList()) blHint = "移出黑名单";

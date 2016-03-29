@@ -159,7 +159,7 @@ public class ClassActivity extends BaseActivity {
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		menu.clear();
 		menu.add(Menu.NONE, Constants.MENU_CLASSROOM_SELECT, Constants.MENU_CLASSROOM_SELECT, "")
-				.setIcon(R.drawable.item).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+				.setIcon(R.drawable.ic_more_horiz_white_48dp).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		return true;
 	}
 

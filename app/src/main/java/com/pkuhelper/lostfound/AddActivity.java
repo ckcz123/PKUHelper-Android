@@ -261,10 +261,10 @@ public class AddActivity extends BaseActivity {
 		menu.clear();
 		menu.add(Menu.NONE, Constants.MENU_LOSTFOUND_SAVE,
 				Constants.MENU_LOSTFOUND_SAVE, "")
-				.setIcon(R.drawable.save).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+				.setIcon(R.drawable.ic_save_white_48dp).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		menu.add(Menu.NONE, Constants.MENU_LOSTFOUND_CLOSE,
 				Constants.MENU_LOSTFOUND_CLOSE, "")
-				.setIcon(R.drawable.close).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+				.setIcon(R.drawable.ic_close_white_48dp).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		return true;
 	}
 

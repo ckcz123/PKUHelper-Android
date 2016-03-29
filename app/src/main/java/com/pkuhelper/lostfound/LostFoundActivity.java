@@ -126,7 +126,7 @@ public class LostFoundActivity extends BaseActivity {
 				int width = swipeRefreshLayout.getWidth(), height = swipeRefreshLayout.getHeight();
 				if (width != 0 && height != 0) {
 					ViewSetting.setBackground(LostFoundActivity.this, swipeRefreshLayout,
-							R.drawable.chat_bg);
+							Color.WHITE);
 					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
 						swipeRefreshLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
 					} else {
@@ -603,9 +603,9 @@ public class LostFoundActivity extends BaseActivity {
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		menu.clear();
 		menu.add(Menu.NONE, Constants.MENU_LOSTFOUND_ADD, Constants.MENU_LOSTFOUND_ADD, "")
-				.setIcon(R.drawable.add).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+				.setIcon(R.drawable.ic_add_white_48dp).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		menu.add(Menu.NONE, Constants.MENU_LOSTFOUND_CLOSE, Constants.MENU_LOSTFOUND_CLOSE, "")
-				.setIcon(R.drawable.close).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+				.setIcon(R.drawable.ic_close_white_48dp).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		return true;
 	}
 

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Message;
@@ -159,7 +160,7 @@ public class NCContent {
 				}).start();
 			}
 		});
-		ViewSetting.setBackground(ncActivity, ncActivity.swipeRefreshLayout, R.drawable.chat_bg,
+		ViewSetting.setBackground(ncActivity, ncActivity.swipeRefreshLayout, Color.WHITE,
 				ncActivity.screenWidth, ncActivity.screenHeight);
 		ncActivity.contentListView = (ListView) ncActivity.findViewById(R.id.nc_viewcontent_listview);
 		ncActivity.setTitle("查看通知");
@@ -270,7 +271,7 @@ public class NCContent {
 				}).start();
 			}
 		});
-		ViewSetting.setBackground(ncActivity, ncActivity.swipeRefreshLayout, R.drawable.chat_bg,
+		ViewSetting.setBackground(ncActivity, ncActivity.swipeRefreshLayout, Color.WHITE,
 				ncActivity.screenWidth, ncActivity.screenHeight);
 		ncActivity.oneListView = (ListView) ncActivity.findViewById(R.id.nc_viewcontent_listview);
 		Notice notice = ncActivity.sourceListMap.get(sid);
