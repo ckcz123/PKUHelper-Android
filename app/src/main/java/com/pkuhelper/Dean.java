@@ -16,6 +16,7 @@ import com.pkuhelper.lib.RequestingTask;
 import com.pkuhelper.lib.ViewSetting;
 import com.pkuhelper.lib.webconnection.Parameters;
 import com.pkuhelper.lib.webconnection.WebConnection;
+import com.pkuhelper.ui.main.impl.PkuHelperActivity;
 
 import java.util.ArrayList;
 
@@ -59,7 +60,11 @@ public class Dean {
 			IAAA.showLoginView();
 			return;
 		}
-		dialog = new Dialog(PKUHelper.pkuhelper);
+
+		// TODO: 3/28/16
+		//dialog = new Dialog(PKUHelper.pkuhelper);
+		dialog = new Dialog(PkuHelperActivity.pkuHelperActivity);
+
 		dialog.setContentView(R.layout.dean_captcha_view);
 		dialog.setTitle("请输入验证码");
 		dialog.setCancelable(true);
@@ -133,7 +138,10 @@ public class Dean {
 		arrayList.add(new Parameters("sno", Constants.username));
 		arrayList.add(new Parameters("password", Constants.password));
 		arrayList.add(new Parameters("captcha", captcha));
-		new RequestingTask(PKUHelper.pkuhelper, "正在登录教务...", "http://dean.pku.edu.cn/student/authenticate.php"
+        // TODO: 3/29/16
+//        new RequestingTask(PKUHelper.pkuhelper, "正在登录教务...", "http://dean.pku.edu.cn/student/authenticate.php"
+//				, Constants.REQUEST_DEAN_LOGIN).execute(arrayList);
+        new RequestingTask(PKUHelper.pkuhelper, "正在登录教务...", "http://dean.pku.edu.cn/student/authenticate.php"
 				, Constants.REQUEST_DEAN_LOGIN).execute(arrayList);
 
 	}

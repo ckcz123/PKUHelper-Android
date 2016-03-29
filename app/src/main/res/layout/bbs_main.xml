@@ -183,8 +183,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/bbs_bottom"
-        android:layout_alignParentTop="true"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_below="@+id/appBarLayout_bbs_main">
 
         <com.pkuhelper.lib.view.CustomViewPager
             android:id="@+id/bbspager"

@@ -173,8 +173,11 @@ public class IPGWFragment extends Fragment implements IIPGWUI {
 
                         float x = event.getX();
                         float y = event.getY();
+                        float offsetX = btnPhone.getX();
+                        float offsetY = btnPhone.getY();
 
-
+                        x+=offsetX;
+                        y+=offsetY;
                         //btnEarth.getLocationInWindow(earthLocation);
 
                         earthLocation[0] = (int) btnEarth.getX();

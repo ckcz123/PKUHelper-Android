@@ -128,8 +128,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/btn_change_free"
         android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/textView"
-        android:layout_toStartOf="@+id/textView" />
+        android:layout_toLeftOf="@+id/btn_disconnect_all"
+        android:layout_toStartOf="@+id/btn_disconnect_all" />
 
     <TextView
         android:layout_width="wrap_content"
