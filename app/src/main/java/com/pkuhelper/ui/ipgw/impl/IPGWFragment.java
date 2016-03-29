@@ -285,7 +285,7 @@ public class IPGWFragment extends Fragment implements IIPGWUI {
                 layers[1] = r.getDrawable(R.drawable.aqi_200);
                 break;
             case AQIEntity.AQI_200_300:
-                layers[0] = r.getDrawable(R.drawable.earth_polluted);
+                layers[0] = r.getDrawable(R.drawable.earth_healthy);
                 layers[1] = r.getDrawable(R.drawable.aqi_300);
                 break;
             case AQIEntity.AQI_300_400:

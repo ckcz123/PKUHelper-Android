@@ -172,7 +172,7 @@ public class BBSActivity extends BaseActivity {
 		menu.clear();
 		if (mViewPager.getCurrentItem() < 2)
 			menu.add(Menu.NONE, Constants.MENU_BBS_REFRESH, Constants.MENU_BBS_REFRESH, "")
-					.setIcon(R.drawable.reload).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+					.setIcon(R.drawable.ic_refresh_white_48dp).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		/*
 		if (mViewPager.getCurrentItem()==1)
 			menu.add(Menu.NONE, Constants.MENU_BBS_FAVORITE, Constants.MENU_BBS_FAVORITE, "")
