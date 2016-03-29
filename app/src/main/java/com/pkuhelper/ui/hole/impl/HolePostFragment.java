@@ -59,6 +59,7 @@ public class HolePostFragment extends DialogFragment implements IHolePostUI {
     private int pid = 0;
     private boolean isReply;
     private int replyCid;
+    private String replyName;
     Bitmap bitmap;
     private Context context;
     private View rootView;
@@ -100,6 +101,7 @@ public class HolePostFragment extends DialogFragment implements IHolePostUI {
                 pid = bundle.getInt("pid");
                 if (isReply = bundle.getBoolean("isReply",false)){
                     replyCid = bundle.getInt("cid");
+                    replyName = bundle.getString("replyName", "");
                 }
                 mHoleCommentPresenter = new HoleCommentPresenter(getContext());
                 break;
@@ -136,8 +138,14 @@ public class HolePostFragment extends DialogFragment implements IHolePostUI {
                 view.findViewById(R.id.linearLayout_hole_post_button).setVisibility(View.GONE);
                 //设置回复字符串
                 if (isReply){
+                    String text;
                     tvHolePost.setText("回复评论");
-                    String text = "Re #"+replyCid+": ";
+                    if (!replyName.isEmpty()){
+                        text = "Re "+replyName+": ";
+                    }
+                    else {
+                        text = "Re #" + replyCid + ": ";
+                    }
                     etContent.setText(text);
                     etContent.setSelection(text.length());
                 }
@@ -149,6 +157,7 @@ public class HolePostFragment extends DialogFragment implements IHolePostUI {
                 break;
             case START_TYPE_REPORT:
                 tvHolePost.setText("举报树洞");
+                etContent.setHint("举报原因");
                 view.findViewById(R.id.linearLayout_hole_post_button).setVisibility(View.GONE);
                 break;
             case START_TYPE_SEARCH:

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -87,13 +88,30 @@ public class HoleCommentListAdapter extends BaseListAdapter<HoleCommentListItemE
                     Bundle bundle = new Bundle();
                     bundle.putString("start-type","comment");
                     bundle.putBoolean("isReply", true);
-                    bundle.putInt("pid",item.getPid());
-                    bundle.putInt("cid",item.getCid());
+                    bundle.putInt("pid", item.getPid());
+                    bundle.putInt("cid", item.getCid());
+                    bundle.putString("replyName", getReplyName(item));
+                    Log.d("replyName:",bundle.getString("replyName"));
+
+
                     HolePostFragment holePostFragment=new HolePostFragment();
                     holePostFragment.setArguments(bundle);
                     holePostFragment.show(activity.getSupportFragmentManager(), holePostFragment.getTag());
                 }
             });
         }
+    }
+
+    String getReplyName(HoleCommentListItemEntity item){
+        if (item==null)
+            return "";
+        String text = item.getText();
+        int leftBracketLocation = text.indexOf("[");
+        int rightBracketLocation = text.indexOf("]");
+        if (leftBracketLocation>=0 && rightBracketLocation>0 &&rightBracketLocation>leftBracketLocation){
+            return text.substring(leftBracketLocation+1,rightBracketLocation);
+        }
+        else
+            return "#"+item.getCid();
     }
 }

@@ -139,12 +139,13 @@ public class IPGWFragment extends Fragment implements IIPGWUI {
                             Log.d("IPGW:","show status");
                             if (data!=null) {
                                 String msg;
-                                msg = "IP:" + data.get("IP") + "\n";
-                                msg += "范围:" + (data.get("SCOPE").equals("international") ? "收费地址" : "免费地址") + "\n";
-                                msg += "时长:" + (Double.parseDouble(data.get("FR_TIME"))) + "/"
+                                msg =  "IP:      " + data.get("IP") + "\n";
+                                msg += "连接数:  "+data.get("CONNECTIONS")+"\n";
+                                msg += "范围:     " + (data.get("SCOPE").equals("international") ? "收费地址" : "免费地址") + "\n";
+                                msg += "时长:     " + (Double.parseDouble(data.get("FR_TIME"))) + "/"
                                         + (Double.parseDouble(data.get("FR_DESC_EN").trim().split("[^\\d]")[0]))
                                         + "小时\n";
-                                msg += "余额:" + data.get("BALANCE");
+                                msg += "余额:     " + data.get("BALANCE");
 
                                 AlertDialog dialog = new AlertDialog.Builder(getContext())
                                         .setTitle("网关账户")
