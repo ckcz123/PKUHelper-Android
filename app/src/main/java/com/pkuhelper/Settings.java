@@ -45,6 +45,8 @@ public class Settings extends Fragment {
 
 	public static ScrollView settingView = null;
 
+	Context mContext;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
@@ -61,6 +63,18 @@ public class Settings extends Fragment {
 		* @TODO
 		* @DEV
 		* */
+		if (Editor.getBoolean(PKUHelper.pkuhelper, "beta_version", false)){
+			mContext = PkuHelperActivity.pkuHelperActivity;
+			rootView.findViewById(R.id.settings_ipgw).setVisibility(View.GONE);
+			rootView.findViewById(R.id.settings_course).setVisibility(View.GONE);
+			rootView.findViewById(R.id.settings_gesture).setVisibility(View.GONE);
+		}
+		else{
+			mContext = PKUHelper.pkuhelper;
+			rootView.findViewById(R.id.settings_ipgw).setVisibility(View.VISIBLE);
+			rootView.findViewById(R.id.settings_course).setVisibility(View.VISIBLE);
+			rootView.findViewById(R.id.settings_gesture).setVisibility(View.VISIBLE);
+		}
         settingView.findViewById(R.id.settings_table_name)
                 .setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
@@ -90,7 +104,6 @@ public class Settings extends Fragment {
 	}
 
 	public static void setOthers() {
-
 		//TODO MAR 27
 		ViewSetting.setSwitchChecked(settingView, R.id.settings_switch_beta, Editor.getBoolean(PKUHelper.pkuhelper, "beta_version", false));
 		ViewSetting.setSwitchOnCheckChangeListener(settingView, R.id.settings_switch_beta, new CompoundButton.OnCheckedChangeListener() {
@@ -99,34 +112,35 @@ public class Settings extends Fragment {
 				Editor.putBoolean(PKUHelper.pkuhelper, "beta_version", isChecked);
 			}
 		});
+
 		//DEV
 
 		ViewSetting.setOnClickListener(settingView, R.id.settings_table_name, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!Constants.isLogin()) {
-                    IAAA.showLoginView();
-                    return;
-                }
-                String message = "";
-                message += "姓名：    " + Constants.name + "\n";
-                message += "学号：    " + Constants.username + "\n";
-                message += "性别：    " + Constants.sex + "\n";
-                message += "院系：    " + Constants.major + "\n";
-                //  message+="User-token: "+Constants.user_token+"\n";
-                new AlertDialog.Builder(PKUHelper.pkuhelper).setTitle("详细信息").setCancelable(true)
-                        .setMessage(message).setPositiveButton("确定", null)
-                        .setNegativeButton("注销", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Constants.reset(PKUHelper.pkuhelper);
-                                CustomToast.showSuccessToast(PKUHelper.pkuhelper, "注销成功");
-                                setName();
-                                IAAA.showLoginView();
-                            }
-                        }).show();
-            }
-        });
+			@Override
+			public void onClick(View v) {
+				if (!Constants.isLogin()) {
+					IAAA.showLoginView();
+					return;
+				}
+				String message = "";
+				message += "姓名：    " + Constants.name + "\n";
+				message += "学号：    " + Constants.username + "\n";
+				message += "性别：    " + Constants.sex + "\n";
+				message += "院系：    " + Constants.major + "\n";
+				//  message+="User-token: "+Constants.user_token+"\n";
+				new AlertDialog.Builder(PKUHelper.pkuhelper).setTitle("详细信息").setCancelable(true)
+						.setMessage(message).setPositiveButton("确定", null)
+						.setNegativeButton("注销", new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								Constants.reset(PKUHelper.pkuhelper);
+								CustomToast.showSuccessToast(PKUHelper.pkuhelper, "注销成功");
+								setName();
+								IAAA.showLoginView();
+							}
+						}).show();
+			}
+		});
 
 		ViewSetting.setOnClickListener(settingView, R.id.settings_gesture, new View.OnClickListener() {
 

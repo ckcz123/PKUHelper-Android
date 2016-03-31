@@ -1,6 +1,7 @@
 package com.pkuhelper.lib;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
 
 import com.pkuhelper.lib.view.CustomToast;
@@ -33,6 +34,27 @@ public class RequestingTask extends AsyncTask<ArrayList<Parameters>, String, Par
 		requestString = url;
 		requestType = type;
 	}
+
+    /**
+     * 发起一个http调用；如果访问失败那么直接Toast提醒，无返回
+     *
+     * @param msg  提示消息
+     * @param url  请求地址
+     * @param type 访问类型
+     */
+    public RequestingTask(BaseActivity activity, Context context, String msg, String url, int type) {
+        baseActivity = activity;
+        progressDialog = new ProgressDialog(context);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setTitle("提示");
+        progressDialog.setMessage(msg);
+        progressDialog.setIndeterminate(false);
+        progressDialog.setCancelable(false);
+        requestString = url;
+        requestType = type;
+    }
+
+
 
 	@Override
 	protected void onPreExecute() {

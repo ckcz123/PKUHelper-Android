@@ -35,6 +35,7 @@ import com.pkuhelper.noticecenter.NCActivity;
 import com.pkuhelper.pkuhole.old.PKUHoleActivity;
 import com.pkuhelper.subactivity.SubActivity;
 import com.pkuhelper.ui.hole.impl.HoleActivity;
+import com.pkuhelper.ui.main.impl.PkuHelperActivity;
 
 import java.util.ArrayList;
 
@@ -217,12 +218,12 @@ public class SchoolLifeFragment extends Fragment {
     private static void click(String string) {
         if ("tzzx".equals(string))
             PKUHelper.pkuhelper.startActivity(
-                    new Intent(PKUHelper.pkuhelper, NCActivity.class));
+                    new Intent(PkuHelperActivity.pkuHelperActivity, NCActivity.class));
         else if ("xmtlm".equals(string))
             PKUHelper.pkuhelper.startActivity(
-                    new Intent(PKUHelper.pkuhelper, MediaActivity.class));
+                    new Intent(PkuHelperActivity.pkuHelperActivity, MediaActivity.class));
         else if ("cjcx".equals(string))
-            Dean.getSessionId(Dean.FLAG_GETTING_GRADE);
+            Dean.getSessionID(Dean.FLAG_GETTING_GRADE, PkuHelperActivity.pkuHelperActivity);
         else if ("jscx".equals(string))
             PKUHelper.pkuhelper.startActivity(
                     new Intent(PKUHelper.pkuhelper, ClassActivity.class));

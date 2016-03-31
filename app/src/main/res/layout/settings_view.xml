@@ -56,7 +56,7 @@
                         android:layout_height="wrap_content"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
-                        android:text="使用测试版本(关闭后台，重开生效)"
+                        android:text="使用测试版本(关闭重开生效)"
                         android:textSize="15sp"
                         />
 
@@ -177,6 +177,7 @@
                     android:textSize="15sp" />
 
                 <View
+                    android:id="@+id/line_ipgw"
                     android:layout_width="fill_parent"
                     android:layout_height="1dip"
                     android:background="#e8e8e7"/>
@@ -194,6 +195,7 @@
                     />
 
                 <View
+                    android:id="@+id/line_course"
                     android:layout_width="fill_parent"
                     android:layout_height="1dip"
                     android:background="#e8e8e7"/>
@@ -211,6 +213,7 @@
                     />
 
                 <View
+                    android:id="@+id/line_notification"
                     android:layout_width="fill_parent"
                     android:layout_height="1dip"
                     android:background="#e8e8e7"/>
@@ -229,6 +232,7 @@
                     />
 
                 <View
+                    android:id="@+id/line_gesture"
                     android:layout_width="fill_parent"
                     android:layout_height="1dip"
                     android:background="#e8e8e7"/>
@@ -259,6 +263,7 @@
                 </TableRow>
 
                 <View
+                    android:id="@+id/line_mail"
                     android:layout_width="fill_parent"
                     android:layout_height="1dip"
                     android:background="#e8e8e7"/>
