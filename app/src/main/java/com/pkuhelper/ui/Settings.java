@@ -213,7 +213,7 @@ public class Settings extends Fragment {
 		ViewSetting.setOnClickListener(settingView, R.id.settings_petest, new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				PE.setPeTestPassword();
+				PE.setPeTestPassword(mContext);
 			}
 		});
 		ViewSetting.setOnClickListener(settingView, R.id.settings_clearcache, new View.OnClickListener() {

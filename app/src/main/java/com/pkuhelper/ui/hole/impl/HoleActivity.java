@@ -57,13 +57,18 @@ public class HoleActivity extends BaseActivity implements IHoleUI {
     private TabLayout tabLayout;
     private FloatingActionButton fab;
 
+    private boolean isMine;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hole);
+
         setTitle("P大树洞");
         mHolePresenter = new HolePresenter(this);
         mHolePresenter.setHoleUI(this);
+
+        isMine = getIntent().getBooleanExtra("isMine",false);
 
         setupContentView();
         setupViewPager();
@@ -312,6 +317,9 @@ public class HoleActivity extends BaseActivity implements IHoleUI {
         mHolePagerAdapter = new HolePagerAdapter(getSupportFragmentManager(), fragments);
         viewPager = (ViewPager) findViewById(R.id.vp_hole_content);
         viewPager.setAdapter(mHolePagerAdapter);
+
+        if (isMine)
+            viewPager.setCurrentItem(1,true);
 //        /*
 //        * 将树洞主页和关注的树洞分别加载在两个layout中
 //        * */

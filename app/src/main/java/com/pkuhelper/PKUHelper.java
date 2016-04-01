@@ -340,8 +340,8 @@ public class PKUHelper extends BaseActivity {
 			startActivity(new Intent(this, ChatActivity.class));
 		} else if ("pkuhole".equals(type)) {
 			clickMYPKU(null);
-			Intent intent = new Intent(this, HoleActivity.class);
-			intent.putExtra("page", HoleActivity.PAGE_MINE);
+			Intent intent = new Intent(this, com.pkuhelper.ui.hole.impl.HoleActivity.class);
+			intent.putExtra("isMine", true);
 			startActivity(intent);
 		}
 	}
