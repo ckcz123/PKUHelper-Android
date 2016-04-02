@@ -6,7 +6,9 @@ import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.design.widget.TabLayout;
 import android.support.v13.app.FragmentPagerAdapter;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.ContextMenu;
@@ -14,6 +16,7 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,13 +26,23 @@ import com.pkuhelper.lib.Constants;
 import com.pkuhelper.lib.Editor;
 import com.pkuhelper.lib.view.CustomToast;
 import com.pkuhelper.lib.view.CustomViewPager;
+import com.pkuhelper.ui.hole.IHoleListUI;
+import com.pkuhelper.util.SizeUtil;
 
 import java.util.ArrayList;
+
+import in.srain.cube.views.ptr.PtrClassicFrameLayout;
+import in.srain.cube.views.ptr.PtrDefaultHandler;
+import in.srain.cube.views.ptr.PtrFrameLayout;
+import in.srain.cube.views.ptr.PtrHandler;
+import in.srain.cube.views.ptr.header.MaterialHeader;
 
 public class BBSActivity extends BaseActivity {
 	public static BBSActivity bbsActivity;
 	public CustomViewPager mViewPager;
 	private Toolbar toolbar;
+	private TabLayout tabLayout;
+    private PtrClassicFrameLayout ptrLayout;
 
 	Handler handler = new Handler(new Handler.Callback() {
 		public boolean handleMessage(Message msg) {
@@ -47,6 +60,7 @@ public class BBSActivity extends BaseActivity {
 
 		//material design update Mar27
 		setupToolbar();
+
 
 		bbsActivity = this;
 		mViewPager = (CustomViewPager) findViewById(R.id.bbspager);
@@ -66,6 +80,19 @@ public class BBSActivity extends BaseActivity {
 					return Fragment.instantiate(bbsActivity, "com.pkuhelper.bbs.UserinfoFragment");
 				return Fragment.instantiate(bbsActivity, "com.pkuhelper.bbs.TopFragment");
 			}
+
+			@Override
+			public CharSequence getPageTitle(int arg0) {
+				if (arg0 == 0)
+					return "热门";
+				if (arg0 == 1)
+					return "版面";
+				if (arg0 == 2)
+					return "搜索";
+				if (arg0 == 3)
+					return "个人";
+				return "";
+			}
 		});
 		mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
 			@Override
@@ -76,6 +103,11 @@ public class BBSActivity extends BaseActivity {
 				else if (position == 3) clickMe(null);
 			}
 		});
+
+		// material design tab: 4/2/16
+		tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+		tabLayout.setupWithViewPager(mViewPager);
+
 		Board.load();
 		Userinfo.load();
 		TopFragment.tops = new ArrayList<ThreadInfo>();
@@ -216,5 +248,6 @@ public class BBSActivity extends BaseActivity {
 		if (type == Constants.REQUEST_BBS_SEARCH)
 			SearchFragment.finishSearch(string);
 	}
+
 
 }

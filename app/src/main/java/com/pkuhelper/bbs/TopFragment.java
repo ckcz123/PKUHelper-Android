@@ -1,9 +1,14 @@
 package com.pkuhelper.bbs;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,24 +23,34 @@ import com.pkuhelper.lib.RequestingTask;
 import com.pkuhelper.lib.ViewSetting;
 import com.pkuhelper.lib.view.CustomToast;
 import com.pkuhelper.lib.webconnection.Parameters;
+import com.pkuhelper.ui.CompatListView;
+import com.pkuhelper.ui.hole.IHoleListUI;
+import com.pkuhelper.util.SizeUtil;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import in.srain.cube.views.ptr.PtrClassicFrameLayout;
+import in.srain.cube.views.ptr.PtrDefaultHandler;
+import in.srain.cube.views.ptr.PtrFrameLayout;
+import in.srain.cube.views.ptr.PtrHandler;
+import in.srain.cube.views.ptr.header.MaterialHeader;
+
 public class TopFragment extends Fragment {
 	public static TopFragment topFragment;
 	public static ArrayList<ThreadInfo> tops = new ArrayList<ThreadInfo>();
 	static View topView;
-
-	@Override
+    private static PtrClassicFrameLayout ptrLayout;
+    @Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.bbs_top_listview, container, false);
 		topFragment = this;
 		topView = rootView;
 		realShowView(true);
+        setupPtrLayout(rootView);
 		return rootView;
 	}
 
@@ -68,6 +83,7 @@ public class TopFragment extends Fragment {
 			}
 			realShowView(false);
 		}
+        ptrLayout.refreshComplete();
 	}
 
 	public static void realShowView(boolean refresh) {
@@ -76,11 +92,11 @@ public class TopFragment extends Fragment {
 			return;
 		}
 
-		ListView listView = (ListView) topView.findViewById(R.id.bbs_top_listview);
+		CompatListView listView = (CompatListView) topView.findViewById(R.id.lv_bbs);
 		listView.setAdapter(new BaseAdapter() {
 			@Override
 			@SuppressLint("ViewHolder")
-			public View getView(int position, View convertView, ViewGroup parent) {
+			public View getView(final int position, View convertView, ViewGroup parent) {
 				convertView = BBSActivity.bbsActivity.getLayoutInflater().inflate(R.layout.bbs_top_listitem,
 						parent, false);
 				ThreadInfo threadInfo = tops.get(position);
@@ -90,6 +106,19 @@ public class TopFragment extends Fragment {
 				ViewSetting.setTextView(convertView, R.id.bbs_top_item_author, threadInfo.author);
 				ViewSetting.setTextView(convertView, R.id.bbs_top_item_time,
 						MyCalendar.format(threadInfo.time));
+
+                CardView cardView = (CardView) convertView.findViewById(R.id.card_bbs_item);
+                cardView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ThreadInfo threadInfo = tops.get(position);
+                        Intent intent = new Intent(BBSActivity.bbsActivity, ViewActivity.class);
+                        intent.putExtra("board", threadInfo.board);
+                        intent.putExtra("threadid", threadInfo.threadid + "");
+                        intent.putExtra("type", "thread");
+                        BBSActivity.bbsActivity.startActivity(intent);
+                    }
+                });
 				return convertView;
 			}
 
@@ -124,4 +153,39 @@ public class TopFragment extends Fragment {
 
 	}
 
+    /**
+     * 配置PullToRefreshLayout
+     * @param view rootView
+     */
+    @TargetApi(Build.VERSION_CODES.M)
+    private void setupPtrLayout(View view) {
+        Context mContext = getContext();
+        ptrLayout = (PtrClassicFrameLayout) view.findViewById(R.id.ptr_bbs_list);
+
+        ptrLayout.setPtrHandler(new PtrDefaultHandler() {
+            @Override
+            public void onRefreshBegin(PtrFrameLayout ptrFrameLayout) {
+                TopFragment.showView();
+            }
+        });
+
+        // 设置下拉刷新时ListView保持不动（仿Chrome刷新效果）
+        ptrLayout.setPinContent(true);
+
+        // set material pull-to-refresh progressBar
+        final MaterialHeader header = new MaterialHeader(getActivity());
+        header.setPtrFrameLayout(ptrLayout);
+        int[] colors = {
+                ContextCompat.getColor(mContext, R.color.colorPrimaryDark),
+                ContextCompat.getColor(mContext, R.color.colorPrimary) };
+        header.setColorSchemeColors(colors);
+        header.setLayoutParams(new PtrFrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        header.setPadding(0, SizeUtil.dip2px(mContext, 16), 0, SizeUtil.dip2px(mContext, 16));
+        ptrLayout.setHeaderView(header);
+        ptrLayout.addPtrUIHandler(header);
+    }
+
+    public void completePullToRefresh() {
+        ptrLayout.refreshComplete();
+    }
 }
