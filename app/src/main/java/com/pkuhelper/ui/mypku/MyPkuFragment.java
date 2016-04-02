@@ -276,12 +276,12 @@ Mar 15
 
     private static void longClick() {
         String[] strings = new String[]{"编辑项目"};
-        new AlertDialog.Builder(PKUHelper.pkuhelper).setItems(strings, new DialogInterface.OnClickListener() {
+        new AlertDialog.Builder(PkuHelperActivity.pkuHelperActivity).setItems(strings, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(PKUHelper.pkuhelper, SubActivity.class);
+                Intent intent = new Intent(PkuHelperActivity.pkuHelperActivity, SubActivity.class);
                 intent.putExtra("type", Constants.SUBACTIVITY_TYPE_MYPKU_SET);
-                PKUHelper.pkuhelper.startActivity(intent);
+                PkuHelperActivity.pkuHelperActivity.startActivity(intent);
             }
         }).show();
     }

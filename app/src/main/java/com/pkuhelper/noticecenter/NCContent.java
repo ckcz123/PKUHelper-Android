@@ -9,6 +9,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -178,9 +179,9 @@ public class NCContent {
 			@SuppressLint("ViewHolder")
 			@Override
 			public View getView(int position, View convertView, ViewGroup parent) {
-				NCActivity ncActivity = NCActivity.ncActivity;
-				Content content = ncActivity.contentListArray.get(position);
-				String sid = content.sid;
+				final NCActivity ncActivity = NCActivity.ncActivity;
+				final Content content = ncActivity.contentListArray.get(position);
+				final String sid = content.sid;
 				Notice notice = ncActivity.sourceListMap.get(sid);
 				LayoutInflater inflater = ncActivity.getLayoutInflater();
 				convertView = inflater.inflate(R.layout.nc_viewcontent_item, parent, false);
@@ -190,7 +191,29 @@ public class NCContent {
 				ViewSetting.setTextView(convertView, R.id.nc_viewcontent_text, content.subscribe);
 				ViewSetting.setImageDrawable(convertView, R.id.nc_viewcontent_image, notice.icon);
 				convertView.setTag(sid);
-				return convertView;
+
+                // Material design: 4/2/16
+                CardView cardView = (CardView) convertView.findViewById(R.id.card_nc_item);
+
+                cardView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ncActivity.contentPosition = ncActivity.contentListView.getFirstVisiblePosition();
+                        if ("0".equals(sid)) {
+                            NCDetail.getCourse(content.title, content.url);
+                            return;
+                        }
+                        Drawable drawable = ncActivity.sourceListMap.get(content.sid).icon;
+                        Bitmap bitmap;
+                        if (drawable == null) bitmap = null;
+                        else bitmap = ((BitmapDrawable) drawable).getBitmap();
+                        NCDetail.showDirectly(content.title, Integer.parseInt(sid),
+                                content.nid, content.subscribe, bitmap);
+                    }
+                });
+
+
+                return convertView;
 			}
 
 			@Override
