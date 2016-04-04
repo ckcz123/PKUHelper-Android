@@ -78,7 +78,7 @@ public class SchoolLifeFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.mypku_view,
                 container, false);
         mypkuView = rootView;
-        String string = Editor.getString(PKUHelper.pkuhelper, "mypku_notwants");
+        String string = Editor.getString(PkuHelperActivity.pkuHelperActivity, "mypku_notwants");
         try {
             setView(getList(publics, string), R.id.mypku_public, "");
         } catch (Exception e) {

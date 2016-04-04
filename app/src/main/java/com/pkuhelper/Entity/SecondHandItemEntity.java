@@ -7,14 +7,16 @@ import java.util.ArrayList;
  */
 public class SecondHandItemEntity {
 
-    String type;
-    String category1;
-    String category2;
-    String name;
-    String description;
-    double price;
-    boolean daoable;
-    ArrayList<ItemImage> itemImages = new ArrayList<>(5);
+    private String timestamp;
+    private String type;
+    private String category1;
+    private String category2;
+    private String name;
+    private String description;
+    private int price;
+    private boolean daoable;
+    private ArrayList<String> images = new ArrayList<>();
+    private ArrayList<ItemImage> itemImages = new ArrayList<>(5);
 
     public SecondHandItemEntity() {
 
@@ -60,11 +62,11 @@ public class SecondHandItemEntity {
         this.description = description;
     }
 
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
@@ -76,10 +78,35 @@ public class SecondHandItemEntity {
         this.daoable = daoable;
     }
 
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
+
+
+    public ArrayList<ItemImage> getItemImages() {
+        return itemImages;
+    }
+
+    public void setItemImages(ArrayList<ItemImage> itemImages) {
+        this.itemImages = itemImages;
+    }
+
+    public ArrayList<String> getImages() {
+        return images;
+    }
+
+    public void setImages(ArrayList<String> images) {
+        this.images = images;
+    }
+
     public class ItemImage{
-        String filename;
-        String description;
-        int showOrder;
+        private String filename;
+        private String description;
+        private int showOrder;
 
         public ItemImage() {
         }

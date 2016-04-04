@@ -19,7 +19,7 @@ public interface ISecondHandMod {
      * @param Category2 第二类别
      * @param keyword 搜索关键字
      */
-    void getItemList(String type, int page, String category1, String Category2, String keyword);
+    void getItemList(String type, int page, String category1, String category2, String keyword, Callback<ArrayList<SecondHandItemEntity>> callback);
 
     /**
      * 获取列表(不搜索)
@@ -55,7 +55,7 @@ public interface ISecondHandMod {
 
     /**
      * @param itemID 商品id
-     * @param status deal/cancel/canceldeal/reactive
+     * @param status active/deal/cancel/canceldeal/reactive
      */
     void changeItemStatus(int itemID, String status);
 

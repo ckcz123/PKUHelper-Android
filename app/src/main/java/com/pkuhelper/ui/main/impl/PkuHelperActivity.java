@@ -163,7 +163,6 @@ public class PkuHelperActivity extends BaseActivity implements IPkuHelperUI, Nav
             hideAllFragments();
             getSupportFragmentManager().beginTransaction().show(schoolLifeFragment).commit();
         } else if (id == R.id.nav_my_pku) {
-            Log.d("fragment", "ipgw start");
             hideAllFragments();
             getSupportFragmentManager().beginTransaction().show(mypkuFragment).commit();
         } else if (id == R.id.nav_hole) {
@@ -173,6 +172,7 @@ public class PkuHelperActivity extends BaseActivity implements IPkuHelperUI, Nav
             hideAllFragments();
             mPkuHelperPresenter.startBBSUI();
         } else if (id == R.id.nav_settings){
+
             hideAllFragments();
             getSupportFragmentManager().beginTransaction().show(settingFragment).commit();
         }
