@@ -11,8 +11,8 @@ import java.util.List;
  */
 public class SecondHandPagerAdapter extends FragmentPagerAdapter {
     private static final String TAG = "HolePagerAdapter";
-    private static final int PAGER_SIZE = 2;
-
+//    private static final int PAGER_SIZE = 2;
+    private List<String> titles;
     private List<SecondHandListFragment> mFragments;
 
     public SecondHandPagerAdapter(FragmentManager fm, List<SecondHandListFragment> fragments) {
@@ -27,17 +27,15 @@ public class SecondHandPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return PAGER_SIZE;
+        return titles.size();
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-        switch (position) {
-            case 0:
-                return "全部";
-            case 1:
-                return "其它";
-        }
-        return null;
+        return titles.get(position);
+    }
+
+    public void setTitles(List<String> titles){
+        this.titles = titles;
     }
 }

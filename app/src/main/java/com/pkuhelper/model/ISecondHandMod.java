@@ -2,6 +2,7 @@ package com.pkuhelper.model;
 
 import android.telecom.Call;
 
+import com.pkuhelper.entity.SecondHandCategoryEntity;
 import com.pkuhelper.entity.SecondHandItemEntity;
 
 import java.util.ArrayList;
@@ -62,7 +63,7 @@ public interface ISecondHandMod {
     /**
      * @param callback
      */
-    void getCategoryList(Callback callback);
+    void getCategoryList(Callback<ArrayList<SecondHandCategoryEntity>> callback);
 
     /**
      * @param itemID

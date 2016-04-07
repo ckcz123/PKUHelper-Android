@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,8 @@ import in.srain.cube.views.ptr.header.MaterialHeader;
  */
 public class SecondHandListFragment extends Fragment implements ISecondHandList {
     private static final String ARG_POSITION = "Position_SecondHandListFragment";
+
+    private static final String TAG="SecondHandListFragment";
     private Context mContext;
     private SecondHandListAdapter mAdapter;
     private CompatListView listView;
@@ -83,7 +86,12 @@ public class SecondHandListFragment extends Fragment implements ISecondHandList 
 
     public void setupAdapter(ArrayList<SecondHandItemEntity> entities){
         mAdapter = new SecondHandListAdapter(mContext,entities);
-        listView.setAdapter(mAdapter);
+        try {
+            listView.setAdapter(mAdapter);
+        }catch (Exception e){
+            Log.d(TAG, e.getMessage());
+            e.printStackTrace();
+        }
     }
 
 

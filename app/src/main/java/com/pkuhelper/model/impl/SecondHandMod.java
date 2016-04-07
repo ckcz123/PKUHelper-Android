@@ -10,12 +10,15 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.pkuhelper.AppContext;
+import com.pkuhelper.entity.SecondHandCategoryEntity;
 import com.pkuhelper.entity.SecondHandItemEntity;
 import com.pkuhelper.manager.ApiManager;
 import com.pkuhelper.model.Callback;
 import com.pkuhelper.model.ISecondHandMod;
+import com.pkuhelper.ui.main.impl.PkuHelperActivity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by zyxu on 4/4/16.
@@ -29,6 +32,9 @@ public class SecondHandMod implements ISecondHandMod {
     private Gson gson = new Gson();
 
     public SecondHandMod(Context context) {
+
+        // TODO: 4/8/16 DEV
+        context = PkuHelperActivity.pkuHelperActivity;
         mContext = (AppContext) context.getApplicationContext();
         mApiManager = ApiManager.getInstance();
         mUserMod = new UserMod(mContext);
@@ -118,7 +124,41 @@ public class SecondHandMod implements ISecondHandMod {
     }
 
     @Override
-    public void getCategoryList(Callback callback) {
+    public void getCategoryList(final Callback<ArrayList<SecondHandCategoryEntity>> callback) {
+        ArrayList<ApiManager.Parameter> params = new ArrayList<>();
+        sendRequest("getCategoryList", params, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String jsonStr) {
+                try {
+                    JsonObject response = gson.fromJson(jsonStr, JsonObject.class);
+                    int code = response.get("code").getAsInt();
+                    if (code == 0) {
+                        ArrayList<SecondHandCategoryEntity> mods;
+                        JsonObject result = response.get("result").getAsJsonObject();
+                        String version = result.get("version").getAsString();
+                        Log.d(TAG,version);
+                        Log.d(TAG,result.get("categories")+"");
+                        // TODO: 4/8/16
+                        mods = gson.fromJson(result.get("categories"), new TypeToken<ArrayList<SecondHandCategoryEntity>>(){}.getType());
+                        Log.d(TAG,"category num:"+mods.size());
+                        callback.onFinished(code, mods);
+                    } else {
+                        String msg = response.get("msg").getAsString();
+                        Log.v(TAG, ("error, code=" + code) + " " + msg);
+                        callback.onError(msg);
+                    }
+                } catch (JsonSyntaxException e) {
+                    e.printStackTrace();
+                    callback.onError(e.getMessage());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                callback.onError(volleyError.getMessage());
+            }
+        });
+
 
     }
 

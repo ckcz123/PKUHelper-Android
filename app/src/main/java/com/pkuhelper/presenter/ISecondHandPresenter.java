@@ -9,6 +9,7 @@ import com.pkuhelper.ui.secondHand.ISecondHandUI;
 public interface ISecondHandPresenter {
 
     void setUI(ISecondHandUI ui);
-    void setListUI(ISecondHandList listUI);
-    void load();
+    void setListUI(ISecondHandList listUI, int showOrder);
+    void load(int showOrder, String category1);
+    void refreshCategory();
 }

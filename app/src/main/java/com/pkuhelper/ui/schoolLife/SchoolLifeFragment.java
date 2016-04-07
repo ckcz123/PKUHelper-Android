@@ -54,6 +54,7 @@ public class SchoolLifeFragment extends Fragment {
             , {"bjyc", "百讲演出", R.drawable.bjyc + ""}
             , {"jscx", "教室查询", R.drawable.jscx + ""}
             , {"swzl", "失物招领", R.drawable.lostfound + ""}
+            ,{"espt","二手平台",R.drawable.lostfound+""}
             , {"cyxx", "常用信息", R.drawable.cyxx + ""}
             , {"xmtlm", "新媒体联盟", R.drawable.xmtlm + ""}
     };
@@ -258,7 +259,11 @@ public class SchoolLifeFragment extends Fragment {
             intent.setClass(PKUHelper.pkuhelper, SubActivity.class);
             intent.putExtra("type", Constants.SUBACTIVITY_TYPE_WEBVIEW_PKUMAIL);
             PKUHelper.pkuhelper.startActivity(intent);
-        } else if ("swzl".equals(string)) {
+        }else if ("espt".equals(string)){
+            PKUHelper.pkuhelper.startActivity(
+                    new Intent(PKUHelper.pkuhelper, com.pkuhelper.ui.secondHand.SecondHandActivity.class));
+        }
+        else if ("swzl".equals(string)) {
             if (!Constants.isValidLogin()) {
                 CustomToast.showInfoToast(PKUHelper.pkuhelper, "请先进行有效登录！");
                 return;
