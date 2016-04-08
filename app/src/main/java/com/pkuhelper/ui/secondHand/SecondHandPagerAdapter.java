@@ -3,6 +3,7 @@ package com.pkuhelper.ui.secondHand;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.util.Log;
 
 import java.util.List;
 
@@ -17,11 +18,15 @@ public class SecondHandPagerAdapter extends FragmentPagerAdapter {
 
     public SecondHandPagerAdapter(FragmentManager fm, List<SecondHandListFragment> fragments) {
         super(fm);
+        Log.d(TAG, "Fragment Size:"+fragments.size());
+        for (int i=0;i<fragments.size();i++)
+            Log.d(TAG, fragments.get(i).showOrder+"");
         mFragments = fragments;
     }
 
     @Override
     public Fragment getItem(int position) {
+        Log.d(TAG,"position:"+position);
         return mFragments.get(position);
     }
 

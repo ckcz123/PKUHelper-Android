@@ -47,8 +47,9 @@ public class SecondHandPresenter implements ISecondHandPresenter {
     }
 
     @Override
-    public void load(int showOrder,String category1) {
-        getList(showOrder, strSale, 0, category1, "", "");
+    public void load(ISecondHandList mList,String category1) {
+        secondHandUI.showProgressBar();
+        getList(mList, strSale, 0, category1, "", "");
     }
 
     @Override
@@ -72,22 +73,28 @@ public class SecondHandPresenter implements ISecondHandPresenter {
         secondHandMod.getCategoryList(callback);
     }
 
-    public void getList(final int showOrder, String type, int page, String category1, String category2, String keywords){
+    public void getList(final ISecondHandList mList, String type, int page, String category1, String category2, String keywords){
         Callback<ArrayList<SecondHandItemEntity>> callback = new Callback<ArrayList<SecondHandItemEntity>>() {
             @Override
             public void onFinished(int code, ArrayList<SecondHandItemEntity> data) {
                 int size = data.size();
                 if (size>0) {
-                    secondHandList.get(showOrder).showList(data);
+                    mList.showList(data);
                     secondHandUI.hideProgressBar();
+//                    secondHandUI.showProgressBar();
                 }
             }
 
             @Override
             public void onError(String msg) {
-                Log.d(TAG, msg);
+                try {
+                    Log.d(TAG, msg);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
             }
         };
+        Log.d(TAG, "Get "+category1);
         secondHandMod.getItemList(type,page,category1,category2,keywords,callback);
     }
 }

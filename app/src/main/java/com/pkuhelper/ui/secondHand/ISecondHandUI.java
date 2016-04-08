@@ -11,4 +11,5 @@ import java.util.ArrayList;
 public interface ISecondHandUI {
     void setupViewPager(ArrayList<SecondHandCategoryEntity> entities);
     void hideProgressBar();
+    void showProgressBar();
 }

@@ -12,7 +12,9 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 
 import com.pkuhelper.R;
+import com.pkuhelper.entity.SecondHandCategoryEntity;
 import com.pkuhelper.entity.SecondHandItemEntity;
+import com.pkuhelper.presenter.ISecondHandPresenter;
 import com.pkuhelper.ui.CompatListView;
 import com.pkuhelper.ui.hole.IHoleListUI;
 import com.pkuhelper.util.SizeUtil;
@@ -32,18 +34,63 @@ public class SecondHandListFragment extends Fragment implements ISecondHandList 
     private static final String ARG_POSITION = "Position_SecondHandListFragment";
 
     private static final String TAG="SecondHandListFragment";
+
+    private ISecondHandPresenter mPresenter;
+    public int showOrder;
+    private SecondHandCategoryEntity mEntity;
+
     private Context mContext;
     private SecondHandListAdapter mAdapter;
     private CompatListView listView;
     private PtrClassicFrameLayout ptrLayout;
+    private boolean isVisible;
+    private boolean isInitialized = false;
+    private ArrayList<SecondHandItemEntity> mData;
 
     public static SecondHandListFragment newInstance(int position) {
         Bundle args = new Bundle();
         args.putInt(ARG_POSITION, position);
         SecondHandListFragment fragment = new SecondHandListFragment();
         fragment.setArguments(args);
+
         return fragment;
     }
+
+    public void setArgs(int position, SecondHandCategoryEntity entity,  ISecondHandPresenter presenter){
+        showOrder = position;
+        mEntity = entity;
+        mPresenter = presenter;
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser){
+        super.setUserVisibleHint(isVisibleToUser);
+
+        Log.d(TAG, "showOrder:" + showOrder + "");
+        if (getUserVisibleHint()){
+            isVisible = true;
+            onVisible();
+        }
+        else{
+            isVisible = false;
+        }
+    }
+
+    private void onVisible(){
+
+        if (!isInitialized) {
+            if (mEntity != null) {
+                Log.d(TAG, "request:" + mEntity.getId());
+                String category = mEntity.getId();
+                mPresenter.load(this, category);
+            } else {
+                mPresenter.load(this, "");
+            }
+        }
+
+    }
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,8 +101,12 @@ public class SecondHandListFragment extends Fragment implements ISecondHandList 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_secondhand_list, container, false);
-        setupListView(view);
-        setupPtrLayout(view);
+
+            setupListView(view);
+            setupPtrLayout(view);
+
+        if (isInitialized && mData!=null)
+            setupAdapter(mData);
         return view;
     }
 
@@ -97,6 +148,8 @@ public class SecondHandListFragment extends Fragment implements ISecondHandList 
 
     @Override
     public void showList(ArrayList<SecondHandItemEntity> data) {
-        setupAdapter(data);
+        mData = data;
+        setupAdapter(mData);
+        isInitialized = true;
     }
 }
