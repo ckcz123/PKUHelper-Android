@@ -38,4 +38,11 @@ public class UserMod implements IUserMod {
     public String getUserDepartment() {
         return mContext.getUserEntity().getDepartment();
     }
+
+    @Override
+    public String getUserID() {
+        return mContext.getUserEntity().getUsername();
+    }
+
+
 }

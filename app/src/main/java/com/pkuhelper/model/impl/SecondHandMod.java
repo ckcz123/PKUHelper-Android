@@ -10,8 +10,10 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.pkuhelper.AppContext;
+import com.pkuhelper.PKUHelper;
 import com.pkuhelper.entity.SecondHandCategoryEntity;
 import com.pkuhelper.entity.SecondHandItemEntity;
+import com.pkuhelper.lib.Editor;
 import com.pkuhelper.manager.ApiManager;
 import com.pkuhelper.model.Callback;
 import com.pkuhelper.model.ISecondHandMod;
@@ -72,7 +74,7 @@ public class SecondHandMod implements ISecondHandMod {
                     int code = response.get("code").getAsInt();
                     if (code == 0) {
                         ArrayList<SecondHandItemEntity> mods;
-                        mods = gson.fromJson(response.get("result"), new TypeToken<ArrayList<SecondHandItemEntity>>() {
+                        mods = gson.fromJson(response.get("result"), new TypeToken<ArrayList<SecondHandItemEntity<String>>>() {
                         }.getType());
                         callback.onFinished(code, mods);
                     } else {
@@ -104,8 +106,37 @@ public class SecondHandMod implements ISecondHandMod {
     }
 
     @Override
-    public void getItem(int itemID, Callback<SecondHandItemEntity> callback) {
+    public void getItem(String itemID, final Callback<SecondHandItemEntity> callback) {
+        ArrayList<ApiManager.Parameter> params = new ArrayList<>();
+        params.add(mApiManager.makeParam("itemID",itemID));
 
+        sendRequest("getitem", params, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String jsonStr) {
+                try {
+                    JsonObject response = gson.fromJson(jsonStr, JsonObject.class);
+                    int code = response.get("code").getAsInt();
+                    if (code == 0) {
+                        SecondHandItemEntity mods;
+                        mods = gson.fromJson(response.get("result"), new TypeToken<SecondHandItemEntity<SecondHandItemEntity.ItemImage>>() {
+                        }.getType());
+                        callback.onFinished(code, mods);
+                    } else {
+                        String msg = response.get("msg").getAsString();
+                        Log.v(TAG, ("error, code=" + code) + " " + msg);
+                        callback.onError(msg);
+                    }
+                } catch (JsonSyntaxException e) {
+                    e.printStackTrace();
+                    callback.onError(e.getMessage());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                callback.onError(volleyError.getMessage());
+            }
+        });
     }
 
     @Override
@@ -163,7 +194,44 @@ public class SecondHandMod implements ISecondHandMod {
     }
 
     @Override
-    public void createSession(int itemID, Callback<Integer> callback) {
+    public void createSession(String itemID, final Callback<String> callback) {
+        ArrayList<ApiManager.Parameter> params = new ArrayList<>();
 
+        String uid = Editor.getString(PKUHelper.pkuhelper,"username");
+
+        params.add(mApiManager.makeParam("uid",uid));
+        params.add(mApiManager.makeParam("token",mUserMod.getToken()));
+        params.add(mApiManager.makeParam("itemID",itemID));
+
+        // TODO: 4/12/16 USERID!!!
+        Log.d(TAG,"userid:"+uid);
+        Log.d(TAG,"token"+mUserMod.getToken());
+
+        sendRequest("createsession", params, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String jsonStr) {
+                try {
+                    Log.d(TAG,jsonStr);
+                    JsonObject response = gson.fromJson(jsonStr, JsonObject.class);
+                    int code = response.get("code").getAsInt();
+                    if (code == 0) {
+                        String chatTo = response.get("result").getAsJsonObject().get("chatTo").getAsString();
+                        callback.onFinished(code, chatTo);
+                    } else {
+                        String msg = response.get("msg").getAsString();
+                        Log.d(TAG, "error, code=" + code + " " + msg);
+                        callback.onError(msg);
+                    }
+                } catch (JsonSyntaxException e) {
+                    e.printStackTrace();
+                    callback.onError(e.getMessage());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                callback.onError(volleyError.getMessage());
+            }
+        });
     }
 }

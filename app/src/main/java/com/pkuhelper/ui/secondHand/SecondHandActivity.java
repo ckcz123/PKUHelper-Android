@@ -1,6 +1,7 @@
 package com.pkuhelper.ui.secondHand;
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.ContentLoadingProgressBar;
@@ -62,6 +63,11 @@ public class SecondHandActivity extends BaseActivity implements ISecondHandUI {
     }
 
     @Override
+    public void showMessage(String msg) {
+        Snackbar.make(toolbar,msg,Snackbar.LENGTH_LONG);
+    }
+
+    @Override
     public void setupViewPager(ArrayList<SecondHandCategoryEntity> entities) {
         int size = entities.size();
         List<SecondHandListFragment> fragments = new ArrayList<SecondHandListFragment>(size+1){};
@@ -75,7 +81,7 @@ public class SecondHandActivity extends BaseActivity implements ISecondHandUI {
         //mPresenter.load(fragments.get(0),"");
 
         Collections.sort(entities,new sortByShowOrder());
-        
+
         for (int i=0;i<size;i++){
             SecondHandCategoryEntity entity = entities.get(i);
             int showOrder = entity.getShowOrder();

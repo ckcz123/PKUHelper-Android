@@ -10,6 +10,15 @@ public class UserEntity {
     private String gender;
     private String birthday;
     private String department;
+    private String username;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public String getToken() {
         return token;

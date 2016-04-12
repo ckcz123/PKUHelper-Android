@@ -12,4 +12,6 @@ public interface ISecondHandUI {
     void setupViewPager(ArrayList<SecondHandCategoryEntity> entities);
     void hideProgressBar();
     void showProgressBar();
+
+    void showMessage(String msg);
 }

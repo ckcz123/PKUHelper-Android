@@ -1,5 +1,6 @@
 package com.pkuhelper.presenter;
 
+import com.pkuhelper.ui.secondHand.ISecondHandItemUI;
 import com.pkuhelper.ui.secondHand.ISecondHandList;
 import com.pkuhelper.ui.secondHand.ISecondHandUI;
 
@@ -12,4 +13,6 @@ public interface ISecondHandPresenter {
     void setListUI(ISecondHandList listUI, int showOrder);
     void load(ISecondHandList mList, String category1);
     void refreshCategory();
+    void getItem(ISecondHandItemUI mItemUI, String itemID);
+    void createSessionByItemID(ISecondHandItemUI mItemUI, String itemID);
 }

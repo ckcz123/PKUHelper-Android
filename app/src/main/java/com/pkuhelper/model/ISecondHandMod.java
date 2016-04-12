@@ -39,7 +39,7 @@ public interface ISecondHandMod {
      * @param itemID 商品id
      * @param callback 返回商品实例
      */
-    void getItem(int itemID, Callback<SecondHandItemEntity> callback);
+    void getItem(String itemID, Callback<SecondHandItemEntity> callback);
 
     /**
      * 发布商品
@@ -69,5 +69,5 @@ public interface ISecondHandMod {
      * @param itemID
      * @param callback 返回chatTo
      */
-    void createSession(int itemID, Callback<Integer> callback);
+    void createSession(String itemID, Callback<String> callback);
 }

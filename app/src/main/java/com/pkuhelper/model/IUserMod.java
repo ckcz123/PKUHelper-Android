@@ -10,4 +10,6 @@ public interface IUserMod {
     String getUserName();
 
     String getUserDepartment();
+
+    String getUserID();
 }

@@ -10,6 +10,7 @@ import com.pkuhelper.model.Callback;
 import com.pkuhelper.model.ISecondHandMod;
 import com.pkuhelper.model.impl.SecondHandMod;
 import com.pkuhelper.presenter.ISecondHandPresenter;
+import com.pkuhelper.ui.secondHand.ISecondHandItemUI;
 import com.pkuhelper.ui.secondHand.ISecondHandList;
 import com.pkuhelper.ui.secondHand.ISecondHandUI;
 
@@ -65,7 +66,7 @@ public class SecondHandPresenter implements ISecondHandPresenter {
 
             @Override
             public void onError(String msg) {
-                Log.d(TAG,msg);
+                Log.d(TAG,msg+"");
             }
         };
 
@@ -96,5 +97,40 @@ public class SecondHandPresenter implements ISecondHandPresenter {
         };
         Log.d(TAG, "Get "+category1);
         secondHandMod.getItemList(type,page,category1,category2,keywords,callback);
+    }
+
+    public void getItem(final ISecondHandItemUI mItemUI, String itemID){
+
+        Callback<SecondHandItemEntity> callback = new Callback<SecondHandItemEntity>() {
+            @Override
+            public void onFinished(int code, SecondHandItemEntity data) {
+                mItemUI.setupContent(data);
+                mItemUI.hideProgressBar();
+            }
+
+            @Override
+            public void onError(String msg) {
+                mItemUI.showMessage(msg);
+                Log.d(TAG,msg+"");
+            }
+        };
+        secondHandMod.getItem(itemID,callback);
+    }
+
+    @Override
+    public void createSessionByItemID(final ISecondHandItemUI mItemUI, String itemID) {
+        Callback<String> callback = new Callback<String>() {
+            @Override
+            public void onFinished(int code, String data) {
+                mItemUI.startMessageSession(data);
+            }
+
+            @Override
+            public void onError(String msg) {
+                mItemUI.showMessage(msg+"");
+            }
+        };
+
+        secondHandMod.createSession(itemID,callback);
     }
 }

@@ -5,21 +5,32 @@ import java.util.ArrayList;
 /**
  * Created by zyxu on 3/31/16.
  */
-public class SecondHandItemEntity {
+public class SecondHandItemEntity<T> {
 
+    public final static String strImageLocation = "http://xiongdianpku.com/static/secondhand/image/";
     private String timestamp;
     private String type;
     private String category1;
     private String category2;
     private String name;
     private String description;
+    private String status;
+    private int itemID;
     private int price;
     private boolean daoable;
-    private ArrayList<String> images = new ArrayList<>();
-    private ArrayList<ItemImage> itemImages = new ArrayList<>(5);
+//    private ArrayList<String> images = new ArrayList<>();
+    private ArrayList<T> images = new ArrayList<>(5);
 
     public SecondHandItemEntity() {
 
+    }
+
+    public int getItemID() {
+        return itemID;
+    }
+
+    public void setItemID(int itemID) {
+        this.itemID = itemID;
     }
 
     public String getType() {
@@ -86,20 +97,20 @@ public class SecondHandItemEntity {
         this.timestamp = timestamp;
     }
 
-
-    public ArrayList<ItemImage> getItemImages() {
-        return itemImages;
+    public String getStatus() {
+        return status;
     }
 
-    public void setItemImages(ArrayList<ItemImage> itemImages) {
-        this.itemImages = itemImages;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public ArrayList<String> getImages() {
+
+    public ArrayList<T> getImages() {
         return images;
     }
 
-    public void setImages(ArrayList<String> images) {
+    public void setImages(ArrayList<T> images) {
         this.images = images;
     }
 
@@ -111,6 +122,9 @@ public class SecondHandItemEntity {
         public ItemImage() {
         }
 
+        public String getUrl(){
+            return strImageLocation+filename;
+        }
         public String getFilename() {
             return filename;
         }
