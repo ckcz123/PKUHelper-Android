@@ -56,13 +56,13 @@
                 android:orientation="horizontal">
                 <TextView
                     android:textSize="18dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="商品名"/>
                 <TextView
                     android:textSize="18dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:layout_width="0dp"
                     android:id="@+id/tv_title"
                     android:layout_height="wrap_content" />
@@ -77,7 +77,7 @@
                 android:orientation="horizontal">
                 <TextView
                     android:textSize="18dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="价格"/>
@@ -85,7 +85,7 @@
                     android:id="@+id/tv_price"
                     android:textSize="18dp"
                     android:textColor="@android:color/holo_red_light"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -100,13 +100,13 @@
                 android:orientation="horizontal">
                 <TextView
                     android:textSize="18dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="是否可刀"/>
                 <TextView
                     android:textSize="18dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:layout_width="0dp"
                     android:id="@+id/tv_daoable"
                     android:layout_height="wrap_content" />
@@ -121,13 +121,13 @@
                 android:orientation="horizontal">
                 <TextView
                     android:textSize="18dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="介绍"/>
                 <TextView
                     android:textSize="18dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:layout_width="0dp"
                     android:id="@+id/tv_description"
                     android:layout_height="wrap_content" />

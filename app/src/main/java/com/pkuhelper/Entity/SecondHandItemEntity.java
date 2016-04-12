@@ -17,7 +17,7 @@ public class SecondHandItemEntity<T> {
     private String status;
     private int itemID;
     private int price;
-    private boolean daoable;
+    private String daoable;
 //    private ArrayList<String> images = new ArrayList<>();
     private ArrayList<T> images = new ArrayList<>(5);
 
@@ -81,11 +81,14 @@ public class SecondHandItemEntity<T> {
         this.price = price;
     }
 
-    public boolean isDaoable() {
+    public String getDaoable() {
         return daoable;
     }
+    public boolean isDaoable(){
+        return daoable.equals("yes");
+    }
 
-    public void setDaoable(boolean daoable) {
+    public void setDaoable(String daoable) {
         this.daoable = daoable;
     }
 

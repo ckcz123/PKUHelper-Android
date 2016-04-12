@@ -61,7 +61,7 @@ public class SecondHandItemActivity extends BaseActivity implements ISecondHandI
 
     @Override
     public void hideProgressBar() {
-        pbInit.hide();
+        pbInit.setVisibility(View.GONE);
     }
 
     @Override
