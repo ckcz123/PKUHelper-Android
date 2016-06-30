@@ -280,7 +280,10 @@ public class PKUHelper extends BaseActivity {
 			IAAA.showLoginView();
 		} else {
 			//doWhenFirstLaunch();
-			dealWithActionType(getIntent().getStringExtra("type"));
+			if (!dealWithActionType(getIntent().getStringExtra("type"))) {
+				if (!Editor.getBoolean(this, "privacy", false))
+					showPrivacy();
+			}
 		}
 	}
 /*
@@ -296,8 +299,8 @@ public class PKUHelper extends BaseActivity {
 		}
 	}
 */
-	void dealWithActionType(String type) {
-		if (type == null) return;
+	boolean dealWithActionType(String type) {
+		if (type == null) return false;
 		if ("course".equals(type)) {
 			clickCourse(null);
 		} else if ("edit_course".equals(type)) {
@@ -318,6 +321,26 @@ public class PKUHelper extends BaseActivity {
 			intent.putExtra("page", HoleActivity.PAGE_MINE);
 			startActivity(intent);
 		}
+		else return false;
+		return true;
+	}
+
+	public void showPrivacy() {
+		new AlertDialog.Builder(this).setTitle("用户隐私条例")
+				.setMessage(Constants.privacy).setCancelable(false)
+				.setPositiveButton("我接受", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						Editor.putBoolean(pkuhelper, "privacy", true);
+					}
+				})
+				.setNegativeButton("我拒绝", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						Editor.putBoolean(pkuhelper, "privacy", false);
+						finish();
+					}
+				}).show();
 	}
 
 	protected void finishRequest(int type, String string) {

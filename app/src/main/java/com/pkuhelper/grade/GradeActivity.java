@@ -63,9 +63,12 @@ public class GradeActivity extends BaseActivity {
 
 	@SuppressWarnings("unchecked")
 	void getGrades() {
+		/*
 		new RequestingTask(this, "正在获取成绩...",
 				Constants.domain + "/services/pkuhelper/allGrade.php?phpsessid=" + phpsessid,
 				Constants.REQUEST_DEAN_GETTING_GRADE).execute(new ArrayList<Parameters>());
+				*/
+		new GradeTask(this, phpsessid).execute();
 	}
 
 	public void finishRequest(int type, String string) {
@@ -80,12 +83,12 @@ public class GradeActivity extends BaseActivity {
 
 			totalWeight = jsonObject.optString("total", "unknown");
 			avggpa = jsonObject.optString("avggpa", "unknown");
-			semesters = setGrade(jsonObject.getJSONArray("gpas"), jsonObject.getJSONArray("courses"));
+			semesters = setGrade(jsonObject.optJSONArray("gpas"), jsonObject.optJSONArray("courses"));
 
 			dualTotalWeight = jsonObject.optString("dualtotal", "unknown");
 			dualavggpa = jsonObject.optString("dualavggpa", "unknown");
-			dualSemesters = setGrade(jsonObject.getJSONArray("dualgpas"),
-					jsonObject.getJSONArray("dualcourses"));
+			dualSemesters = setGrade(jsonObject.optJSONArray("dualgpas"),
+					jsonObject.optJSONArray("dualcourses"));
 
 			setStrings();
 		} catch (JSONException e) {
@@ -97,6 +100,7 @@ public class GradeActivity extends BaseActivity {
 	private ArrayList<Semester> setGrade(JSONArray gpas, JSONArray courses) {
 		try {
 			ArrayList<Semester> arrayList = new ArrayList<Semester>();
+			if (gpas==null || courses==null) return  arrayList;
 			int len = gpas.length();
 			for (int i = 0; i < len; i++) {
 				JSONObject termObject = gpas.optJSONObject(i);

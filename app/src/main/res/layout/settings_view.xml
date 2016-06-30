@@ -293,6 +293,22 @@
                     android:background="#e8e8e7"/>
 
                 <TextView
+                    android:id="@+id/settings_privacy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/settings_privacy"
+                    android:textSize="15sp"
+                    />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dip"
+                    android:background="#e8e8e7"/>
+
+                <TextView
                     android:id="@+id/settings_about"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

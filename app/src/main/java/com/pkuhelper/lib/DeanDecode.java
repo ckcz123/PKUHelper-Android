@@ -17,8 +17,11 @@ public class DeanDecode {
 	private static ArrayList<Template> arrayList = null;
 
 	public static String decode(Drawable drawable) {
-		if (drawable == null) return "";
-		return decode(((BitmapDrawable) drawable).getBitmap());
+		try {
+			if (drawable == null) return "";
+			return decode(((BitmapDrawable) drawable).getBitmap());
+		}
+		catch (Exception | Error e) {return "";}
 	}
 
 	public static String decode(Bitmap bitmap) {
@@ -33,7 +36,7 @@ public class DeanDecode {
 			Score s3 = checkScore(arrayList, bitmap, s2.x + s2.template.width - 3);
 			Score s4 = checkScore(arrayList, bitmap, s3.x + s3.template.width - 3);
 			return "" + s1.template.c + s2.template.c + s3.template.c + s4.template.c;
-		} catch (Exception e) {
+		} catch (Exception | Error e) {
 			e.printStackTrace();
 			return "";
 		}
@@ -49,7 +52,7 @@ public class DeanDecode {
 	 * @throws Exception
 	 */
 	private static Score checkScore(
-			ArrayList<Template> arrayList, Bitmap bitmap, int start) throws Exception {
+			ArrayList<Template> arrayList, Bitmap bitmap, int start) throws Exception, Error {
 		int width = bitmap.getWidth(), height = bitmap.getHeight();
 
 		ArrayList<Score> scoreList = new ArrayList<Score>();
@@ -99,7 +102,7 @@ public class DeanDecode {
 	 *
 	 * @return
 	 */
-	private static ArrayList<Template> getList() throws Exception {
+	private static ArrayList<Template> getList() throws Exception, Error {
 		ArrayList<Template> arrayList = new ArrayList<Template>();
 
 		arrayList.add(new Template('1', 6, 10, new int[]{2, 9, 101, 102, 109, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 300, 301, 302, 303, 304, 305, 306, 307, 308, 309, 409, 509}));
@@ -186,7 +189,7 @@ class Score {
 	 */
 	@SuppressLint("UseSparseArrays")
 	public static Score getScore(Bitmap bitmap, Template template,
-								 int x, int y) throws Exception {
+								 int x, int y) throws Exception, Error {
 		int width = bitmap.getWidth(), height = bitmap.getHeight();
 		ArrayList<Integer> arrayList = template.arrayList;
 		int size = arrayList.size();

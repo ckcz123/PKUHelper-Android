@@ -102,7 +102,7 @@ public class Dean {
 							WebConnection.connect("http://dean.pku.edu.cn/student/yanzheng.php?act=init"),
 							"dean");
 					handler.sendMessage(Message.obtain(handler, Constants.MESSAGE_DEAN_PICTURE_FINISHED, drawable));
-				} catch (Exception e) {
+				} catch (Exception | Error e) {
 					handler.sendEmptyMessage(Constants.MESSAGE_DEAN_PICTURE_FAILED);
 				}
 			}

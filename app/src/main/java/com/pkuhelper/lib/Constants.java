@@ -290,6 +290,9 @@ public class Constants {
 	public static String updateVersion = Constants.version;
 	public static String updateMessage = "";
 
+	public static String privacy = "";
+
+
 	public static void setDrawable(int id, Drawable drawable) {
 		if (id >= features.size()) return;
 		features.get(id).drawable = drawable;

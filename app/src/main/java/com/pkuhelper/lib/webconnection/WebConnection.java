@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.pkuhelper.lib.Constants;
 
+import org.apache.http.Header;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -91,13 +92,18 @@ public class WebConnection {
 
 			int encodeingType = getEncodingType(url);
 			boolean isGbk = false;
-			if (encodeingType == -1) {
-				String typeString = httpResponse.getFirstHeader("Content-type").getValue()
-						.toLowerCase(Locale.getDefault());
+
+			Header header=httpResponse.getFirstHeader("Content-type");
+			if (header!=null) {
+				String typeString = header.getValue().toLowerCase(Locale.getDefault());
 				if (typeString.contains("gbk") || typeString.contains("gb2312"))
 					isGbk = true;
-			} else if (encodeingType == 1)
-				isGbk = true;
+				else if (typeString.contains("utf8") || typeString.contains("utf-8"))
+					isGbk = false;
+				else if (encodeingType == 1) isGbk = true;
+			}
+			else if (encodeingType == 1) isGbk = true;
+
 			Cookies.setCookie(httpResponse, url);
 
 			parameters.name = returncode + "";
@@ -144,13 +150,18 @@ public class WebConnection {
 
 			int encodeingType = getEncodingType(url);
 			boolean isGbk = false;
-			if (encodeingType == -1) {
-				String typeString = httpResponse.getFirstHeader("Content-type").getValue()
-						.toLowerCase(Locale.getDefault());
+
+			Header header=httpResponse.getFirstHeader("Content-type");
+			if (header!=null) {
+				String typeString = header.getValue().toLowerCase(Locale.getDefault());
 				if (typeString.contains("gbk") || typeString.contains("gb2312"))
 					isGbk = true;
-			} else if (encodeingType == 1)
-				isGbk = true;
+				else if (typeString.contains("utf8") || typeString.contains("utf-8"))
+					isGbk = false;
+				else if (encodeingType == 1) isGbk = true;
+			}
+			else if (encodeingType == 1) isGbk = true;
+
 			Cookies.setCookie(httpResponse, url);
 
 			parameters.name = returncode + "";
