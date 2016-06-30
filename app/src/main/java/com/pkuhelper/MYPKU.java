@@ -208,7 +208,7 @@ public class MYPKU extends Fragment {
 				itemView.setLayoutParams(layoutParams);
 				itemView.setPadding(PADDING_PX, 0, PADDING_PX, 0);
 				ViewSetting.setTextView(itemView, R.id.mypku_text, text);
-//				ViewSetting.setImageResource(itemView, R.id.mypku_image, imagesource);
+				ViewSetting.setImageResource(itemView, R.id.mypku_image, imagesource);
 				itemView.setOnClickListener(new View.OnClickListener() {
 					public void onClick(View v) {
 						click(name);

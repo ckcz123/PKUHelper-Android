@@ -129,7 +129,7 @@ public class GradeTask extends AsyncTask<String, String, Parameters> {
 			String total="";
 			if (matcher.find()) total=matcher.group(1);
 			String avggpa="";
-			matcher=Pattern.compile("平均绩点(\\(GPA\\)):([\\d.]+)").matcher(document.toString());
+			matcher=Pattern.compile("平均绩点(\\(GPA\\))?:([\\d.]+)").matcher(document.toString());
 			if (matcher.find()) avggpa=matcher.group(2);
 			JSONObject jsonObject=new JSONObject();
 			jsonObject.put("gpas", gpas);
