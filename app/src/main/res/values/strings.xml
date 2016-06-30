@@ -2,7 +2,6 @@
 <resources>
 
     <string name="app_name">PKU Helper</string>
-    <string name="app_name_text">PKU Helper - 北大地带</string>
     <string name="title_ipgw">网关连接</string>
     <string name="title_course">课程表</string>
     <string name="title_mypku">我的PKU</string>
@@ -120,20 +119,16 @@
     <string name="about_version">版本号</string>
     <string name="about_time">最后更新日期</string>
     <string name="about_dev_name">开发者</string>
-    <string name="about_dev_chenzhang">陈章</string>
-    <string name="about_help_name">协助开发</string>
-    <string name="about_help_xiongdian">熊典</string>
-    <string name="about_art_name">美工</string>
-    <string name="about_art_value">熊典/唐褚怡</string>
+    <string name="about_dev_value">PKU Helper开发团队</string>
     <string name="about_guide_name">指导单位</string>
     <string name="about_guide_value">北大网教办</string>
     <string name="about_team_name">运营团队</string>
     <string name="about_team_value">新青年网络文化工作室</string>
     <string name="about_contact">联系我们</string>
     <string name="about_ckcz123">ckcz123@126.com</string>
-    <string name="about_copyright">Copyright &#169; 2015. Zhang Chen, EECS, Peking University</string>
+    <string name="about_copyright">Copyright &#169; Peking University</string>
     <string name="about_rights">All rights reserved.</string>
-    <string name="about_recommend">北京大学官方推荐客户端</string>
+    <string name="about_recommend">北京大学校园生活客户端</string>
     <string name="custom_course_name">课程名称</string>
     <string name="custom_course_location">课程地点</string>
 	<string name="custom_course_when_hint"><![CDATA[请点亮上课时间；<font color=\'#00ffff\'>青色</font>代表已存在教学网课程

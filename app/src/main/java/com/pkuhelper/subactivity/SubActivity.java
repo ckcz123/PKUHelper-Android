@@ -27,6 +27,7 @@ import com.pkuhelper.lib.Share;
 import com.pkuhelper.lib.ViewSetting;
 import com.pkuhelper.lib.view.CustomToast;
 
+import java.util.Calendar;
 import java.util.Locale;
 
 public class SubActivity extends BaseActivity {
@@ -199,6 +200,8 @@ public class SubActivity extends BaseActivity {
 		getActionBar().setTitle("关于本软件");
 		ViewSetting.setTextView(this, R.id.about_version, Constants.version);
 		ViewSetting.setTextView(this, R.id.about_time, Constants.update_time);
+		ViewSetting.setTextView(this, R.id.about_copyright, "Copyright © 2014 - " +
+				Calendar.getInstance().get(Calendar.YEAR) + " Peking University.");
 	}
 
 	public void finishRequest(int type, String string) {
