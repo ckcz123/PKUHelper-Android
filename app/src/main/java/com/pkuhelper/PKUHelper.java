@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,21 +37,26 @@ import com.pkuhelper.noticecenter.NCActivity;
 import com.pkuhelper.pkuhole.HoleActivity;
 import com.pkuhelper.qrcode.QRCodeActivity;
 import com.pkuhelper.subactivity.SubActivity;
+import com.pkuhelper.ui.main.impl.PkuHelperActivity;
 
 public class PKUHelper extends BaseActivity {
 
 	public static PKUHelper pkuhelper;
 	public CustomViewPager mViewPager;
-	ActionBar actionBar;
 	private SensorManager sensorManager;
 	private Vibrator vibrator;
 	private SensorEventListener sensorEventListener;
 	private long lastShakeTime = 0;
+	private Toolbar toolbar;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+
+		//material design update Mar27
+		setupToolbar();
+
 		MyFile.setUseSDCard(true, this);
 
 		pkuhelper = this;
@@ -80,41 +86,61 @@ public class PKUHelper extends BaseActivity {
 		};
 
 		// Set up the action bar.
-		actionBar = getActionBar();
 
 		mViewPager = (CustomViewPager) findViewById(R.id.tabpager);
 		mViewPager.setAdapter(new FragmentPagerAdapter(getFragmentManager()) {
 
-			@Override
-			public int getCount() {
-				return 4;
-			}
+            @Override
+            public int getCount() {
+                return 4;
+            }
 
-			@Override
-			public Fragment getItem(int position) {
-				if (position == 0) {
-					if (Editor.getBoolean(PKUHelper.this, "use_shake"))
-						return Fragment.instantiate(PKUHelper.this, "com.pkuhelper.IPGW_shake", null);
-					return Fragment.instantiate(PKUHelper.this, "com.pkuhelper.IPGW", null);
-				} else if (position == 1)
-					return Fragment.instantiate(PKUHelper.this, "com.pkuhelper.Course", null);
-				else if (position == 2)
-					return Fragment.instantiate(PKUHelper.this, "com.pkuhelper.MYPKU", null);
-				else return Fragment.instantiate(PKUHelper.this, "com.pkuhelper.Settings", null);
-			}
-		});
+            @Override
+            public Fragment getItem(int position) {
+                if (position == 0) {
+                    if (Editor.getBoolean(PKUHelper.this, "use_shake"))
+                        return Fragment.instantiate(PKUHelper.this, "com.pkuhelper.IPGW_shake", null);
+                    return Fragment.instantiate(PKUHelper.this, "com.pkuhelper.IPGW", null);
+                } else if (position == 1)
+                    return Fragment.instantiate(PKUHelper.this, "com.pkuhelper.Course", null);
+                else if (position == 2)
+                    return Fragment.instantiate(PKUHelper.this, "com.pkuhelper.MYPKU", null);
+                else return Fragment.instantiate(PKUHelper.this, "com.pkuhelper.Settings", null);
+            }
+        });
 
 		mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                if (position == 0)
+                    clickIPGW(null);
+                else if (position == 1) clickCourse(null);
+                else if (position == 2) clickMYPKU(null);
+                else if (position == 3) clickSettings(null);
+            }
+        });
+		init();
+
+
+
+        //TODO MAR 27
+        //DEV
+        if (Editor.getBoolean(PKUHelper.pkuhelper, "beta_version", false))
+            startActivity(new Intent(this, PkuHelperActivity.class));
+        //dev
+	}
+
+
+	private void setupToolbar(){
+		toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+		setSupportActionBar(toolbar);
+		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
-			public void onPageSelected(int position) {
-				if (position == 0)
-					clickIPGW(null);
-				else if (position == 1) clickCourse(null);
-				else if (position == 2) clickMYPKU(null);
-				else if (position == 3) clickSettings(null);
+			public void onClick(View v) {
+				finish();
 			}
 		});
-		init();
 	}
 
 	private void resetAllTab() {
@@ -134,7 +160,7 @@ public class PKUHelper extends BaseActivity {
 		resetAllTab();
 		ViewSetting.setImageResource(this, R.id.img_ipgw, R.drawable.tab_ipgw_selected);
 		((TextView) findViewById(R.id.title_ipgw)).setTextColor(Color.parseColor("#319de1"));
-		actionBar.setTitle("欢迎进入PKU Helper");
+		setTitle("欢迎进入PKU Helper");
 	}
 
 	public void clickCourse(View view) {
@@ -146,9 +172,9 @@ public class PKUHelper extends BaseActivity {
 		int week = Editor.getInt(this, "week");
 		if (week < 0 || week >= 20) week = 0;
 		if (week == 0)
-			actionBar.setTitle("放假期间");
+			setTitle("放假期间");
 		else
-			actionBar.setTitle("第" + week + "周课表");
+			setTitle("第" + week + "周课表");
 	}
 
 	public void clickMYPKU(View view) {
@@ -157,7 +183,7 @@ public class PKUHelper extends BaseActivity {
 		resetAllTab();
 		ViewSetting.setImageResource(this, R.id.img_mypku, R.drawable.tab_mypku_selected);
 		((TextView) findViewById(R.id.title_mypku)).setTextColor(Color.parseColor("#319de1"));
-		actionBar.setTitle("我的PKU");
+		setTitle("我的PKU");
 	}
 
 	public void clickSettings(View view) {
@@ -166,7 +192,7 @@ public class PKUHelper extends BaseActivity {
 		resetAllTab();
 		ViewSetting.setImageResource(this, R.id.img_settings, R.drawable.tab_settings_selected);
 		((TextView) findViewById(R.id.title_settings)).setTextColor(Color.parseColor("#319de1"));
-		actionBar.setTitle("设置");
+		setTitle("设置");
 	}
 
 	@Override
@@ -314,8 +340,8 @@ public class PKUHelper extends BaseActivity {
 			startActivity(new Intent(this, ChatActivity.class));
 		} else if ("pkuhole".equals(type)) {
 			clickMYPKU(null);
-			Intent intent = new Intent(this, HoleActivity.class);
-			intent.putExtra("page", HoleActivity.PAGE_MINE);
+			Intent intent = new Intent(this, com.pkuhelper.ui.hole.impl.HoleActivity.class);
+			intent.putExtra("isMine", true);
 			startActivity(intent);
 		}
 	}
@@ -356,7 +382,13 @@ public class PKUHelper extends BaseActivity {
 		if (sensorManager != null) {// 注册监听器
 			sensorManager.registerListener(sensorEventListener, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
 		}
-	}
+
+        //TODO: 3/27/16
+        //@DEV
+        if (Editor.getBoolean(PKUHelper.pkuhelper, "beta_version", false))
+            finish();
+        //@DEV
+    }
 
 	@Override
 	protected void onPause() {

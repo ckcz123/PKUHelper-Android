@@ -29,6 +29,64 @@
             >
 
             <TextView
+                android:id="@+id/settings_title_beta"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:text="测试版"
+                android:textColor="#aaaaaa"
+                android:textSize="13sp"
+                />
+
+            <TableLayout
+                android:id="@+id/settings_beta_version"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/settings_title_beta"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/corners_bg">
+
+                <TableRow
+                    android:id="@+id/settings_table_beta"
+                    android:padding="10dip">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="使用测试版本(关闭重开生效)"
+                        android:textSize="15sp"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+
+                    <Switch
+                        android:id="@+id/settings_switch_beta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        />
+                </TableRow>
+            </TableLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginTop="7dp"
+            android:orientation="vertical"
+            >
+
+
+
+            <TextView
                 android:id="@+id/settings_title_username"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -110,14 +168,16 @@
                     android:id="@+id/settings_ipgw"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
+                    android:layout_margin="0dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
                     android:text="@string/settings_ipgw"
-                    android:textSize="15sp"
-                    />
+                    android:textSize="15sp" />
 
                 <View
+                    android:id="@+id/line_ipgw"
                     android:layout_width="fill_parent"
                     android:layout_height="1dip"
                     android:background="#e8e8e7"/>
@@ -126,14 +186,16 @@
                     android:id="@+id/settings_course"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
                     android:text="@string/settings_course"
                     android:textSize="15sp"
                     />
 
                 <View
+                    android:id="@+id/line_course"
                     android:layout_width="fill_parent"
                     android:layout_height="1dip"
                     android:background="#e8e8e7"/>
@@ -142,14 +204,16 @@
                     android:id="@+id/settings_notifications"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
                     android:text="@string/settings_notifications"
                     android:textSize="15sp"
                     />
 
                 <View
+                    android:id="@+id/line_notification"
                     android:layout_width="fill_parent"
                     android:layout_height="1dip"
                     android:background="#e8e8e7"/>
@@ -159,14 +223,16 @@
                     android:id="@+id/settings_gesture"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
                     android:text="@string/settings_gesture"
                     android:textSize="15sp"
                     />
 
                 <View
+                    android:id="@+id/line_gesture"
                     android:layout_width="fill_parent"
                     android:layout_height="1dip"
                     android:background="#e8e8e7"/>
@@ -197,6 +263,7 @@
                 </TableRow>
 
                 <View
+                    android:id="@+id/line_mail"
                     android:layout_width="fill_parent"
                     android:layout_height="1dip"
                     android:background="#e8e8e7"/>
@@ -205,9 +272,10 @@
                     android:id="@+id/settings_petest"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
                     android:text="@string/settings_petest"
                     android:textSize="15sp"
                     />
@@ -221,9 +289,10 @@
                     android:id="@+id/settings_clearcache"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
                     android:text="@string/settings_clearcache"
                     android:textSize="15sp"
                     />
@@ -264,9 +333,10 @@
                     android:id="@+id/settings_faq"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
                     android:text="@string/settings_faq"
                     android:textSize="15sp"
                     />
@@ -280,9 +350,10 @@
                     android:id="@+id/settings_report"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
                     android:text="@string/settings_report"
                     android:textSize="15sp"
                     />
@@ -296,9 +367,10 @@
                     android:id="@+id/settings_about"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
                     android:text="@string/settings_about"
                     android:textSize="15sp"
                     />
@@ -312,9 +384,10 @@
                     android:id="@+id/settings_recommended"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
                     android:text="@string/settings_recommended"
                     android:textSize="15sp"
                     />

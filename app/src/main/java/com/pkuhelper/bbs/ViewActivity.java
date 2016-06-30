@@ -154,10 +154,10 @@ public class ViewActivity extends BaseActivity {
 		if (showingPage == PAGE_THREAD) {
 			if (ViewThread.page != 1)
 				menu.add(Menu.NONE, Constants.MENU_BBS_VIEW_PREVIOUS, Constants.MENU_BBS_VIEW_PREVIOUS, "")
-						.setIcon(R.drawable.bbs_pre).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+						.setIcon(R.drawable.ic_keyboard_arrow_left_white_36dp).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 			if (ViewThread.page != ViewThread.totalPage)
 				menu.add(Menu.NONE, Constants.MENU_BBS_VIEW_NEXT, Constants.MENU_BBS_VIEW_NEXT, "")
-						.setIcon(R.drawable.bbs_nxt).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+						.setIcon(R.drawable.ic_keyboard_arrow_right_white_36dp).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 			menu.add(Menu.NONE, Constants.MENU_BBS_FAVORITE, Constants.MENU_BBS_FAVORITE,
 					Board.favorite.contains(board) ? "移出收藏夹" : "加入收藏夹");
 			menu.add(Menu.NONE, Constants.MENU_BBS_VIEW_POST, Constants.MENU_BBS_VIEW_POST, "发表主题");
@@ -165,10 +165,10 @@ public class ViewActivity extends BaseActivity {
 		if (showingPage == PAGE_POST) {
 			if (ViewPost.page > 1)
 				menu.add(Menu.NONE, Constants.MENU_BBS_VIEW_PREVIOUS, Constants.MENU_BBS_VIEW_PREVIOUS, "")
-						.setIcon(R.drawable.bbs_pre).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+						.setIcon(R.drawable.ic_keyboard_arrow_left_white_36dp).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 			if (ViewPost.page < (ViewPost.totalNum - 1) / PAGESIZE + 1)
 				menu.add(Menu.NONE, Constants.MENU_BBS_VIEW_NEXT, Constants.MENU_BBS_VIEW_NEXT, "")
-						.setIcon(R.drawable.bbs_nxt).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+						.setIcon(R.drawable.ic_keyboard_arrow_right_white_36dp).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 			menu.add(Menu.NONE, Constants.MENU_BBS_VIEW_POST, Constants.MENU_BBS_VIEW_POST, "发表回复");
 			menu.add(Menu.NONE, Constants.MENU_BBS_VIEW_SHARE, Constants.MENU_BBS_VIEW_SHARE, "分享");
 		}

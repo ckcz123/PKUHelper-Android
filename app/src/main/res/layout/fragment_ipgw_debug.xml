@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <Button
+        android:id="@+id/btn_connect_free"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="连接免费网" />
+
+    <Button
+        android:id="@+id/btn_connect_paid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="连接收费网"/>
+
+    <Button
+        android:id="@+id/btn_disconnect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="断开连接"/>
+
+    <Button
+        android:id="@+id/btn_disconnect_all"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="断开全部"/>
+
+    <TextView
+        android:id="@+id/tv_ipgw_debug"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</FrameLayout>

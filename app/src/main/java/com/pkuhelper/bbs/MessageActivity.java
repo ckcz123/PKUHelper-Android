@@ -101,7 +101,7 @@ public class MessageActivity extends BaseActivity {
 
 	void showDetail() {
 		setContentView(R.layout.bbs_message_detail);
-		getActionBar().setTitle(tmpInfo.title);
+		setTitle(tmpInfo.title);
 		showingPage = PAGE_DETAIL;
 		invalidateOptionsMenu();
 		ViewSetting.setTextView(this, R.id.bbs_message_detail, Html.fromHtml(content));
@@ -110,7 +110,7 @@ public class MessageActivity extends BaseActivity {
 	void showList() {
 		setContentView(R.layout.bbs_message_listview);
 		showingPage = PAGE_LIST;
-		getActionBar().setTitle("站内信");
+		setTitle("站内信");
 		invalidateOptionsMenu();
 		ListView listView = (ListView) findViewById(R.id.bbs_message_listview);
 		listView.setAdapter(new BaseAdapter() {

@@ -25,7 +25,7 @@ public class CourseSetting {
 
 	public void show() {
 		subActivity.setContentView(R.layout.settings_course);
-		subActivity.getActionBar().setTitle("课表设置");
+		subActivity.setTitle("课表设置");
 
 		final Spinner courseWeekSpinner = (Spinner) subActivity.findViewById(R.id.settings_spinner_week);
 		ArrayList<String> weeks = new ArrayList<String>();

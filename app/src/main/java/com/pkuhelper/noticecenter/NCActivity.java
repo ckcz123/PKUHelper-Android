@@ -3,6 +3,7 @@ package com.pkuhelper.noticecenter;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -98,7 +99,7 @@ public class NCActivity extends BaseActivity {
 					screenHeight = height;
 					screenWidth = width;
 					ViewSetting.setBackground(NCActivity.this, swipeRefreshLayout,
-							R.drawable.chat_bg);
+							Color.WHITE);
 					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
 						swipeRefreshLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
 					} else {
@@ -135,14 +136,14 @@ public class NCActivity extends BaseActivity {
 		if (nowShowing == PAGE_SOURCE)
 			menu.add(Menu.NONE, Constants.MENU_NOTICECENTER_SETSOURCE_SAVE,
 					Constants.MENU_NOTICECENTER_SETSOURCE_SAVE, "")
-					.setIcon(R.drawable.save).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+					.setIcon(R.drawable.ic_save_white_48dp).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		if (nowShowing == PAGE_VIEW) {
 			menu.add(Menu.NONE, Constants.MENU_NOTICECENTER_SHOWCONTENTS_CHOOSE,
 					Constants.MENU_NOTICECENTER_SHOWCONTENTS_CHOOSE, "")
-					.setIcon(R.drawable.some).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+					.setIcon(R.drawable.ic_folder_open_white_48dp).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 			menu.add(Menu.NONE, Constants.MENU_NOTICECENTER_SHOWCONTENTS_SETTINGS,
 					Constants.MENU_NOTICECENTER_SHOWCONTENTS_SETTINGS, "")
-					.setIcon(R.drawable.set).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+					.setIcon(R.drawable.ic_settings_white_48dp).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		}
 		return true;
 	}

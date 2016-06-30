@@ -82,7 +82,7 @@ public class HoleComment extends BaseActivity {
 			return;
 		}
 		mediaPlayer = new MediaPlayer();
-		getActionBar().setTitle("查看评论");
+		setTitle("查看评论");
 		setContentView(R.layout.hole_comment_listview);
 		setResult(RESULT_CANCELED);
 

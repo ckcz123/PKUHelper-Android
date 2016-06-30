@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 
+import com.pkuhelper.ui.hole.impl.HoleActivity;
 import com.pkuhelper.bbs.BBSActivity;
 import com.pkuhelper.chat.ChatActivity;
 import com.pkuhelper.classroom.ClassActivity;
@@ -29,7 +30,6 @@ import com.pkuhelper.lib.view.CustomToast;
 import com.pkuhelper.lostfound.old.LostFoundActivity;
 import com.pkuhelper.media.MediaActivity;
 import com.pkuhelper.noticecenter.NCActivity;
-import com.pkuhelper.pkuhole.HoleActivity;
 import com.pkuhelper.pkuhole.old.PKUHoleActivity;
 import com.pkuhelper.subactivity.SubActivity;
 
@@ -100,11 +100,14 @@ public class MYPKU extends Fragment {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		try {
+
+
+        try {
 			setView(getList(communities, string), R.id.mypku_community, "P大社区");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
 		setOthers(Constants.features);
 		Lib.setBadgeView();
 		return rootView;
@@ -261,7 +264,10 @@ public class MYPKU extends Fragment {
 					new Intent(PKUHelper.pkuhelper, BBSActivity.class));
 		else if ("pkuhole".equals(string))
 			PKUHelper.pkuhelper.startActivity(
+
+					//TEST
 					new Intent(PKUHelper.pkuhelper, HoleActivity.class));
+					//new Intent(PKUHelper.pkuhelper, HoleActivity.class));
 		else if (("pdsd").equals(string))
 			PKUHelper.pkuhelper.startActivity(
 					new Intent(PKUHelper.pkuhelper, PKUHoleActivity.class));

@@ -4,12 +4,13 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DownloadManager;
 import android.app.DownloadManager.Request;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +33,7 @@ import com.pkuhelper.lib.ViewSetting;
 import com.pkuhelper.lib.view.CustomToast;
 import com.pkuhelper.lib.webconnection.Parameters;
 import com.pkuhelper.subactivity.SubActivity;
+import com.pkuhelper.ui.main.impl.PkuHelperActivity;
 
 import org.json.JSONObject;
 
@@ -43,6 +45,8 @@ public class Settings extends Fragment {
 
 	public static ScrollView settingView = null;
 
+	Context mContext;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
@@ -52,6 +56,37 @@ public class Settings extends Fragment {
 		setName();
 		setOthers();
 		Lib.setBadgeView();
+
+
+
+		/*
+		* @TODO
+		* @DEV
+		* */
+		if (Editor.getBoolean(PKUHelper.pkuhelper, "beta_version", false)){
+			mContext = PkuHelperActivity.pkuHelperActivity;
+			rootView.findViewById(R.id.settings_ipgw).setVisibility(View.GONE);
+			rootView.findViewById(R.id.settings_course).setVisibility(View.GONE);
+			rootView.findViewById(R.id.settings_gesture).setVisibility(View.GONE);
+		}
+		else{
+			mContext = PKUHelper.pkuhelper;
+			rootView.findViewById(R.id.settings_ipgw).setVisibility(View.VISIBLE);
+			rootView.findViewById(R.id.settings_course).setVisibility(View.VISIBLE);
+			rootView.findViewById(R.id.settings_gesture).setVisibility(View.VISIBLE);
+		}
+        settingView.findViewById(R.id.settings_table_name)
+                .setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        Intent intent = new Intent(getActivity(), PkuHelperActivity.class);
+                        startActivity(intent);
+                        return true;
+                    }
+                });
+        //END-DEV
+
+
 		return rootView;
 	}
 
@@ -69,6 +104,17 @@ public class Settings extends Fragment {
 	}
 
 	public static void setOthers() {
+		//TODO MAR 27
+		ViewSetting.setSwitchChecked(settingView, R.id.settings_switch_beta, Editor.getBoolean(PKUHelper.pkuhelper, "beta_version", false));
+		ViewSetting.setSwitchOnCheckChangeListener(settingView, R.id.settings_switch_beta, new CompoundButton.OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				Editor.putBoolean(PKUHelper.pkuhelper, "beta_version", isChecked);
+			}
+		});
+
+		//DEV
+
 		ViewSetting.setOnClickListener(settingView, R.id.settings_table_name, new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -125,6 +171,10 @@ public class Settings extends Fragment {
 
 			@Override
 			public void onClick(View v) {
+
+				//DEBUG
+				Log.d("setting:","onclick");
+
 				Intent intent = new Intent(PKUHelper.pkuhelper, SubActivity.class);
 				intent.putExtra("type", Constants.SUBACTIVITY_TYPE_IPGW_SET);
 				PKUHelper.pkuhelper.startActivity(intent);

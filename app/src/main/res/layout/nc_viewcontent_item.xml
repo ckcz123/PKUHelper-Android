@@ -1,94 +1,114 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="fill_parent"
-              android:layout_height="fill_parent"
-              android:orientation="vertical">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/card_horizontal_margin"
+    android:paddingRight="@dimen/card_horizontal_margin">
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/nc_viewcontent_image"
-            android:layout_width="32sp"
-            android:layout_height="32sp"
-            android:contentDescription="@string/app_name"
-            android:layout_marginTop="10sp"
-            android:layout_marginLeft="20sp"
-            android:layout_marginStart="20sp"
-            android:layout_marginBottom="10sp"
-            android:src="@drawable/failure"/>
-
-        <TextView
-            android:id="@+id/nc_viewcontent_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="12sp"
-            android:layout_marginRight="26sp"
-            android:layout_marginStart="12sp"
-            android:layout_marginEnd="26sp"
-            android:layout_marginTop="10sp"
-            android:layout_marginBottom="10sp"
-            android:textSize="17sp"
-            android:textColor="#000000"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_nc_item"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
+        android:layout_marginTop="@dimen/card_vertical_margin"
+        android:layout_marginBottom="@dimen/card_vertical_margin"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        app:cardCornerRadius="@dimen/card_corner_radius"
+        app:cardElevation="2dp">
 
-        <TextView
-            android:id="@+id/nc_viewcontent_text"
-            android:textSize="15sp"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#444444"
-            android:layout_marginLeft="26sp"
-            android:layout_marginRight="26sp"
-            android:layout_marginBottom="10sp"
-            />
+        <LinearLayout android:layout_width="fill_parent"
+                      android:layout_height="fill_parent"
+                      android:orientation="vertical">
 
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        >
+                <ImageView
+                    android:id="@+id/nc_viewcontent_image"
+                    android:layout_width="32sp"
+                    android:layout_height="32sp"
+                    android:contentDescription="@string/app_name"
+                    android:layout_marginTop="10sp"
+                    android:layout_marginLeft="20sp"
+                    android:layout_marginStart="20sp"
+                    android:layout_marginBottom="10sp"
+                    android:src="@drawable/failure"/>
 
-        <TextView
-            android:id="@+id/nc_viewcontent_author"
-            android:textColor="#ff0000"
-            android:textSize="13sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            />
+                <TextView
+                    android:id="@+id/nc_viewcontent_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12sp"
+                    android:layout_marginRight="26sp"
+                    android:layout_marginStart="12sp"
+                    android:layout_marginEnd="26sp"
+                    android:layout_marginTop="10sp"
+                    android:layout_marginBottom="10sp"
+                    android:textSize="17sp"
+                    android:textColor="#000000"
+                    />
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
 
-        <TextView
-            android:id="@+id/nc_viewcontent_time"
-            android:textColor="#FF800080"
-            android:textSize="13sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <TextView
+                    android:id="@+id/nc_viewcontent_text"
+                    android:textSize="15sp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#444444"
+                    android:layout_marginLeft="26sp"
+                    android:layout_marginRight="26sp"
+                    android:layout_marginBottom="10sp"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                >
+
+                <TextView
+                    android:id="@+id/nc_viewcontent_author"
+                    android:textColor="#ff0000"
+                    android:textSize="13sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/nc_viewcontent_time"
+                    android:textColor="#FF800080"
+                    android:textSize="13sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    />
 
 
-    </LinearLayout>
+            </LinearLayout>
 
-</LinearLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</RelativeLayout>

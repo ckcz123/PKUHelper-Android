@@ -28,7 +28,7 @@ public class SchoolCalendar {
 	@SuppressWarnings("unchecked")
 	public SchoolCalendar showCalendar() {
 		subActivity.setContentView(R.layout.subactivity_webview);
-		subActivity.getActionBar().setTitle("北京大学校历");
+		subActivity.setTitle("北京大学校历");
 
 		subActivity.webView =
 				(WebView) subActivity.findViewById(R.id.subactivity_webview);
@@ -65,7 +65,7 @@ public class SchoolCalendar {
 		}
 		element.getElementsByTag("a").remove();
 		String title = element.getElementsByClass("clearfix1").get(0).text();
-		subActivity.getActionBar().setTitle(title);
+		subActivity.setTitle(title);
 		String html = "<html><body><style>"
 				+ "html,body,div,span,h2,p,a,table,td,tr,th{border: 0px;"
 				+ "padding: 0px;margin: 0px;"

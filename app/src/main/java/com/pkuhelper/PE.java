@@ -2,6 +2,7 @@ package com.pkuhelper;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Base64;
@@ -27,20 +28,25 @@ import java.util.HashMap;
 public class PE {
 	@SuppressWarnings("unchecked")
 	public static void peCard() {
-		if (!Constants.isLogin()) {
-			IAAA.showLoginView();
-			return;
-		}
-		ArrayList<Parameters> arrayList = new ArrayList<Parameters>();
-		String proxypsd = Base64.encodeToString(Constants.password.getBytes(), Base64.DEFAULT);
-		String password = Base64.encodeToString(Constants.username.getBytes(), Base64.DEFAULT);
-		arrayList.add(new Parameters("uid", Constants.username));
-		arrayList.add(new Parameters("proxypsd", proxypsd));
-		arrayList.add(new Parameters("password", password));
-		new RequestingTask(PKUHelper.pkuhelper, "正在获取打卡信息...",
-				Constants.domain + "/services/pkuhelper/pecard.php",
-				Constants.REQUEST_PE_CARD).execute(arrayList);
+		peCard(PKUHelper.pkuhelper);
 	}
+
+    @SuppressWarnings("unchecked")
+    public static void peCard(Context context) {
+        if (!Constants.isLogin()) {
+            IAAA.showLoginView();
+            return;
+        }
+        ArrayList<Parameters> arrayList = new ArrayList<Parameters>();
+        String proxypsd = Base64.encodeToString(Constants.password.getBytes(), Base64.DEFAULT);
+        String password = Base64.encodeToString(Constants.username.getBytes(), Base64.DEFAULT);
+        arrayList.add(new Parameters("uid", Constants.username));
+        arrayList.add(new Parameters("proxypsd", proxypsd));
+        arrayList.add(new Parameters("password", password));
+        new RequestingTask(PKUHelper.pkuhelper, context, "正在获取打卡信息...",
+                Constants.domain + "/services/pkuhelper/pecard.php",
+                Constants.REQUEST_PE_CARD).execute(arrayList);
+    }
 
 	public static void finishPeCardRequest(String string) {
 		try {
@@ -103,11 +109,16 @@ public class PE {
 
 	@SuppressWarnings("unchecked")
 	public static void getPeTestScore() {
+        getPeTestScore(PKUHelper.pkuhelper);
+	}
+
+    @SuppressWarnings("unchecked")
+	public static void getPeTestScore(final Context context){
 		if (!Constants.isLogin()) {
 			IAAA.showLoginView();
 			return;
 		}
-		String pepassword = Editor.getString(PKUHelper.pkuhelper, "pepass_" + Constants.username);
+		String pepassword = Editor.getString(context, "pepass_" + Constants.username);
 		if ("".equals(pepassword)) {
 			String s = new String(Constants.birthday);
 			s.replace("-", "");
@@ -118,12 +129,12 @@ public class PE {
 
 		if ("".equals(pepassword)) {
 
-			new AlertDialog.Builder(PKUHelper.pkuhelper).setTitle("提示")
+			new AlertDialog.Builder(context).setTitle("提示")
 					.setMessage("初次使用，请设置自己的体测密码。（一般为8位生日）\n你可以在设置中修改自己的体测密码。")
 					.setCancelable(true).setPositiveButton("设置", new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					setPeTestPassword();
+					setPeTestPassword(context);
 				}
 			}).setNegativeButton("取消", null).show();
 			return;
@@ -137,44 +148,48 @@ public class PE {
 		arrayList.add(new Parameters("proxypsd", proxypsd));
 		arrayList.add(new Parameters("password", password));
 
-		new RequestingTask(PKUHelper.pkuhelper, "正在获取体测成绩...",
+		new RequestingTask(PKUHelper.pkuhelper, context,"正在获取体测成绩...",
 				Constants.domain + "/services/pkuhelper/petest.php", Constants.REQUEST_PE_TEST)
 				.execute(arrayList);
 	}
 
 	public static void setPeTestPassword() {
-		if (!Constants.isLogin()) {
-			IAAA.showLoginView();
-			return;
-		}
-		final Dialog dialog = new Dialog(PKUHelper.pkuhelper);
-		dialog.setContentView(R.layout.pe_password_dialog);
-		dialog.setTitle("输入体测查询密码");
-		ViewSetting.setOnClickListener(dialog, R.id.pepassword_change, new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				EditText userEditText = (EditText) dialog.findViewById(R.id.pepassword);
-				String string = userEditText.getEditableText().toString();
-				if ("".equals(string)) {
-					CustomToast.showErrorToast(PKUHelper.pkuhelper, "体测密码不能为空");
-					return;
-				}
-				Editor.putString(PKUHelper.pkuhelper, "pepass_" + Constants.username, string);
-				CustomToast.showSuccessToast(PKUHelper.pkuhelper, "修改成功！");
-				dialog.dismiss();
-			}
-		});
-		ViewSetting.setOnClickListener(dialog, R.id.pepassword_cancel, new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				dialog.dismiss();
-			}
-		});
-		dialog.show();
+	    setPeTestPassword(PKUHelper.pkuhelper);
 	}
+
+    public static void setPeTestPassword(final Context context) {
+        if (!Constants.isLogin()) {
+            IAAA.showLoginView();
+            return;
+        }
+        final Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.pe_password_dialog);
+        dialog.setTitle("输入体测查询密码");
+        ViewSetting.setOnClickListener(dialog, R.id.pepassword_change, new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                EditText userEditText = (EditText) dialog.findViewById(R.id.pepassword);
+                String string = userEditText.getEditableText().toString();
+                if ("".equals(string)) {
+                    CustomToast.showErrorToast(context, "体测密码不能为空");
+                    return;
+                }
+                Editor.putString(context, "pepass_" + Constants.username, string);
+                CustomToast.showSuccessToast(context, "修改成功！");
+                dialog.dismiss();
+            }
+        });
+        ViewSetting.setOnClickListener(dialog, R.id.pepassword_cancel, new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
 
 	public static void finishPeTestRequest(String string) {
 		try {

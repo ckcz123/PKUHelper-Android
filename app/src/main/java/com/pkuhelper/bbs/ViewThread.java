@@ -83,7 +83,7 @@ public class ViewThread {
 		viewActivity.setContentView(R.layout.bbs_thread_listview);
 		viewActivity.showingPage = ViewActivity.PAGE_THREAD;
 		viewActivity.invalidateOptionsMenu();
-		viewActivity.getActionBar().setTitle("(" + page + "/" + totalPage + ") " + ViewActivity.boardName);
+		viewActivity.setTitle("(" + page + "/" + totalPage + ") " + ViewActivity.boardName);
 		final ListView listView = (ListView) viewActivity.findViewById(R.id.bbs_thread_listview);
 		listView.setAdapter(new BaseAdapter() {
 

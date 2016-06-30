@@ -55,7 +55,7 @@ public class PostActivity extends BaseActivity {
 		String tt = "发表帖子";
 		if ("reply".equals(type)) tt = "回复帖子";
 		if ("edit".equals(type)) tt = "编辑帖子";
-		getActionBar().setTitle(tt);
+		setTitle(tt);
 		if (!"".equals(title)) {
 			ViewSetting.setEditTextValue(this, R.id.bbs_postpage_title, "Re: " + title);
 		}

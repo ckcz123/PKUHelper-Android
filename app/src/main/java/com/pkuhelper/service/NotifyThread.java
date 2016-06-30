@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Locale;
+import java.util.Random;
 import java.util.Scanner;
 
 public class NotifyThread extends Thread implements Runnable {
@@ -36,6 +37,7 @@ public class NotifyThread extends Thread implements Runnable {
 	int last_notify_exam_day;
 	int last_notify_course_index;
 
+	// TODO: 4/1/16 需要加细
 	public final static String[] wakeUpTime = {
 			"00:01", "07:30", "08:30", "09:40", "10:40", "12:30",
 			"13:30", "14:40", "15:40", "16:40", "18:10", "19:10", "20:10", "21:50"
@@ -100,6 +102,11 @@ public class NotifyThread extends Thread implements Runnable {
 	}
 
 	private long getSleepTime() {
+
+		// 4/1/16 加入随机化时间 0-5分钟 减轻服务器压力
+		Random random = new Random(System.nanoTime());
+		int randomTime = random.nextInt(300)*1000;
+
 		try {
 			Calendar calendar = Calendar.getInstance();
 			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
@@ -108,6 +115,8 @@ public class NotifyThread extends Thread implements Runnable {
 			String today_date = format2.format(calendar.getTime());
 			int len = wakeUpTime.length;
 			long[] times = new long[len];
+
+
 			for (int i = 0; i < len; i++) {
 				times[i] = simpleDateFormat.parse(today_date + " " + wakeUpTime[i]).getTime();
 			}
@@ -115,10 +124,10 @@ public class NotifyThread extends Thread implements Runnable {
 			while (nearest < len && times[nearest] < currTime) {
 				nearest++;
 			}
-			if (nearest == len) return times[0] + 86400 * 1000 - currTime;
-			return times[nearest] - currTime;
+			if (nearest == len) return times[0]+randomTime + 86400 * 1000 - currTime;
+			return times[nearest]+randomTime - currTime;
 		} catch (Exception e) {
-			return 600 * 1000;
+			return 600 * 1000+randomTime;
 		}
 	}
 

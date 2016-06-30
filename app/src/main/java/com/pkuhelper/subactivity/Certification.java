@@ -73,7 +73,7 @@ public class Certification {
 	@SuppressLint("InflateParams")
 	public Certification getCertification(boolean refresh) {
 		subActivity.setContentView(R.layout.subactivity_listview);
-		subActivity.getActionBar().setTitle("我的凭证");
+		subActivity.setTitle("我的凭证");
 		subActivity.findViewById(R.id.subactivity_swipeRefreshLayout).setBackgroundColor(Color.parseColor("#fda58c"));
 		listView = (ListView) subActivity.findViewById(R.id.subactivity_listview);
 		LayoutInflater layoutInflater = subActivity.getLayoutInflater();

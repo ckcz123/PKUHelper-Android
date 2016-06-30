@@ -77,7 +77,7 @@ public class MediaActivity extends BaseActivity {
 		menu.clear();
 		menu.add(Menu.NONE, Constants.MENU_MEDIA_CHOOSE,
 				Constants.MENU_MEDIA_CHOOSE, "")
-				.setIcon(R.drawable.some).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+				.setIcon(R.drawable.ic_folder_open_white_48dp).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		return true;
 	}
 

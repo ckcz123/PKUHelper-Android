@@ -196,7 +196,7 @@ public class SubActivity extends BaseActivity {
 
 	public void viewAbout() {
 		setContentView(R.layout.about);
-		getActionBar().setTitle("关于本软件");
+		setTitle("关于本软件");
 		ViewSetting.setTextView(this, R.id.about_version, Constants.version);
 		ViewSetting.setTextView(this, R.id.about_time, Constants.update_time);
 	}
@@ -251,7 +251,7 @@ public class SubActivity extends BaseActivity {
 		if (type == Constants.SUBACTIVITY_TYPE_NOTIFICATIONS_SETTING
 				|| type == Constants.SUBACTIVITY_TYPE_MYPKU_SET) {
 			menu.add(Menu.NONE, Constants.MENU_SUBACTIVITY_SAVE, Constants.MENU_SUBACTIVITY_SAVE, "")
-					.setIcon(R.drawable.save).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+					.setIcon(R.drawable.ic_save_white_48dp).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		}
 		if (type == Constants.SUBACTIVITY_TYPE_WEBVIEW
 				|| type == Constants.SUBACTIVITY_TYPE_WEBVIEW_CALENDAR
@@ -259,28 +259,28 @@ public class SubActivity extends BaseActivity {
 				|| type == Constants.SUBACTIVITY_TYPE_WEBVIEW_PKUMAIL) {
 			if (myWebView != null && !myWebView.loading) {
 				menu.add(Menu.NONE, Constants.MENU_SUBACTIVITY_OPEN_IN_BROWSER, Constants.MENU_SUBACTIVITY_OPEN_IN_BROWSER, "")
-						.setIcon(R.drawable.open).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+						.setIcon(R.drawable.ic_open_in_browser_white_48dp).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 				if (type != Constants.SUBACTIVITY_TYPE_WEBVIEW_PKUMAIL)
 					menu.add(Menu.NONE, Constants.MENU_SUBACTIVITY_SHARE, Constants.MENU_SUBACTIVITY_SHARE, "")
-							.setIcon(R.drawable.share).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+							.setIcon(R.drawable.ic_share_white_48dp).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 				if (myWebView != null) {
 					if (myWebView.sid != 0) {
 						menu.add(Menu.NONE, Constants.MENU_SUBACTIVITY_REPLY, Constants.MENU_SUBACTIVITY_REPLY, "")
-								.setIcon(R.drawable.reply).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+								.setIcon(R.drawable.ic_reply_white_48dp).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 					}
 				}
 			}
 		}
 		if (type == Constants.SUBACTIVITY_TYPE_PICTURE_FILE) {
 			menu.add(Menu.NONE, Constants.MENU_SUBACTIVITY_SHARE, Constants.MENU_SUBACTIVITY_SHARE, "")
-					.setIcon(R.drawable.share).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+					.setIcon(R.drawable.ic_share_white_48dp).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 			menu.add(Menu.NONE, Constants.MENU_SUBACTIVITY_SAVE_PICTURE, Constants.MENU_SUBACTIVITY_SAVE_PICTURE, "")
-					.setIcon(R.drawable.download).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+					.setIcon(R.drawable.ic_file_download_white_48dp).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 
 		}
 		if (type == Constants.SUBACTIVITY_TYPE_PICTURE_GIF) {
 			menu.add(Menu.NONE, Constants.MENU_SUBACTIVITY_SAVE_PICTURE, Constants.MENU_SUBACTIVITY_SAVE_PICTURE, "")
-					.setIcon(R.drawable.download).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+					.setIcon(R.drawable.ic_file_download_white_48dp).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		}
 		/*
 		if (type==Constants.SUBACTIVITY_TYPE_CERTIFICATION) {
@@ -289,7 +289,7 @@ public class SubActivity extends BaseActivity {
 		}
 		*/
 		menu.add(Menu.NONE, Constants.MENU_SUBACTIVITY_CLOSE, Constants.MENU_SUBACTIVITY_CLOSE, "")
-				.setIcon(R.drawable.close).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+				.setIcon(R.drawable.ic_close_white_48dp).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		return true;
 	}
 
@@ -323,7 +323,7 @@ public class SubActivity extends BaseActivity {
 					if (url == null || "".equals(url))
 						return true;
 				}
-				String title = getActionBar().getTitle().toString();
+				String title = getTitle().toString();
 				String content = html;
 				if (content == null || "".equals(content))
 					content = getIntent().getStringExtra("content");

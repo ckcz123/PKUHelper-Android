@@ -1,0 +1,144 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/layout_ipgw"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                tools:context=".ui.ipgw.impl.IPGWFragment">
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ipgw_bg"/>
+
+    <com.pkuhelper.ui.DrawView
+        android:id="@+id/drawview_ipgw"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+    <ImageButton
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:scaleType="fitCenter"
+        android:id="@+id/btn_ipgw_start"
+        android:src="@drawable/android_sketch"
+        android:background="#00000000"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp" />
+
+    <ImageButton
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:id="@+id/btn_ipgw_end"
+        android:src="@drawable/earth_healthy"
+        android:scaleType="fitCenter"
+        android:background="#00000000"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp" />
+
+    <ImageButton
+        android:id="@+id/btn_disconnect_all"
+        android:background="@android:color/transparent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/button_ipgw_disconnectall"
+        android:layout_alignBottom="@+id/btn_ipgw_start"
+        android:layout_alignLeft="@+id/btn_disconnect"
+        android:layout_alignStart="@+id/btn_disconnect" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="断开全部"
+        android:id="@+id/textView"
+        android:layout_below="@+id/btn_disconnect_all"
+        android:layout_alignRight="@+id/btn_ipgw_end"
+        android:layout_alignEnd="@+id/btn_ipgw_end" />
+
+    <LinearLayout
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout">
+        <Button
+            android:id="@+id/btn_connect_free_dev"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="连接免费网" />
+
+        <Button
+            android:id="@+id/btn_connect_paid_dev"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="连接收费网"/>
+
+        <Button
+            android:id="@+id/btn_disconnect_dev"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="断开连接"/>
+
+        <Button
+            android:id="@+id/btn_disconnect_all_dev"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="断开全部"/>
+
+        <TextView
+            android:id="@+id/tv_ipgw_debug_dev"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/btn_disconnect"
+        android:background="@android:color/transparent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/button_ipgw_disconnectall"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="断开"
+        android:id="@+id/textView2"
+        android:layout_below="@+id/btn_disconnect"
+        android:layout_alignLeft="@+id/textView"
+        android:layout_alignStart="@+id/textView" />
+
+    <ImageButton
+        android:background="@android:color/transparent"
+        android:src="@drawable/button_ipgw_change"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_change_free"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/btn_disconnect_all"
+        android:layout_toStartOf="@+id/btn_disconnect_all" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="收费地址"
+        android:id="@+id/textView3"
+        android:layout_alignTop="@+id/btn_ipgw_start"
+        android:layout_toLeftOf="@+id/textView"
+        android:layout_toStartOf="@+id/textView" />
+
+
+</RelativeLayout>

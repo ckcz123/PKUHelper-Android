@@ -44,7 +44,7 @@ public class NotificationSetting {
 		boolean notifications = Editor.getBoolean(subActivity, "n_notifications", true);
 
 		subActivity.setContentView(R.layout.settings_notification);
-		subActivity.getActionBar().setTitle("消息提醒");
+		subActivity.setTitle("消息提醒");
 
 		ViewSetting.setSwitchChecked(subActivity, R.id.settings_notification_course_switch, course);
 		ViewSetting.setSwitchOnCheckChangeListener(subActivity, R.id.settings_notification_course_switch, new CompoundButton.OnCheckedChangeListener() {
@@ -174,7 +174,7 @@ public class NotificationSetting {
 	@SuppressLint("InflateParams")
 	public NotificationSetting setPushes() {
 		subActivity.setContentView(R.layout.settings_pushes_listview);
-		subActivity.getActionBar().setTitle("推送设置");
+		subActivity.setTitle("推送设置");
 		View headerView = subActivity.getLayoutInflater().inflate(R.layout.settings_pushes_headerview, null);
 		listView = (ListView) subActivity.findViewById(R.id.settings_pushes_listview);
 		listView.addHeaderView(headerView);

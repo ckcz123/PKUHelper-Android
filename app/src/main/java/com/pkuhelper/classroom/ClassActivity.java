@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,6 +28,7 @@ import java.util.ArrayList;
 
 public class ClassActivity extends BaseActivity {
 
+    private Toolbar toolbar;
 	ViewPager mViewPager;
 	static ClassActivity classActivity;
 	ArrayList<String> buildings = new ArrayList<String>();
@@ -49,7 +51,11 @@ public class ClassActivity extends BaseActivity {
 		classActivity = this;
 		htmls = new String[3];
 		htmls[0] = htmls[1] = htmls[2] = null;
-		getActionBar().setTitle("教室查询");
+
+        //material design update Mar27
+        setupToolbar();
+		setTitle("教室查询");
+
 
 		mViewPager = (ViewPager) findViewById(R.id.classroom_pager);
 		mViewPager.setAdapter(new FragmentPagerAdapter(getFragmentManager()) {
@@ -84,6 +90,17 @@ public class ClassActivity extends BaseActivity {
 
 		selectToday(null);
 
+	}
+	private void setupToolbar(){
+		toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+		setSupportActionBar(toolbar);
+		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
 	}
 
 	public void resetAllTab() {
@@ -142,7 +159,7 @@ public class ClassActivity extends BaseActivity {
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		menu.clear();
 		menu.add(Menu.NONE, Constants.MENU_CLASSROOM_SELECT, Constants.MENU_CLASSROOM_SELECT, "")
-				.setIcon(R.drawable.item).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+				.setIcon(R.drawable.ic_more_horiz_white_48dp).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		return true;
 	}
 

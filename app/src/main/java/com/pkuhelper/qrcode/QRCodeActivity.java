@@ -18,7 +18,7 @@ public class QRCodeActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		startActivityForResult(new Intent(this, MipcaActivityCapture.class), 1);
-		getActionBar().setTitle("二维码扫描");
+		setTitle("二维码扫描");
 	}
 
 	@Override

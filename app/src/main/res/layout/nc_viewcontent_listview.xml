@@ -9,6 +9,7 @@
     <ListView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:divider="@null"
         android:id="@+id/nc_viewcontent_listview">
 
     </ListView>

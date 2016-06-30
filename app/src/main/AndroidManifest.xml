@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.pkuhelper"
-          android:versionCode="20"
           android:screenOrientation="portrait"
-          android:installLocation="internalOnly"
-          android:versionName="2.0.4">
-
-    <uses-sdk
-        android:minSdkVersion="14"
-        android:targetSdkVersion="21"/>
+          android:installLocation="internalOnly">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.VIBRATE"/>
     <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
@@ -26,13 +22,39 @@
     <uses-feature android:name="android.hardware.camera.autofocus"/>
 
     <application
+        android:name=".AppContext"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:logo="@drawable/icon"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppThemeOld">
 
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="569de34b67e58e97f4000028" />
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="${UMENG_CHANNEL_VALUE}" />
+
+        <!-- new -->
+        <!-- on exported debug -->
         <activity
+            android:exported="true"
+            android:name=".ui.main.impl.PkuHelperActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:launchMode="singleTask">
+
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN"/>-->
+                <!--<category android:name="android.intent.category.LAUNCHER"/>-->
+            <!--</intent-filter>-->
+        </activity>
+
+        <!-- old -->
+        <activity
+            android:theme="@style/AppTheme.NoActionBar"
             android:name="com.pkuhelper.PKUHelper"
             android:screenOrientation="portrait"
             android:launchMode="singleTask"
@@ -42,44 +64,87 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
         <activity
+            android:theme="@style/AppTheme"
             android:name="com.pkuhelper.grade.GradeActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleTask"
             android:label="@string/app_name">
         </activity>
+
         <activity
+            android:theme="@style/AppTheme.NoActionBar"
             android:name="com.pkuhelper.classroom.ClassActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleTask"
             android:label="@string/app_name">
         </activity>
+
         <activity
+            android:theme="@style/AppTheme"
             android:name="com.pkuhelper.subactivity.SubActivity"
             android:screenOrientation="portrait"
             android:label="@string/app_name">
         </activity>
+
         <activity
             android:name="com.pkuhelper.pkuhole.HoleActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleTask"
             android:label="@string/app_name">
         </activity>
+
+        <activity
+            android:name="com.pkuhelper.ui.hole.impl.HoleCommentActivity"
+            android:screenOrientation="sensor"
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:label="@string/app_name">>
+        </activity>
+
+        <!-- New -->
+        <activity
+            android:name=".ui.hole.impl.HoleActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:label="@string/app_name">
+        </activity>
+
         <activity
             android:name="com.pkuhelper.pkuhole.HolePost"
             android:screenOrientation="portrait"
             android:label="@string/app_name">
         </activity>
         <activity
+            android:theme="@style/AppTheme"
             android:name="com.pkuhelper.pkuhole.HoleComment"
             android:screenOrientation="portrait"
             android:label="@string/app_name">
         </activity>
         <activity
+            android:theme="@style/AppTheme"
             android:name="com.pkuhelper.pkuhole.HoleSearch"
             android:screenOrientation="portrait"
             android:label="@string/app_name">
         </activity>
+
+        <activity
+            android:exported="true"
+            android:name="com.pkuhelper.ui.secondHand.SecondHandActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:label="@string/app_name">
+        </activity>
+
+
+        <activity
+            android:exported="true"
+            android:name="com.pkuhelper.ui.secondHand.SecondHandItemActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:label="@string/app_name">
+        </activity>
+
         <activity
             android:name="com.pkuhelper.pkuhole.old.PKUHoleActivity"
             android:screenOrientation="portrait"
@@ -87,18 +152,21 @@
             android:label="@string/app_name">
         </activity>
         <activity
+            android:theme="@style/AppTheme"
             android:name="com.pkuhelper.noticecenter.NCActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleTask"
             android:label="@string/app_name">
         </activity>
         <activity
+            android:theme="@style/AppTheme"
             android:name="com.pkuhelper.lostfound.LostFoundActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleTask"
             android:label="@string/app_name">
         </activity>
         <activity
+            android:theme="@style/AppTheme"
             android:name="com.pkuhelper.lostfound.AddActivity"
             android:screenOrientation="portrait"
             android:label="@string/app_name">
@@ -110,76 +178,90 @@
             android:label="@string/app_name">
         </activity>
         <activity
+            android:theme="@style/AppTheme"
             android:name="com.pkuhelper.gesture.GestureActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleTask"
             android:label="@string/app_name">
         </activity>
         <activity
+            android:theme="@style/AppTheme"
             android:name="com.pkuhelper.course.DeanCourseActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleTask"
             android:label="@string/app_name">
         </activity>
         <activity
+            android:theme="@style/AppTheme"
             android:name="com.pkuhelper.course.CustomCourseActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleTask"
             android:label="@string/app_name">
         </activity>
         <activity
+            android:theme="@style/AppTheme"
             android:name="com.pkuhelper.course.ExamActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleTask"
             android:label="@string/app_name"/>
         <activity
+            android:theme="@style/AppTheme"
             android:name="com.pkuhelper.chat.ChatActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleTask"
             android:windowSoftInputMode="stateHidden"
             android:label="@string/app_name"/>
         <activity
+            android:theme="@style/AppTheme.NoActionBar"
             android:name="com.pkuhelper.bbs.BBSActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleTask"
             android:label="@string/app_name"/>
         <activity
+            android:theme="@style/AppTheme"
             android:name="com.pkuhelper.bbs.ViewActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleTask"
             android:label="@string/app_name"/>
         <activity
+            android:theme="@style/AppTheme"
             android:name="com.pkuhelper.bbs.PostActivity"
             android:screenOrientation="portrait"
             android:label="@string/app_name"/>
         <activity
+            android:theme="@style/AppTheme"
             android:name="com.pkuhelper.bbs.MessageActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleTask"
             android:label="@string/app_name"/>
         <activity
+            android:theme="@style/AppTheme"
             android:name="com.pkuhelper.bbs.FavoriteActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleTask"
             android:label="@string/app_name"/>
         <activity
+            android:theme="@style/AppTheme"
             android:name="com.pkuhelper.bbs.MessagePostActivity"
             android:screenOrientation="portrait"
             android:label="@string/app_name"/>
 
         <activity
+            android:theme="@style/AppTheme"
             android:name="com.pkuhelper.qrcode.QRCodeActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleTask"
             android:label="@string/app_name"/>
 
         <activity
+            android:theme="@style/AppTheme"
             android:name="com.pkuhelper.qrcode.MipcaActivityCapture"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden"/>
 
         <activity
+            android:theme="@style/AppTheme"
             android:name="com.pkuhelper.media.MediaActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleTask"

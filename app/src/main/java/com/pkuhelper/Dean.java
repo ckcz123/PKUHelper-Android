@@ -2,6 +2,7 @@ package com.pkuhelper;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
@@ -16,6 +17,7 @@ import com.pkuhelper.lib.RequestingTask;
 import com.pkuhelper.lib.ViewSetting;
 import com.pkuhelper.lib.webconnection.Parameters;
 import com.pkuhelper.lib.webconnection.WebConnection;
+import com.pkuhelper.ui.main.impl.PkuHelperActivity;
 
 import java.util.ArrayList;
 
@@ -35,54 +37,63 @@ public class Dean {
 
 	public static Dialog dialog;
 
-	public static void getSessionId(int _flag) {
-		handler = new Handler(PKUHelper.pkuhelper.getMainLooper(), new Handler.Callback() {
-			public boolean handleMessage(Message msg) {
-				if (msg.what == Constants.MESSAGE_DEAN_PICTURE_FINISHED) {
-					setPicture((Drawable) msg.obj);
-					return true;
-				}
-				if (msg.what == Constants.MESSAGE_DEAN_PICTURE_FAILED) {
-					setPicture(PKUHelper.pkuhelper.getResources().getDrawable(R.drawable.failure));
-					return true;
-				}
-				if (msg.what == Constants.MESSAGE_DEAN_DECODE_FINISHED) {
-					setInput((String) msg.obj);
-					return true;
-				}
-				return false;
-			}
-		});
+	public static void getSessionID(int _flag, final Context context){
+        handler = new Handler(PKUHelper.pkuhelper.getMainLooper(), new Handler.Callback() {
+            public boolean handleMessage(Message msg) {
+                if (msg.what == Constants.MESSAGE_DEAN_PICTURE_FINISHED) {
+                    setPicture((Drawable) msg.obj);
+                    return true;
+                }
+                if (msg.what == Constants.MESSAGE_DEAN_PICTURE_FAILED) {
+                    setPicture(PKUHelper.pkuhelper.getResources().getDrawable(R.drawable.failure));
+                    return true;
+                }
+                if (msg.what == Constants.MESSAGE_DEAN_DECODE_FINISHED) {
+                    setInput((String) msg.obj);
+                    return true;
+                }
+                return false;
+            }
+        });
 
-		flag = _flag;
-		if (!Constants.isLogin()) {
-			IAAA.showLoginView();
-			return;
-		}
-		dialog = new Dialog(PKUHelper.pkuhelper);
-		dialog.setContentView(R.layout.dean_captcha_view);
-		dialog.setTitle("请输入验证码");
-		dialog.setCancelable(true);
-		refreshPicture();
-		ViewSetting.setOnClickListener(dialog, R.id.dean_captcha_connect, new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				connect();
-			}
-		});
-		ViewSetting.setOnClickListener(dialog, R.id.dean_captcha_refresh, new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				refreshPicture();
-			}
-		});
-		ViewSetting.setOnClickListener(dialog, R.id.dean_captcha_cancel, new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				dialog.dismiss();
-			}
-		});
-		dialog.show();
+        flag = _flag;
+        if (!Constants.isLogin()) {
+            IAAA.showLoginView();
+            return;
+        }
+
+        // TODO: 3/28/16
+
+        dialog = new Dialog(context);
+        //dialog = new Dialog(PkuHelperActivity.pkuHelperActivity);
+
+        dialog.setContentView(R.layout.dean_captcha_view);
+        dialog.setTitle("请输入验证码");
+        dialog.setCancelable(true);
+        refreshPicture();
+        ViewSetting.setOnClickListener(dialog, R.id.dean_captcha_connect, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                connect(context);
+            }
+        });
+        ViewSetting.setOnClickListener(dialog, R.id.dean_captcha_refresh, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                refreshPicture();
+            }
+        });
+        ViewSetting.setOnClickListener(dialog, R.id.dean_captcha_cancel, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
+
+	public static void getSessionId(int _flag) {
+        getSessionID(_flag, PKUHelper.pkuhelper);
 	}
 
 	private static void refreshPicture() {
@@ -122,7 +133,7 @@ public class Dean {
 
 	private static void setInput(String string) {
 		ViewSetting.setEditTextValue(dialog, R.id.dean_captcha_input,
-				string);
+                string);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -133,10 +144,29 @@ public class Dean {
 		arrayList.add(new Parameters("sno", Constants.username));
 		arrayList.add(new Parameters("password", Constants.password));
 		arrayList.add(new Parameters("captcha", captcha));
-		new RequestingTask(PKUHelper.pkuhelper, "正在登录教务...", "http://dean.pku.edu.cn/student/authenticate.php"
+        // TODO: 3/29/16
+//        new RequestingTask(PKUHelper.pkuhelper, "正在登录教务...", "http://dean.pku.edu.cn/student/authenticate.php"
+//				, Constants.REQUEST_DEAN_LOGIN).execute(arrayList);
+        new RequestingTask(PKUHelper.pkuhelper, "正在登录教务...", "http://dean.pku.edu.cn/student/authenticate.php"
 				, Constants.REQUEST_DEAN_LOGIN).execute(arrayList);
 
 	}
+
+    @SuppressWarnings("unchecked")
+    public static void connect(Context context) {
+        String captcha = ViewSetting.getEditTextValue(dialog, R.id.dean_captcha_input).trim();
+
+        ArrayList<Parameters> arrayList = new ArrayList<Parameters>();
+        arrayList.add(new Parameters("sno", Constants.username));
+        arrayList.add(new Parameters("password", Constants.password));
+        arrayList.add(new Parameters("captcha", captcha));
+        // TODO: 3/29/16
+//        new RequestingTask(PKUHelper.pkuhelper, "正在登录教务...", "http://dean.pku.edu.cn/student/authenticate.php"
+//				, Constants.REQUEST_DEAN_LOGIN).execute(arrayList);
+        new RequestingTask(PKUHelper.pkuhelper, context, "正在登录教务...", "http://dean.pku.edu.cn/student/authenticate.php"
+                , Constants.REQUEST_DEAN_LOGIN).execute(arrayList);
+
+    }
 
 	public static void finishLogin(String string) {
 		if (string.contains("alert")) {

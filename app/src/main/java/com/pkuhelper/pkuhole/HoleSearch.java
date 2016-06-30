@@ -64,7 +64,7 @@ public class HoleSearch extends BaseActivity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.hole_search);
-		getActionBar().setTitle("搜索树洞");
+		setTitle("搜索树洞");
 
 
 		searchView = (SearchView) findViewById(R.id.hole_search);

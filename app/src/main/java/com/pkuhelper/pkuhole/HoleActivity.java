@@ -79,7 +79,7 @@ public class HoleActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		//holeActivity=this;
-		getActionBar().setTitle("P大树洞");
+		setTitle("P大树洞");
 
 		mediaPlayer = new MediaPlayer();
 
@@ -279,7 +279,6 @@ public class HoleActivity extends BaseActivity {
 				public Object getItem(int position) {
 					return null;
 				}
-
 				public int getCount() {
 					return 0;
 				}
@@ -360,7 +359,6 @@ public class HoleActivity extends BaseActivity {
 				}
 
 				ViewSetting.setTextView(convertView, R.id.hole_listitem_time, MyCalendar.format(holeInfo.timestamp));
-
 				ViewSetting.setTextView(convertView, R.id.hole_listitem_like, "(" + holeInfo.like + ")");
 				ViewSetting.setTextView(convertView, R.id.hole_listitem_reply, "(" + holeInfo.reply + ")");
 
