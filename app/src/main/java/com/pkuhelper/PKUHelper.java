@@ -278,6 +278,8 @@ public class PKUHelper extends BaseActivity {
 		Constants.init(this);
 		if (!Constants.isLogin()) {
 			IAAA.showLoginView();
+			if (!Editor.getBoolean(this, "privacy", false))
+				showPrivacy();
 		} else {
 			//doWhenFirstLaunch();
 			if (!dealWithActionType(getIntent().getStringExtra("type"))) {
