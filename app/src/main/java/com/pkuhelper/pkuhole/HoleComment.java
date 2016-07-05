@@ -127,11 +127,22 @@ public class HoleComment extends BaseActivity {
 			public void onItemClick(AdapterView<?> parent, View view,
 									int position, long id) {
 				try {
+					/*
 					String scid = ViewSetting.getTextView(view, R.id.hole_comment_listitem_id);
 					if (scid.startsWith("#")) scid = scid.substring(1);
 					int cid = Integer.parseInt(scid);
 					if (cid != 0)
 						reply("Re #" + cid + ": ");
+					*/
+					String scid = ViewSetting.getTextView(view, R.id.hole_comment_listitem_id);
+					String text = ViewSetting.getTextView(view, R.id.hole_comment_listitem_text);
+					if (text.startsWith("[")) {
+						int pos=text.indexOf("]");
+						if (pos!=-1) {
+							scid=text.substring(1, pos);
+						}
+					}
+					reply("Re "+scid+": ");
 				} catch (Exception e) {
 				}
 
