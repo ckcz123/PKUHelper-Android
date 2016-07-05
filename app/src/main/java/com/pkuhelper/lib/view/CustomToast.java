@@ -14,9 +14,9 @@ import com.pkuhelper.lib.ViewSetting;
 
 public class CustomToast {
 
-	public static final int TYPE_SUCCESS = 0;
-	public static final int TYPE_INFO = 1;
-	public static final int TYPE_ERROR = 2;
+	private static final int TYPE_SUCCESS = 0;
+	private static final int TYPE_INFO = 1;
+	private static final int TYPE_ERROR = 2;
 
 	@SuppressLint("InflateParams")
 	private static void showToast(Context context,

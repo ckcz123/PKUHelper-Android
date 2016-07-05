@@ -3,7 +3,10 @@ package com.pkuhelper;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.view.View;
 
@@ -246,8 +249,15 @@ class LoginTask extends AsyncTask<String, String, Parameters> {
 	protected void onPostExecute(Parameters parameters) {
 		progressDialog.dismiss();
 		if (!"200".equals(parameters.name)) {
-			if ("-1".equals(parameters.name))
-				CustomToast.showInfoToast(PKUHelper.pkuhelper, "无法连接网络(-1,-1)");
+			if ("-1".equals(parameters.name)) {
+				ConnectivityManager connectivityManager=
+						(ConnectivityManager)PKUHelper.pkuhelper.getSystemService(Context.CONNECTIVITY_SERVICE);
+				NetworkInfo networkInfo=connectivityManager.getActiveNetworkInfo();
+				if (networkInfo!=null && networkInfo.isAvailable() && networkInfo.getType()==ConnectivityManager.TYPE_WIFI)
+					CustomToast.showInfoToast(PKUHelper.pkuhelper, "无法连接网络，请使用4G进行尝试。", 3000);
+				else
+					CustomToast.showInfoToast(PKUHelper.pkuhelper, "无法连接网络(-1,-1)");
+			}
 			else {
 				CustomToast.showInfoToast(PKUHelper.pkuhelper, "无法连接到服务器 (HTTP " + parameters.name + ")");
 			}
