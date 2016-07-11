@@ -278,13 +278,13 @@ public class PKUHelper extends BaseActivity {
 		Constants.init(this);
 		if (!Constants.isLogin()) {
 			IAAA.showLoginView();
-			if (!Editor.getBoolean(this, "privacy", false))
-				showPrivacy();
+//			if (!Editor.getBoolean(this, "privacy", false))
+//				showPrivacy();
 		} else {
 			//doWhenFirstLaunch();
 			if (!dealWithActionType(getIntent().getStringExtra("type"))) {
-				if (!Editor.getBoolean(this, "privacy", false))
-					showPrivacy();
+//				if (!Editor.getBoolean(this, "privacy", false))
+//					showPrivacy();
 			}
 		}
 	}
@@ -354,12 +354,12 @@ public class PKUHelper extends BaseActivity {
 				|| type == Constants.REQUEST_ITS_DISCONNECT
 				|| type == Constants.REQUEST_ITS_DISCONNECT_ALL)
 			IPGW.finishConnection(type, string);
-		if (type == Constants.REQUEST_ELECTIVE || type == Constants.REQUEST_ELECTIVE_TOKEN
+		if (type == Constants.REQUEST_ELECTIVE_COURSES || type == Constants.REQUEST_ELECTIVE_TOKEN
 				|| type == Constants.REQUEST_ELECTIVE_COOKIE)
 			Course.finishConnection(type, string);
-		if (type == Constants.REQUEST_ELECTIVE_COURSES)
+		if (type == Constants.REQUEST_DEAN_COURSES)
 			Course.finishGetCourses(string);
-		if (type == Constants.REQUEST_ELECTIVE_CUSTOM)
+		if (type == Constants.REQUEST_CUSTOM_COURSES)
 			Course.finishGetCustom(string);
 		if (type == Constants.REQUEST_DEAN_LOGIN)
 			Dean.finishLogin(string);

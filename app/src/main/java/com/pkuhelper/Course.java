@@ -2,12 +2,14 @@ package com.pkuhelper;
 
 import android.annotation.SuppressLint;
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -27,6 +29,7 @@ import com.pkuhelper.lib.Util;
 import com.pkuhelper.lib.ViewSetting;
 import com.pkuhelper.lib.view.CustomToast;
 import com.pkuhelper.lib.webconnection.Parameters;
+import com.pkuhelper.lib.webconnection.WebConnection;
 import com.pkuhelper.widget.WidgetCourse2Provider;
 import com.pkuhelper.widget.WidgetCourseProvider;
 
@@ -146,7 +149,7 @@ public class Course extends Fragment {
 	private static void connectCourse() {
 		RequestingTask requestingTask = new RequestingTask(PKUHelper.pkuhelper, "正在获取课表...",
 				"http://elective.pku.edu.cn/elective2008/edu/pku/stu/elective/controller/electiveWork/showResults.do",
-				Constants.REQUEST_ELECTIVE);
+				Constants.REQUEST_ELECTIVE_COURSES);
 		requestingTask.execute(new ArrayList<Parameters>());
 	}
 
@@ -170,7 +173,7 @@ public class Course extends Fragment {
 			}
 		} else if (type == Constants.REQUEST_ELECTIVE_COOKIE) {
 			connectCourse();
-		} else if (type == Constants.REQUEST_ELECTIVE) {
+		} else if (type == Constants.REQUEST_ELECTIVE_COURSES) {
 			html = decodeHtml(string);
 			showView();
 			try {
@@ -183,12 +186,15 @@ public class Course extends Fragment {
 
 	@SuppressWarnings("unchecked")
 	public static void getCourses() {
+		/*
 		ArrayList<Parameters> arrayList = new ArrayList<>();
 		arrayList.add(new Parameters("token", Constants.token));
 		arrayList.add(new Parameters("phpsessid", Constants.phpsessid));
 		new RequestingTask(PKUHelper.pkuhelper, "正在获取课表..",
 				Constants.domain + "/services/pkuhelper/course.php",
-				Constants.REQUEST_ELECTIVE_COURSES).execute(arrayList);
+				Constants.REQUEST_DEAN_COURSES).execute(arrayList);
+		*/
+		new DeanCourseTask(PKUHelper.pkuhelper, Constants.phpsessid).execute();
 	}
 
 	public static void finishGetCourses(String string) {
@@ -268,7 +274,7 @@ public class Course extends Fragment {
 		arrayList.add(new Parameters("operation", "get"));
 		arrayList.add(new Parameters("token", Constants.token));
 		new RequestingTask(PKUHelper.pkuhelper, "正在获取自选课表..",
-				Constants.domain + "/services/course.php", Constants.REQUEST_ELECTIVE_CUSTOM)
+				Constants.domain + "/services/course.php", Constants.REQUEST_CUSTOM_COURSES)
 				.execute(arrayList);
 	}
 
@@ -935,5 +941,191 @@ class CourseString {
 
 	public static final String HR_STRING = "<hr color='red' style='position: absolute; z-index:100;"
 			+ "width: 95%%;left: 0;top: %d%%;margin: 0;padding: 0;'>";
+}
+
+class DeanCourseTask extends AsyncTask<String, String, Parameters> {
+	ProgressDialog progressDialog;
+	String phpsessid;
+	PKUHelper pkuhelper;
+
+	public DeanCourseTask(PKUHelper pkuhelper, String phpsessid) {
+		this.pkuhelper=pkuhelper;
+		this.phpsessid=new String(phpsessid);
+		progressDialog=new ProgressDialog(pkuhelper);
+		progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+		progressDialog.setTitle("提示");
+		progressDialog.setMessage("正在获取教务课表");
+		progressDialog.setIndeterminate(false);
+		progressDialog.setCancelable(false);
+	}
+
+	@Override
+	protected void onPreExecute() {
+		progressDialog.show();
+	}
+
+	@Override
+	protected Parameters doInBackground(String... params) {
+		try {
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("code", 0);
+
+			JSONArray courses=new JSONArray();
+
+			dealWithDean("http://dean.pku.edu.cn/student/newXkInfo_1105.php?PHPSESSID=" + phpsessid, courses);
+			dealWithDual("http://dean.pku.edu.cn/student/fxsxwxk.php?PHPSESSID=" + phpsessid, courses);
+
+			Parameters parameters=WebConnection.connect(Constants.domain+
+					"/services/course.php?operation=get&token="+Constants.token, null);
+			if ("200".equals(parameters.name)) {
+				try {
+					JSONObject object = new JSONObject(parameters.value);
+					int hasCustom = object.getInt("hasCustom");
+					if (hasCustom==1) {
+						JSONArray customArray=object.optJSONArray("courses");
+						int len=customArray.length();
+						for (int i=0;i<len;i++) {
+							JSONObject custom=customArray.getJSONObject(i);
+							custom.put("type", "custom");
+							courses.put(custom);
+						}
+					}
+				}
+				catch (Exception ee) {}
+			}
+
+			jsonObject.put("courses", courses);
+
+			return new Parameters("200", jsonObject.toString());
+
+
+		}
+		catch (Exception e) {return new Parameters("-1", "");}
+	}
+
+	private void dealWithDual(String url, JSONArray courses) {
+		Parameters parameters= WebConnection.connect(url, null, 1);
+		if (!"200".equals(parameters.name)) return;
+		Document document= Jsoup.parse(parameters.value);
+		Elements tables=document.getElementsByTag("table");
+		if (tables.size()==0) return;
+		Element table=tables.get(0);
+		Elements trs=table.getElementsByTag("tr");
+		int len=trs.size();
+
+		for (int i=1;i<len;i++) {
+			try {
+				Element tr = trs.get(i);
+				Elements tds = tr.getElementsByTag("td");
+				JSONObject course=new JSONObject();
+				course.put("courseName", tds.get(1).text().trim());
+				JSONArray times=new JSONArray();
+				for (int j=1;j<=7;j++) {
+					String cur=tds.get(6+j).text().trim();
+					if (!"".equals(cur)) {
+						String week="all";
+						int pos=cur.indexOf("单");
+						if (pos!=-1) {
+							week = "odd";
+							cur=cur.substring(0, pos);
+						}
+						pos=cur.indexOf("双");
+						if (pos!=-1) {
+							week="even";
+							cur=cur.substring(0, pos);
+						}
+						cur=cur.trim();
+						JSONObject time=new JSONObject();
+						time.put("day", ""+j);
+						time.put("num", cur);
+						time.put("week", week);
+						times.put(time);
+					}
+				}
+				course.put("times", times);
+				course.put("location", tds.get(14).text().replace(" ","").trim());
+				course.put("type","dual");
+
+				courses.put(course);
+			} catch (Exception e) {
+			}
+		}
+
+
+	}
+
+	private void dealWithDean(String url, JSONArray courses) {
+		Parameters parameters= WebConnection.connect(url, null, 0);
+		if (!"200".equals(parameters.name)) return;
+		Document document= Jsoup.parse(parameters.value);
+		Elements tables=document.getElementsByTag("table");
+		if (tables.size()==0) return;
+		Element table=tables.get(0);
+		Elements trs=table.getElementsByTag("tr");
+		int len=trs.size();
+
+		for (int i=1;i<len;i++) {
+			try {
+				Element tr = trs.get(i);
+				Elements tds = tr.getElementsByTag("td");
+				if (tds.size()<10) continue;
+
+				JSONObject course=new JSONObject();
+
+				course.put("courseName", tds.get(1).text().trim());
+				String timeandplace=tds.get(8).html();
+				String[] tap=timeandplace.split("<br>");
+				String[] items=tap[0].split(":");
+				String[] timecomps=items[1].split(",");
+				JSONArray times=new JSONArray();
+				for (String time: timecomps) {
+					String week="all";
+					if (time.contains("(单)")) week="odd";
+					else if (time.contains("(双)")) week="even";
+					time=time.replace("(单)","").replace("(双)","").trim();
+					int day=0;
+					String[] weeks={"周一", "周二", "周三", "周四", "周五", "周六", "周日"};
+					for (int j=0;j<7;j++) {
+						if (time.contains(weeks[j])) {
+							day=j+1;
+							time=time.replace(weeks[j],"").trim();
+						}
+					}
+					if (day==0) continue;
+					JSONObject object=new JSONObject();
+					object.put("day", ""+day);
+					object.put("num", time);
+					object.put("week", week);
+					times.put(object);
+				}
+
+				course.put("times", times);
+				String[] locs=tap[1].split(":");
+				String location="";
+				if (locs.length>1) {
+					location=locs[1].trim();
+				}
+				course.put("location", location);
+				course.put("type","main");
+				courses.put(course);
+			}
+			catch (Exception e) {}
+		}
+
+	}
+
+	@Override
+	protected void onPostExecute(Parameters parameters) {
+		progressDialog.dismiss();
+		if (!"200".equals(parameters.name)) {
+			if ("-1".equals(parameters.name))
+				CustomToast.showInfoToast(pkuhelper, "无法连接网络(-1,-1)");
+			else {
+				CustomToast.showInfoToast(pkuhelper, "无法连接到服务器 (HTTP " + parameters.name + ")");
+			}
+		} else
+			pkuhelper.finishRequest(Constants.REQUEST_DEAN_COURSES, parameters.value);
+	}
+
 }
 

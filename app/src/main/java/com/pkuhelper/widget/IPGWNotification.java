@@ -169,7 +169,7 @@ public class IPGWNotification extends BroadcastReceiver {
 
 			@Override
 			public void run() {
-				Parameters parameters = WebConnection.connect("https://its.pku.edu.cn:5428/ipgatewayofpku", arrayList);
+				Parameters parameters = WebConnection.connect("https://its.pku.edu.cn:5428/ipgatewayofpku", arrayList, 1);
 				if (!"200".equals(parameters.name)) {
 					handler.sendMessage(Message.obtain(handler,
 							Constants.MESSAGE_WIDGET_FAILED, constantType,

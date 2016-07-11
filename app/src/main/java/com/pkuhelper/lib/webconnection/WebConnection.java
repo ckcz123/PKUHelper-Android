@@ -35,6 +35,7 @@ import java.util.Locale;
 
 public class WebConnection {
 
+
 	/**
 	 * 向服务器发送请求，并且接收到返回的数据
 	 *
@@ -44,8 +45,20 @@ public class WebConnection {
 	 * 存放的是返回的网页内容
 	 */
 	public static Parameters connect(String url, ArrayList<Parameters> params) {
+		return connect(url, params, 0);
+	}
+	/**
+	 * 向服务器发送请求，并且接收到返回的数据
+	 *
+	 * @param url    请求地址
+	 * @param params 请求参数；如果参数为空使用get请求，如果不为空使用post请求
+	 * @param encodingType 编码类型；-1表示Unknown, 0表示utf-8，1表示gbk；默认为0
+	 * @return 一个 Parameters；name 存放 HTTP code（无法连接时为-1）；如果 code==200 那么 value
+	 * 存放的是返回的网页内容
+	 */
+	public static Parameters connect(String url, ArrayList<Parameters> params, int encodingType) {
 		if (params == null || params.size() == 0) {
-			return connectWithGet(url);
+			return connectWithGet(url, encodingType);
 		}
 		try {
 			url = url.trim();
@@ -88,9 +101,6 @@ public class WebConnection {
 
 			Parameters parameters = new Parameters("", "");
 			int returncode = httpResponse.getStatusLine().getStatusCode();
-
-
-			int encodeingType = getEncodingType(url);
 			boolean isGbk = false;
 
 			Header header=httpResponse.getFirstHeader("Content-type");
@@ -100,9 +110,9 @@ public class WebConnection {
 					isGbk = true;
 				else if (typeString.contains("utf8") || typeString.contains("utf-8"))
 					isGbk = false;
-				else if (encodeingType == 1) isGbk = true;
+				else if (encodingType == 1) isGbk = true;
 			}
-			else if (encodeingType == 1) isGbk = true;
+			else if (encodingType == 1) isGbk = true;
 
 			Cookies.setCookie(httpResponse, url);
 
@@ -132,7 +142,7 @@ public class WebConnection {
 		}
 	}
 
-	private static Parameters connectWithGet(String url) {
+	private static Parameters connectWithGet(String url, int encodingType) {
 		try {
 			url = url.trim();
 			HttpParams httpParams = new BasicHttpParams();
@@ -147,8 +157,6 @@ public class WebConnection {
 			Parameters parameters = new Parameters("", "");
 			int returncode = httpResponse.getStatusLine().getStatusCode();
 
-
-			int encodeingType = getEncodingType(url);
 			boolean isGbk = false;
 
 			Header header=httpResponse.getFirstHeader("Content-type");
@@ -158,9 +166,9 @@ public class WebConnection {
 					isGbk = true;
 				else if (typeString.contains("utf8") || typeString.contains("utf-8"))
 					isGbk = false;
-				else if (encodeingType == 1) isGbk = true;
+				else if (encodingType == 1) isGbk = true;
 			}
-			else if (encodeingType == 1) isGbk = true;
+			else if (encodingType == 1) isGbk = true;
 
 			Cookies.setCookie(httpResponse, url);
 
@@ -240,23 +248,6 @@ public class WebConnection {
 		}
 	}
 
-	// return 1: gbk
-	// return 0: utf-8
-	// return -1: unknown
-	private static int getEncodingType(String url) {
-		if (url.startsWith("http://dean.pku.edu.cn/student/authenticate.php"))
-			return 0;
-		if (url.startsWith("http://dean.pku.edu.cn/"))
-			return 1;
-		if (url.startsWith("http://elective.pku.edu.cn"))
-			return 0;
-		if (url.startsWith("https://iaaa.pku.edu.cn"))
-			return 0;
-		if (url.startsWith("https://its.pku.edu.cn"))
-			return 1;
-		return -1;
-	}
-
 	/**
 	 * 什么时候使用校内代理
 	 *
@@ -265,12 +256,12 @@ public class WebConnection {
 	 */
 	private static boolean whetherToUseProxy(String url) {
 		// 未登录：不用
-		if (!Constants.isValidLogin()) return false;
+		//if (!Constants.isValidLogin()) return false;
 		// 已经是校内：不用
-		if (Constants.inSchool) return false;
+		//if (Constants.inSchool) return false;
 		// 如果是树洞请求访问，使用
-		if (url.startsWith("http://pkuhole.sinaapp.com"))
-			return true;
+		//if (url.startsWith("http://pkuhole.sinaapp.com"))
+		//	return true;
 
 		// 默认不用
 		return false;

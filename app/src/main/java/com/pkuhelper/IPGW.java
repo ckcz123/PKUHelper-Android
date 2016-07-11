@@ -261,7 +261,7 @@ public class IPGW extends Fragment {
 		arrayList.add(new Parameters("timeout", "-1"));
 
 		new RequestingTask(PKUHelper.pkuhelper, hintString,
-				"https://its.pku.edu.cn:5428/ipgatewayofpku", constantType)
+				"https://its.pku.edu.cn:5428/ipgatewayofpku", constantType, 1)
 				.execute(arrayList);
 	}
 

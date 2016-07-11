@@ -9,8 +9,8 @@ import com.pkuhelper.Settings;
 import java.util.ArrayList;
 
 public class Constants {
-	public static final String version = "2.0.4";
-	public static final String update_time = "2015-10-23";
+	public static final String version = "2.0.5";
+	public static final String update_time = "2016-07-11";
 
 	public static final String domain = "http://www.xiongdianpku.com";
 
@@ -26,11 +26,11 @@ public class Constants {
 	public static final int REQUEST_ITS_CONNECT_NO_FREE = 501;
 	public static final int REQUEST_ITS_DISCONNECT = 502;
 	public static final int REQUEST_ITS_DISCONNECT_ALL = 503;
-	public static final int REQUEST_ELECTIVE = 600;
+	public static final int REQUEST_ELECTIVE_COURSES = 600;
 	public static final int REQUEST_ELECTIVE_TOKEN = 601;
 	public static final int REQUEST_ELECTIVE_COOKIE = 602;
-	public static final int REQUEST_ELECTIVE_COURSES = 603;
-	public static final int REQUEST_ELECTIVE_CUSTOM = 604;
+	public static final int REQUEST_DEAN_COURSES = 603;
+	public static final int REQUEST_CUSTOM_COURSES = 604;
 	public static final int REQUEST_DEAN_LOGIN = 700;
 	public static final int REQUEST_DEAN_GETTING_GRADE = 701;
 	public static final int REQUEST_CLASSROOM_LIST = 800;

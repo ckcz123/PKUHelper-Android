@@ -134,7 +134,7 @@ public class Dean {
 		arrayList.add(new Parameters("password", Constants.password));
 		arrayList.add(new Parameters("captcha", captcha));
 		new RequestingTask(PKUHelper.pkuhelper, "正在登录教务...", "http://dean.pku.edu.cn/student/authenticate.php"
-				, Constants.REQUEST_DEAN_LOGIN).execute(arrayList);
+				, Constants.REQUEST_DEAN_LOGIN, 0).execute(arrayList);
 
 	}
 
@@ -168,7 +168,7 @@ public class Dean {
 		if (tmpflag == FLAG_GETTING_GRADE)
 			getGrade();
 		else if (tmpflag == FLAG_GETTING_COURSE)
-			getTimetable();
+			getCourses();
 	}
 
 	private static void getGrade() {
@@ -178,7 +178,7 @@ public class Dean {
 		PKUHelper.pkuhelper.startActivity(intent);
 	}
 
-	private static void getTimetable() {
+	private static void getCourses() {
 		Course.getCourses();
 	}
 

@@ -149,12 +149,12 @@ public class Settings extends Fragment {
 				clearCache();
 			}
 		});
-		ViewSetting.setOnClickListener(settingView, R.id.settings_privacy, new View.OnClickListener() {
+/*		ViewSetting.setOnClickListener(settingView, R.id.settings_privacy, new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				PKUHelper.pkuhelper.showPrivacy();
 			}
-		});
+		}); */
 		ViewSetting.setOnClickListener(settingView, R.id.settings_tablerow_update, new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

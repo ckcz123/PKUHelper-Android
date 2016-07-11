@@ -48,13 +48,13 @@ public class GradeTask extends AsyncTask<String, String, Parameters> {
 		try {
 			JSONObject jsonObject = new JSONObject();
 			jsonObject.put("code", 0);
-			JSONObject grade=dealWithDean("http://dean.pku.edu.cn/student/new_grade.php?PHPSESSID="+phpsessid);
+			JSONObject grade=dealWithDean("http://dean.pku.edu.cn/student/new_grade.php?PHPSESSID="+phpsessid, 0);
 			jsonObject.put("total", grade.optString("total", "0"));
 			jsonObject.put("avggpa", grade.optString("avggpa", "0"));
 			jsonObject.put("gpas", grade.optJSONArray("gpas"));
 			jsonObject.put("courses", grade.optJSONArray("courses"));
 
-			JSONObject grade2=dealWithDean("http://dean.pku.edu.cn/student/fxsxw.php?PHPSESSID="+phpsessid);
+			JSONObject grade2=dealWithDean("http://dean.pku.edu.cn/student/fxsxw.php?PHPSESSID="+phpsessid, 1);
 			jsonObject.put("dualtotal", grade2.optString("total", "0"));
 			jsonObject.put("dualavggpa", grade2.optString("avggpa", "0"));
 			jsonObject.put("dualgpas", grade2.optJSONArray("gpas"));
@@ -65,9 +65,9 @@ public class GradeTask extends AsyncTask<String, String, Parameters> {
 		} catch (Exception e) {return new Parameters("-1", "");}
 	}
 
-	private JSONObject dealWithDean(String url)  {
+	private JSONObject dealWithDean(String url, int encodingType)  {
 		try {
-			Parameters parameters=WebConnection.connect(url, null);
+			Parameters parameters=WebConnection.connect(url, null, encodingType);
 			if (!"200".equals(parameters.name)) return new JSONObject();
 			Document document= Jsoup.parse(parameters.value);
 			Elements tables=document.getElementsByTag("table");

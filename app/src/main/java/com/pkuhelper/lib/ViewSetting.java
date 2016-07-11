@@ -163,7 +163,7 @@ public class ViewSetting {
 				imageView = (ImageView) ((Dialog) father).findViewById(resourceid);
 			if (imageView == null) return;
 			imageView.setImageDrawable(drawable);
-		} catch (Exception e) {
+		} catch (Exception | OutOfMemoryError e) {
 		}
 	}
 
@@ -179,7 +179,7 @@ public class ViewSetting {
 				imageView = (ImageView) ((Dialog) father).findViewById(resourceid);
 			if (imageView == null) return;
 			imageView.setImageBitmap(bitmap);
-		} catch (Exception e) {
+		} catch (Exception | OutOfMemoryError e) {
 		}
 	}
 
@@ -195,7 +195,7 @@ public class ViewSetting {
 				imageView = (ImageView) ((Dialog) father).findViewById(resourceid);
 			if (imageView == null) return;
 			imageView.setImageResource(resID);
-		} catch (Exception e) {
+		} catch (Exception | OutOfMemoryError e) {
 		}
 	}
 
