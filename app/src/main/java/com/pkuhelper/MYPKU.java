@@ -89,6 +89,10 @@ public class MYPKU extends Fragment {
 		View rootView = inflater.inflate(R.layout.mypku_view,
 				container, false);
 		mypkuView = rootView;
+		try {
+			mypkuView.setBackgroundResource(R.drawable.mypku_bg);
+		}
+		catch (OutOfMemoryError e) {System.gc();}
 		String string = Editor.getString(PKUHelper.pkuhelper, "mypku_notwants");
 		try {
 			setView(getList(publics, string), R.id.mypku_public, "公共信息");

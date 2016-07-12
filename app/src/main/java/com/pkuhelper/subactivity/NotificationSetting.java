@@ -259,12 +259,15 @@ public class NotificationSetting {
 
 	@SuppressWarnings("unchecked")
 	public void save() {
-		ArrayList<Parameters> arrayList = new ArrayList<Parameters>();
-		arrayList.add(new Parameters("token", Constants.token));
-		arrayList.add(new Parameters("push", jsonArray.toString()));
-		new RequestingTask(subActivity, "正在保存",
-				Constants.domain + "/pkuhelper/nc/setPush.php", Constants.REQUEST_SUBACTIVITY_PUSHES_SET)
-				.execute(arrayList);
+		try {
+			ArrayList<Parameters> arrayList = new ArrayList<Parameters>();
+			arrayList.add(new Parameters("token", Constants.token));
+			arrayList.add(new Parameters("push", jsonArray.toString()));
+			new RequestingTask(subActivity, "正在保存",
+					Constants.domain + "/pkuhelper/nc/setPush.php", Constants.REQUEST_SUBACTIVITY_PUSHES_SET)
+					.execute(arrayList);
+		}
+		catch (Exception e) {CustomToast.showErrorToast(subActivity, "保存失败");}
 	}
 
 	public void finishSave(String string) {

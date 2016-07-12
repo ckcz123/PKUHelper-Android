@@ -163,8 +163,9 @@ public class ViewSetting {
 				imageView = (ImageView) ((Dialog) father).findViewById(resourceid);
 			if (imageView == null) return;
 			imageView.setImageDrawable(drawable);
-		} catch (Exception | OutOfMemoryError e) {
+		} catch (Exception e) {
 		}
+		catch (OutOfMemoryError e) {System.gc();}
 	}
 
 	public static void setImageBitmap(final Object father, final int resourceid, final Bitmap bitmap) {
@@ -179,8 +180,9 @@ public class ViewSetting {
 				imageView = (ImageView) ((Dialog) father).findViewById(resourceid);
 			if (imageView == null) return;
 			imageView.setImageBitmap(bitmap);
-		} catch (Exception | OutOfMemoryError e) {
+		} catch (Exception e) {
 		}
+		catch (OutOfMemoryError e) {System.gc();}
 	}
 
 	public static void setImageResource(final Object father, final int resourceid, final int resID) {
@@ -195,8 +197,9 @@ public class ViewSetting {
 				imageView = (ImageView) ((Dialog) father).findViewById(resourceid);
 			if (imageView == null) return;
 			imageView.setImageResource(resID);
-		} catch (Exception | OutOfMemoryError e) {
+		} catch (Exception e) {
 		}
+		catch (OutOfMemoryError e) {System.gc();}
 	}
 
 	public static void setSwitchChecked(final Object father, final int resourceid, final boolean checked) {
