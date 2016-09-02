@@ -13,7 +13,7 @@ public class Constants {
 	public static final String update_time = "2016-07-11";
 
 	public static final String domain = "http://www.xiongdianpku.com";
-	public static final String bbsurl = "http://www.bdwm.net/v2/bbsclient1.php";
+	public static final String bbsurl = "http://www.bdwm.net/client/bbsclient.php";
 
 	public static final int REQUEST_REPORT = 300;
 	public static final int REQUEST_UPDATE = 301;
