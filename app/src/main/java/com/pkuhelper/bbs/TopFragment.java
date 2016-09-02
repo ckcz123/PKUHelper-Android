@@ -41,7 +41,7 @@ public class TopFragment extends Fragment {
 
 	@SuppressWarnings("unchecked")
 	public static void showView() {
-		new RequestingTask(BBSActivity.bbsActivity, "正在获取热门帖子...", "http://www.bdwm.net/client/bbsclient.php?type=gettop&number=30",
+		new RequestingTask(BBSActivity.bbsActivity, "正在获取热门帖子...", Constants.bbsurl+"?type=gettop&number=30",
 				Constants.REQUEST_BBS_GET_TOP).execute(new ArrayList<Parameters>());
 	}
 

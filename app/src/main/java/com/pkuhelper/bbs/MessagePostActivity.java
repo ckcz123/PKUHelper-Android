@@ -88,7 +88,7 @@ public class MessagePostActivity extends BaseActivity {
 				arrayList.add(new Parameters("text", text));
 				arrayList.add(new Parameters("number", getIntent().getExtras().getString("number", "")));
 				new RequestingTask(MessagePostActivity.this, "正在发送...",
-						"http://www.bdwm.net/client/bbsclient.php", Constants.REQUEST_BBS_POST_MAIL)
+						Constants.bbsurl, Constants.REQUEST_BBS_POST_MAIL)
 						.execute(arrayList);
 			}
 		});

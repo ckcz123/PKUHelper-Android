@@ -61,7 +61,7 @@ public class ViewPost {
 		arrayList.add(new Parameters("pagesize", ViewActivity.PAGESIZE + ""));
 		arrayList.add(new Parameters("token", Userinfo.token));
 		new RequestingTask(ViewActivity.viewActivity, "正在获取内容...",
-				"http://www.bdwm.net/client/bbsclient.php", Constants.REQUEST_BBS_GET_POST)
+				Constants.bbsurl, Constants.REQUEST_BBS_GET_POST)
 				.execute(arrayList);
 		tmpPage = page;
 		tmpThreadid = threadid;
@@ -280,7 +280,7 @@ public class ViewPost {
 				arrayList.add(new Parameters("number", postInfo.number + ""));
 				arrayList.add(new Parameters("timestamp", postInfo.timestamp + ""));
 				arrayList.add(new Parameters("toboard", text));
-				new RequestingTask(ViewActivity.viewActivity, "正在转载...", "http://www.bdwm.net/client/bbsclient.php",
+				new RequestingTask(ViewActivity.viewActivity, "正在转载...", Constants.bbsurl,
 						Constants.REQUEST_BBS_REPRINT).execute(arrayList);
 				tmpBoard = text;
 			}

@@ -54,14 +54,14 @@ public class MessageActivity extends BaseActivity {
 	void requestList() {
 		showList();
 		new RequestingTask(this, "正在获取信件列表",
-				"http://www.bdwm.net/client/bbsclient.php?type=getmaillist&token=" + Userinfo.token,
+				Constants.bbsurl+"?type=getmaillist&token=" + Userinfo.token,
 				Constants.REQUEST_BBS_GET_MAIL_LIST).execute(new ArrayList<Parameters>());
 	}
 
 	@SuppressWarnings("unchecked")
 	void requestDetail() {
 		new RequestingTask(this, "正在获取内容...",
-				"http://www.bdwm.net/client/bbsclient.php?type=getmail&token=" + Userinfo.token
+				Constants.bbsurl+"?type=getmail&token=" + Userinfo.token
 						+ "&timestamp=" + tmpInfo.timestamp, Constants.REQUEST_BBS_GET_MAIL).execute(new ArrayList<Parameters>());
 	}
 

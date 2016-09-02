@@ -43,7 +43,7 @@ public class Userinfo {
 				arrayList.add(new Parameters("type", "login"));
 				arrayList.add(new Parameters("username", username));
 				arrayList.add(new Parameters("password", password));
-				Parameters parameters = WebConnection.connect("http://www.bdwm.net/client/bbsclient.php", arrayList);
+				Parameters parameters = WebConnection.connect(Constants.bbsurl, arrayList);
 				if ("200".equals(parameters.name)) {
 					BBSActivity.bbsActivity.handler.sendMessage(Message.obtain(
 							BBSActivity.bbsActivity.handler, Constants.MESSAGE_BBS_LOGIN, parameters.value));
@@ -63,7 +63,7 @@ public class Userinfo {
 		arrayList.add(new Parameters("type", "login"));
 		arrayList.add(new Parameters("username", username));
 		arrayList.add(new Parameters("password", password));
-		new RequestingTask(BBSActivity.bbsActivity, "正在登录 ...", "http://www.bdwm.net/client/bbsclient.php",
+		new RequestingTask(BBSActivity.bbsActivity, "正在登录 ...", Constants.bbsurl,
 				Constants.REQUEST_BBS_LOGIN).execute(arrayList);
 		givehint = true;
 	}

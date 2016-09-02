@@ -155,7 +155,7 @@ public class SearchFragment extends Fragment {
 		arrayList.add(new Parameters("text", text));
 
 		new RequestingTask(BBSActivity.bbsActivity, "正在搜索..",
-				"http://www.bdwm.net/client/bbsclient.php", Constants.REQUEST_BBS_SEARCH)
+				Constants.bbsurl, Constants.REQUEST_BBS_SEARCH)
 				.execute(arrayList);
 		searchBoard = new String(string);
 	}

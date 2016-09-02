@@ -42,7 +42,7 @@ public class ViewThread {
 		arrayList.add(new Parameters("board", ViewActivity.board));
 		arrayList.add(new Parameters("token", Userinfo.token));
 		new RequestingTask(ViewActivity.viewActivity, "正在获取内容...",
-				"http://www.bdwm.net/client/bbsclient.php", Constants.REQUEST_BBS_GET_LIST)
+				Constants.bbsurl, Constants.REQUEST_BBS_GET_LIST)
 				.execute(arrayList);
 		tmpPage = page;
 	}

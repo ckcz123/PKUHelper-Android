@@ -78,7 +78,7 @@ public class PostActivity extends BaseActivity {
 		});
 		if ("reply".equals(type)) {
 			new RequestingTask(this, "正在拉取内容...",
-					"http://www.bdwm.net/client/bbsclient.php?type=quote"
+					Constants.bbsurl+"?type=quote"
 							+ "&token=" + Userinfo.token + "&board=" + board + "&number=" + number
 							+ "&timestamp=" + timestamp
 					, Constants.REQUEST_BBS_GET_QUOTE)
@@ -86,7 +86,7 @@ public class PostActivity extends BaseActivity {
 		}
 		if ("edit".equals(type)) {
 			new RequestingTask(this, "正在拉取内容...",
-					"http://www.bdwm.net/client/bbsclient.php?type=getedit"
+					Constants.bbsurl+"?type=getedit"
 							+ "&token=" + Userinfo.token + "&board=" + board + "&number=" + number
 							+ "&timestamp=" + timestamp
 					, Constants.REQUEST_BBS_GET_EDIT).execute(new ArrayList<Parameters>());
@@ -153,7 +153,7 @@ public class PostActivity extends BaseActivity {
 			arrayList.add(new Parameters("number", number));
 			arrayList.add(new Parameters("author", author));
 		}
-		new RequestingTask(this, "正在发表...", "http://www.bdwm.net/client/bbsclient.php",
+		new RequestingTask(this, "正在发表...", Constants.bbsurl,
 				Constants.REQUEST_BBS_POST).execute(arrayList);
 
 	}
@@ -180,7 +180,7 @@ public class PostActivity extends BaseActivity {
 		arrayList.add(new Parameters("anonymous", anonymous));
 		arrayList.add(new Parameters("timestamp", timestamp));
 		arrayList.add(new Parameters("number", number));
-		new RequestingTask(this, "正在修改...", "http://www.bdwm.net/client/bbsclient.php",
+		new RequestingTask(this, "正在修改...", Constants.bbsurl,
 				Constants.REQUEST_BBS_POST).execute(arrayList);
 
 	}

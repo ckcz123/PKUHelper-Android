@@ -72,7 +72,7 @@ public class Board {
 
 	@SuppressWarnings("unchecked")
 	public static void reload() {
-		new RequestingTask(BBSActivity.bbsActivity, "正在获取所有版面...", "http://www.bdwm.net/client/bbsclient.php?type=getallboards",
+		new RequestingTask(BBSActivity.bbsActivity, "正在获取所有版面...", Constants.bbsurl+"?type=getallboards",
 				Constants.REQUEST_BBS_GET_ALL_BOARDS).execute(new ArrayList<Parameters>());
 	}
 
