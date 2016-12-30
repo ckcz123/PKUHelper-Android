@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 21
-    buildToolsVersion "23.0.1"
+    compileSdkVersion 24
+    buildToolsVersion "24.0.1"
 
     defaultConfig {
         applicationId "com.pkuhelper"
         minSdkVersion 14
-        targetSdkVersion 21
+        targetSdkVersion 24
     }
 
     signingConfigs {
@@ -19,6 +19,8 @@ android {
     aaptOptions {
         cruncherEnabled = false
     }
+
+    useLibrary 'org.apache.http.legacy'
 
 }
 
