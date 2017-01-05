@@ -131,7 +131,7 @@ public class ViewPost {
 							public Drawable getDrawable(String source) {
 								if (source == null) return null;
 								if (source.startsWith("/"))
-									source = "http://www.bdwm.net" + source;
+									source = "https://bbs.pku.edu.cn" + source;
 								final File file = MyFile.getCache(ViewActivity.viewActivity, Util.getHash(source));
 								if (file.exists()) {
 									Bitmap bitmap = MyBitmapFactory.getCompressedBitmap(file.getAbsolutePath(), 2.5);
@@ -222,7 +222,7 @@ public class ViewPost {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						String url = values[which];
-						String uurl = url.toLowerCase(Locale.getDefault());
+						String uurl = url.toLowerCase(Locale.getDefault()).replaceAll("\\?(.+?)*","");
 						if (uurl.endsWith(".gif") || uurl.endsWith(".ico") || uurl.endsWith(".jpg")
 								|| uurl.endsWith(".jpeg") || uurl.endsWith(".bmp") || uurl.endsWith(".png")) {
 							//new ImageRequestingTask(names[which]).execute(url);
@@ -333,9 +333,12 @@ public class ViewPost {
 	}
 
 	public static void share() {
+		/*
 		Share.readyToShareURL(ViewActivity.viewActivity, "分享帖子",
-				"http://www.bdwm.net/bbs/bbstcon.php?board=" + ViewActivity.board + "&threadid=" + ViewActivity.threadid,
+				"https://bbs.pku.edu.cn/v2/post-read.php?bid=" + ViewActivity.board + "&threadid=" + ViewActivity.threadid,
 				title, firstFloor.content, null);
+				*/
+		CustomToast.showErrorToast(ViewActivity.viewActivity, "暂时不支持分享帖子！");
 	}
 
 }

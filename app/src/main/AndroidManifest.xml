@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.pkuhelper"
-          android:versionCode="24"
+          android:versionCode="30"
           android:screenOrientation="portrait"
           android:installLocation="internalOnly"
-          android:versionName="2.0.5">
+          android:versionName="2.0.6.1">
 
     <uses-sdk
         android:minSdkVersion="14"

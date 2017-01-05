@@ -83,7 +83,7 @@ public class ViewActivity extends BaseActivity {
 	void init() {
 		board = getIntent().getStringExtra("board");
 		if (board == null || "".equals(board)) {
-			CustomToast.showErrorToast(this, "没有这个版面！");
+			CustomToast.showErrorToast(this, "没有这个版面！尝试刷新一下版面列表？（在版面列表右上角点击刷新）", 3000);
 			super.wantToExit();
 			return;
 		}
@@ -94,7 +94,7 @@ public class ViewActivity extends BaseActivity {
 
 		Board bd = Board.boards.get(board);
 		if (bd == null) {
-			CustomToast.showErrorToast(this, "没有这个版面！");
+			CustomToast.showErrorToast(this, "没有这个版面！尝试刷新一下版面列表？（在版面列表右上角点击刷新）");
 			super.wantToExit();
 			return;
 		}
@@ -127,7 +127,7 @@ public class ViewActivity extends BaseActivity {
 									Html.fromHtml(postInfo.content, new Html.ImageGetter() {
 										public Drawable getDrawable(String source) {
 											if (source.startsWith("/"))
-												source = "http://www.bdwm.net" + source;
+												source = "https://bbs.pku.edu.cn" + source;
 											final File file = MyFile.getCache(ViewActivity.viewActivity, Util.getHash(source));
 											if (file.exists()) {
 												Bitmap bitmap = MyBitmapFactory.getCompressedBitmap(file.getAbsolutePath(), 2.5);

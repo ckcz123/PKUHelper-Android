@@ -72,11 +72,15 @@ public class Cookies {
 			return false;
 		if (url.startsWith("http://www.bdwm.net/"))
 			return false;
+		if (url.startsWith("https://bbs.pku.edu.cn/"))
+			return false;
 		return true;
 	}
 
 	private static boolean whetherToSetCookie(String url) {
 		if (url.startsWith("http://www.bdwm.net/"))
+			return false;
+		if (url.startsWith("https://bbs.pku.edu.cn/"))
 			return false;
 		return true;
 	}

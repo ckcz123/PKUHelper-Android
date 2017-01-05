@@ -9,8 +9,8 @@ import com.pkuhelper.Settings;
 import java.util.ArrayList;
 
 public class Constants {
-	public static final String version = "2.0.6";
-	public static final String update_time = "2016-12-30";
+	public static final String version = "2.0.6.1";
+	public static final String update_time = "2017-01-05";
 
 	public static final String domain = "http://www.xiongdianpku.com";
 	public static final String bbsurl = "https://bbs.pku.edu.cn/client/bbsclient.php";
