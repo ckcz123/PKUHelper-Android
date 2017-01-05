@@ -168,7 +168,7 @@ public class Settings extends Fragment {
 						.setCancelable(true).setPositiveButton("立即下载", new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						Uri uri = Uri.parse(Constants.domain + "/pkuhelper/getandroid.php");
+						Uri uri = Uri.parse(Constants.domain + "/applications/pkuhelper/getandroid.php");
 						try {
 							DownloadManager.Request request = new Request(uri);
 							request.setTitle("正在下载PKU Helper...");
