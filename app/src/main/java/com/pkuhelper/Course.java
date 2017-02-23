@@ -47,6 +47,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Course extends Fragment {
 	static WebView courseView;
@@ -129,7 +132,8 @@ public class Course extends Fragment {
 		parameters.add(new Parameters("appid", "syllabus"));
 		parameters.add(new Parameters("userName", Constants.username));
 		parameters.add(new Parameters("password", Constants.password));
-		parameters.add(new Parameters("randCode", "0"));
+		//parameters.add(new Parameters("randCode", "验证码"));
+		//parameters.add(new Parameters("smsCode","短信验证码"));
 		parameters.add(new Parameters("redirUrl",
 				"http://elective.pku.edu.cn:80/elective2008/agent4Iaaa.jsp/../ssoLogin.do"));
 		RequestingTask requestingTask = new RequestingTask(PKUHelper.pkuhelper, "正在连接...",
@@ -408,7 +412,12 @@ public class Course extends Fragment {
 						String where = strings[k].trim();
 						int pos = where.indexOf(")");
 						String location = "(？)";
-						if (pos != -1) {
+						Pattern pattern=Pattern.compile("[一二三四理]教\\d+");
+						Matcher matcher=pattern.matcher(span.text());
+						if (matcher.find()) {
+							location="("+matcher.group()+")";
+						}
+						else if (pos != -1) {
 							location = where.substring(0, pos + 1);
 							if (location.contains("备注")) location = "(？)";
 						}

@@ -269,9 +269,13 @@ public class WebConnection {
 
 	private static void addHeader(HttpRequestBase httpRequestBase, String url) {
 		if (url.startsWith("http://dean.pku.edu.cn/student/")) {
-			httpRequestBase.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.81 Safari/537.36");
 			httpRequestBase.addHeader("Referer", "http://dean.pku.edu.cn/student/");
 		}
+		if (url.startsWith("http://elective.pku.edu.cn/")) {
+			httpRequestBase.addHeader("Referer", "http://elective.pku.edu.cn/elective2008/edu/pku/stu/elective/controller/electiveWork/showResults.do");
+		}
+		httpRequestBase.addHeader("Upgrade-Insecure-Requests","1");
+		httpRequestBase.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.81 Safari/537.36");
 		httpRequestBase.addHeader("Platform", "Android");
 		httpRequestBase.addHeader("Version", Constants.version);
 		httpRequestBase.addHeader("User-token", Constants.user_token);
